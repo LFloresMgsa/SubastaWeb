@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Dashboard from './views/Dashboard';
 import Catalogo from './views/Catalogo';
 import Videoteca from './views/Videoteca';
+import Subasta from './views/Subasta';
 import Login from './views/Login';
 
 const AppRoutes = (props) => {
@@ -22,6 +23,10 @@ const AppRoutes = (props) => {
       <Route
         path="/videoteca"
         render={(route) => <Videoteca {...props} {...route} />}
+      />
+       <Route
+        path="/subasta"
+        render={(route) => <Subasta {...props} {...route} />}
       />
     </Switch>
   );
