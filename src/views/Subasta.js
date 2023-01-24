@@ -12,7 +12,7 @@ const StyledView = styled('div')(
 const Dashboard = (props) => {
   return (
     <div>
-      <h1>Bienvenidos!</h1>
+      <h1>Bienvenidos a la subasta!</h1>
     </div>
   );
 };
