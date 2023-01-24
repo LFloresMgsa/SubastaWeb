@@ -118,6 +118,27 @@ const _temp_tabs = [
     wasUpdated: false,
     tabChildren: [],
   },
+  {
+    index: 4,
+    tabID: 4,
+    portalID: 9,
+    tabName: 'Subasta',
+    title: '',
+    description: '',
+    parentId: -1,
+    level: 0,
+    authorizedRoles: '65;68;-3;',
+    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    administratorRoles: '65;',
+    tabOrder: 4,
+    isVisible: false,
+    componentName: '',
+    routeName: 'Subasta',
+    isDisabled: false,
+    isDeleted: false,
+    wasUpdated: false,
+    tabChildren: [],
+  },
 ];
 
 const Menu = (props) => {
