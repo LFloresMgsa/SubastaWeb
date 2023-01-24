@@ -119,7 +119,7 @@ const _temp_tabs = [
     tabChildren: [],
   },
   {
-    index: 4,
+    index: 5,
     tabID: 4,
     portalID: 9,
     tabName: 'Subasta',
