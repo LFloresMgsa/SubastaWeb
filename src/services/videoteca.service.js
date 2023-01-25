@@ -6,18 +6,19 @@ export const videotecaService = {
   obtenerGAllos,
 };
 
-// function obtenerGAllos() {
+// function obtenergallos() {
 //   // tu trabajo
-//     const options = { headers: authHeader() };
+//     const options = { headers: authheader() };
 //     const params = {};
-//     const url = `localhost:80/tu-end-point/.../${requestID}`;
-//     return Fetch.get(url, params, options).then(handleResponse);
+//     const url = `localhost:80/obtenerGallos}`;
+//     return fetch.get(url, params, options).then(handleresponse);
 // }
 
 function obtenerGAllos() {
   let gallosArray = [
     {nombre: "Edwin", imagen :"https://random.imagecdn.app/500/150"},
-    {nombre: "Dany", imagen :"https://random.imagecdn.app/500/150"}
+    {nombre: "Dany", imagen :"https://random.imagecdn.app/500/150"},
+    {nombre: "Luis", imagen :"https://random.imagecdn.app/500/150"}
   ]
 
   const gallos = Promise.resolve(gallosArray);
