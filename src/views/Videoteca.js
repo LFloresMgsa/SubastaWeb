@@ -108,7 +108,7 @@ const Catalogo = (props) => {
                 <ImageListItemBar
                   title={item.nombre}
                  // subtitle={item.author}
-                  subtitle="Luis Flores"
+                  subtitle={`Precio: ${item.id}`}
                   actionicon={
                     <IconButton
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
