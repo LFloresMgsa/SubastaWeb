@@ -22,7 +22,7 @@ const Item = (props) => {
                 //alt={item.title}
                 loading="lazy"
             />
-            <ImageListItemBar
+            <ImageListItemBar 
                 title={props.nombre}
                 // subtitle={item.author}
                 subtitle={`Codigo: ${props.codigo} , Precio: S/.${props.precio}`}

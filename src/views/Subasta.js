@@ -19,20 +19,14 @@ import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
 import { subastaactualService } from '../services/subastaactual.service';
 
-
 const SubastaStyled = styled('div')(
-  ({ theme }) => css`
-    width:300px;
-    background-color:grey;
-    height:70px;
-  `
-);
-
-const SubastaTitulosStyled = styled('div')(
   ({ theme }) => css`
     width:100%;
     background-color:grey;
     height:20px;
+
+    .subasta-item {
+    }
   `
 );
 
@@ -153,47 +147,38 @@ const Subasta = (props) => {
 
       <TabPanel value={value} index={1}>
         <h1>Bienvenido a la Subasta</h1>
-
-        <SubastaTitulosStyled >
+        <SubastaStyled>
           {subastasActual.map((subastaactual) => (
             <ItemProgramacion key={subastaactual.id} {...subastaactual} />
           ))}
-
-          <SubastaStyled>
-            <ImageList sx={{ width: 500, height: 450 }} >
-
-              <ImageListItem key="Subheader" cols={2}>
+            <ImageList className="subasta-item" cols={3}>
+              <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={3} >
                 <ListSubheader component="div">Padrillos</ListSubheader>
               </ImageListItem>
-
               {subastas.map((subasta) => (
                 <ItemSubasta key={subasta.id} {...subasta} />
               ))}
             </ImageList>
-          </SubastaStyled>
-
-        </SubastaTitulosStyled>
-
-
+        </SubastaStyled>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <h1>Proximas Subastas</h1>
 
-        <SubastaTitulosStyled >
+        <SubastaStyled >
           {subastasProximas.map((subastaproxima) => (
             <ItemProgramacion key={subastaproxima.id} {...subastaproxima} />
           ))}
-        </SubastaTitulosStyled>
+        </SubastaStyled>
       </TabPanel>
 
       <TabPanel value={value} index={3}>
         <h1>Subastas Cerradas</h1>
 
-        <SubastaTitulosStyled >
+        <SubastaStyled >
           {subastasCerradas.map((subastacerrada) => (
             <ItemProgramacion key={subastacerrada.id} {...subastacerrada} />
           ))}
-        </SubastaTitulosStyled>
+        </SubastaStyled>
 
       </TabPanel>
 

@@ -98,7 +98,7 @@ const Catalogo = (props) => {
       <TabPanel value={value} index={1}>
           <ImageList sx={{ width: 500, height: 450 }}>
             {gallos.map((item, index) => (
-              <ImageListItem key={index}>
+              <ImageListItem key={index} >
                 <img
                   src={`${item.imagen}?w=248&fit=crop&auto=format`}
                   srcSet={`${item.imagen}?w=248&fit=crop&auto=format&dpr=2 1x`}
