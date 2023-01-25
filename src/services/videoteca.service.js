@@ -16,9 +16,14 @@ export const videotecaService = {
 
 function obtenerGAllos() {
   let gallosArray = [
-    {nombre: "Edwin", imagen :"https://random.imagecdn.app/500/150"},
-    {nombre: "Dany", imagen :"https://random.imagecdn.app/500/150"},
-    {nombre: "Luis", imagen :"https://random.imagecdn.app/500/150"}
+    {
+      id:1, 
+      nombre: "Edwin", 
+      imagen :"https://random.imagecdn.app/500/150", 
+      precio:100,
+    },
+    {id:2, nombre: "Dany", imagen :"https://random.imagecdn.app/500/150"},
+    {id:3, nombre: "Luis", imagen :"https://random.imagecdn.app/500/150"}
   ]
 
   const gallos = Promise.resolve(gallosArray);

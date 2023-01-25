@@ -10,9 +10,11 @@ import { videotecaService } from '../services/videoteca.service';
 import Item from '../components/gallos/Item';
 import Programacion from '../components/gallos/Programacion';
 
-const StyledView = styled('div')(
+const SubastaStyled = styled('div')(
   ({ theme }) => css`
-    overflow-y: hidden;
+    h1 {
+      color:black;
+    }
      `
 );
 
@@ -41,17 +43,15 @@ const Subasta = (props) => {
   }, []);
 
   return (
-    <div>
+    <SubastaStyled>
       <h1>Bienvenido a la Subasta</h1>
       <Programacion />
-     
-      <ImageList sx={{ width: 500, height: 450 }}>
-        {gallos.map((item, index) => (
-          <Item key={index} {...item} />
-          // <Item key={index} imagen={item.imagen} nombre={item.nombre} />
+      <ImageList sx={{ width: 500, height: 450 }} >
+        {gallos.map((gallo) => (
+          <Item key={gallo.id} {...gallo} />
         ))}
       </ImageList>
-    </div>
+    </SubastaStyled>
   );
 };
 

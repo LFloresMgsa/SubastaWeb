@@ -7,15 +7,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 
-// public string CalcularEdad(Persona persona)
-// {
-//     return Now - persona.fechaDeNacimiento
-// }
 
-// public string Sumar(int a, int b)
-// {
-//     return a + b
-// }
 
 const Item = (props) => {
 
