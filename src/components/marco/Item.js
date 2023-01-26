@@ -32,11 +32,11 @@ const Item = (props) => {
             <ImageListItemBar
                 title={props.nombre}
                 // subtitle={item.author}
-                subtitle="Luis Flores"
+                subtitle=""
                 actionicon={
                 <IconButton
                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                    aria-label={`info about ${"Mi Gallo Preferido"}`}
+                    aria-label={`info about ${"XXX XXXX XXXX"}`}
                 >
                     <InfoIcon />
                 </IconButton>

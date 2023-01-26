@@ -19,22 +19,22 @@ const Item = (props) => {
             <img
                 src={`${props.imagen}?w=248&fit=crop&auto=format`}
                 srcSet={`${props.imagen}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                //alt={item.title}
+                alt={props.nombre}
                 loading="lazy"
             />
             <ImageListItemBar 
                 title={props.nombre}
-                // subtitle={item.author}
                 subtitle={`Codigo: ${props.codigo} , Precio: S/.${props.precio}`}
                 actionicon={
                 <IconButton
                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                    aria-label={`info about ${"Mi Gallo Preferido"}`}
+                    aria-label={`info about ${props.info}`}
+                    
                 >
                     <InfoIcon />
                 </IconButton>
                 }
-                position="below"
+                //position="below"
             />
             </ImageListItem>
     </div>
