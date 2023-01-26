@@ -14,7 +14,7 @@ const Item = (props) => {
     // const [gallo, setGallo] = React.useState('');
 
     // useEffect(() => {
-    //     setGallo(props)
+    //     setGallo(props)   
     //       return () => {
             
     //       };
