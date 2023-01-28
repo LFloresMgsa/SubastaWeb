@@ -28,6 +28,10 @@ const AppRoutes = (props) => {
         path="/subasta"
         render={(route) => <Subasta {...props} {...route} />}
       />
+        <Route
+          path="/SubastaDetalle"
+          render={(route) => <SubastaDetalle {...props} {...route} />}
+        />
     </Switch>
   );
 

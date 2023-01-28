@@ -28,7 +28,7 @@ module.exports = merge(common, {
     contentBase: './dist',
     historyApiFallback: true,
     host: 'localhost',
-    port: 82,
+    port: 80,
     https: true,
     disableHostCheck: true,
     // key: fs.readFileSync('localhost-key.pem'), // LUIS: Hablar con Victor.

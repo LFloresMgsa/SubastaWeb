@@ -22,7 +22,7 @@ const Item = (props) => {
 
   return (
     <div>
-        <ImageListItem >
+        <ImageListItem on>
             <img
                 src={`${props.imagen}?w=248&fit=crop&auto=format`}
                 srcSet={`${props.imagen}?w=248&fit=crop&auto=format&dpr=2 1x`}

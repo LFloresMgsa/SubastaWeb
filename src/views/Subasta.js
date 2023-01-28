@@ -17,6 +17,7 @@ import { subastaproximaService } from '../services/subastaproxima.service';
 import ItemSubasta from '../components/marco/ItemSubasta';
 import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
+import ItemDetalle from '../components/marco/ItemDetalle';
 import { subastaactualService } from '../services/subastaactual.service';
 
 const SubastaStyled = styled('div')(
@@ -142,7 +143,7 @@ const Subasta = (props) => {
       <TabPanel value={value} index={0}>
         <h1>Bases de la Subasta</h1>
         <Bases />
-
+        
       </TabPanel>
 
       <TabPanel value={value} index={1}>
@@ -150,6 +151,7 @@ const Subasta = (props) => {
         <SubastaStyled>
           {subastasActual.map((subastaactual) => (
             <ItemProgramacion key={subastaactual.id} {...subastaactual} />
+                        
           ))}
             <ImageList className="subasta-item" cols={4}>
               <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
@@ -158,12 +160,10 @@ const Subasta = (props) => {
               {subastas.map((subasta) => (
                 <ItemSubasta key={subasta.id} {...subasta} />
               ))}
-
-              
             </ImageList>
         </SubastaStyled>
+        <ItemDetalle />
       </TabPanel>
-
       
       <TabPanel value={value} index={2}>
         <h1>Proximas Subastas</h1>
@@ -187,7 +187,6 @@ const Subasta = (props) => {
       </TabPanel>
 
     </Box>
-
 
   );
 };
