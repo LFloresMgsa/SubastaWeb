@@ -13,12 +13,18 @@ const Item = (props) => {
     const history = useHistory();
 
     const handleVerDetalle = () => {
+
+        const data={codigo:`${props.codigo}`};
+
         console.log("handleVerDetalle");
-        history.push(`/gallo/${props.codigo}`)
+        history.push({
+            pathname:'/SubastaDetalle',
+            search:`?data=${JSON.stringify(data)}`
+        });
     }
 
   return (
-    <ImageListItem onClick={handleVerDetalle}>
+    <ImageListItem onClick={handleVerDetalle }>
         <img
             src={`${props.imagen}?w=248&fit=crop&auto=format`}
             srcSet={`${props.imagen}?w=248&fit=crop&auto=format&dpr=2 2x`}

@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard';
 import Catalogo from './views/Catalogo';
 import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
+import SubastaDetalle from './views/SubastaDetalle';
 import Login from './views/Login';
 
 const AppRoutes = (props) => {
@@ -24,14 +25,14 @@ const AppRoutes = (props) => {
         path="/videoteca"
         render={(route) => <Videoteca {...props} {...route} />}
       />
-       <Route
+      <Route
         path="/subasta"
         render={(route) => <Subasta {...props} {...route} />}
       />
-        <Route
-          path="/SubastaDetalle"
-          render={(route) => <SubastaDetalle {...props} {...route} />}
-        />
+      <Route
+        path="/SubastaDetalle"
+        render={(route) => <SubastaDetalle {...props} {...route} />}
+      />
     </Switch>
   );
 

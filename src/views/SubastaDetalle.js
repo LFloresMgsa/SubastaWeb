@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
+import { css, useTheme } from 'styled-components';
+import { styled } from '@mui/material/styles';
+import { useLocation } from 'react-router-dom';
 
-const SubastaDetalle = () => {
+const SubastaDetalle = (props) => {
 
-    //leer codigo en la url
-    // llamar servicio
-    // asignar respuesta de la api al estado
+    const location = useLocation();
+    const data = location.search && JSON.parse(location.search.split('=')[1]);
 
     return (
         <div>
             {/* <GalloDetalle /> */}
             <div>
-                <h2>Precio Base: {state.precioBase}</h2>
+                <h2>Precio Base: {data.precio}</h2>
+                <p>Codigo: {data.codigo}</p>
+                <p>Name: {data.nombre}</p>
+                
             </div>
-            <PujeForm />
+            {/*   <PujeForm /> */}
         </div>
     );
 };
