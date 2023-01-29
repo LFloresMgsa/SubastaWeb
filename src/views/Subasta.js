@@ -17,7 +17,7 @@ import { subastaproximaService } from '../services/subastaproxima.service';
 import ItemSubasta from '../components/marco/ItemSubasta';
 import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
-import ItemDetalle from '../components/marco/ItemDetalle';
+import ItemDetalle from '../components/marco/ItemDetalleModal';
 import { subastaactualService } from '../services/subastaactual.service';
 
 const SubastaStyled = styled('div')(
@@ -133,7 +133,7 @@ const Subasta = (props) => {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Condiciones" {...a11yProps(0)} />
+          <Tab label="Bases" {...a11yProps(0)} />
           <Tab label="Subastas Abiertas" {...a11yProps(1)} />
           <Tab label="Proximas Subastas" {...a11yProps(2)} />
           <Tab label="Subastas Cerradas" {...a11yProps(3)} />
@@ -156,13 +156,19 @@ const Subasta = (props) => {
             <ImageList className="subasta-item" cols={4}>
               <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
                 <ListSubheader component="div">Padrillos</ListSubheader>
+                
               </ImageListItem>
               {subastas.map((subasta) => (
                 <ItemSubasta key={subasta.id} {...subasta} />
+                  
+                
+                
               ))}
+              
             </ImageList>
+            
         </SubastaStyled>
-        <ItemDetalle />
+        
       </TabPanel>
       
       <TabPanel value={value} index={2}>
