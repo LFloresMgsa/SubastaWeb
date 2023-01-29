@@ -8,19 +8,19 @@ import { useHistory } from 'react-router-dom';
 
 const SubastaDetalle = (props) => {
 
+    const history = useHistory();
+
     const location = useLocation();
     const data = location.search && JSON.parse(location.search.split('=')[1]);
 
-    const history = useHistory();
+
 
     const handleRegresarSubasta = () => {
-
-        const data = { codigo: `${props.codigo}` };
 
         console.log("handleRegresarSubasta");
         history.push({
             pathname: '/Subasta'
-       /*      search: `?data=${JSON.stringify(data)}` */
+
         });
     }
 
@@ -28,10 +28,14 @@ const SubastaDetalle = (props) => {
         <div>
 
             <div>
-                <h2>Precio Base: {data.precio}</h2>
                 <p>Codigo: {data.codigo}</p>
-                <p>Name: {data.nombre}</p>
-
+                
+                <p><b>Precio Base:</b> S/. {props.precio}</p>
+                <p><b>Placa:</b> {props.placa}</p>
+                <p><b>Propietario</b>: {props.propietario}</p>
+                <p><b>Padre:</b> {props.padre}</p>
+                <p><b>Madre:</b> {props.madre}</p>
+                <p><b>Info:</b> {props.info}</p>
             </div>
             {/*   <PujeForm /> */}
 

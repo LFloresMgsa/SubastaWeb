@@ -17,7 +17,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -84,12 +84,12 @@ const Item = (props) => {
                                         <b>INFORMACION DEL EJEMPLAR</b>
                                     </Typography>
                                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                        <p><b>Precio Base:</b></p>
-                                        <p>Placa:</p>
-                                        <p>Propietario:</p>
-                                        <p>Padre:</p>
-                                        <p>Madre:</p>
-                                        <p>Info:</p>
+                                        <p><b>Precio Base:</b> S/. {props.precio}</p>
+                                        <p><b>Placa:</b> {props.placa}</p>
+                                        <p><b>Propietario</b>: {props.propietario}</p>
+                                        <p><b>Padre:</b> {props.padre}</p>
+                                        <p><b>Madre:</b> {props.madre}</p>
+                                        <p><b>Info:</b> {props.info}</p>
                                     </Typography>
                                 </Box>
                             </Modal>

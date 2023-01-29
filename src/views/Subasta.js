@@ -17,7 +17,6 @@ import { subastaproximaService } from '../services/subastaproxima.service';
 import ItemSubasta from '../components/marco/ItemSubasta';
 import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
-import ItemDetalle from '../components/marco/ItemDetalleModal';
 import { subastaactualService } from '../services/subastaactual.service';
 
 const SubastaStyled = styled('div')(
