@@ -34,15 +34,10 @@ const Item = (props) => {
     const handleClose = () => setOpen(false);
 
 
-
     const handleVerDetalle = () => {
-
-        const data = { codigo: `${props.codigo}` };
-
-        console.log("handleVerDetalle");
         history.push({
             pathname: '/SubastaDetalle',
-            search: `?data=${JSON.stringify(data)}`
+            state: { props }
         });
     }
 
@@ -55,8 +50,8 @@ const Item = (props) => {
                 loading="lazy"
             />
             <ImageListItemBar
-                title={props.nombre}
-                subtitle={`Codigo: ${props.codigo} , Precio: S/.${props.precio}`}
+                title={`${props.placa} - PUJAR POR N° ${props.id} `}
+                subtitle={props.propietario}
                 actionicon={
                     <IconButton
                         sx={{ color: 'rgba(255, 255, 255, 0.54)' }}

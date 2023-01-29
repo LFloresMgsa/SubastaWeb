@@ -154,7 +154,7 @@ const Subasta = (props) => {
           ))}
             <ImageList className="subasta-item" cols={4}>
               <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
-                <ListSubheader component="div">Padrillos</ListSubheader>
+                {/* <ListSubheader component="div">Padrillos</ListSubheader> */}
                 
               </ImageListItem>
               {subastas.map((subasta) => (
