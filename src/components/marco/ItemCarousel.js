@@ -7,10 +7,10 @@ const ItemCarousel = ({ images }) => {
 	return (
 		<section className='slider'>
 			
-			<h1  >Imagenes</h1>
+			
 			<Slider className='slider__content'>
 				{images.map((image) => (
-					<div key={image.id} className='slider__content--item'>
+					<div key={image.id} >
 						<img src={image.imagen} alt={image.titulo} />
 						{/* <p className='slider-description'>{image.title}</p> */}
 					</div>
