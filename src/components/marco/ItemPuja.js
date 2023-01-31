@@ -61,16 +61,6 @@ const ItemPuja = (props) => {
     const location = useLocation();
     const myObject = location.state.props;
 
-    const handleRegresarSubasta = () => {
-
-        console.log("handleRegresarSubasta");
-        history.push({
-            pathname: '/Subasta'
-
-        });
-
-    }
-
     return (
         <div>
             <Paper
@@ -84,8 +74,17 @@ const ItemPuja = (props) => {
                 }}
             >
 
-
-
+                <table>
+                    <tr>
+                        <th>
+                            <ItemContacto />
+                        </th>
+                        <th>
+                            <ItemPujaGrilla />
+                        </th>
+                    </tr>
+                </table>
+                {/* 
                 <Grid sx={{ flexGrow: 1 }} container spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justifyContent="center" spacing={2}>
@@ -103,7 +102,7 @@ const ItemPuja = (props) => {
                         </Grid>
                     </Grid>
                 </Grid>
-
+ */}
 
 
             </Paper>

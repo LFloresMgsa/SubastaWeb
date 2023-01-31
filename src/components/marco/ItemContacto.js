@@ -5,10 +5,10 @@ import { styled } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
-
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
+import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import { IMaskInput } from 'react-imask';
 import NumberFormat from 'react-number-format';
@@ -65,12 +65,23 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
+
+
 const ItemContacto = (props) => {
 
     const history = useHistory();
 
     const location = useLocation();
     const myObject = location.state.props;
+
+    const handleRegresarSubasta = () => {
+
+        console.log("handleRegresarSubasta");
+        history.push({
+            pathname: '/Subasta'
+
+        });
+    }
 
     const [values, setValues] = React.useState({
         textmask: '',
@@ -86,31 +97,63 @@ const ItemContacto = (props) => {
 
 
     return (
-        <Box>
-            <TextField id="outlined-documento" label="Documento Id." variant="standard" />
-            <TextField id="outlined-nombre" label="Nombres y Apellidos" variant="standard" />
-            <FormControl variant="standard">
-                <InputLabel htmlFor="formatted-text-mask-input">Teléfono</InputLabel>
-                <Input
-                    value={values.textmask}
-                    onChange={handleChange}
-                    name="textmask"
-                    id="outlined-telefono"
-                    inputComponent={TextMaskCustom}
-                />
-            </FormControl>
-            <TextField
-                label="Valor de Puja"
-                value={values.numberformat}
-                onChange={handleChange}
-                name="numberformat"
-                id="outlined-puja"
-                InputProps={{
-                    inputComponent: NumberFormatCustom,
-                }}
-                variant="standard"
-            />
-        </Box>
+        <Box sx={{ flexGrow: 1 }}>
+            <div align="left">
+                <h2 >Contacto:</h2>
+            </div>
+
+            <Grid container spacing={2}>
+
+                <Grid item xs={8}>
+
+
+                    <TextField id="outlined-documento" label="Documento Id." variant="standard" />
+                    <TextField id="outlined-nombre" label="Nombres y Apellidos" variant="standard" />
+                    <FormControl variant="standard">
+                        <InputLabel htmlFor="formatted-text-mask-input">Teléfono</InputLabel>
+                        <Input
+                            value={values.textmask}
+                            onChange={handleChange}
+                            name="textmask"
+                            id="outlined-telefono"
+                            inputComponent={TextMaskCustom}
+                        />
+                    </FormControl>
+                    <TextField
+                        label="Valor de Puja"
+                        value={values.numberformat}
+                        onChange={handleChange}
+                        name="numberformat"
+                        id="outlined-puja"
+                        InputProps={{
+                            inputComponent: NumberFormatCustom,
+                        }}
+                        variant="standard"
+                    />
+                </Grid>
+
+            </Grid>
+
+            <Grid container spacing={2}>
+
+                <Grid item xs={8}>
+                    <table>
+                        <tr>
+                            <th>
+                                <Button variant="contained" size="small" color="primary"  onClick={handleRegresarSubasta}>Pujar</Button>
+                            </th>
+                            <th>
+                                <Button variant="contained" size="small" color="primary"   onClick={handleRegresarSubasta}>Regresar</Button>
+                            </th>
+                        </tr>
+                    </table>
+
+                </Grid>
+
+            </Grid>
+        </Box >
+
+
     );
 };
 

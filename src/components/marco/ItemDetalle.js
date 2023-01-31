@@ -3,7 +3,7 @@ import { css, useTheme } from 'styled-components';
 
 import { styled } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
-import Button from '@mui/material/Button';
+
 import { useHistory } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -64,27 +64,18 @@ const ItemDetalle = (props) => {
                                     <p><b>Propietario</b>: {myObject.propietario}</p>
                                     <p><b>Padre:</b> {myObject.padre}</p>
                                     <p><b>Madre:</b> {myObject.madre}</p>
-
                                     <p><b>Info:</b> {myObject.info}</p>
                                 </Typography>
                             </Grid>
-                            <Grid item>
-                                <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                                    <Button onClick={handleRegresarSubasta}>Regresar</Button>
-                                </Typography>
-                            </Grid>
+
                         </Grid>
                         <Grid item>
-                            <Typography variant="h6" component="div">
+                            <Typography variant="h6" component="div" color="primary">
                                 <b>Precio Base : S/. {myObject.precio}</b>
                             </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
-
-
-
-
             </Paper>
         </div>
     );

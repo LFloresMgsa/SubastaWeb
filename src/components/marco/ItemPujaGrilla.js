@@ -55,7 +55,7 @@ const ItemPujaGrilla = (props) => {
     return (
         <box>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <Table sx={{ minWidth: 400 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
 
