@@ -4,7 +4,6 @@ import Fetch from '../helpers/Fetch';
 
 export const subastaService = {
   obtenerSubasta,
-  filtrarSubasta,
   obtenerSubastaSlider
 };
 
@@ -25,14 +24,6 @@ function obtenerSubasta() {
   return subasta;
 }
 
-function filtrarSubasta() {
-  let subastaArray = [
-    {id:1, nombre: "Agente",codigo: "101", imagen :"https://3.bp.blogspot.com/-OXd22pi2f5k/VEXi5TWJ0fI/AAAAAAAAAkU/KrnR_tv4ZLk/s1600/coronelgivens11.jpg", precio:700.00, precio:450.00, placa:"LTF 101", propietario:"Sr. LUIS TORRES FIGUEROA - LIMA", padre:"GENNA", madre:"ACARI - CEB", info:"MADRILLA COMPROBADA. EDAD: 1 AÑOS"},
-  ]
-
-  const subasta = Promise.resolve(subastaArray );
-  return subasta;
-}
 
 
 function obtenerSubastaSlider() {
