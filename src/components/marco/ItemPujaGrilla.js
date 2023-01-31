@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { WidthFull } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -55,7 +56,7 @@ const ItemPujaGrilla = (props) => {
     return (
         <box>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 400 }} aria-label="customized table">
+                <Table  aria-label="customized table">
                     <TableHead>
                         <TableRow>
 
