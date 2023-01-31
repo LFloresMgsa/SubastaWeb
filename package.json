@@ -44,6 +44,7 @@
         "dompurify": "^2.3.6",
         "history": "^4.10.1",
         "i18next": "^20.2.1",
+        "infinite-react-carousel": "^1.2.11",
         "lodash": "^4.17.21",
         "moment": "^2.29.1",
         "prop-types": "^15.7.2",

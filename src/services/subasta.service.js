@@ -5,6 +5,7 @@ import Fetch from '../helpers/Fetch';
 export const subastaService = {
   obtenerSubasta,
   filtrarSubasta,
+  obtenerSubastaSlider
 };
 
 
@@ -34,4 +35,14 @@ function filtrarSubasta() {
 }
 
 
+function obtenerSubastaSlider() {
 
+
+  const imagesCarousel = [
+    {id:1, codigo: "101", imagen :"https://3.bp.blogspot.com/-OXd22pi2f5k/VEXi5TWJ0fI/AAAAAAAAAkU/KrnR_tv4ZLk/s1600/coronelgivens11.jpg", titulo:"Ejemplar"},
+    {id:2, codigo: "101", imagen :"http://subasta.galpon-legado.amigosgallerosunidos.com/images/subasta/animal26_2.jpg", titulo:"Jerarquia"}
+]  
+
+  const subasta = Promise.resolve(imagesCarousel );
+  return subasta;
+}

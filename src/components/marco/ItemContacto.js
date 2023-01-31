@@ -138,14 +138,16 @@ const ItemContacto = (props) => {
 
                 <Grid item xs={8}>
                     <table>
-                        <tr>
-                            <th>
-                                <Button variant="contained" size="small" color="primary"  onClick={handleRegresarSubasta}>Pujar</Button>
-                            </th>
-                            <th>
-                                <Button variant="contained" size="small" color="primary"   onClick={handleRegresarSubasta}>Regresar</Button>
-                            </th>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Pujar</Button>
+                                </td>
+                                <td>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
 
                 </Grid>

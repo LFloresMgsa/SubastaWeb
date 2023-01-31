@@ -64,37 +64,39 @@ const Item = (props) => {
 
             />
             <table>
-                <tr>
-                    <th>
+                <tbody>
+                    <tr>
+                        <td>
 
-                        <Button variant="contained" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    <b>INFORMACION DEL EJEMPLAR</b>
-                                </Typography>
-                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                    <p><b>Precio Base:</b> S/. {props.precio}</p>
-                                    <p><b>Placa:</b> {props.placa}</p>
-                                    <p><b>Propietario</b>: {props.propietario}</p>
-                                    <p><b>Padre:</b> {props.padre}</p>
-                                    <p><b>Madre:</b> {props.madre}</p>
-                                    <p><b>Info:</b> {props.info}</p>
-                                </Typography>
-                            </Box>
-                        </Modal>
+                            <Button variant="contained" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={style}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        <b>INFORMACION DEL EJEMPLAR</b>
+                                    </Typography>
+                                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                        <p><b>Precio Base:</b> S/. {props.precio}</p>
+                                        <p><b>Placa:</b> {props.placa}</p>
+                                        <p><b>Propietario</b>: {props.propietario}</p>
+                                        <p><b>Padre:</b> {props.padre}</p>
+                                        <p><b>Madre:</b> {props.madre}</p>
+                                        <p><b>Info:</b> {props.info}</p>
+                                    </Typography>
+                                </Box>
+                            </Modal>
 
-                    </th>
+                        </td>
 
-                    <th>
-                        <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}>Subasta</Button>
-                    </th>
-                </tr>
+                        <td>
+                            <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}>Subasta</Button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </ImageListItem>
     );

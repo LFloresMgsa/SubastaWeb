@@ -46,7 +46,7 @@ const rows = [
 
 ];
 
-const ItemPujaGrilla = (props) => {
+const ItemPujaGrilla = () => {
 
     const history = useHistory();
 
