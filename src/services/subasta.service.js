@@ -34,6 +34,6 @@ function obtenerSubastaSlider() {
     {id:2, codigo: "101", imagen :"http://subasta.galpon-legado.amigosgallerosunidos.com/images/subasta/animal26_2.jpg", titulo:"Jerarquia"}
 ]  
 
-  const subasta = Promise.resolve(imagesCarousel );
-  return subasta;
+  const imagenes = Promise.resolve(imagesCarousel );
+  return imagenes;
 }
