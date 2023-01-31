@@ -67,7 +67,7 @@ const Item = (props) => {
                 <tr>
                     <th>
                         <div>
-                            <Button onClick={handleOpen}>Ver</Button>
+                            <Button onClick={handleOpen}>Info</Button>
                             <Modal
                                 open={open}
                                 onClose={handleClose}
@@ -92,7 +92,7 @@ const Item = (props) => {
                         </div>
                     </th>
 
-                    <th><Button onClick={handleVerDetalle}>Pujar</Button></th>
+                    <th><Button onClick={handleVerDetalle}>Subasta</Button></th>
                 </tr>
             </table>
         </ImageListItem>

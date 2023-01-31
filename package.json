@@ -54,6 +54,7 @@
         "react-dropzone": "^12.0.1",
         "react-google-recaptcha": "^2.1.0",
         "react-i18next": "^11.8.12",
+        "react-imask": "^6.4.3",
         "react-number-format": "^4.7.3",
         "react-quill": "^2.0.0-beta.4",
         "react-redux": "^7.2.3",
