@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { useHistory } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 
 const style = {
     position: 'absolute',
@@ -42,63 +43,74 @@ const Item = (props) => {
     }
 
     return (
-        <ImageListItem >
-            <img
-                src={`${props.imagen}?w=248&fit=crop&auto=format`}
-                srcSet={`${props.imagen}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={props.nombre}
-                loading="lazy"
-            />
-            <ImageListItemBar
-                title={`${props.placa} - PUJAR POR N° ${props.id} `}
-                subtitle={props.propietario}
-                actionicon={
-                    <IconButton
-                        sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                        aria-label={`info about ${props.info}`}
-                    >
-                        <InfoIcon />
-                    </IconButton>
-                }
-                position="below"
+        <Paper
+            sx={{
+                p: 1,
+                margin: 0.5,
+                maxWidth: 'auto',
+                flexGrow: 1,
+                backgroundColor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+        >
+            <ImageListItem >
+                <img
+                    src={`${props.imagen}?w=248&fit=crop&auto=format`}
+                    srcSet={`${props.imagen}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={props.nombre}
+                    loading="lazy"
+                />
+                <ImageListItemBar
+                    title={`${props.placa} - PUJAR POR N° ${props.id} `}
+                    subtitle={props.propietario}
+                    actionicon={
+                        <IconButton
+                            sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                            aria-label={`info about ${props.info}`}
+                        >
+                            <InfoIcon />
+                        </IconButton>
+                    }
+                    position="below"
 
-            />
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
+                />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
 
-                            <Button variant="contained" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                            >
-                                <Box sx={style}>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                                        <b>INFORMACION DEL EJEMPLAR</b>
-                                    </Typography>
-                                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                        <p><b>Precio Base:</b> S/. {props.precio}</p>
-                                        <p><b>Placa:</b> {props.placa}</p>
-                                        <p><b>Propietario</b>: {props.propietario}</p>
-                                        <p><b>Padre:</b> {props.padre}</p>
-                                        <p><b>Madre:</b> {props.madre}</p>
-                                        <p><b>Info:</b> {props.info}</p>
-                                    </Typography>
-                                </Box>
-                            </Modal>
+                                <Button variant="contained" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
+                                <Modal
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                                            <b>INFORMACION DEL EJEMPLAR</b>
+                                        </Typography>
+                                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                            <p><b>Precio Base:</b> S/. {props.precio}</p>
+                                            <p><b>Placa:</b> {props.placa}</p>
+                                            <p><b>Propietario</b>: {props.propietario}</p>
+                                            <p><b>Padre:</b> {props.padre}</p>
+                                            <p><b>Madre:</b> {props.madre}</p>
+                                            <p><b>Info:</b> {props.info}</p>
+                                        </Typography>
+                                    </Box>
+                                </Modal>
 
-                        </td>
+                            </td>
 
-                        <td>
-                            <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}>Subasta</Button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </ImageListItem>
+                            <td>
+                                <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}>Subasta</Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ImageListItem>
+        </Paper>
     );
 };
 

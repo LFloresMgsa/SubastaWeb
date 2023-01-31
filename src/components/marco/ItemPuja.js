@@ -84,26 +84,6 @@ const ItemPuja = (props) => {
                         </th>
                     </tr>
                 </table>
-                {/* 
-                <Grid sx={{ flexGrow: 1 }} container spacing={2}>
-                    <Grid item xs={12}>
-                        <Grid container justifyContent="center" spacing={2}>
-
-                            <Grid key={0} item>
-
-                                <ItemContacto />
-
-                            </Grid>
-                            <Grid key={1} item>
-
-                                <ItemPujaGrilla />
-                            </Grid>
-
-                        </Grid>
-                    </Grid>
-                </Grid>
- */}
-
 
             </Paper>
         </div>

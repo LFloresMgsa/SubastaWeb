@@ -29,7 +29,7 @@ function obtenerSubasta() {
 function obtenerSubastaSlider() {
 
 
-  const imagesCarousel = [
+  let imagesCarousel = [
     {id:1, codigo: "101", imagen :"https://3.bp.blogspot.com/-OXd22pi2f5k/VEXi5TWJ0fI/AAAAAAAAAkU/KrnR_tv4ZLk/s1600/coronelgivens11.jpg", titulo:"Ejemplar"},
     {id:2, codigo: "101", imagen :"http://subasta.galpon-legado.amigosgallerosunidos.com/images/subasta/animal26_2.jpg", titulo:"Jerarquia"}
 ]  

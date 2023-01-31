@@ -66,13 +66,7 @@ const ItemDetalle = (props) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const imagesCarousel = [
-        { id: '1', titulo: 'Awesome forest', imagen: 'https://cdn.pixabay.com/photo/2020/11/09/15/12/trail-5726987_960_720.jpg', },
-        { id: '2', titulo: 'A litle bird.', imagen: 'https://cdn.pixabay.com/photo/2011/09/27/18/52/bird-9950_960_720.jpg', },
-        { id: '3', titulo: 'The best friend.', imagen: 'https://cdn.pixabay.com/photo/2017/12/27/14/02/friends-3042751_960_720.jpg', },
-        { id: '4', titulo: 'Beautiful desert.', imagen: 'https://cdn.pixabay.com/photo/2016/11/21/17/44/arches-national-park-1846759_960_720.jpg', },
-        { id: '5', titulo: 'Harley Davidson motorcycle.', imagen: 'https://cdn.pixabay.com/photo/2018/10/26/22/55/harley-davidson-3775527_960_720.jpg', },
-    ]
+
 
     return (
         <div>

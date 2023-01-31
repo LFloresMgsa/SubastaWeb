@@ -140,9 +140,9 @@ const Subasta = (props) => {
       </Box>
 
       <TabPanel value={value} index={0}>
-        <h1>Bases de la Subasta</h1>
+          <h1>Bases de la Subasta</h1>
         <Bases />
-        
+
       </TabPanel>
 
       <TabPanel value={value} index={1}>
@@ -150,26 +150,26 @@ const Subasta = (props) => {
         <SubastaStyled>
           {subastasActual.map((subastaactual) => (
             <ItemProgramacion key={subastaactual.id} {...subastaactual} />
-                        
+
           ))}
-            <ImageList className="subasta-item" cols={4}>
-              <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
-                {/* <ListSubheader component="div">Padrillos</ListSubheader> */}
-                
-              </ImageListItem>
-              {subastas.map((subasta) => (
-                <ItemSubasta key={subasta.id} {...subasta} />
-                  
-                
-                
-              ))}
-              
-            </ImageList>
-            
+          <ImageList className="subasta-item" cols={4}>
+            <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
+              {/* <ListSubheader component="div">Padrillos</ListSubheader> */}
+
+            </ImageListItem>
+            {subastas.map((subasta) => (
+              <ItemSubasta key={subasta.id} {...subasta} />
+
+
+
+            ))}
+
+          </ImageList>
+
         </SubastaStyled>
-        
+
       </TabPanel>
-      
+
       <TabPanel value={value} index={2}>
         <h1>Proximas Subastas</h1>
 
