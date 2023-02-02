@@ -10,6 +10,7 @@ import Login from './views/Login';
 
 import CompShowBlogs from './blog/ShowBlog';
 import CompCreateBlog from './blog/CreateBlog';
+import CompEditBlog from './blog/EditBlog';
 
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
@@ -40,6 +41,11 @@ const AppRoutes = (props) => {
       <Route
         path="/Create"
         render={(route) => <CompCreateBlog {...props} {...route} />}
+      />
+
+      <Route
+        path="/Update"
+        render={(route) => <CompEditBlog {...props} {...route} />}
       />
 
     </Switch>

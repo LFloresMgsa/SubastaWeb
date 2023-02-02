@@ -1,15 +1,33 @@
-import { getTablePaginationUnstyledUtilityClass } from "@mui/base";
+import React, { Fragment, useState, useEffect } from 'react';
 import axios from "axios";
-import { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 const URI = 'http://localhost:8000/blogs/'
 
-const CompShowBlogs = () => {
+const CompShowBlogs = (props) => {
+
+    const history = useHistory();    
     const [blogs, setBlog] = useState([])
     useEffect(() => {
         getBlogs()
     }, [])
+
+
+    const handleCrear = () => {
+        history.push({
+            pathname: '/Create',
+            state: {props }
+        });
+    }    
+
+    const handleEditar = (id) => {
+        history.push({
+            pathname: `/Update/${id}`,
+            state: {props }
+        });
+    }  
 
     // procedimiento para mostrar todos los blogs
     const getBlogs = async () => {
@@ -26,33 +44,37 @@ const CompShowBlogs = () => {
 
     return (
         <div className='container'>
-            <div className='row'>
-                <div className='col'>
-                    <Link to="/create" className='btn btn-primary mt-2 mb-2'><i className="fas fa-plus"></i></Link>
-                    <table className='table'>
-                        <thead className='table-primary'>
-                            <tr>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {blogs.map((blog) => (
-                                <tr key={blog.id}>
-                                    <td> {blog.title} </td>
-                                    <td> {blog.content} </td>
-                                    <td>
-                                        <Link to={`/edit/${blog.id}`} className='btn btn-info'><i className="fas fa-edit"></i></Link>
-                                        <button onClick={() => deleteBlog(blog.id)} className='btn btn-danger'><i className="fas fa-trash-alt"></i></button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div className='row'>
+          <div className='col'>
+            
+            <Button variant="contained" size="small" color="primary" onClick={handleCrear}>Crear</Button>
+  
+            <table className='table'>
+              <thead className='table-primary'>
+                <tr>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {blogs.map((blog) => (
+                  <tr key={blog.id}>
+                    <td> {blog.title} </td>
+                    <td> {blog.content} </td>
+                    <td>
+                     {/* <Button variant="contained" size="small" color="primary" onClick={handleEditar(blog.id)}>Editar</Button>  */}
+                      <Link to={`/Update/${blog.id}`} >Editar</Link>
+                      <button onClick={() => deleteBlog(blog.id)} >Eliminar</button>
+                      
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     )
 }
 
