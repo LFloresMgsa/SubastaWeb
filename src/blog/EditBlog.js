@@ -14,7 +14,7 @@ const CompEditBlog = (props) => {
     //procedimiento para actualizar
     const update = async (e) => {
         e.preventDefault()
-        await axios.put(URI+id, {
+        await axios.put(URI+id, { 
             title: title,
             content: content
         })
