@@ -16,6 +16,8 @@ import { GlobalStyle } from './GlobalStyles';
 import AppContent from './AppContent';
 import AppTopBar from './components/layout/AppTopBar';
 
+import CompShowBlogs from './blog/ShowBlog';
+
 function App(props) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -91,6 +93,8 @@ function App(props) {
           <BrowserRouter getUserConfirmation={getConfirmation}>
             <CssBaseline />
             <GlobalStyle theme={theme} />
+
+            
             <AppTopBar />
             {/* {currentUser.detail ? (
               <AppTopBar />
@@ -114,11 +118,13 @@ function App(props) {
                 </AppBar>
               )
             )} */}
+            
             <AppContent {...props} viewport={viewport} />
           </BrowserRouter>
         </ThemeProvider>
       )}
     </Fragment>
+    
   );
 }
 

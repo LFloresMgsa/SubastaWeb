@@ -8,6 +8,9 @@ import Subasta from './views/Subasta';
 import SubastaDetalle from './views/SubastaDetalle';
 import Login from './views/Login';
 
+import CompShowBlogs from './blog/ShowBlog';
+import CompCreateBlog from './blog/CreateBlog';
+
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
 
@@ -33,6 +36,12 @@ const AppRoutes = (props) => {
         path="/SubastaDetalle"
         render={(route) => <SubastaDetalle {...props} {...route} />}
       />
+
+      <Route
+        path="/Create"
+        render={(route) => <CompCreateBlog {...props} {...route} />}
+      />
+
     </Switch>
   );
 
