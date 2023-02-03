@@ -52,6 +52,7 @@ const CompShowBlogs = (props) => {
             <table className='table'>
               <thead className='table-primary'>
                 <tr>
+                <th>Id</th>
                   <th>Title</th>
                   <th>Content</th>
                   <th>Actions</th>
@@ -60,6 +61,7 @@ const CompShowBlogs = (props) => {
               <tbody>
                 {blogs.map((blog) => (
                   <tr key={blog.id}>
+                    <td> {blog.id} </td>
                     <td> {blog.title} </td>
                     <td> {blog.content} </td>
                     <td>

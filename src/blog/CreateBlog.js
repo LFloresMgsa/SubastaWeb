@@ -29,13 +29,13 @@ const CompCreateBlog = (props) => {
         <div>
             <h3>Create POST</h3>
             <form onSubmit={store}>
-                <div className='mb-3'>
-                    <label className='form-label'>Id</label>
+                <div>
+                    <label >Id</label>
                     <input
                         value={id}
                         onChange={(e) => setId(e.target.value)}
                         type="number"
-                        className='form-control'
+                        
                     />
                 </div>
                 <div className='mb-3'>
