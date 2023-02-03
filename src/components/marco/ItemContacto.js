@@ -67,12 +67,12 @@ NumberFormatCustom.propTypes = {
 
 
 
-const ItemContacto = (props) => {
+const ItemContacto = () => {
 
     const history = useHistory();
 
     const location = useLocation();
-    const myObject = location.state.props;
+  /*   const myObject = location.state.props; */
 
     const handleRegresarSubasta = () => {
 

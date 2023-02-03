@@ -38,13 +38,29 @@ const style = {
 
 const ItemDetalle = (props) => {
 
-    const history = useHistory();
+    // const history = useHistory();
+    // const location = useLocation();
 
-    const location = useLocation();
-    const myObject = location.state.props;
+    // const myObject = location.state.props;
+    // const myObject = '';
 
-
+    const [detalle, setDetalle] = React.useState('');
     const [imagenesSlide, setImagenesSlide] = React.useState([]);
+
+    useEffect(() => {
+
+        subastaService.obtenerSubastaDetalle(props.detalleID).then(
+            (res) => {
+                console.log(res)
+                setDetalle(res)
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        
+        return () => {};
+    }, []);
 
 
     const obtenerSubastaSlider = async () => {
@@ -59,14 +75,10 @@ const ItemDetalle = (props) => {
             }
         );
     };
-
-
-
+    
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-
 
     return (
         <div>
@@ -83,7 +95,7 @@ const ItemDetalle = (props) => {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase sx={{ width: 150, height: 150 }}>
-                            <Img alt="complex" src={myObject.imagen} onClick={obtenerSubastaSlider} />
+                            <Img alt="complex" src={detalle.imagen} onClick={obtenerSubastaSlider} />
                             <Modal
                                 open={open}
                                 onClose={handleClose}
@@ -93,7 +105,7 @@ const ItemDetalle = (props) => {
                                 <Box sx={style}>
 
                                     <ItemCarousel images={imagenesSlide} />
-                                    {/* <Img alt="complex" src={myObject.imagen} onClick={handleOpen} /> */}
+                                    {/* <Img alt="complex" src={detalle.imagen} onClick={handleOpen} /> */}
                                 </Box>
                             </Modal>
                         </ButtonBase>
@@ -102,24 +114,24 @@ const ItemDetalle = (props) => {
                         <Grid item xs container direction="column" spacing={2} a>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1" component="div" align="left">
-                                    <b>Placa: {myObject.placa} - PUJAR POR N° {myObject.id}</b>
+                                    <b>Placa: {detalle.placa} - PUJAR POR N° {detalle.id}</b>
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    {/* <p><b>Propietario</b>: {myObject.propietario}</p> */}
+                                    {/* <p><b>Propietario</b>: {detalle.propietario}</p> */}
 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-                                    <p><b>Propietario</b>: {myObject.propietario}</p>
-                                    <p><b>Padre:</b> {myObject.padre}</p>
-                                    <p><b>Madre:</b> {myObject.madre}</p>
-                                    <p><b>Info:</b> {myObject.info}</p>
+                                    <p><b>Propietario</b>: {detalle.propietario}</p>
+                                    <p><b>Padre:</b> {detalle.padre}</p>
+                                    <p><b>Madre:</b> {detalle.madre}</p>
+                                    <p><b>Info:</b> {detalle.info}</p>
                                 </Typography>
                             </Grid>
 
                         </Grid>
                         <Grid item>
                             <Typography variant="h6" component="div" color="primary">
-                                <b>Precio Base : S/. {myObject.precio}</b>
+                                <b>Precio Base : S/. {detalle.precio}</b>
                             </Typography>
                         </Grid>
                     </Grid>

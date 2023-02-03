@@ -1,6 +1,6 @@
 // import './wdyr'; // <--- first import
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './App';
@@ -14,13 +14,13 @@ const defaultTheme = createTheme({
   ...appThemes[storedTheme.customTheme],
 });
 
-ReactDOM.render(
-  <React.Fragment>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App defaultTheme={defaultTheme} />
-      </Provider>
-    </BrowserRouter>
-  </React.Fragment>,
-  document.getElementById('app')
+const container = document.getElementById('app');
+const root = createRoot(container);
+
+root.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App defaultTheme={defaultTheme} />
+    </Provider>
+  </BrowserRouter>
 );

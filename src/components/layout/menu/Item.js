@@ -3,6 +3,9 @@ import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import FeaturedPlayListOutlinedIcon from '@mui/icons-material/FeaturedPlayListOutlined';
+import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
+import LibraryAddCheckOutlinedIcon from '@mui/icons-material/LibraryAddCheckOutlined';
+import MissedVideoCallOutlinedIcon from '@mui/icons-material/MissedVideoCallOutlined';
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -99,7 +102,11 @@ const Item = React.forwardRef((props, ref) => {
       case 'inicio':
         return <DashboardOutlinedIcon />;
       case 'catalogo':
-          return <DashboardOutlinedIcon />;
+          return <LibraryAddCheckOutlinedIcon />;
+      case 'videoteca':
+          return <MissedVideoCallOutlinedIcon />;    
+      case 'Subasta':
+          return <AttachMoneyOutlinedIcon />;       
       case 'signing-request':
         return <FeaturedPlayListOutlinedIcon />;
       case 'management':

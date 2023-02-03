@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 
 const style = {
@@ -27,19 +27,20 @@ const style = {
 
 
 const Item = (props) => {
-
     const history = useHistory();
-
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    // const handleVerDetalle = () => {
+    //     history.push({
+    //         pathname: '/subastaDetalle',
+    //         state: { props }
+    //     });
+    // }
 
     const handleVerDetalle = () => {
-        history.push({
-            pathname: '/SubastaDetalle',
-            state: { props }
-        });
+        history.push(`/subasta/detalle/${props.codigo}`);
     }
 
     return (

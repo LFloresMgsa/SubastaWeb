@@ -30,11 +30,19 @@ const AppRoutes = (props) => {
         render={(route) => <Videoteca {...props} {...route} />}
       />
       <Route
+        exact
         path="/subasta"
         render={(route) => <Subasta {...props} {...route} />}
       />
-      <Route
+
+      {/* <Route
         path="/SubastaDetalle"
+        render={(route) => <SubastaDetalle {...props} {...route} />}
+      /> */}
+
+      <Route
+        exact
+        path="/subasta/detalle/:id"
         render={(route) => <SubastaDetalle {...props} {...route} />}
       />
 

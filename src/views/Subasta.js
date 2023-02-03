@@ -159,9 +159,6 @@ const Subasta = (props) => {
             </ImageListItem>
             {subastas.map((subasta) => (
               <ItemSubasta key={subasta.id} {...subasta} />
-
-
-
             ))}
 
           </ImageList>

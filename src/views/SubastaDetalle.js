@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import { css, useTheme } from 'styled-components';
 import { styled } from '@mui/material/styles';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -24,20 +24,16 @@ import ItemPuja from '../components/marco/ItemPuja';
 
 const SubastaDetalle = () => {
 
+    // const history = useHistory();
+    // const location = useLocation();
+    // const myObject = location.state.props;
 
-
-    const history = useHistory();
-
-    const location = useLocation();
-    const myObject = location.state.props;
-
-
+    const detalleID = useParams().id;
 
     return (
         <div>
-            <ItemDetalle />
-            <ItemPuja />
-            
+            <ItemDetalle detalleID={detalleID}/>
+            <ItemPuja /> 
         </div>
     );
 };

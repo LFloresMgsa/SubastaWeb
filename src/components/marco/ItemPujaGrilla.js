@@ -48,10 +48,9 @@ const rows = [
 
 const ItemPujaGrilla = () => {
 
-    const history = useHistory();
-
-    const location = useLocation();
-    const myObject = location.state.props;
+    // const history = useHistory();
+    // const location = useLocation();
+    // const myObject = location.state.props;
 
     return (
         <box>

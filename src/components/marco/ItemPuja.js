@@ -54,12 +54,12 @@ const rows = [
 
 ];
 
-const ItemPuja = (props) => {
+const ItemPuja = () => {
 
     const history = useHistory();
 
     const location = useLocation();
-    const myObject = location.state.props;
+    /* const myObject = location.state.props; */
 
     return (
         <div>

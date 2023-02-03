@@ -21,6 +21,7 @@ import CompShowBlogs from './blog/ShowBlog';
 function App(props) {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const {
     showLoginBar,
     accessToken,
@@ -104,7 +105,7 @@ function App(props) {
                   <Toolbar
                     variant="dense"
                     style={{ justifyContent: 'flex-end' }}
-                  >
+                  // >
                     <Button
                       color="inherit"
                       onClick={() => {
