@@ -11,12 +11,14 @@ const CompShowBlogs = (props) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const history = useHistory();
 
+//LUIS: como se debe llamar al APLI para que retorne los valores del JSON retornado al ejecutar el URI
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setData(response.data);
-        const response = await axios.get('http://localhost:5000/api/catalogo');
+        
+        const response = await axios.get(URI);
         setData(response.data);
       } catch (error) {
         setError(error);
@@ -29,7 +31,19 @@ const CompShowBlogs = (props) => {
   }, []);
 
 
-  const history = useHistory();
+  
+  // procedimiento para eliminar un catalogo
+
+  // LUIS: consultar como se puede ejecutar el DELETE cuando los parametros "empresa y catalogo" deben ser enviados como JSON al API
+  // en este ejemplo esta como parametro pero creo que no debe ser asi ya que el API solicita un JSON como parametros
+
+  const deleteCatalogo = async (empresa, catalogo) => {
+    await axios.delete(`${URI}${empresa}${catalogo}`)
+    getBlogs()
+  }
+
+
+
 /*   const [catalogos, setCatalogo] = useState([])
 
 
@@ -43,14 +57,15 @@ const CompShowBlogs = (props) => {
               pathname: '/Create',
               state: {props }
           });
-      }    
-  
+      }   
+      */ 
+  /*
       const handleEditar = (id) => {
           history.push({
               pathname: `/Update/${id}`,
               state: {props }
           });
-      }   */
+      }   
 
   // procedimiento para mostrar todos los blogs
 /*   const getCatalogos = async () => {
@@ -64,10 +79,7 @@ const CompShowBlogs = (props) => {
     }
   } */
 
-  /*     // procedimiento para eliminar un blog
-      const deleteBlog = async (id) => {
-          await axios.delete(`${URI}${id}`)
-          getBlogs()
+  /*   
       } */
 
   return (
@@ -87,16 +99,25 @@ const CompShowBlogs = (props) => {
                 <th>Propietario</th>
               </tr>
             </thead>
+
             <tbody>
-              {data.map(item  => (
+              {// LUIS: como se debe asociar los datos obtenidos por el API a la tabla, que se esta llenando con la funcion : fetchData
+              
+                data.map(item  => (
                 <tr key={item.Cab_cCatalogo}>
                   <td> {item.Emp_cCodigo} </td>
                   <td> {item.Cab_cDescripcion} </td>
                   <td> {item.Propietario} </td>
                   <td>
 
-                    {/*                       <Link to={`/Update/${blog.Cab_cCatalogo}`} >Editar</Link>
-                      <button onClick={() => deleteBlog(blog.Cab_cCatalogo)} >Eliminar</button> */}
+                    {
+                      /*{ <Link to={`/Update/${blog.Cab_cCatalogo}`} >Editar</Link> }*/
+
+
+                      // LUIS: como se debe enviar los parametros  item.Emp_cCodigo y item.Cab_cCatalogo como JSON al api delete
+                      // a la funcion deleteCatalogo
+                      <button onClick={() => deleteCatalogo(item.Cab_cCatalogo)} >Eliminar</button> 
+                      }
 
                   </td>
                 </tr>
