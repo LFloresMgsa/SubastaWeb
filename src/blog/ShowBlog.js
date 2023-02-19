@@ -13,7 +13,10 @@ const CompShowBlogs = (props) => {
   const [error, setError] = useState(null);
   const history = useHistory();
 
-//LUIS: como se debe llamar al APLI para que retorne los valores del JSON retornado al ejecutar el URI
+//LUIS: como se debe llamar al API para que retorne los valores del JSON retornado al ejecutar el URI
+
+//LUIS: como se puede hacer para que llame al SP con url: http://localhost:5000/api/catalogo/listar
+//      donde el parametro de entrada es un JSON
   useEffect(() => {
     const fetchData = async () => {
       try {
