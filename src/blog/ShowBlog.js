@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from "axios";
+import Fetch from '../helpers/Fetch';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
@@ -14,20 +15,34 @@ const CompShowBlogs = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setData(response.data);
-        const response = await axios.get('http://localhost:5000/api/catalogo');
-        setData(response.data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
+      const response = await fetch('http://localhost:5000/api/catalogo/listar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          // Aquí debes incluir el objeto JSON que se utilizará como parámetro de entrada del API
+            "Accion":"BUSCAR_REGISTRO",
+            "Emp_cCodigo":"015",
+            "Lgt_cCategoria":"",
+            "Lgt_cGrupo":"",
+            "Lgt_cClase":"",
+            "Lgt_cFamilia":"",
+            "Cab_cCatalogo":"000009",
+            "Cab_cDescripcion":"",
+            "Propietario":"",
+            "Padre":"",
+            "Madre":"",
+            "Info":"",
+            "Placa":""
+        })
+      });
+      const json = await response.json();
+      setData(json);
     };
 
     fetchData();
   }, []);
-
 
   const history = useHistory();
 /*   const [catalogos, setCatalogo] = useState([])
@@ -88,7 +103,7 @@ const CompShowBlogs = (props) => {
               </tr>
             </thead>
             <tbody>
-              {data.map(item  => (
+              {data.map((item)  => (
                 <tr key={item.Cab_cCatalogo}>
                   <td> {item.Emp_cCodigo} </td>
                   <td> {item.Cab_cDescripcion} </td>
