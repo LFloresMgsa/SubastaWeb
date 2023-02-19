@@ -8,14 +8,34 @@ const URI = 'http://localhost:5000/api/catalogo'
 
 const CompShowBlogs = (props) => {
 
-  const history = useHistory();
-  const [catalogos, setCatalogo] = useState([])
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getCatalogos();
+    const fetchData = async () => {
+      try {
+        setData(response.data);
+        const response = await axios.get('http://localhost:5000/api/catalogo');
+        setData(response.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+
+  const history = useHistory();
+/*   const [catalogos, setCatalogo] = useState([])
+
+
+  useEffect(() => {
+    getCatalogos();
+  }, []); */
 
 
   /*     const handleCrear = () => {
@@ -33,7 +53,7 @@ const CompShowBlogs = (props) => {
       }   */
 
   // procedimiento para mostrar todos los blogs
-  const getCatalogos = async () => {
+/*   const getCatalogos = async () => {
     try {
       const response = await axios.get(URI);
       setCatalogo(response.data);
@@ -42,7 +62,7 @@ const CompShowBlogs = (props) => {
     } finally {
       setLoading(false);
     }
-  }
+  } */
 
   /*     // procedimiento para eliminar un blog
       const deleteBlog = async (id) => {
@@ -68,11 +88,11 @@ const CompShowBlogs = (props) => {
               </tr>
             </thead>
             <tbody>
-              {catalogos.map((catalogo) => (
-                <tr key={catalogo.Cab_cCatalogo}>
-                  <td> {catalogo.Emp_cCodigo} </td>
-                  <td> {catalogo.Cab_cDescripcion} </td>
-                  <td> {catalogo.Propietario} </td>
+              {data.map(item  => (
+                <tr key={item.Cab_cCatalogo}>
+                  <td> {item.Emp_cCodigo} </td>
+                  <td> {item.Cab_cDescripcion} </td>
+                  <td> {item.Propietario} </td>
                   <td>
 
                     {/*                       <Link to={`/Update/${blog.Cab_cCatalogo}`} >Editar</Link>
