@@ -62,8 +62,6 @@ const CompListaCatalogo = (props) => {
     });
   }
 
-  //:Emp_cCodigo/:Cab_cCatalogo
-
   // procedimiento para CREAR un catalogo con SP MySQL
   const crearCatalogo = () => {
     history.push({
