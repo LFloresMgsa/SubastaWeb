@@ -47,35 +47,18 @@ const AppRoutes = (props) => {
       />
 
       <Route
-        path="/Create"
+        path="/crear"
         render={(route) => <CompCreateBlog {...props} {...route} />}
       />
 
       <Route
-        path="/Update"
+        path="/editar"
         render={(route) => <CompEditBlog {...props} {...route} />}
       />
 
     </Switch>
   );
 
-  // return accessToken.token ? (
-  //   <Switch>
-  //     <Route
-  //       path="/dashboard"
-  //       render={(route) => <Dashboard {...props} {...route} />}
-  //     />
-  //   </Switch>
-  // ) : (
-  //   !currentUser.detail && (
-  //     <Switch>
-  //       <Route
-  //         path="/login"
-  //         render={(route) => <Login {...props} {...route} />}
-  //       />
-  //     </Switch>
-  //   )
-  // );
 };
 
 export default AppRoutes;
