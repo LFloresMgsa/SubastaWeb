@@ -52,7 +52,7 @@ const CompListaCatalogo = (props) => {
       const response = await fetch(URI + '/sp/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Accion: "BUSCARTODOS", Emp_cCodigo: "015", Cab_cCatalogo: "000008" })
+        body: JSON.stringify({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" })
       });
       const json = await response.json();
       setData(json[0]);

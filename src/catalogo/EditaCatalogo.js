@@ -35,13 +35,13 @@ const CompEditaCatalogo = (props) => {
 
     useEffect(() => {
 
-        obtenerCatalogos()
+        obtenerCatalogo()
     }, [])
 
 
 
     // procedimiento para CONSULTA un catalogo con SP MySQL
-    const obtenerCatalogos = async () => {
+    const obtenerCatalogo = async () => {
         try {
             const response = await fetch(URI + '/sp/', {
                 method: 'POST',
