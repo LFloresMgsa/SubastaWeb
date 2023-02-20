@@ -1,16 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import axios from "axios";
-import Fetch from '../helpers/Fetch';
-import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
+
 
 const URI = 'http://localhost:5000/api/catalogo'
 
-const CompShowBlogs = (props) => {
+const CompListaCatalogo = (props) => {
 
   const history = useHistory();
   const [data, setData] = useState([]);
+  const [error, setError] = useState([]);
+  const [loading, setLoading] = useState([]);
   const [dataDelete, setDataDelete] = useState([]);
 
 
@@ -63,6 +62,8 @@ const CompShowBlogs = (props) => {
     });
   }
 
+  //:Emp_cCodigo/:Cab_cCatalogo
+
   // procedimiento para CREAR un catalogo con SP MySQL
   const crearCatalogo = () => {
     history.push({
@@ -77,24 +78,41 @@ const CompShowBlogs = (props) => {
         <div className='col'>
 
           {/*  <Button variant="contained" size="small" color="primary" onClick={handleCrear}>Crear</Button> */}
-          <button onClick={() => crearCatalogo()} >Crear</button>
+          <button variant="contained" size="small" color="primary"  onClick={() => crearCatalogo()} >Crear</button>
 
           <table className='table'>
             <thead className='table-primary'>
               <tr>
-                <th>Cab_cCatalogo</th>
-                <th>Emp_cCodigo</th>
-
-                <th>Cab_cDescripcion</th>
+                <th>Empresa</th>
+                <th>Categoria</th>
+                <th>Grupo</th>
+                <th>Clase</th>
+                <th>Familia</th>
+                <th>Catalogo</th>
+                <th>Descripcion</th>
                 <th>Propietario</th>
+                <th>Padre</th>
+                <th>Madre</th>
+                <th>Info</th>
+                <th>Placa</th>
+                <th>Proceso</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item) => (
                 <tr key={item.Cab_cCatalogo}>
                   <td> {item.Emp_cCodigo} </td>
+                  <td> {item.Lgt_cCategoria} </td>
+                  <td> {item.Lgt_cGrupo} </td>
+                  <td> {item.Lgt_cClase} </td>
+                  <td> {item.Lgt_cFamilia} </td>
+                  <td> {item.Cab_cCatalogo} </td>
                   <td> {item.Cab_cDescripcion} </td>
                   <td> {item.Propietario} </td>
+                  <td> {item.Padre} </td>
+                  <td> {item.Madre} </td>
+                  <td> {item.Info} </td>
+                  <td> {item.Placa} </td>
                   <td>
                     <button onClick={() => editarCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</button>
                     <button onClick={() => eliminaCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</button>
@@ -109,4 +127,4 @@ const CompShowBlogs = (props) => {
   )
 }
 
-export default CompShowBlogs
+export default CompListaCatalogo

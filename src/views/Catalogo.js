@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import CompShowBlogs from '../blog/ShowBlog';
+import CompListaCatalogo from '../catalogo/ListaCatalogo';
 
 const Catalogo = () => {
 
 
   return (
     <div >
-      <CompShowBlogs />
+      <CompListaCatalogo />
     </div>
   );
 };

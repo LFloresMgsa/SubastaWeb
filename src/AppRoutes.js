@@ -8,9 +8,9 @@ import Subasta from './views/Subasta';
 import SubastaDetalle from './views/SubastaDetalle';
 import Login from './views/Login';
 
-import CompShowBlogs from './blog/ShowBlog';
-import CompCreateBlog from './blog/CreateBlog';
-import CompEditBlog from './blog/EditBlog';
+import CompListaCatalogo from './catalogo/ListaCatalogo';
+import CompCreaCatalogo from './catalogo/CreaCatalogo';
+import CompEditaCatalogo from './catalogo/EditaCatalogo';
 
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
@@ -48,12 +48,12 @@ const AppRoutes = (props) => {
 
       <Route
         path="/crear"
-        render={(route) => <CompCreateBlog {...props} {...route} />}
+        render={(route) => <CompCreaCatalogo {...props} {...route} />}
       />
 
       <Route
-        path="/editar"
-        render={(route) => <CompEditBlog {...props} {...route} />}
+        path="/editar/:Emp_cCodigo/:Cab_cCatalogo"
+        render={(route) => <CompEditaCatalogo {...props} {...route} />}
       />
 
     </Switch>
