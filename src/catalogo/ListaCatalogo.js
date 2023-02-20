@@ -1,8 +1,36 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
 const URI = 'http://localhost:5000/api/catalogo'
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 const CompListaCatalogo = (props) => {
 
@@ -71,56 +99,68 @@ const CompListaCatalogo = (props) => {
   }
 
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col'>
+    <div>
+      <Paper
+        sx={{
+          p: 2,
+          margin: 1,
+          maxWidth: 'auto',
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        }}
+      >
+        <box>
+          <Button variant="contained" size="small" color="primary" onClick={() => crearCatalogo()} >Crear</Button>
+          <TableContainer component={Paper}>
+            <Table aria-label="customized table">
+              <TableHead>
+                <TableRow>
 
-          {/*  <Button variant="contained" size="small" color="primary" onClick={handleCrear}>Crear</Button> */}
-          <button variant="contained" size="small" color="primary"  onClick={() => crearCatalogo()} >Crear</button>
+                  <StyledTableCell align="right">Empresa</StyledTableCell>
+                  <StyledTableCell align="right">Categoria</StyledTableCell>
+                  <StyledTableCell align="center">Grupo</StyledTableCell>
+                  <StyledTableCell align="left">Clase</StyledTableCell>
 
-          <table className='table'>
-            <thead className='table-primary'>
-              <tr>
-                <th>Empresa</th>
-                <th>Categoria</th>
-                <th>Grupo</th>
-                <th>Clase</th>
-                <th>Familia</th>
-                <th>Catalogo</th>
-                <th>Descripcion</th>
-                <th>Propietario</th>
-                <th>Padre</th>
-                <th>Madre</th>
-                <th>Info</th>
-                <th>Placa</th>
-                <th>Proceso</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={item.Cab_cCatalogo}>
-                  <td> {item.Emp_cCodigo} </td>
-                  <td> {item.Lgt_cCategoria} </td>
-                  <td> {item.Lgt_cGrupo} </td>
-                  <td> {item.Lgt_cClase} </td>
-                  <td> {item.Lgt_cFamilia} </td>
-                  <td> {item.Cab_cCatalogo} </td>
-                  <td> {item.Cab_cDescripcion} </td>
-                  <td> {item.Propietario} </td>
-                  <td> {item.Padre} </td>
-                  <td> {item.Madre} </td>
-                  <td> {item.Info} </td>
-                  <td> {item.Placa} </td>
-                  <td>
-                    <button onClick={() => editarCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</button>
-                    <button onClick={() => eliminaCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                  <StyledTableCell align="left">Familia</StyledTableCell>
+                  <StyledTableCell align="left">Catalogo</StyledTableCell>
+                  <StyledTableCell align="left">Descripcion</StyledTableCell>
+                  <StyledTableCell align="left">Propietario</StyledTableCell>
+                  <StyledTableCell align="left">Padre</StyledTableCell>
+                  <StyledTableCell align="left">Madre</StyledTableCell>
+                  <StyledTableCell align="left">Info</StyledTableCell>
+                  <StyledTableCell align="left">Placa</StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map((item) => (
+                  <StyledTableRow key={item.Cab_cCatalogo}>
+
+                    <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
+                    <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
+                    <StyledTableCell align="center">{item.Lgt_cGrupo}</StyledTableCell>
+                    <StyledTableCell align="left">{item.Lgt_cClase}</StyledTableCell>
+
+                    <StyledTableCell align="right">{item.Lgt_cFamilia}</StyledTableCell>
+                    <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
+                    <StyledTableCell align="center">{item.Cab_cDescripcion}</StyledTableCell>
+                    <StyledTableCell align="left">{item.Propietario}</StyledTableCell>
+                    <StyledTableCell align="right">{item.Padre}</StyledTableCell>
+                    <StyledTableCell align="right">{item.Madre}</StyledTableCell>
+                    <StyledTableCell align="center">{item.Info}</StyledTableCell>
+                    <StyledTableCell align="left">{item.Placa}</StyledTableCell>
+                    <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editarCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
+                    <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminaCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </box>
+
+      </Paper>
     </div>
   )
 }

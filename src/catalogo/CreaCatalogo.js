@@ -1,5 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import { Description } from '@mui/icons-material';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 const URI = 'http://localhost:5000/api/catalogo'
 
@@ -48,118 +54,136 @@ const CompCreaCatalogo = (props) => {
 
     return (
         <div>
-            <h3>Crear CATALOGO</h3>
-            <form onSubmit={insertaCatalogo}>
-                <div>
-                    <label className='form-label'>Empresa</label>
-                    <input
-                        value={Emp_cCodigo}
-                        onChange={(e) => setEmpresa(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Categoria</label>
-                    <input
-                        value={Lgt_cCategoria}
-                        onChange={(e) => setCategoria(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Grupo</label>
-                    <textarea
-                        value={Lgt_cGrupo}
-                        onChange={(e) => setGrupo(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Clase</label>
-                    <textarea
-                        value={Lgt_cClase}
-                        onChange={(e) => setClase(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Familia</label>
-                    <textarea
-                        value={Lgt_cFamilia}
-                        onChange={(e) => setFamilia(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Catalogo</label>
-                    <textarea
-                        value={Cab_cCatalogo}
-                        onChange={(e) => setCatalogo(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Descripcion</label>
-                    <textarea
-                        value={Cab_cDescripcion}
-                        onChange={(e) => setDescripcion(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Propietario</label>
-                    <textarea
-                        value={Propietario}
-                        onChange={(e) => setPropietario(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Padre</label>
-                    <textarea
-                        value={Padre}
-                        onChange={(e) => setPadre(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Madre</label>
-                    <textarea
-                        value={Madre}
-                        onChange={(e) => setMadre(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Info</label>
-                    <textarea
-                        value={Info}
-                        onChange={(e) => setInfo(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label'>Placa</label>
-                    <textarea
-                        value={Placa}
-                        onChange={(e) => setPlaca(e.target.value)}
-                        type="text"
-                        className='form-control'
-                    />
-                </div>
-                <button type='submit' className='btn btn-primary'>Grabar</button>
-            </form>
+            <Paper
+                sx={{
+                    p: 2,
+                    margin: 1,
+                    maxWidth: 'auto',
+                    flexGrow: 1,
+                    backgroundColor: (theme) =>
+                        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                }}
+            >
+
+                <Box sx={{ flexGrow: 1 }}>
+                    <div align="left">
+                        <h2 >CREA CATALOGO:</h2>
+                    </div>
+
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={8}>
+                            <TextField
+                                label="Empresa"
+                                value={Emp_cCodigo}
+                                onChange={(e) => setEmpresa(e.target.value)}
+                                name="textformat"
+                                id="empresa"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Categoria"
+                                value={Lgt_cCategoria}
+                                onChange={(e) => setCategoria(e.target.value)}
+                                name="textformat"
+                                id="categoria"
+                                variant="standard"
+                            />
+
+
+                            <TextField
+                                label="Grupo"
+                                value={Lgt_cGrupo}
+                                onChange={(e) => setGrupo(e.target.value)}
+                                name="textformat"
+                                id="grupo"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Clase"
+                                value={Lgt_cClase}
+                                onChange={(e) => setClase(e.target.value)}
+                                name="textformat"
+                                id="clase"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Familia"
+                                value={Lgt_cFamilia}
+                                onChange={(e) => setFamilia(e.target.value)}
+                                name="textformat"
+                                id="familia"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Catalogo"
+                                value={Cab_cCatalogo}
+                                onChange={(e) => setCatalogo(e.target.value)}
+                                name="textformat"
+                                id="catalogo"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Descripcion"
+                                value={Cab_cDescripcion}
+                                onChange={(e) => setDescripcion(e.target.value)}
+                                name="textformat"
+                                id="descripcion"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Propietario"
+                                value={Propietario}
+                                onChange={(e) => setPropietario(e.target.value)}
+                                name="textformat"
+                                id="propietario"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Pade"
+                                value={Padre}
+                                onChange={(e) => setPadre(e.target.value)}
+                                name="textformat"
+                                id="padre"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Madre"
+                                value={Madre}
+                                onChange={(e) => setMadre(e.target.value)}
+                                name="textformat"
+                                id="madre"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Info"
+                                value={Info}
+                                onChange={(e) => setInfo(e.target.value)}
+                                name="textformat"
+                                id="info"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Placa"
+                                value={Placa}
+                                onChange={(e) => setPlaca(e.target.value)}
+                                name="textformat"
+                                id="placa"
+                                variant="standard"
+                            />
+
+                            <Button variant="contained" size="small" color="primary" onClick={insertaCatalogo}>Crear</Button>
+
+                        </Grid>
+
+                    </Grid>
+                </Box >
+
+            </Paper>
         </div>
     )
 }
