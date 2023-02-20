@@ -9,6 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+
+import { signingRequestService } from '../services/ejemplos'
 
 const URI = 'http://localhost:5000/api/catalogo'
 
@@ -49,12 +52,16 @@ const CompListaCatalogo = (props) => {
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const obtenerCatalogos = async () => {
     try {
+      /* const response = await signingRequestService.sendEjecutaSP({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" }) */
       const response = await fetch(URI + '/sp/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" })
       });
       const json = await response.json();
+
+      console.log(response);
+
       setData(json[0]);
     } catch (error) {
       setError(error);
@@ -110,7 +117,7 @@ const CompListaCatalogo = (props) => {
             theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         }}
       >
-        <box>
+        <Box>
           <Button variant="contained" size="small" color="primary" onClick={() => crearCatalogo()} >Crear</Button>
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
@@ -158,7 +165,7 @@ const CompListaCatalogo = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
-        </box>
+        </Box>
 
       </Paper>
     </div>
