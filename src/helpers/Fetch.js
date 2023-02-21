@@ -4,21 +4,13 @@ const _apiHost = `${SERVICE_URL}`;
 
 async function request(url, params = {}, method = 'GET', options) {
   const { currentPortalID = 0, activeTabID = 0 } = store.getState();
-  const _options = { method, credentials: 'include', ...options };
+  // const _options = { method, credentials: 'include', ...options };
+  const _options = { method, credentials: 'same-origin', ...options };
 
   let _portalID = params.portalID || currentPortalID;
   let _tabID = params.tabID || activeTabID;
 
-  url +=
-    '?' +
-    objectToQueryString({
-      ...params,
-      portalID: _portalID,
-      tabID: _tabID,
-    });
-  //   else {
-  //     options.body = JSON.stringify(params);
-  //   }
+  url += '?' +  objectToQueryString({...params});
 
   return await fetch(_apiHost + url, _options);
 }

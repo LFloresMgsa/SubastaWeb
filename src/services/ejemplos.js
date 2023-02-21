@@ -53,7 +53,8 @@ const signingRequestService = {
   sendEjecutaSP: function ( dataJson) {
     const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
     const params = { };
-    const url = `http://localhost:5000/api/catalogo/sp`;
+    // const url = `http://localhost:5000/api/catalogo/sp`;
+    const url = `/api/catalogo/sp`;
     return Fetch.post(url, params, options).then((res) =>
       handleResponse(res, false)
     );/*  */
@@ -61,3 +62,4 @@ const signingRequestService = {
 };
 
 export { signingRequestService };
+

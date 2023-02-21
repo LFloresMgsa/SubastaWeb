@@ -53,18 +53,23 @@ const CompListaCatalogo = (props) => {
   const obtenerCatalogos = async () => {
     try {
       /* const response = await signingRequestService.sendEjecutaSP({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" }) */
-      const response = await fetch(URI + '/sp/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" })
-      });
-      const json = await response.json();
+      // const response = await fetch(URI + '/sp/', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" })
+      // });
 
-      console.log(response);
-
-      setData(json[0]);
-    } catch (error) {
-      setError(error);
+      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
+      await signingRequestService.sendEjecutaSP(_body).then(
+        (res) => {
+          // setData(json[0]);
+          setData(res[0]);
+        },
+        (error) => {
+          console.log(error)
+          setError(error);
+        }
+      )
     } finally {
       setLoading(false);
     }
