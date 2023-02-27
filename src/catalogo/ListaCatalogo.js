@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
-import { signingRequestService } from '../services/ejemplos'
+import { signingRequestService } from '../services/api.helper'
 
 const URI = 'http://localhost:5000/api/catalogo'
 
@@ -52,17 +52,9 @@ const CompListaCatalogo = (props) => {
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const obtenerCatalogos = async () => {
     try {
-      /* const response = await signingRequestService.sendEjecutaSP({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" }) */
-      // const response = await fetch(URI + '/sp/', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ Accion: "BUSCARTODOS", Emp_cCodigo: "015" })
-      // });
-
       let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
-      await signingRequestService.sendEjecutaSP(_body).then(
+      await signingRequestService.ejecutaSP(_body).then(
         (res) => {
-          // setData(json[0]);
           setData(res[0]);
         },
         (error) => {
@@ -78,16 +70,16 @@ const CompListaCatalogo = (props) => {
   // procedimiento para ELIMINAR un catalogo con SP MySQL
   const eliminaCatalogo = async (Emp_cCodigo, Cab_cCatalogo) => {
     try {
-      const response = await fetch(URI + '/sp/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo })
-      });
-      const json = await response.json();
-      setDataDelete(json[0]);
-
-    } catch (error) {
-      setError(error);
+      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo })
+      await signingRequestService.sendEjecutaSP(_body).then(
+        (res) => {
+          setDataDelete(res[0]);
+        },
+        (error) => {
+          console.log(error)
+          setError(error);
+        }
+      )
     } finally {
       obtenerCatalogos();
       setLoading(false);

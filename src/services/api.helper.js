@@ -50,7 +50,7 @@ const signingRequestService = {
     return Fetch.update(url, params, options).then(handleResponse);
   },
 
-  sendEjecutaSP: function ( dataJson) {
+  ejecutaSP: function ( dataJson) {
     const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
     const params = { };
     // const url = `http://localhost:5000/api/catalogo/sp`;

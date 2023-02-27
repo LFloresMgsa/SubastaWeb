@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-const URI = 'http://localhost:5000/api/catalogo'
+import { signingRequestService } from '../services/api.helper'
 
 const CompCreaCatalogo = (props) => {
 
@@ -30,23 +30,20 @@ const CompCreaCatalogo = (props) => {
     // procedimiento para INSERTAR un catalogo con SP MySQL
     const insertaCatalogo = async (e) => {
         try {
-            e.preventDefault()
-            const response = await fetch(URI + '/sp/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa })
-            });
-            const json = await response.json();
-            setData(json[0]);
-
-        } catch (error) {
-            setError(error);
+            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
+            await signingRequestService.ejecutaSP(_body).then(
+              (res) => {
+                setData(res[0]);
+              },
+              (error) => {
+                console.log(error)
+                setError(error);
+              }
+            )
         } finally {
-
             history.push({
                 pathname: '/catalogo'
             });
-
             setLoading(false);
         }
     }
