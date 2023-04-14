@@ -59,6 +59,17 @@ const signingRequestService = {
       handleResponse(res, false)
     );/*  */
   },
+
+  ejecutaSPSubasta: function ( dataJson) {
+    const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+    const params = { };
+
+    const url = `/api/subasta/sp`;
+    return Fetch.post(url, params, options).then((res) =>
+      handleResponse(res, false)
+    );/*  */
+  },
+
 };
 
 export { signingRequestService };

@@ -4,6 +4,7 @@ import Fetch from '../helpers/Fetch';
 
 export const subastaactualService = {
   obtenerSubastaactual,
+  
 };
 
 

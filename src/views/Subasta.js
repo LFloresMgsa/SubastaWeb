@@ -19,6 +19,10 @@ import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
 import { subastaactualService } from '../services/subastaactual.service';
 
+import { CompListaEventoService } from '../subasta/ListaSubasta.js';
+
+
+
 const SubastaStyled = styled('div')(
   ({ theme }) => css`
     width:100%;
@@ -83,7 +87,8 @@ const Subasta = (props) => {
   };
 
   const obtenerSubastaactual = async () => {
-    return await subastaactualService.obtenerSubastaactual().then(
+    //return await CompListaEventoService.obtenerEventoActivo().then(
+    return await CompListaEventoService.obtenerEventoActivo().then(
       (res) => {
         console.log(res)
         setSubastasActual(res)
@@ -107,7 +112,8 @@ const Subasta = (props) => {
   };
 
   const obtenerSubastascerradas = async () => {
-    return await subastacerradaService.obtenerSubastacerrada().then(
+    //return await subastacerradaService.obtenerSubastacerrada().then(
+      return await CompListaEventoService.obtenerEventoCerrada().then(
       (res) => {
         console.log(res)
         setSubastasCerradas(res)
@@ -125,6 +131,7 @@ const Subasta = (props) => {
     obtenerSubastasproximas();
     obtenerSubastascerradas();
     obtenerSubastaactual();
+    //obtenerEventoActivo();
   };
 
   return (
