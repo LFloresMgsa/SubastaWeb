@@ -6,7 +6,7 @@ import { signingRequestService } from '../services/api.helper'
 
 
 
-  // procedimiento para CONSULTA un catalogo con SP MySQL
+  // procedimiento para CONSULTA un evento con SP MySQL
   function obtenerEventoActivo  ()  {
 
     const history = useHistory();
@@ -24,14 +24,14 @@ import { signingRequestService } from '../services/api.helper'
         }
       )
     } finally {
-      setLoading(false);
+      //setLoading(false);
       
     }
 
     return  data;
   }
 
-  // procedimiento para CONSULTA un catalogo con SP MySQL
+  // procedimiento para CONSULTA un evento con SP MySQL
   const obtenerEventoCerrada   = async () =>   {
 
     const history = useHistory();
@@ -49,14 +49,11 @@ import { signingRequestService } from '../services/api.helper'
         }
       )
     } finally {
-      setLoading(false);
+      //setLoading(false);
       
     }
 
-    //return  res[0];
-
-    const eventoactual= Promise.resolve(res[0]  );
-    return eventoactual;
+    return data;
 
   }
 

@@ -32,7 +32,7 @@ const Itemprogramacion = (props) => {
                                 >
                                   
                                 </Typography>
-                                {`Inicio : ${props.inicio} - Termino: ${props.fin}`}
+                                {`Inicio : ${props.Dvm_dInicio} - Termino: ${props.Dvm_dFin}`}
                                 
                             </React.Fragment>
                         }

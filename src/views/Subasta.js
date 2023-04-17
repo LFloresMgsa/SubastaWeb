@@ -19,6 +19,8 @@ import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
 import { subastaactualService } from '../services/subastaactual.service';
 
+import { signingRequestService } from '../services/api.helper'
+
 import { CompListaEventoService } from '../subasta/ListaSubasta.js';
 
 
@@ -73,11 +75,12 @@ const Subasta = (props) => {
   const [subastasActual, setSubastasActual] = React.useState([]);
   const [subastasProximas, setSubastasProximas] = React.useState([]);
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
+  const [loading, setLoading] = useState([]);
 
   const obtenerSubastas = async () => {
     return await subastaService.obtenerSubasta().then(
       (res) => {
-        console.log(res)
+       // console.log(res)
         setSubastas(res)
       },
       (error) => {
@@ -88,9 +91,9 @@ const Subasta = (props) => {
 
   const obtenerSubastaactual = async () => {
     //return await CompListaEventoService.obtenerEventoActivo().then(
-    return await CompListaEventoService.obtenerEventoActivo().then(
+    return await subastaactualService.obtenerSubastaactual().then(
       (res) => {
-        console.log(res)
+        //console.log(res)
         setSubastasActual(res)
       },
       (error) => {
@@ -102,7 +105,7 @@ const Subasta = (props) => {
   const obtenerSubastasproximas = async () => {
     return await subastaproximaService.obtenerSubastaproxima().then(
       (res) => {
-        console.log(res)
+        //console.log(res)
         setSubastasProximas(res)
       },
       (error) => {
@@ -111,26 +114,54 @@ const Subasta = (props) => {
     );
   };
 
-  const obtenerSubastascerradas = async () => {
-    //return await subastacerradaService.obtenerSubastacerrada().then(
-      return await CompListaEventoService.obtenerEventoCerrada().then(
+
+  const obtenerEventoCerrada   = async () =>   {
+
+    //const history = useHistory();
+    //const [data, setData] = useState([]);
+    
+    try {
+      let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
+      await signingRequestService.ejecutaSPSubasta(_body).then(
+        (res) => {
+          //setData(res[0]);
+        },
+        (error) => {
+          console.log(error)
+          setError(error);
+        }
+      )
+    } finally {
+      setLoading(false);
+      
+    }   
+
+  }
+
+  const obtenerSubastascerradas = async () => {    
+    let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
+      
+   
+   return await subastacerradaService.obtenerSubastacerrada(_body).then(
+      
       (res) => {
         console.log(res)
-        setSubastasCerradas(res)
+        setSubastasCerradas(res[0])
       },
       (error) => {
         console.log(error);
       }
     );
-  };
+ };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // llamar api
     obtenerSubastas();
     obtenerSubastasproximas();
-    obtenerSubastascerradas();
+    obtenerEventoCerrada();
     obtenerSubastaactual();
+    obtenerSubastascerradas();
     //obtenerEventoActivo();
   };
 
@@ -188,8 +219,9 @@ const Subasta = (props) => {
         <h1>Subastas Cerradas</h1>
 
         <SubastaStyled >
-          {subastasCerradas.map((subastacerrada) => (
-            <ItemProgramacion key={subastacerrada.id} {...subastacerrada} />
+          {subastasCerradas.map((subastacerrada,index) => (
+            <ItemProgramacion key={index} {...subastacerrada} />
+            //<ItemProgramacion key={subastacerrada.id} {...subastacerrada} />
           ))}
         </SubastaStyled>
 
