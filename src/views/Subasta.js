@@ -18,10 +18,7 @@ import ItemSubasta from '../components/marco/ItemSubasta';
 import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
 import { subastaactualService } from '../services/subastaactual.service';
-
 import { signingRequestService } from '../services/api.helper'
-
-import { CompListaEventoService } from '../subasta/ListaSubasta.js';
 
 
 
@@ -75,7 +72,7 @@ const Subasta = (props) => {
   const [subastasActual, setSubastasActual] = React.useState([]);
   const [subastasProximas, setSubastasProximas] = React.useState([]);
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
-  const [loading, setLoading] = useState([]);
+  //const [loading, setLoading] = useState([]);
 
   const obtenerSubastas = async () => {
     return await subastaService.obtenerSubasta().then(
@@ -90,53 +87,36 @@ const Subasta = (props) => {
   };
 
   const obtenerSubastaactual = async () => {
-    //return await CompListaEventoService.obtenerEventoActivo().then(
-    return await subastaactualService.obtenerSubastaactual().then(
-      (res) => {
-        //console.log(res)
-        setSubastasActual(res)
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
+      
+   
+    return await subastaproximaService.obtenerSubastaproxima(_body).then(
+       
+       (res) => {
+         console.log(res)
+         setSubastasActual(res[0])
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
   };
 
   const obtenerSubastasproximas = async () => {
-    return await subastaproximaService.obtenerSubastaproxima().then(
-      (res) => {
-        //console.log(res)
-        setSubastasProximas(res)
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
-
-
-  const obtenerEventoCerrada   = async () =>   {
-
-    //const history = useHistory();
-    //const [data, setData] = useState([]);
-    
-    try {
-      let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
-      await signingRequestService.ejecutaSPSubasta(_body).then(
-        (res) => {
-          //setData(res[0]);
-        },
-        (error) => {
-          console.log(error)
-          setError(error);
-        }
-      )
-    } finally {
-      setLoading(false);
+    let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
       
-    }   
-
-  }
+   
+    return await subastaproximaService.obtenerSubastaproxima(_body).then(
+       
+       (res) => {
+         console.log(res)
+         setSubastasProximas(res[0])
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
+  };
 
   const obtenerSubastascerradas = async () => {    
     let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
@@ -159,10 +139,9 @@ const Subasta = (props) => {
     // llamar api
     obtenerSubastas();
     obtenerSubastasproximas();
-    obtenerEventoCerrada();
     obtenerSubastaactual();
     obtenerSubastascerradas();
-    //obtenerEventoActivo();
+    
   };
 
   return (
@@ -186,8 +165,9 @@ const Subasta = (props) => {
       <TabPanel value={value} index={1}>
         <h1>Bienvenido a la Subasta</h1>
         <SubastaStyled>
-          {subastasActual.map((subastaactual) => (
-            <ItemProgramacion key={subastaactual.id} {...subastaactual} />
+          {subastasActual.map((subastaactual,index) => (
+            // <ItemProgramacion key={subastaactual.id} {...subastaactual} />
+            <ItemProgramacion key={index} {...subastaactual} />
 
           ))}
           <ImageList className="subasta-item" cols={4}>
@@ -209,8 +189,9 @@ const Subasta = (props) => {
         <h1>Proximas Subastas</h1>
 
         <SubastaStyled >
-          {subastasProximas.map((subastaproxima) => (
-            <ItemProgramacion key={subastaproxima.id} {...subastaproxima} />
+          {subastasProximas.map((subastaproxima,index) => (
+            <ItemProgramacion key={index} {...subastaproxima} />
+            // <ItemProgramacion key={subastaproxima.id} {...subastaproxima} />
           ))}
         </SubastaStyled>
       </TabPanel>

@@ -21,7 +21,7 @@ const Itemprogramacion = (props) => {
                         <Avatar alt="Calendar" src={imagenes[0].img} />
                     </ListItemAvatar>
                     <ListItemText
-                        primary={props.descripcion}
+                        primary={props.Dvm_cDescripcion}
                         secondary={
                             <React.Fragment>
                                 <Typography

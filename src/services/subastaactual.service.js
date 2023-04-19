@@ -8,14 +8,22 @@ export const subastaactualService = {
 };
 
 
-function obtenerSubastaactual() {
-  let subastaactualArray = [
-    {id:1,inicio: "26/01/2023", fin:"29/01/2023",descripcion:"Cuarta semana de enero "},
-  ]
+// function obtenerSubastaactual() {
+//   let subastaactualArray = [
+//     {id:1,inicio: "26/01/2023", fin:"29/01/2023",descripcion:"Cuarta semana de enero "},
+//   ]
 
-  const subastaactual= Promise.resolve(subastaactualArray  );
-  return subastaactual;
+//   const subastaactual= Promise.resolve(subastaactualArray  );
+//   return subastaactual;
+// }
+function obtenerSubastaactual(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/subasta/sp`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );/*  */
 }
-
 
 
