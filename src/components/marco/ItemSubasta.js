@@ -40,7 +40,7 @@ const Item = (props) => {
     // }
 
     const handleVerDetalle = () => {
-        history.push(`/subasta/detalle/${props.codigo}`);
+        history.push(`/subasta/detalle/${props.Cab_cCatalogo}`);
     }
 
     return (
@@ -56,18 +56,18 @@ const Item = (props) => {
         >
             <ImageListItem >
                 <img
-                    src={`${props.imagen}?w=248&fit=crop&auto=format`}
-                    srcSet={`${props.imagen}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    alt={props.nombre}
+                    src={`${props.cab_cenlace}?w=248&fit=crop&auto=format`}
+                    srcSet={`${props.cab_cenlace}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={props.Cab_cDescripcion}
                     loading="lazy"
                 />
                 <ImageListItemBar
-                    title={`${props.placa} - PUJAR POR N° ${props.id} `}
-                    subtitle={props.propietario}
+                    title={`${props.Placa} - PUJAR POR N° ${props.Cab_cCatalogo} `}
+                    subtitle={props.Propietario}
                     actionicon={
                         <IconButton
                             sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                            aria-label={`info about ${props.info}`}
+                            aria-label={`info about ${props.Info}`}
                         >
                             <InfoIcon />
                         </IconButton>
@@ -92,12 +92,12 @@ const Item = (props) => {
                                             <b>INFORMACION DEL EJEMPLAR</b>
                                         </Typography>
                                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                            <p><b>Precio Base:</b> S/. {props.precio}</p>
-                                            <p><b>Placa:</b> {props.placa}</p>
-                                            <p><b>Propietario</b>: {props.propietario}</p>
-                                            <p><b>Padre:</b> {props.padre}</p>
-                                            <p><b>Madre:</b> {props.madre}</p>
-                                            <p><b>Info:</b> {props.info}</p>
+                                            <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
+                                            <p><b>Placa:</b> {props.Placa}</p>
+                                            <p><b>Propietario</b>: {props.Propietario}</p>
+                                            <p><b>Padre:</b> {props.Padre}</p>
+                                            <p><b>Madre:</b> {props.Madre}</p>
+                                            <p><b>Info:</b> {props.Info}</p>
                                         </Typography>
                                     </Box>
                                 </Modal>

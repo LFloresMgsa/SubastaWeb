@@ -11,15 +11,15 @@ import ListSubheader from '@mui/material/ListSubheader';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
+
 import { subastaService } from '../services/subasta.service';
-import { subastacerradaService } from '../services/subastacerrada.service';
-import { subastaproximaService } from '../services/subastaproxima.service';
 import ItemSubasta from '../components/marco/ItemSubasta';
 import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
-import { subastaactualService } from '../services/subastaactual.service';
+
 import { signingRequestService } from '../services/api.helper'
 
+import { eventoService } from '../services/evento.service';
 
 
 const SubastaStyled = styled('div')(
@@ -60,6 +60,7 @@ TabPanel.propTypes = {
 };
 
 function a11yProps(index) {
+
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -74,6 +75,7 @@ const Subasta = (props) => {
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
   //const [loading, setLoading] = useState([]);
 
+/*
   const obtenerSubastas = async () => {
     return await subastaService.obtenerSubasta().then(
       (res) => {
@@ -85,12 +87,29 @@ const Subasta = (props) => {
       }
     );
   };
+*/
+
+  const obtenerEventoDetalle = async () => {
+    let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio:"2023" , Dvm_cNummov:"0000000003"}
+      
+   
+    return await eventoService.obtenerEventosDet(_body).then(
+       
+       (res) => {
+         console.log(res)
+         setSubastas(res[0])
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
+  };
 
   const obtenerSubastaactual = async () => {
     let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
       
    
-    return await subastaproximaService.obtenerSubastaproxima(_body).then(
+    return await eventoService.obtenerEventosCab(_body).then(
        
        (res) => {
          console.log(res)
@@ -106,7 +125,7 @@ const Subasta = (props) => {
     let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
       
    
-    return await subastaproximaService.obtenerSubastaproxima(_body).then(
+    return await eventoService.obtenerEventosCab(_body).then(
        
        (res) => {
          console.log(res)
@@ -122,7 +141,7 @@ const Subasta = (props) => {
     let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
       
    
-   return await subastacerradaService.obtenerSubastacerrada(_body).then(
+   return await eventoService.obtenerEventosCab(_body).then(
       
       (res) => {
         console.log(res)
@@ -136,11 +155,23 @@ const Subasta = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    // llamar api
-    obtenerSubastas();
+
+    if (newValue == 1)
+    {
+      //obtenerSubastas();
+      obtenerEventoDetalle();
+      obtenerSubastaactual();
+    }
+
+    if (newValue == 2)
+    {
     obtenerSubastasproximas();
-    obtenerSubastaactual();
+    }
+
+    if (newValue == 3)
+    {
     obtenerSubastascerradas();
+    }
     
   };
 
@@ -164,6 +195,7 @@ const Subasta = (props) => {
 
       <TabPanel value={value} index={1}>
         <h1>Bienvenido a la Subasta</h1>
+        
         <SubastaStyled>
           {subastasActual.map((subastaactual,index) => (
             // <ItemProgramacion key={subastaactual.id} {...subastaactual} />
@@ -176,7 +208,8 @@ const Subasta = (props) => {
 
             </ImageListItem>
             {subastas.map((subasta) => (
-              <ItemSubasta key={subasta.id} {...subasta} />
+              // <ItemSubasta key={subasta.id} {...subasta} />
+              <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} />
             ))}
 
           </ImageList>
