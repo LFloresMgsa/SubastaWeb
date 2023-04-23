@@ -75,19 +75,7 @@ const Subasta = (props) => {
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
   //const [loading, setLoading] = useState([]);
 
-/*
-  const obtenerSubastas = async () => {
-    return await subastaService.obtenerSubasta().then(
-      (res) => {
-       // console.log(res)
-        setSubastas(res)
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
-*/
+
 
   const obtenerEventoDetalle = async () => {
     let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio:"2023" , Dvm_cNummov:"0000000003"}
@@ -105,6 +93,7 @@ const Subasta = (props) => {
      );
   };
 
+
   const obtenerSubastaactual = async () => {
     let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
       
@@ -120,6 +109,7 @@ const Subasta = (props) => {
        }
      );
   };
+
 
   const obtenerSubastasproximas = async () => {
     let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
@@ -159,8 +149,10 @@ const Subasta = (props) => {
     if (newValue == 1)
     {
       //obtenerSubastas();
+      
       obtenerEventoDetalle();
       obtenerSubastaactual();
+     
     }
 
     if (newValue == 2)

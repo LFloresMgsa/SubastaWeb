@@ -28,12 +28,12 @@ const SubastaDetalle = () => {
     // const location = useLocation();
     // const myObject = location.state.props;
 
-    const detalleID = useParams().id;
+    const detalleID = useParams().Cab_cCatalogo;
 
     return (
         <div>
             <ItemDetalle detalleID={detalleID}/>
-            <ItemPuja /> 
+            {/* <ItemPuja />             */}
         </div>
     );
 };

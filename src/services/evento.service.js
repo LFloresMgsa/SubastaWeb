@@ -5,7 +5,8 @@ import Fetch from '../helpers/Fetch';
 export const eventoService = {
     obtenerEventosCab,
     obtenerEventosDet,
-    obtenerEventosDetPuja
+    obtenerEventosDetPuja,
+    obtenerCatalogoDetImagenes
 };
 
 
@@ -39,6 +40,14 @@ function obtenerEventosDetPuja(dataJson) {
   );
 }
 
+function obtenerCatalogoDetImagenes(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
 
+  const url = `/api/evento/lgd_catalogo_imagenes`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
 
 

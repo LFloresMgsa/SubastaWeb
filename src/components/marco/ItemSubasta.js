@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { useHistory, useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
+import ItemDetalle from './ItemDetalle';
 
 const style = {
     position: 'absolute',
@@ -27,6 +28,7 @@ const style = {
 
 
 const Item = (props) => {
+    
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -40,6 +42,8 @@ const Item = (props) => {
     // }
 
     const handleVerDetalle = () => {
+
+
         history.push(`/subasta/detalle/${props.Cab_cCatalogo}`);
     }
 
@@ -106,6 +110,7 @@ const Item = (props) => {
 
                             <td>
                                 <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}>Subasta</Button>
+                                
                             </td>
                         </tr>
                     </tbody>
