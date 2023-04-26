@@ -13,7 +13,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import ItemCarousel from './ItemCarousel';
-import { subastaService } from '../../services/subasta.service';
 import { eventoService } from '../../services/evento.service';
 
 const Img = styled('img')({

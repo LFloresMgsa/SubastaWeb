@@ -7,10 +7,6 @@ import Divider from '@mui/material/Divider';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import ListSubheader from '@mui/material/ListSubheader';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 
 import { eventoService } from '../../services/evento.service';
 import ItemSubasta from '../../components/marco/ItemSubasta';

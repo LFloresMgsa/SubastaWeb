@@ -12,7 +12,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { useHistory, useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
-import ItemDetalle from './ItemDetalle';
+
 
 const style = {
     position: 'absolute',
@@ -34,12 +34,6 @@ const Item = (props) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // const handleVerDetalle = () => {
-    //     history.push({
-    //         pathname: '/subastaDetalle',
-    //         state: { props }
-    //     });
-    // }
 
     const handleVerDetalle = () => {
 

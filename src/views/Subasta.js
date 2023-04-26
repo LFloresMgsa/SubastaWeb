@@ -5,19 +5,8 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ListSubheader from '@mui/material/ListSubheader';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-
-import { subastaService } from '../services/subasta.service';
-import ItemSubasta from '../components/marco/ItemSubasta';
 import ItemProgramacion from '../components/marco/ItemProgramacion';
 import Bases from '../components/marco/Bases';
-
-import { signingRequestService } from '../services/api.helper'
 
 import { eventoService } from '../services/evento.service';
 
@@ -73,7 +62,7 @@ const Subasta = (props) => {
   const [subastasActual, setSubastasActual] = React.useState([]);
   const [subastasProximas, setSubastasProximas] = React.useState([]);
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
-  //const [loading, setLoading] = useState([]);
+  
 
   const obtenerSubastaactual = async () => {
     let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
@@ -171,7 +160,6 @@ const Subasta = (props) => {
         
         <SubastaStyled>
           {subastasActual.map((subastaactual,index) => (
-            // <ItemProgramacion key={subastaactual.id} {...subastaactual} />
             <ItemProgramacion key={index} {...subastaactual} />
 
           ))}
@@ -187,7 +175,6 @@ const Subasta = (props) => {
         <SubastaStyled >
           {subastasProximas.map((subastaproxima,index) => (
             <ItemProgramacion key={index} {...subastaproxima} />
-            // <ItemProgramacion key={subastaproxima.id} {...subastaproxima} />
           ))}
         </SubastaStyled>
       </TabPanel>
@@ -198,7 +185,6 @@ const Subasta = (props) => {
         <SubastaStyled >
           {subastasCerradas.map((subastacerrada,index) => (
             <ItemProgramacion key={index} {...subastacerrada} />
-            //<ItemProgramacion key={subastacerrada.id} {...subastacerrada} />
           ))}
         </SubastaStyled>
 
