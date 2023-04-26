@@ -6,7 +6,8 @@ export const eventoService = {
     obtenerEventosCab,
     obtenerEventosDet,
     obtenerEventosDetPuja,
-    obtenerCatalogoDetImagenes
+    obtenerCatalogoDetImagenes,
+    grabarEventosDetPuja
 };
 
 
@@ -39,6 +40,19 @@ function obtenerEventosDetPuja(dataJson) {
     handleResponse(res, false)
   );
 }
+
+function grabarEventosDetPuja(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/vtd_evento_puja`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+
+
 
 function obtenerCatalogoDetImagenes(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
