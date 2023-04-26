@@ -120,78 +120,19 @@ const ItemDetalle = (props) => {
     const handleClose = () => setOpen(false);
 
 
-    // console.log("----------------w");
-
-    //
-    //           
-    //    }, [detalle]);
-
-
-
-
-    // }    // const obtenerEventosDet = async () => {
-
-    //     let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio:"2023" , Dvm_cNummov:"0000000003", Cab_cCatalogo: "000004"}
-
-    //       eventoService.obtenerEventosDet(_body).then(
-    //        (res) => {
-    //          setDetalle(res[0])
-    //        },
-    //        (error) => {
-    //          console.log(error);
-    //        }
-    //     );    
-    // }
-
-    // const obtenerSubastaSlider = async () => {
-    //     return await subastaService.obtenerSubastaSlider().then(
-    //         (res) => {
-    //             console.log(res)
-    //             setImagenesSlide(res)
-    //             handleOpen()
-    //         },
-    //         (error) => {
-    //             console.log(error);
-    //         }
-    //     );
-    // };
-
-
-
-
-
-
-
-    // const obtenerSubastaSlider = async () => {
-    //     let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015",  Cab_cCatalogo: "000003"}
-
-    //     return await eventoService.obtenerCatalogoDetImagenes(_body).then(
-    //        (res) => {
-    //          console.log(res)
-    //          setImagenesSlide(res[0])
-    //        },
-    //        (error) => {
-    //          console.log(error);
-    //        }
-    //     );
-    // };
-
-    // const [open, setOpen] = React.useState(false);
-    // const handleOpen = () => setOpen(true);
-    // const handleClose = () => setOpen(false);
 
     return (
         <div>
-        <Paper
-            sx={{
-                p: 2,
-                margin: 1,
-                maxWidth: 'auto',
-                flexGrow: 1,
-                backgroundColor: (theme) =>
-                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-            }}
-        >
+                <Paper
+                    sx={{
+                        p: 2,
+                        margin: 1,
+                        maxWidth: 'auto',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                    }}
+                >
             <Grid container spacing={2}>
                 <Grid item>
                 <ButtonBase sx={{ width: 150, height: 150 }}>

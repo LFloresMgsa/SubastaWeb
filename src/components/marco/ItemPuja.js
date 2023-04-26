@@ -20,7 +20,7 @@ import Paper from '@mui/material/Paper';
 import { ForkLeft } from '@mui/icons-material';
 
 import ItemContacto from './ItemContacto';
-import ItemPujaGrilla from './ItemPujaGrilla';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -53,16 +53,7 @@ const ItemPuja = (props) => {
 
     return (
         <div>
-            <Paper
-                sx={{
-                    p: 2,
-                    margin: 1,
-                    maxWidth: 'auto',
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                }}
-            >
+
 
                 <table>
                     <tr>
@@ -70,12 +61,12 @@ const ItemPuja = (props) => {
                             <ItemContacto  pCab_cCatalogo={props.pCab_cCatalogo} pDvm_cNummov={props.pDvm_cNummov}/>
                         </th>
                         <th>
-                            <ItemPujaGrilla  pCab_cCatalogo={props.pCab_cCatalogo} pDvm_cNummov={props.pDvm_cNummov}/>
+                            {/* <ItemPujaGrilla  pCab_cCatalogo={props.pCab_cCatalogo} pDvm_cNummov={props.pDvm_cNummov}/> */}
                         </th>
                     </tr>
                 </table>
 
-            </Paper>
+        
         </div>
     );
 };
