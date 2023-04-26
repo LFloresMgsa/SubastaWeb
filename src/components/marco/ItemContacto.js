@@ -220,7 +220,7 @@ const ItemContacto = (props) => {
                                                 onChange={(e) => setApellido(e.target.value)} />
 
 
-                                            <TextField id="outlined-telefono" label="Apellidos" variant="standard"
+                                            <TextField id="outlined-telefono" label="Teléfono" variant="standard"
                                                 value={ptelefono}
                                                 onChange={(e) => setTelefono(e.target.value)} />
 
