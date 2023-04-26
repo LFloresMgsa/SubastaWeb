@@ -67,7 +67,7 @@ const ItemPuja = (props) => {
                 <table>
                     <tr>
                         <th>
-                            <ItemContacto />
+                            <ItemContacto  pCab_cCatalogo={props.pCab_cCatalogo} pDvm_cNummov={props.pDvm_cNummov}/>
                         </th>
                         <th>
                             <ItemPujaGrilla  pCab_cCatalogo={props.pCab_cCatalogo} pDvm_cNummov={props.pDvm_cNummov}/>

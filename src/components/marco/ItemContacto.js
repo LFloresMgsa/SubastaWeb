@@ -16,6 +16,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 
 import FormControl from '@mui/material/FormControl';
+import { eventoService } from '../../services/evento.service';
 
 const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
     const { onChange, ...other } = props;
@@ -67,12 +68,37 @@ NumberFormatCustom.propTypes = {
 
 
 
-const ItemContacto = () => {
+const ItemContacto = (props) => {
 
     const history = useHistory();
 
-    const location = useLocation();
-  /*   const myObject = location.state.props; */
+
+    const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
+        let _body = { Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo , Dvd_cDocID: pDvd_cDocID, 
+        Dvd_cNombres: pDvd_cNombres , Dvd_cApellidos: pDvd_cApellidos , Dvd_cTelefono: pDvd_cTelefono ,
+		Dvd_cCorreo: pDvd_cCorreo , Dvd_nImporte : pDvd_nImporte}
+
+
+        return await eventoService.obtenerEventosDetPuja(_body).then(
+
+            (res) => {
+
+                setSubastasPuja(res[0])
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+
+
+    const handleGrabarSubasta = () => {
+
+        console.log("handleGrabarSubasta");
+        console.log(outlined-documento.value);
+        // grabarPujaDetalle(pCab_cCatalogo, pDvm_cNummov, outlined-documento.value, outlined-nombre.value, outlined-apellido.value, outlined-telefono.value, outlined-correo.value, outlined-puja.value);
+
+    }
 
     const handleRegresarSubasta = () => {
 
@@ -108,7 +134,8 @@ const ItemContacto = () => {
 
 
                     <TextField id="outlined-documento" label="Documento Id." variant="standard" />
-                    <TextField id="outlined-nombre" label="Nombres y Apellidos" variant="standard" />
+                    <TextField id="outlined-nombre" label="Nombres" variant="standard" />
+                    <TextField id="outlined-apellido" label="Apellidos" variant="standard" />
                     <FormControl variant="standard">
                         <InputLabel htmlFor="formatted-text-mask-input">Teléfono</InputLabel>
                         <Input
@@ -119,6 +146,7 @@ const ItemContacto = () => {
                             inputComponent={TextMaskCustom}
                         />
                     </FormControl>
+                    <TextField id="outlined-correo" label="Correo" variant="standard" />
                     <TextField
                         label="Valor de Puja"
                         value={values.numberformat}
@@ -141,7 +169,7 @@ const ItemContacto = () => {
                         <tbody>
                             <tr>
                                 <td>
-                                    <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Pujar</Button>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleGrabarSubasta}>Pujar</Button>
                                 </td>
                                 <td>
                                     <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
