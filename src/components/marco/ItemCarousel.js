@@ -10,8 +10,8 @@ const ItemCarousel = ({ images }) => {
 			
 			<Slider className='slider__content'>
 				{images.map((image) => (
-					<div key={image.id} >
-						<img src={image.imagen} alt={image.titulo} />
+					<div key={image.Cab_cCatalogo} >
+						<img src={image.Cab_cEnlace} alt={image.Cab_cCatalogo} />
 						{/* <p className='slider-description'>{image.title}</p> */}
 					</div>
 				))}

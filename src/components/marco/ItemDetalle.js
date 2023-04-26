@@ -37,59 +37,89 @@ const style = {
 
 
 // Función para hacer la solicitud a la API
-const obtenerDetalleEvento = async () => {
+const obtenerDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
     try {
-        const body = {
-            Accion: "EVENTO_DET",
-            Emp_cCodigo: "015",
-            Pan_cAnio: "2023",
-            Dvm_cNummov: "0000000003",
-            Cab_cCatalogo: "000004"
-        };
+        const body = {Accion: "EVENTO_DET",Emp_cCodigo: "015",Pan_cAnio: "2023",Dvm_cNummov: pDvm_cNummov,Cab_cCatalogo: pCab_cCatalogo};
 
         const response = await eventoService.obtenerEventosDet(body);
 
-        // Si el valor de la respuesta no es válido, lanzar un error
         if (!response || response.length === 0) {
             throw new Error("Respuesta inválida de la API");
         }
 
         return response[0];
 
-
     } catch (error) {
-        // Agregar un manejo de errores más robusto aquí
         console.log(error);
         throw error; // Lanzar el error para que el componente lo pueda manejar
     }
 };
 
+const obtenerImagenes = async (pCab_cCatalogo, pDvm_cNummov) => {
+    try {
+        const body = {Accion: "BUSCARREGISTRO",Emp_cCodigo: "015",Pan_cAnio: "",Dvm_cNummov: pDvm_cNummov,Cab_cCatalogo: pCab_cCatalogo};
 
-const ItemDetalle = () => {
 
+        const response = await eventoService.obtenerCatalogoDetImagenes(body);
 
+        if (!response || response.length === 0) {
+            throw new Error("Respuesta inválida de la API");
+        }
 
-    // const [imagenesSlide, setImagenesSlide] = React.useState([]);
-    // const [detalleX, setDetalleX] = React.useState([]);
+        return response[0];
 
+    } catch (error) {
+        console.log(error);
+        throw error; // Lanzar el error para que el componente lo pueda manejar
+    }
+};
+
+const ItemDetalle = (props) => {
+
+    
+    const [imagenesSlide, setImagenesSlide] = React.useState([]);
     const [detalle, setDetalleEvento] = React.useState([]);
 
 
     useEffect(() => {
-        const fetchDetalleEvento = async () => {
-            const detalleEvento = await obtenerDetalleEvento();
+        const fetchDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
+            const detalleEvento = await obtenerDetalleEvento(pCab_cCatalogo, pDvm_cNummov);
 
-            setDetalleEvento(detalleEvento);
+
+            setDetalleEvento(detalleEvento[0]);            
+            
         };
-
-        fetchDetalleEvento();
-
-
+        
+        fetchDetalleEvento(props.pCab_cCatalogo, props.pDvm_cNummov);
 
     }, []);
 
 
-    // console.log("----------------w");
+    useEffect(() => {
+
+
+        
+        console.log(detalle);
+    }, [detalle]);
+
+
+    const obtenerSubastaSlider = async () => {
+        return await obtenerImagenes(props.pCab_cCatalogo, props.pDvm_cNummov).then(
+            (res) => {
+                
+                setImagenesSlide(res)
+                handleOpen()
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+    
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
 
     // console.log("----------------w");
 
@@ -153,55 +183,64 @@ const ItemDetalle = () => {
 
     return (
         <div>
-            <Paper
-                sx={{
-                    p: 2,
-                    margin: 1,
-                    maxWidth: 'auto',
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                }}
-            >
-                <Grid container spacing={2}>
-                    <Grid item>
+        <Paper
+            sx={{
+                p: 2,
+                margin: 1,
+                maxWidth: 'auto',
+                flexGrow: 1,
+                backgroundColor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+        >
+            <Grid container spacing={2}>
+                <Grid item>
+                <ButtonBase sx={{ width: 150, height: 150 }}>
+                            <Img alt="complex" src={detalle.cab_cenlace} onClick={obtenerSubastaSlider} />
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={style}>
 
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2} a>
-                            <Grid item xs>
-                                <Typography gutterBottom variant="subtitle1" component="div" align="left">
+                                    <ItemCarousel images={imagenesSlide} />
 
-                                    <b>Placa:{detalle.Placa}</b>
+                                </Box>
+                            </Modal>
+                        </ButtonBase>
+                </Grid>
+                <Grid item xs={12} sm container>
+                    <Grid item xs container direction="column" spacing={2} a>
+                        <Grid item xs>
+                            <Typography gutterBottom variant="subtitle1" component="div" align="left">
 
-                                    {/* <b>Placa: {detalle.Placa} - PUJAR POR N° {detalle.Cab_cCatalogo}</b>  s */}
-                                    {/* <b> {detalle.Per_cPeriodo.toString()} </b> */}
+                                 <b>Placa: {detalle.Placa} - PUJAR POR N° {detalle.Cab_cCatalogo}</b>  
 
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                    {/* <p><b>Propietario</b>: {detalle.propietario}</p> */}
-                                    <b>Propietario:</b>
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" align="left">
-                                    <b>Padre:</b>
-                                    {/* <p><b>Propietario</b>: {detalle.propietario}</p>
-                                    <p><b>Padre:</b> {detalle.padre}</p>
-                                    <p><b>Madre:</b> {detalle.madre}</p>
-                                    <p><b>Info:</b> {detalle.info}</p> */}
-                                </Typography>
-                            </Grid>
-
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="h6" component="div" color="primary">
-                                <b>Precio:</b>
-                                {/* <b>Precio Base : S/. {detalle.precio}</b> */}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                                 <p><b>Propietario</b>: {detalle.Propietario}</p> 
+                                
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" align="left">
+                                <p><b>Padre:</b> {detalle.Padre}</p>
+                                <p><b>Madre:</b> {detalle.Madre}</p>
+                                <p><b>Info:</b> {detalle.Info}</p> 
                             </Typography>
                         </Grid>
+
+                    </Grid>
+                    <Grid item>
+                        <Typography variant="h6" component="div" color="primary">
+                            
+                             <b>Precio Base : S/. {detalle.Dvd_nImporte}</b> 
+                        </Typography>
                     </Grid>
                 </Grid>
-            </Paper>
-        </div>
+            </Grid>
+        </Paper>
+    </div>
     );
 };
 

@@ -69,30 +69,11 @@ function a11yProps(index) {
 
 const Subasta = (props) => {
   const [value, setValue] = React.useState(0);
-  const [subastas, setSubastas] = React.useState([]);
+  
   const [subastasActual, setSubastasActual] = React.useState([]);
   const [subastasProximas, setSubastasProximas] = React.useState([]);
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
   //const [loading, setLoading] = useState([]);
-
-
-
-  const obtenerEventoDetalle = async () => {
-    let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio:"2023" , Dvm_cNummov:"0000000003"}
-      
-   
-    return await eventoService.obtenerEventosDet(_body).then(
-       
-       (res) => {
-         console.log(res)
-         setSubastas(res[0])
-       },
-       (error) => {
-         console.log(error);
-       }
-     );
-  };
-
 
   const obtenerSubastaactual = async () => {
     let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: "015", Pan_cAnio:"2023" }
@@ -101,13 +82,17 @@ const Subasta = (props) => {
     return await eventoService.obtenerEventosCab(_body).then(
        
        (res) => {
-         console.log(res)
-         setSubastasActual(res[0])
+         //console.log(res)
+         setSubastasActual(res[0]);
+
+        
        },
        (error) => {
          console.log(error);
        }
      );
+
+     
   };
 
 
@@ -118,7 +103,7 @@ const Subasta = (props) => {
     return await eventoService.obtenerEventosCab(_body).then(
        
        (res) => {
-         console.log(res)
+       //  console.log(res)
          setSubastasProximas(res[0])
        },
        (error) => {
@@ -134,7 +119,7 @@ const Subasta = (props) => {
    return await eventoService.obtenerEventosCab(_body).then(
       
       (res) => {
-        console.log(res)
+      //  console.log(res)
         setSubastasCerradas(res[0])
       },
       (error) => {
@@ -148,11 +133,7 @@ const Subasta = (props) => {
 
     if (newValue == 1)
     {
-      //obtenerSubastas();
-      
-      obtenerEventoDetalle();
       obtenerSubastaactual();
-     
     }
 
     if (newValue == 2)
@@ -194,17 +175,7 @@ const Subasta = (props) => {
             <ItemProgramacion key={index} {...subastaactual} />
 
           ))}
-          <ImageList className="subasta-item" cols={4}>
-            <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
-              {/* <ListSubheader component="div">Padrillos</ListSubheader> */}
 
-            </ImageListItem>
-            {subastas.map((subasta) => (
-              // <ItemSubasta key={subasta.id} {...subasta} />
-              <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} />
-            ))}
-
-          </ImageList>
 
         </SubastaStyled>
 

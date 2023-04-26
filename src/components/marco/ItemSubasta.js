@@ -44,7 +44,7 @@ const Item = (props) => {
     const handleVerDetalle = () => {
 
 
-        history.push(`/subasta/detalle/${props.Cab_cCatalogo}`);
+        history.push(`/subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}`);
     }
 
     return (

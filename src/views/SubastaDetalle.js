@@ -28,12 +28,13 @@ const SubastaDetalle = () => {
     // const location = useLocation();
     // const myObject = location.state.props;
 
-    const detalleID = useParams().Cab_cCatalogo;
+    const pCab_cCatalogo = useParams().Cab_cCatalogo;
+    const pDvm_cNummov = useParams().Dvm_cNummov;
 
     return (
         <div>
-            <ItemDetalle detalleID={detalleID}/>
-            {/* <ItemPuja />             */}
+            <ItemDetalle pCab_cCatalogo={pCab_cCatalogo} pDvm_cNummov={pDvm_cNummov}/>
+            <ItemPuja />            
         </div>
     );
 };
