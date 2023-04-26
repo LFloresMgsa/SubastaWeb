@@ -42,19 +42,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(numero, puja, fecha, nombre) {
-    return { numero, puja, fecha, nombre };
-}
 
-const rows = [
-    createData(1, 650, '01/01/2023', 'Miguel Lopez'),
-    createData(2, 600, '01/01/2023', 'Luis flores'),
-    createData(3, 550, '01/01/2023', 'Erika Flores'),
-    createData(4, 500, '01/01/2023', 'Jose Hurtado')
 
-];
-
-const ItemPuja = () => {
+const ItemPuja = (props) => {
 
     const history = useHistory();
 
@@ -80,7 +70,7 @@ const ItemPuja = () => {
                             <ItemContacto />
                         </th>
                         <th>
-                            <ItemPujaGrilla />
+                            <ItemPujaGrilla  pCab_cCatalogo={props.pCab_cCatalogo} pDvm_cNummov={props.pDvm_cNummov}/>
                         </th>
                     </tr>
                 </table>

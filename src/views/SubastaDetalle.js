@@ -16,7 +16,7 @@ const SubastaDetalle = () => {
     return (
         <div>
             <ItemDetalle pCab_cCatalogo={pCab_cCatalogo} pDvm_cNummov={pDvm_cNummov}/>
-            <ItemPuja />            
+            <ItemPuja pCab_cCatalogo={pCab_cCatalogo} pDvm_cNummov={pDvm_cNummov}/>            
         </div>
     );
 };
