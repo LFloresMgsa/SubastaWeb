@@ -85,15 +85,10 @@ const ItemContacto = (props) => {
 
     const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
-            Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo, Dvd_cDocID: pDvd_cDocID,
-            Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos, Dvd_cTelefono: pDvd_cTelefono,
-            Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: pDvd_nImporte
+            Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo:"04",Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
+            Dvd_nCorrel:10, Dvd_cDocID: pDvd_cDocID,Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos, 
+            Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: 100, Dvd_cEstado:"A", Dvd_dFechaPuja:"2023-04-26"
         }
-
-        console.log("---------------------------");
-        console.log(_body);
-        console.log("---------------------------");
-
 
         return await eventoService.grabarEventosDetPuja(_body).then(
 
