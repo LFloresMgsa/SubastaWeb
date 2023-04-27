@@ -145,7 +145,7 @@ const Subasta = (props) => {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
 
-          <Tab label="Subastas Abiertas" {...a11yProps(0)} />
+          <Tab label="Subastas Activas" {...a11yProps(0)} />
           <Tab label="Proximas Subastas" {...a11yProps(1)} />
           <Tab label="Subastas Cerradas" {...a11yProps(2)} />
           <Tab label="Bases" {...a11yProps(3)} />

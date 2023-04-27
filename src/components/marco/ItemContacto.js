@@ -47,26 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-        <IMaskInput
-            {...other}
-            mask="000 000 0000"
-            definitions={{
-                '#': /[1-9]/,
-            }}
-            inputRef={ref}
-            onAccept={(value) => onChange({ target: { name: props.name, value } })}
-            overwrite
-        />
-    );
-});
 
-TextMaskCustom.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
     const { onChange, ...other } = props;
@@ -108,7 +89,6 @@ const ItemContacto = (props) => {
     const [pcorreo, setCorreo] = useState('')
     const [ppuja, setPuja] = useState(0)
 
-    const [subastasPujaGrabar, setSubastasPujaGrabar] = useState('')
     const [subastasPuja, setSubastasPuja] = React.useState([]);
 
 

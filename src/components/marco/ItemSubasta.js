@@ -60,7 +60,7 @@ const Item = (props) => {
 
             <Dialog open={openMsg} onClose={handleCloseMsg} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
                 <DialogTitle id="alert-dialog-title">
-                    {"Iniciar Subasta"}
+                    {"Subasta"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
