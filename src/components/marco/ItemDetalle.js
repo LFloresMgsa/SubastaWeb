@@ -38,7 +38,7 @@ const style = {
 // Función para hacer la solicitud a la API
 const obtenerDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
     try {
-        const body = {Accion: "EVENTO_DET",Emp_cCodigo: "015",Pan_cAnio: "2023",Dvm_cNummov: pDvm_cNummov,Cab_cCatalogo: pCab_cCatalogo};
+        const body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo };
 
         const response = await eventoService.obtenerEventosDet(body);
 
@@ -56,7 +56,7 @@ const obtenerDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
 
 const obtenerImagenes = async (pCab_cCatalogo, pDvm_cNummov) => {
     try {
-        const body = {Accion: "BUSCARREGISTRO",Emp_cCodigo: "015",Pan_cAnio: "",Dvm_cNummov: pDvm_cNummov,Cab_cCatalogo: pCab_cCatalogo};
+        const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015", Pan_cAnio: "", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo };
 
 
         const response = await eventoService.obtenerCatalogoDetImagenes(body);
@@ -75,7 +75,7 @@ const obtenerImagenes = async (pCab_cCatalogo, pDvm_cNummov) => {
 
 const ItemDetalle = (props) => {
 
-    
+
     const [imagenesSlide, setImagenesSlide] = React.useState([]);
     const [detalle, setDetalleEvento] = React.useState([]);
 
@@ -85,10 +85,10 @@ const ItemDetalle = (props) => {
             const detalleEvento = await obtenerDetalleEvento(pCab_cCatalogo, pDvm_cNummov);
 
 
-            setDetalleEvento(detalleEvento[0]);            
-            
+            setDetalleEvento(detalleEvento[0]);
+
         };
-        
+
         fetchDetalleEvento(props.pCab_cCatalogo, props.pDvm_cNummov);
 
     }, []);
@@ -97,7 +97,7 @@ const ItemDetalle = (props) => {
     useEffect(() => {
 
 
-        
+
         console.log(detalle);
     }, [detalle]);
 
@@ -105,7 +105,7 @@ const ItemDetalle = (props) => {
     const obtenerSubastaSlider = async () => {
         return await obtenerImagenes(props.pCab_cCatalogo, props.pDvm_cNummov).then(
             (res) => {
-                
+
                 setImagenesSlide(res)
                 handleOpen()
             },
@@ -114,7 +114,7 @@ const ItemDetalle = (props) => {
             }
         );
     };
-    
+
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -123,19 +123,19 @@ const ItemDetalle = (props) => {
 
     return (
         <div>
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-            <Grid container spacing={2}>
-                <Grid item>
-                <ButtonBase sx={{ width: 150, height: 150 }}>
+            <Paper
+                sx={{
+                    p: 2,
+                    margin: 1,
+                    maxWidth: 'auto',
+                    flexGrow: 1,
+                    backgroundColor: (theme) =>
+                        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                }}
+            >
+                <Grid container spacing={2}>
+                    <Grid item>
+                        <ButtonBase sx={{ width: 150, height: 150 }}>
                             <Img alt="complex" src={detalle.cab_cenlace} onClick={obtenerSubastaSlider} />
                             <Modal
                                 open={open}
@@ -150,37 +150,37 @@ const ItemDetalle = (props) => {
                                 </Box>
                             </Modal>
                         </ButtonBase>
-                </Grid>
-                <Grid item xs={12} sm container>
-                    <Grid item xs container direction="column" spacing={2} a>
-                        <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1" component="div" align="left">
+                    </Grid>
+                    <Grid item xs={12} sm container>
+                        <Grid item xs container direction="column" spacing={2} a>
+                            <Grid item xs>
+                                <Typography gutterBottom variant="subtitle1" component="div" align="left">
 
-                                 <b>Placa: {detalle.Placa} - PUJAR POR N° {detalle.Cab_cCatalogo}</b>  
+                                    <b>Placa: {detalle.Placa} - PUJAR POR N° {detalle.Cab_cCatalogo}</b>
 
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                                 <p><b>Propietario</b>: {detalle.Propietario}</p> 
-                                
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary" align="left">
-                                <p><b>Padre:</b> {detalle.Padre}</p>
-                                <p><b>Madre:</b> {detalle.Madre}</p>
-                                <p><b>Info:</b> {detalle.Info}</p> 
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                    <p><b>Propietario</b>: {detalle.Propietario}</p>
+
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" align="left">
+                                    <p><b>Padre:</b> {detalle.Padre}</p>
+                                    <p><b>Madre:</b> {detalle.Madre}</p>
+                                    <p><b>Info:</b> {detalle.Info}</p>
+                                </Typography>
+                            </Grid>
+
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h6" component="div" color="primary">
+
+                                <b>Precio Base : S/. {detalle.Dvd_nImporte}</b>
                             </Typography>
                         </Grid>
-
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h6" component="div" color="primary">
-                            
-                             <b>Precio Base : S/. {detalle.Dvd_nImporte}</b> 
-                        </Typography>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Paper>
-    </div>
+            </Paper>
+        </div>
     );
 };
 

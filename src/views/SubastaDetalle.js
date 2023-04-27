@@ -7,16 +7,18 @@ import ItemDetalle from '../components/marco/ItemDetalle';
 import ItemPuja from '../components/marco/ItemPuja';
 
 
-const SubastaDetalle = () => {
+const SubastaDetalle = (props) => {
 
 
     const pCab_cCatalogo = useParams().Cab_cCatalogo;
     const pDvm_cNummov = useParams().Dvm_cNummov;
+    const pIndicePanel = useParams().IndicePanel;
+    
 
     return (
         <div>
             <ItemDetalle pCab_cCatalogo={pCab_cCatalogo} pDvm_cNummov={pDvm_cNummov}/>
-            <ItemPuja pCab_cCatalogo={pCab_cCatalogo} pDvm_cNummov={pDvm_cNummov}/>            
+            <ItemPuja pCab_cCatalogo={pCab_cCatalogo} pDvm_cNummov={pDvm_cNummov}  pEventoActual={props.pEventoActual} pIndicePanel={pIndicePanel}/>            
         </div>
     );
 };

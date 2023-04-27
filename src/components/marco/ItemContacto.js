@@ -112,6 +112,9 @@ const ItemContacto = (props) => {
     const [subastasPuja, setSubastasPuja] = React.useState([]);
 
 
+    const [disabledPujar, setDisabledPujar] = useState(false)
+
+
     const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
             Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo: "04", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
@@ -174,18 +177,31 @@ const ItemContacto = (props) => {
         });
     };
 
+    const handleDisabled = (valor) => {
+
+        if (valor == 0) {
+
+            setDisabledPujar(false);
+        }
+        else {
+            setDisabledPujar(true);
+        }
+
+    }
+
     useEffect(() => {
 
         obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
+        handleDisabled(props.pIndicePanel);
 
     }, []);
 
     return (
-        <div>
+        <div >
             <Box sx={{ flexGrow: 1 }}>
 
 
-                <Paper
+                <Paper 
                     sx={{
                         p: 2,
                         margin: 1,
@@ -195,40 +211,44 @@ const ItemContacto = (props) => {
                             theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                     }}
                 >
-                <div align="left">
-                    <h2 >Contacto:</h2>
-                </div>
+                    <div align="left">
+                        <h2 >Contacto:</h2>
+                    </div>
 
                     <Grid container spacing={2}>
 
                         <Grid item xs={8}>
 
-                            <table>
+                            <table >
                                 <tbody>
                                     <tr>
                                         <td>
                                             <TextField id="outlined-documento" label="Documento Id." variant="standard"
                                                 value={pdocumento}
-                                                onChange={(e) => setDocumento(e.target.value)} />
+                                                onChange={(e) => setDocumento(e.target.value)}
+                                                disabled={disabledPujar} />
 
                                             <TextField id="outlined-nombre" label="Nombres" variant="standard"
                                                 value={pnombre}
-                                                onChange={(e) => setNombre(e.target.value)} />
+                                                onChange={(e) => setNombre(e.target.value)}
+                                                disabled={disabledPujar} />
 
                                             <TextField id="outlined-apellido" label="Apellidos" variant="standard"
                                                 value={papellido}
-                                                onChange={(e) => setApellido(e.target.value)} />
+                                                onChange={(e) => setApellido(e.target.value)}
+                                                disabled={disabledPujar} />
 
 
                                             <TextField id="outlined-telefono" label="Teléfono" variant="standard"
                                                 value={ptelefono}
-                                                onChange={(e) => setTelefono(e.target.value)} />
-
+                                                onChange={(e) => setTelefono(e.target.value)}
+                                                disabled={disabledPujar} />
 
 
                                             <TextField id="outlined-correo" label="Correo" variant="standard"
                                                 value={pcorreo}
-                                                onChange={(e) => setCorreo(e.target.value)} />
+                                                onChange={(e) => setCorreo(e.target.value)}
+                                                disabled={disabledPujar} />
 
                                             <TextField
                                                 label="Valor de Puja"
@@ -240,7 +260,7 @@ const ItemContacto = (props) => {
                                                     inputComponent: NumberFormatCustom,
                                                 }}
                                                 variant="standard"
-                                            />
+                                                disabled={disabledPujar} />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -250,7 +270,18 @@ const ItemContacto = (props) => {
                         </Grid>
 
                     </Grid>
+                </Paper>
 
+                <Paper
+                    sx={{
+                        p: 2,
+                        margin: 1,
+                        maxWidth: 'auto',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                    }}
+                >
                     <Grid container spacing={2}>
 
                         <Grid item xs={8}>
@@ -258,7 +289,7 @@ const ItemContacto = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={handleGrabarSubasta}>Pujar</Button>
+                                            <Button variant="contained" size="small" color="primary" onClick={handleGrabarSubasta} disabled={disabledPujar} >Pujar</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
@@ -271,6 +302,7 @@ const ItemContacto = (props) => {
 
                     </Grid>
                 </Paper>
+
                 <Paper
                     sx={{
                         p: 2,

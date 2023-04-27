@@ -22,24 +22,26 @@ const Itemprogramacion = (props) => {
     const [subastas, setSubastas] = React.useState([]);
 
     const obtenerEventoDetalle = async (pDvm_cNummov) => {
-        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio:"2023" , Dvm_cNummov:pDvm_cNummov}
-          
-       
+        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov }
+
+
         return await eventoService.obtenerEventosDet(_body).then(
-           
-           (res) => {
+
+            (res) => {
+
+                setSubastas(res[0])
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+
+
+    useEffect(() => {
         
-             setSubastas(res[0])
-           },
-           (error) => {
-             console.log(error);
-           }
-         );
-      };
-
-
-      useEffect(() => {
-
+        
+        
         obtenerEventoDetalle(props.Dvm_cNummov);
 
     }, []);
@@ -69,7 +71,7 @@ const Itemprogramacion = (props) => {
                         }
                     />
                 </ListItem>
-                <Divider variant="inset" component="li" />
+                
             </List>
 
             <ImageList className="subasta-item" cols={4}>
@@ -77,7 +79,7 @@ const Itemprogramacion = (props) => {
 
                 </ImageListItem>
                 {subastas.map((subasta) => (
-                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} />
+                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel = {props.IndicePanel}/>
                 ))}
 
             </ImageList>
