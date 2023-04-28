@@ -7,7 +7,8 @@ export const eventoService = {
     obtenerEventosDet,
     obtenerEventosDetPuja,
     obtenerCatalogoDetImagenes,
-    grabarEventosDetPuja
+    grabarEventosDetPuja,
+    obtenerVideos
 };
 
 
@@ -65,3 +66,12 @@ function obtenerCatalogoDetImagenes(dataJson) {
 }
 
 
+function obtenerVideos(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/lgm_videoteca`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
