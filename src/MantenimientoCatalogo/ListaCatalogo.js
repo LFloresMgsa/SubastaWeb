@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CompListaCatalogo = (props) => {
+const ListaCatalogo = (props) => {
 
   const history = useHistory();
   const [data, setData] = useState([]);
@@ -169,4 +169,4 @@ const CompListaCatalogo = (props) => {
   )
 }
 
-export default CompListaCatalogo
+export default ListaCatalogo

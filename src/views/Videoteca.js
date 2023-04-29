@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ReactPlayer from 'react-player'
 import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';
-
+import TextField from '@mui/material/TextField';
 
 import './Videos.css';
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 function Videoteca() {
   const [videos, setVideos] = useState([]);
-
+  const [contenido, setContenido] = useState('');
 
   const obtenerVideos = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
@@ -60,6 +60,12 @@ function Videoteca() {
           }}
         >
 
+          <div>
+            <br></br>
+            <h2>{video.Lgt_cTitulo}</h2>
+
+          </div>
+
           <div style={{ width: '100', height: '100' }}>
             <ReactPlayer
               url={video.Lgt_cURL}
@@ -69,8 +75,19 @@ function Videoteca() {
             />
           </div>
           <div>
-            <h2>{video.Lgt_cTitulo}</h2>
-            <p>{video.Lgt_cComentario}</p>
+
+
+            <TextField
+              label=""
+              multiline
+
+              value={video.Lgt_cComentario}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+
+
 
           </div>
         </Paper>

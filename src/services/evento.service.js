@@ -8,7 +8,8 @@ export const eventoService = {
     obtenerEventosDetPuja,
     obtenerCatalogoDetImagenes,
     grabarEventosDetPuja,
-    obtenerVideos
+    obtenerVideos,
+    obtenerCatalogo
 };
 
 
@@ -65,6 +66,15 @@ function obtenerCatalogoDetImagenes(dataJson) {
   );
 }
 
+function obtenerCatalogo(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/lgm_catalogo_bs`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
 
 function obtenerVideos(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };

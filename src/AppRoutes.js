@@ -6,11 +6,13 @@ import Catalogo from './views/Catalogo';
 import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
 import SubastaDetalle from './views/SubastaDetalle';
+import MantCatalogo from './views/MantCatalogo';
+
 import Login from './views/Login';
 
-import CompListaCatalogo from './catalogo/ListaCatalogo';
-import CompCreaCatalogo from './catalogo/CreaCatalogo';
-import CompEditaCatalogo from './catalogo/EditaCatalogo';
+import ListaCatalogo from './MantenimientoCatalogo/ListaCatalogo';
+import CreaCatalogo from './MantenimientoCatalogo/CreaCatalogo';
+import EditaCatalogo from './MantenimientoCatalogo/EditaCatalogo';
 
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
@@ -35,10 +37,11 @@ const AppRoutes = (props) => {
         render={(route) => <Subasta {...props} {...route} />}
       />
 
-      {/* <Route
-        path="/SubastaDetalle"
-        render={(route) => <SubastaDetalle {...props} {...route} />}
-      /> */}
+      <Route
+        exact
+        path="/MantCatalogo"
+        render={(route) => <MantCatalogo {...props} {...route} />}
+      />
 
       <Route
         exact
@@ -46,14 +49,16 @@ const AppRoutes = (props) => {
         render={(route) => <SubastaDetalle {...props} {...route} />}
       />
 
+
+
       <Route
         path="/crear"
-        render={(route) => <CompCreaCatalogo {...props} {...route} />}
+        render={(route) => <CreaCatalogo {...props} {...route} />}
       />
 
       <Route
         path="/editar/:Emp_cCodigo/:Cab_cCatalogo"
-        render={(route) => <CompEditaCatalogo {...props} {...route} />}
+        render={(route) => <EditaCatalogo {...props} {...route} />}
       />
 
     </Switch>

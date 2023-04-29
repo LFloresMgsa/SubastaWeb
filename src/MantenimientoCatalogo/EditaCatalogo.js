@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { Description } from '@mui/icons-material';
@@ -9,17 +10,17 @@ import Paper from '@mui/material/Paper';
 
 import { signingRequestService } from '../services/api.helper'
 
-const CompCreaCatalogo = (props) => {
+const EditaCatalogo = (props) => {
+    const history = useHistory()
+    const [data, setData] = useState([])
+    const [error, setError] = useState([])
+    const [loading, setLoading] = useState([])
 
-    const history = useHistory();
-
-
-    const [Emp_cCodigo, setEmpresa] = useState('')
     const [Lgt_cCategoria, setCategoria] = useState('')
     const [Lgt_cGrupo, setGrupo] = useState('')
     const [Lgt_cClase, setClase] = useState('')
     const [Lgt_cFamilia, setFamilia] = useState('')
-    const [Cab_cCatalogo, setCatalogo] = useState('')
+
     const [Cab_cDescripcion, setDescripcion] = useState('')
     const [Propietario, setPropietario] = useState('')
     const [Padre, setPadre] = useState('')
@@ -27,29 +28,74 @@ const CompCreaCatalogo = (props) => {
     const [Info, setInfo] = useState('')
     const [Placa, setPlaca] = useState('')
 
-    // procedimiento para INSERTAR un catalogo con SP MySQL
-    const insertaCatalogo = async (e) => {
+
+    const { Emp_cCodigo } = useParams()
+    const { Cab_cCatalogo } = useParams()
+
+
+    useEffect(() => {
+
+        obtenerCatalogo()
+    }, [])
+
+    // procedimiento para CONSULTA un catalogo con SP MySQL
+    const obtenerCatalogo = async () => {
         try {
-            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
+            let _result;
+            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo }
             await signingRequestService.ejecutaSP(_body).then(
-              (res) => {
-                setData(res[0]);
-              },
-              (error) => {
-                console.log(error)
-                setError(error);
-              }
+                (res) => {
+                    setData(res[0]);
+                    _result = res[0];
+                },
+                (error) => {
+                    console.log(error)
+                    setError(error);
+                }
             )
+
+            _result.map((item) => (
+                setCategoria(item.Lgt_cCategoria),
+                setGrupo(item.Lgt_cGrupo),
+                setClase(item.Lgt_cClase),
+                setFamilia(item.Lgt_cFamilia),
+                setDescripcion(item.Cab_cDescripcion),
+                setPropietario(item.Propietario),
+                setPadre(item.Padre),
+                setMadre(item.Madre),
+                setInfo(item.Info),
+                setPlaca(item.Placa)
+            ))
+
         } finally {
-            history.push({
-                pathname: '/catalogo'
-            });
             setLoading(false);
         }
     }
 
 
+    // procedimiento para EDITAR un catalogo con SP MySQL
+    const editarCatalogo = async (e) => {
+        try {
+            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
+            await signingRequestService.ejecutaSP(_body).then(
+                (res) => {
+                    setData(res[0]);
+                },
+                (error) => {
+                    console.log(error)
+                    setError(error);
+                }
+            )
+        } finally {
+            history.push({
+                pathname: '/MantenimientoCatalogo'
+            });
+            setLoading(false);
+        }
+    }
+
     return (
+
         <div>
             <Paper
                 sx={{
@@ -64,20 +110,12 @@ const CompCreaCatalogo = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >CREA CATALOGO:</h2>
+                        <h2 >EDITA CATALOGO:</h2>
                     </div>
 
                     <Grid container spacing={2}>
 
                         <Grid item xs={8}>
-                            <TextField
-                                label="Empresa"
-                                value={Emp_cCodigo}
-                                onChange={(e) => setEmpresa(e.target.value)}
-                                name="textformat"
-                                id="empresa"
-                                variant="standard"
-                            />
 
                             <TextField
                                 label="Categoria"
@@ -112,15 +150,6 @@ const CompCreaCatalogo = (props) => {
                                 onChange={(e) => setFamilia(e.target.value)}
                                 name="textformat"
                                 id="familia"
-                                variant="standard"
-                            />
-
-                            <TextField
-                                label="Catalogo"
-                                value={Cab_cCatalogo}
-                                onChange={(e) => setCatalogo(e.target.value)}
-                                name="textformat"
-                                id="catalogo"
                                 variant="standard"
                             />
 
@@ -173,7 +202,7 @@ const CompCreaCatalogo = (props) => {
                                 variant="standard"
                             />
 
-                            <Button variant="contained" size="small" color="primary" onClick={insertaCatalogo}>Crear</Button>
+                            <Button variant="contained" size="small" color="primary" onClick={editarCatalogo}>Actualizar</Button>
 
                         </Grid>
 
@@ -183,6 +212,7 @@ const CompCreaCatalogo = (props) => {
             </Paper>
         </div>
     )
+
 }
 
-export default CompCreaCatalogo
+export default EditaCatalogo
