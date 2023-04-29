@@ -5,7 +5,7 @@ import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
-import './Videos.css';
+
 
 const useStyles = makeStyles({
   root: {

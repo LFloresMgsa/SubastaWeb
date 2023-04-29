@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
-import { signingRequestService } from '../services/api.helper'
+import { signingRequestService } from '../../services/api.helper'
 
 const URI = 'http://localhost:5000/api/catalogo'
 

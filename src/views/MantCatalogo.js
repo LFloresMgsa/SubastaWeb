@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import CompListaCatalogo from '../MantenimientoCatalogo/ListaCatalogo';
+import CompListaCatalogo from '../Mantenimientos/Catalogo/ListaCatalogo';
 
 const MantCatalogo = () => {
 

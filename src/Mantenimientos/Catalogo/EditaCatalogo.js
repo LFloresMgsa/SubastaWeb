@@ -8,7 +8,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-import { signingRequestService } from '../services/api.helper'
+import { signingRequestService } from '../../services/api.helper'
+
 
 const EditaCatalogo = (props) => {
     const history = useHistory()
@@ -88,7 +89,7 @@ const EditaCatalogo = (props) => {
             )
         } finally {
             history.push({
-                pathname: '/MantenimientoCatalogo'
+                pathname: '/MantCatalogo'
             });
             setLoading(false);
         }

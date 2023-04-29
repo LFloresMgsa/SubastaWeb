@@ -10,9 +10,9 @@ import MantCatalogo from './views/MantCatalogo';
 
 import Login from './views/Login';
 
-import ListaCatalogo from './MantenimientoCatalogo/ListaCatalogo';
-import CreaCatalogo from './MantenimientoCatalogo/CreaCatalogo';
-import EditaCatalogo from './MantenimientoCatalogo/EditaCatalogo';
+import ListaCatalogo from './Mantenimientos/Catalogo/ListaCatalogo';
+import CreaCatalogo from './Mantenimientos/Catalogo/CreaCatalogo';
+import EditaCatalogo from './Mantenimientos/Catalogo/EditaCatalogo';
 
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
