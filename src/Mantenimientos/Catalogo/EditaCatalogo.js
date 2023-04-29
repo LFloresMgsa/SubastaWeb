@@ -2,14 +2,11 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import { Description } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-
-import { signingRequestService } from '../../services/api.helper'
-
+import { eventoService } from '../../services/evento.service';
 
 const EditaCatalogo = (props) => {
     const history = useHistory()
@@ -33,7 +30,7 @@ const EditaCatalogo = (props) => {
     const { Emp_cCodigo } = useParams()
     const { Cab_cCatalogo } = useParams()
 
-
+    // Load de Pagina
     useEffect(() => {
 
         obtenerCatalogo()
@@ -44,7 +41,8 @@ const EditaCatalogo = (props) => {
         try {
             let _result;
             let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo }
-            await signingRequestService.ejecutaSP(_body).then(
+
+            await eventoService.obtenerCatalogo(_body).then(
                 (res) => {
                     setData(res[0]);
                     _result = res[0];
@@ -78,7 +76,7 @@ const EditaCatalogo = (props) => {
     const editarCatalogo = async (e) => {
         try {
             let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
-            await signingRequestService.ejecutaSP(_body).then(
+            await eventoService.obtenerCatalogo(_body).then(
                 (res) => {
                     setData(res[0]);
                 },
@@ -93,6 +91,13 @@ const EditaCatalogo = (props) => {
             });
             setLoading(false);
         }
+    }
+
+    const cancelar = async (e) => {
+        history.push({
+            pathname: '/MantCatalogo'
+        });
+        setLoading(false);
     }
 
     return (
@@ -117,6 +122,16 @@ const EditaCatalogo = (props) => {
                     <Grid container spacing={2}>
 
                         <Grid item xs={8}>
+
+                            <TextField
+                                label="Catalogo"
+                                value={Cab_cCatalogo}
+                                onChange={(e) => setCategoria(e.target.value)}
+                                name="textformat"
+                                id="catalogo"
+                                variant="standard"
+                                disabled="true"
+                            />
 
                             <TextField
                                 label="Categoria"
@@ -203,10 +218,25 @@ const EditaCatalogo = (props) => {
                                 variant="standard"
                             />
 
-                            <Button variant="contained" size="small" color="primary" onClick={editarCatalogo}>Actualizar</Button>
-
                         </Grid>
 
+                    </Grid>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={8}>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <Button variant="contained" size="small" color="primary" onClick={editarCatalogo}>Actualizar</Button>
+                                        </td>
+                                        <td>
+                                            <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Grid>
                     </Grid>
                 </Box >
 

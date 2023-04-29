@@ -10,10 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { eventoService } from '../../services/evento.service';
 
-import { signingRequestService } from '../../services/api.helper'
 
-const URI = 'http://localhost:5000/api/catalogo'
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,48 +43,44 @@ const ListaCatalogo = (props) => {
   const [loading, setLoading] = useState([]);
   const [dataDelete, setDataDelete] = useState([]);
 
-
+  // Load de pagina
   useEffect(() => {
     obtenerCatalogos();
   }, []);
 
-
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const obtenerCatalogos = async () => {
-    try {
-      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
-      await signingRequestService.ejecutaSP(_body).then(
-        (res) => {
-          setData(res[0]);
-        },
-        (error) => {
-          console.log(error)
-          setError(error);
-        }
-      )
-    } finally {
-      setLoading(false);
-    }
-  }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
+
+    return await eventoService.obtenerCatalogo(_body).then(
+      (res) => {
+        setData(res[0]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
   const eliminaCatalogo = async (Emp_cCodigo, Cab_cCatalogo) => {
-    try {
-      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo })
-      await signingRequestService.sendEjecutaSP(_body).then(
-        (res) => {
-          setDataDelete(res[0]);
-        },
-        (error) => {
-          console.log(error)
-          setError(error);
-        }
-      )
-    } finally {
-      obtenerCatalogos();
-      setLoading(false);
-    }
-  }
+
+    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo })
+
+     await eventoService.obtenerCatalogo(_body).then(
+      (res) => {
+        setDataDelete(res[0]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    obtenerCatalogos();
+  };
+
+
 
   // procedimiento para EDITAR un catalogo con SP MySQL
   const editarCatalogo = (Emp_cCodigo, Cab_cCatalogo) => {
@@ -115,53 +111,72 @@ const ListaCatalogo = (props) => {
         }}
       >
         <Box>
-          <Button variant="contained" size="small" color="primary" onClick={() => crearCatalogo()} >Crear</Button>
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableHead>
-                <TableRow>
 
-                  <StyledTableCell align="right">Empresa</StyledTableCell>
-                  <StyledTableCell align="right">Categoria</StyledTableCell>
-                  <StyledTableCell align="center">Grupo</StyledTableCell>
-                  <StyledTableCell align="left">Clase</StyledTableCell>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <Button variant="contained" size="small" color="primary"
+                    onClick={() => crearCatalogo()} >Nuevo
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
 
-                  <StyledTableCell align="left">Familia</StyledTableCell>
-                  <StyledTableCell align="left">Catalogo</StyledTableCell>
-                  <StyledTableCell align="left">Descripcion</StyledTableCell>
-                  <StyledTableCell align="left">Propietario</StyledTableCell>
-                  <StyledTableCell align="left">Padre</StyledTableCell>
-                  <StyledTableCell align="left">Madre</StyledTableCell>
-                  <StyledTableCell align="left">Info</StyledTableCell>
-                  <StyledTableCell align="left">Placa</StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map((item) => (
-                  <StyledTableRow key={item.Cab_cCatalogo}>
+                          <StyledTableCell align="right">Empresa</StyledTableCell>
+                          <StyledTableCell align="right">Categoria</StyledTableCell>
+                          <StyledTableCell align="center">Grupo</StyledTableCell>
+                          <StyledTableCell align="left">Clase</StyledTableCell>
 
-                    <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                    <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
-                    <StyledTableCell align="center">{item.Lgt_cGrupo}</StyledTableCell>
-                    <StyledTableCell align="left">{item.Lgt_cClase}</StyledTableCell>
+                          <StyledTableCell align="left">Familia</StyledTableCell>
+                          <StyledTableCell align="left">Catalogo</StyledTableCell>
+                          <StyledTableCell align="left">Descripcion</StyledTableCell>
+                          <StyledTableCell align="left">Propietario</StyledTableCell>
+                          <StyledTableCell align="left">Padre</StyledTableCell>
+                          <StyledTableCell align="left">Madre</StyledTableCell>
+                          <StyledTableCell align="left">Info</StyledTableCell>
+                          <StyledTableCell align="left">Placa</StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {data.map((item) => (
+                          <StyledTableRow key={item.Cab_cCatalogo}>
 
-                    <StyledTableCell align="right">{item.Lgt_cFamilia}</StyledTableCell>
-                    <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
-                    <StyledTableCell align="center">{item.Cab_cDescripcion}</StyledTableCell>
-                    <StyledTableCell align="left">{item.Propietario}</StyledTableCell>
-                    <StyledTableCell align="right">{item.Padre}</StyledTableCell>
-                    <StyledTableCell align="right">{item.Madre}</StyledTableCell>
-                    <StyledTableCell align="center">{item.Info}</StyledTableCell>
-                    <StyledTableCell align="left">{item.Placa}</StyledTableCell>
-                    <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editarCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
-                    <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminaCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Lgt_cGrupo}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Lgt_cClase}</StyledTableCell>
+
+                            <StyledTableCell align="right">{item.Lgt_cFamilia}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Cab_cDescripcion}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Propietario}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Padre}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Madre}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Info}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Placa}</StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editarCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminaCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
+                          </StyledTableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+
         </Box>
 
       </Paper>

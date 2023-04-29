@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import CompListaCatalogo from '../Mantenimientos/Catalogo/ListaCatalogo';
+import ListaCatalogo from '../Mantenimientos/Catalogo/ListaCatalogo';
 
 const MantCatalogo = () => {
 
@@ -11,7 +11,7 @@ const MantCatalogo = () => {
                 <h1>Mantenimiento - Catalogo</h1>
             </div>
 
-            <CompListaCatalogo />
+            <ListaCatalogo />
         </div>
     );
 };

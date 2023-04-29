@@ -102,7 +102,7 @@ const ItemContacto = (props) => {
             Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: ppuja, Dvd_cEstado: "A", Dvd_dFechaPuja: "2023-04-26"
         }
 
-        return await eventoService.grabarEventosDetPuja(_body).then(
+        return await eventoService.obtenerEventosDetPuja(_body).then(
 
             (res) => {
 

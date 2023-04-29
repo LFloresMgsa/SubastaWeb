@@ -6,9 +6,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import { eventoService } from '../../services/evento.service';
 
-
-import { signingRequestService } from '../../services/api.helper'
 
 const CreaCatalogo = (props) => {
 
@@ -32,7 +31,7 @@ const CreaCatalogo = (props) => {
     const insertaCatalogo = async (e) => {
         try {
             let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
-            await signingRequestService.ejecutaSP(_body).then(
+            await eventoService.obtenerCatalogo(_body).then(
               (res) => {
                 setData(res[0]);
               },
@@ -49,7 +48,12 @@ const CreaCatalogo = (props) => {
         }
     }
 
-
+    const cancelar = async (e) => {
+        history.push({
+            pathname: '/MantCatalogo'
+        });
+        setLoading(false);
+    }
     return (
         <div>
             <Paper
@@ -174,11 +178,28 @@ const CreaCatalogo = (props) => {
                                 variant="standard"
                             />
 
-                            <Button variant="contained" size="small" color="primary" onClick={insertaCatalogo}>Crear</Button>
+                            
 
                         </Grid>
 
                     </Grid>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={8}>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                        <Button variant="contained" size="small" color="primary" onClick={insertaCatalogo}>Crear</Button>
+                                        </td>
+                                        <td>
+                                            <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Grid>
+                    </Grid>                    
                 </Box >
 
             </Paper>
