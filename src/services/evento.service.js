@@ -8,7 +8,8 @@ export const eventoService = {
     obtenerEventosDetPuja,
     obtenerCatalogoDetImagenes,
     obtenerVideos,
-    obtenerCatalogo
+    obtenerCatalogo,
+    obtenerUsuario
 };
 
 
@@ -67,6 +68,16 @@ function obtenerVideos(dataJson) {
   const params = { }; 
 
   const url = `/api/evento/lgm_videoteca`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerUsuario(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/sgm_usuarios`;
   return Fetch.post(url, params, options).then((res) =>
     handleResponse(res, false)
   );

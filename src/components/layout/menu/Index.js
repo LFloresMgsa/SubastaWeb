@@ -161,6 +161,28 @@ const _temp_tabs = [
     wasUpdated: false,
     tabChildren: [],
   },
+
+  {
+    index: 6,
+    tabID: 6,
+    portalID: 9,
+    tabName: 'Login',
+    title: '',
+    description: '',
+    parentId: -1,
+    level: 0,
+    authorizedRoles: '65;68;-3;',
+    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    administratorRoles: '65;',
+    tabOrder: 6,
+    isVisible: false,
+    componentName: '',
+    routeName: 'Login',
+    isDisabled: false,
+    isDeleted: false,
+    wasUpdated: false,
+    tabChildren: [],
+  },  
 ];
 
 const Menu = (props) => {

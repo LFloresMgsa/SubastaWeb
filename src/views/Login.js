@@ -1,250 +1,137 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Card, Button, TextField } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
-import { useInputValue } from '../helpers/hooks/useInputValue';
-import { store } from '../store';
-import { handleResponse } from '../helpers';
-import Loading from '../components/common/others/Loading';
+import React, { Fragment, useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { eventoService } from '../services/evento.service';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
-const useStyles = makeStyles((theme, context) => ({
-  root: {
-    padding: '5px',
-    margin: '0 auto',
-
-    [theme.breakpoints.up('sm')]: {
-      width: '400px',
-    },
-
-    [theme.breakpoints.only('xs')]: {
-      '& h2': {
-        position: 'relative',
-        top: '-10px',
-      },
-    },
-
-    '& .portalLogo': {
-      // padding: '20px 20px',
-      width: '100%',
-      textAlign: 'center',
-
-      '& img': {
-        maxWidth: '100%',
-        maxHeight: '100%',
-      },
-    },
-
-    '& .MuiCard-root': {
-      padding: '20px',
-    },
-
-    '& .separator': {
-      marginRight: '10px',
-      marginLeft: '10px',
-    },
-
-    '& .link': {
-      color: theme.palette.primary.main,
-      textDecoration: 'none',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
-    },
-
-    '& .forgot-password': {
-      marginTop: '20px',
-      textAlign: 'center',
-    },
-    '& .need-register': {
-      marginTop: '0px',
-      textAlign: 'center',
-    },
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    margin: theme.spacing(1),
+    width: '100%',
+  },
+  button: {
+    margin: theme.spacing(2),
   },
 }));
 
-const initialState = () => {
-  return {
-    isSubmitting: false,
-    username: '',
-    password: '',
-    portalID: -1,
-    error: false,
-    userError: false,
-    passError: false,
-  };
-};
-
-const Login = (props) => {
-  const mountedRef = useRef(true);
+const Login = () => {
   const classes = useStyles();
-  const { global, currentUser } = store.getState();
-  const [currentLogin, setCurrentLogin] = useState('');
-  const [state, setState] = useState(initialState);
-  const [fieldErrors, setFieldErrors] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [logeo, setLogeo] = useState('');
 
-  let username = useInputValue(state.username, state.userError);
-  let password = useInputValue(state.password, state.passError);
+  const [error, setError] = useState('');
 
-  let portalLogoSRC;
-  if (global.logoFile) {
+
+  const handleLogin = async () => {
+
     try {
-      portalLogoSRC = require(`../assets/portals/${global.portalID}/${global.logoFile}`);
+      let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: password }
+      let _result;
+
+
+
+      await eventoService.obtenerUsuario(_body).then(
+
+        (res) => {
+
+          setLogeo(res[0]);
+          _result = res[0];
+
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+
+      _result.map((item) => (
+        setLogeo(item.Sgm_cUsuario),
+        console.log(item.Sgm_cUsuario)
+
+      ));
+
+
+      if (logeo == username) {
+        console.log('Login successful!');
+        setError('');
+
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
-      portalLogoSRC = '';
+      setError('An error occurred while trying to login.');
     }
-  }
 
+
+
+  };
+
+
+  // Load de pagina
   useEffect(() => {
-    props.history.push('/login');
-    store.dispatch({
-      type: 'SET_SHOW_LOGIN',
-      payload: false,
-    });
-
-    if (!mountedRef.current) return null;
-    return () => {
-      mountedRef.current = false;
-    };
+    handleLogin();
   }, []);
 
-  const loginUser = async (loginPayload) => {
-    const requestOptions = {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginPayload),
-    };
-
-    return await fetch(`${SERVICE_URL}/users/authenticate`, requestOptions)
-      .then(handleResponse)
-      .then(({ currentUser: loggedUser, token }) => {
-        store.dispatch({
-          type: 'pushNewAlert',
-          payload: {
-            open: true,
-            color: 'success',
-            message: 'Login was successful!',
-            onLogin: true,
-          },
-        });
-        return { loggedUser, token };
-      })
-      .catch((error) => {
-        let errorMsg = error.title || error.message || error;
-        store.dispatch({
-          type: 'pushNewAlert',
-          payload: {
-            open: true,
-            color: 'error',
-            message: '[Replace]' + errorMsg,
-            keepOpen: true,
-          },
-        });
-        setState({
-          ...state,
-          userError: error.errors?.Username,
-          passError: error.errors?.Password,
-          isSubmitting: false,
-        });
-      });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setState({ ...state, isSubmitting: true });
-    const { isSubmitting, ...payload } = { ...state };
-    payload.username = username.value;
-    payload.password = password.value;
-
-    try {
-      //loginUser action makes the request and handles all the neccessary state changes
-      let response = await loginUser({
-        username: payload.username,
-        password: payload.password,
-      });
-      if (!response) return;
-
-      setTimeout(() => {
-        store.dispatch({ type: 'clearAlerts' });
-        props.history.push('/dashboard');
-        localStorage.setItem('NSUserInfo', JSON.stringify(response.loggedUser));
-        store.dispatch({
-          type: 'LOGIN_SUCCESS',
-          payload: { ...response.loggedUser },
-          onLogin: true,
-        });
-        store.dispatch({
-          type: 'SET_GLOBALS',
-          payload: {
-            isAuthenticated: true,
-            portalID: global.portalID,
-            superUserId: global.superUserId,
-            portalName: global.portalName,
-          },
-        });
-        store.dispatch({
-          type: 'SET_ACCESS_TOKEN',
-          payload: {
-            token: response.token,
-            onLogin: true,
-          },
-        });
-      }, 1500);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <React.Fragment>
-      <div className={classes.root}>
-        {!currentUser.detail && (
-          <React.Fragment>
-            <div className="portalLogo">
-              {portalLogoSRC ? (
-                <img src={portalLogoSRC} alt="Logo" />
-              ) : (
-                <h3>{global.portalName}</h3>
-              )}
-            </div>
-            <Card>
-              <div className="view-title">Login</div>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  label="Username"
-                  variant="outlined"
-                  margin="dense"
-                  size="small"
-                  helperText={fieldErrors.userName}
-                  {...username}
-                />
-                <TextField
-                  type="password"
-                  label="Password"
-                  variant="outlined"
-                  margin="dense"
-                  size="small"
-                  error={password.error && fieldErrors.password ? true : false}
-                  helperText={fieldErrors.password}
-                  {...password}
-                />
-                <br />
-                <br />
-                <Button
-                  fullWidth
-                  variant="contained"
-                  type="submit"
-                  disabled={state.isSubmitting}
-                >
-                  Login {state.isSubmitting && <Loading forButton lpad />}
-                </Button>
-                <br />
-              </form>
-            </Card>
-          </React.Fragment>
-        )}
-      </div>
-    </React.Fragment>
+
+
+    <form className={classes.form} onSubmit={(e) => e.preventDefault()}>
+
+
+      <Box sx={{ flexGrow: 1 }}>
+
+
+        <Paper
+          sx={{
+            p: 2,
+            margin: 1,
+            maxWidth: 'auto',
+            flexGrow: 1,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+
+
+          <TextField
+            className={classes.input}
+            label="Usuario"
+            variant="outlined"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            className={classes.input}
+            label="Contraseña"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleLogin}
+          >
+            Ingresar
+          </Button>
+          {error && <p>{error}</p>}
+
+        </Paper>
+      </Box >
+
+    </form>
   );
 };
 
