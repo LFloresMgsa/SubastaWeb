@@ -12,6 +12,10 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
 import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import StoreIcon from '@mui/icons-material/Store';
+import LoginIcon from '@mui/icons-material/Login';
+import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ReportIcon from '@mui/icons-material/BarChart';
 import { Link } from 'react-router-dom';
 
@@ -102,11 +106,19 @@ const Item = React.forwardRef((props, ref) => {
       case 'inicio':
         return <DashboardOutlinedIcon />;
       case 'catalogo':
-          return <LibraryAddCheckOutlinedIcon />;
+        return <StoreIcon />;
       case 'videoteca':
-          return <MissedVideoCallOutlinedIcon />;    
+        return <MissedVideoCallOutlinedIcon />;
       case 'Subasta':
-          return <AttachMoneyOutlinedIcon />;       
+        return <CrisisAlertIcon />;
+      case 'MantCatalogo':
+        return <LibraryAddCheckOutlinedIcon />;
+      case 'Login':
+        return <LoginIcon />;
+      case 'Logout':
+        return <LogoutIcon />;
+
+
       case 'signing-request':
         return <FeaturedPlayListOutlinedIcon />;
       case 'management':

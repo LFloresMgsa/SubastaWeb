@@ -9,6 +9,7 @@ import SubastaDetalle from './views/SubastaDetalle';
 import MantCatalogo from './views/MantCatalogo';
 
 import Login from './views/Login';
+import Logout from './views/Logout';
 
 import ListaCatalogo from './Mantenimientos/Catalogo/ListaCatalogo';
 import CreaCatalogo from './Mantenimientos/Catalogo/CreaCatalogo';
@@ -47,6 +48,13 @@ const AppRoutes = (props) => {
         exact
         path="/Login"
         render={(route) => <Login {...props} {...route} />}
+      />
+
+
+      <Route
+        exact
+        path="/Logout"
+        render={(route) => <Logout {...props} {...route} />}
       />
 
       <Route

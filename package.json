@@ -51,6 +51,7 @@
         "i18next": "^20.2.1",
         "infinite-react-carousel": "^1.2.11",
         "lodash": "^4.17.21",
+        "md5": "^2.3.0",
         "moment": "^2.29.1",
         "prop-types": "^15.7.2",
         "react": "^18.2.0",
@@ -73,7 +74,8 @@
         "redux": "^4.0.5",
         "redux-state-sync": "^3.1.2",
         "rxjs": "^6.6.7",
-        "styled-components": "^5.3.5"
+        "styled-components": "^5.3.5",
+        "universal-cookie": "^4.0.4"
     },
     "standard": {
         "ignore": [

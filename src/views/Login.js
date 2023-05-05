@@ -6,6 +6,11 @@ import Button from '@material-ui/core/Button';
 import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import md5 from 'md5';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -35,17 +40,19 @@ const Login = () => {
   const handleLogin = async () => {
 
     try {
-      let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: password }
+      let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
       let _result;
-
+      let _valor;
+let _oResponse;
 
 
       await eventoService.obtenerUsuario(_body).then(
 
         (res) => {
-
+          _oResponse = res
           setLogeo(res[0]);
           _result = res[0];
+
 
         },
         (error) => {
@@ -56,14 +63,28 @@ const Login = () => {
 
       _result.map((item) => (
         setLogeo(item.Sgm_cUsuario),
-        console.log(item.Sgm_cUsuario)
+        _valor = item.Sgm_cUsuario
 
+        
       ));
 
+      
 
-      if (logeo == username) {
-        console.log('Login successful!');
+      if (_valor == username) {
+
+        let objeto ;
+        objeto=_result[0];
+
+        cookies.set('Sgm_cUsuario', objeto.Sgm_cUsuario, {path:"/"});
+        cookies.set('Sgm_cNombre', objeto.Sgm_cNombre, {path:"/"});
+        cookies.set('Sgm_cContrasena', objeto.Sgm_cContrasena, {path:"/"});
+        cookies.set('Sgm_cObservaciones', objeto.Sgm_cObservaciones, {path:"/"});
+
+
+        alert(`Bienvenido ${objeto.Sgm_cNombre}`);
         setError('');
+
+        window.location.href="./inicio";
 
       } else {
         setError(data.message);
@@ -71,15 +92,12 @@ const Login = () => {
     } catch (error) {
       setError('An error occurred while trying to login.');
     }
-
-
-
   };
 
 
   // Load de pagina
   useEffect(() => {
-    handleLogin();
+
   }, []);
 
   return (

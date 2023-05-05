@@ -5,6 +5,10 @@ import { styled } from '@mui/material/styles';
 
 import { Avatar, Chip, Drawer } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 const StyledMenu = styled(Drawer)(
   ({ theme, viewport, state }) => css`
@@ -65,10 +69,10 @@ const _temp_tabs = [
     parentId: -1,
     level: 0,
     authorizedRoles: '65;-1;',
-    authorizedRolesAllString: 'Administrators,All Users',
+    authorizedRolesAllString: ' Administrators, All',
     administratorRoles: '65;',
     tabOrder: 1,
-    isVisible: false,
+    isVisible: true,
     componentName: '',
     routeName: 'inicio', // ***
     isDisabled: false,
@@ -86,10 +90,10 @@ const _temp_tabs = [
     parentId: -1,
     level: 0,
     authorizedRoles: '65;68;-3;',
-    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    authorizedRolesAllString: ' Administrators, All',
     administratorRoles: '65;',
     tabOrder: 2,
-    isVisible: false,
+    isVisible: true,
     componentName: '',
     routeName: 'catalogo',
     isDisabled: false,
@@ -107,10 +111,10 @@ const _temp_tabs = [
     parentId: -1,
     level: 0,
     authorizedRoles: '65;68;-3;',
-    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    authorizedRolesAllString: ' Administrators, All',
     administratorRoles: '65;',
     tabOrder: 3,
-    isVisible: false,
+    isVisible: true,
     componentName: '',
     routeName: 'videoteca',
     isDisabled: false,
@@ -128,10 +132,10 @@ const _temp_tabs = [
     parentId: -1,
     level: 0,
     authorizedRoles: '65;68;-3;',
-    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    authorizedRolesAllString: ' Administrators, All',
     administratorRoles: '65;',
     tabOrder: 4,
-    isVisible: false,
+    isVisible: true,
     componentName: '',
     routeName: 'Subasta',
     isDisabled: false,
@@ -150,10 +154,10 @@ const _temp_tabs = [
     parentId: -1,
     level: 0,
     authorizedRoles: '65;68;-3;',
-    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    authorizedRolesAllString: ' Administrators, Customer, Unauthenticated Users',
     administratorRoles: '65;',
     tabOrder: 5,
-    isVisible: false,
+    isVisible: true,
     componentName: '',
     routeName: 'MantCatalogo',
     isDisabled: false,
@@ -172,12 +176,34 @@ const _temp_tabs = [
     parentId: -1,
     level: 0,
     authorizedRoles: '65;68;-3;',
-    authorizedRolesAllString: 'Administrators,Customer,Unauthenticated Users',
+    authorizedRolesAllString: ' Administrators, All',
     administratorRoles: '65;',
     tabOrder: 6,
-    isVisible: false,
+    isVisible: true,
     componentName: '',
     routeName: 'Login',
+    isDisabled: false,
+    isDeleted: false,
+    wasUpdated: false,
+    tabChildren: [],
+  },
+
+  {
+    index: 7,
+    tabID: 7,
+    portalID: 9,
+    tabName: 'Cerrar Sesion',
+    title: '',
+    description: '',
+    parentId: -1,
+    level: 0,
+    authorizedRoles: '65;68;-3;',
+    authorizedRolesAllString: ' Administrators',
+    administratorRoles: '65;',
+    tabOrder: 7,
+    isVisible: true,
+    componentName: '',
+    routeName: 'Logout',
     isDisabled: false,
     isDeleted: false,
     wasUpdated: false,
@@ -189,9 +215,17 @@ const Menu = (props) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { viewport, state, global } = props;
-  const tabs = _temp_tabs;
+
+  let tabs = _temp_tabs.filter(_temp_tabs => _temp_tabs.authorizedRolesAllString.indexOf("All") > 0);
+
+  if (cookies.get('Sgm_cUsuario') != "" && cookies.get('Sgm_cUsuario') != null) {
+    
+    tabs = _temp_tabs.filter(_temp_tabs => _temp_tabs.authorizedRolesAllString.indexOf("Administrators") > 0);
+  }
 
   const sortMenuItems = tabs.sort((a, b) => (a.tabOrder > b.tabOrder ? 1 : -1));
+
+
 
   const drawerContent = (
     <Fragment>
