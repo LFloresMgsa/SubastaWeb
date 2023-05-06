@@ -113,6 +113,19 @@ const Item = React.forwardRef((props, ref) => {
         return <CrisisAlertIcon />;
       case 'MantCatalogo':
         return <LibraryAddCheckOutlinedIcon />;
+
+      case 'MantCatalogoImagenes':
+        return <LibraryAddCheckOutlinedIcon />;
+
+      case 'MantVideoteca':
+        return <LibraryAddCheckOutlinedIcon />;
+      case 'MantEvento':
+        return <LibraryAddCheckOutlinedIcon />;
+      case 'MantEventoDet':
+        return <LibraryAddCheckOutlinedIcon />;
+      case 'MantEventoPuja':
+        return <LibraryAddCheckOutlinedIcon />;
+
       case 'Login':
         return <LoginIcon />;
       case 'Logout':

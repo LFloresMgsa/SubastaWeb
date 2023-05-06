@@ -8,6 +8,13 @@ import Subasta from './views/Subasta';
 import SubastaDetalle from './views/SubastaDetalle';
 import MantCatalogo from './views/MantCatalogo';
 
+import MantCatalogoImagenes from './views/MantCatalogoImagenes';
+import MantVideoteca from './views/MantVideoteca';
+import MantEvento from './views/MantEvento';
+import MantEventoDet from './views/MantEventoDet';
+import MantEventoPuja from './views/MantEventoPuja';
+
+
 import Login from './views/Login';
 import Logout from './views/Logout';
 
@@ -43,6 +50,39 @@ const AppRoutes = (props) => {
         path="/MantCatalogo"
         render={(route) => <MantCatalogo {...props} {...route} />}
       />
+
+      <Route
+        exact
+        path="/MantCatalogoImagenes"
+        render={(route) => <MantCatalogoImagenes {...props} {...route} />}
+      />
+
+      <Route
+        exact
+        path="/MantVideoteca"
+        render={(route) => <MantVideoteca {...props} {...route} />}
+      />
+
+      <Route
+        exact
+        path="/MantEvento"
+        render={(route) => <MantEvento {...props} {...route} />}
+      />
+
+      <Route
+        exact
+        path="/MantEventoDet"
+        render={(route) => <MantEventoDet {...props} {...route} />}
+      />
+
+      <Route
+        exact
+        path="/MantEventoPuja"
+        render={(route) => <MantEventoPuja {...props} {...route} />}
+      />
+
+
+
 
       <Route
         exact
