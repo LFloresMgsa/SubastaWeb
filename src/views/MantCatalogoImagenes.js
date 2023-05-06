@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, Component } from 'react';
-import ListaCatalogo from '../Mantenimientos/Catalogo/ListaCatalogo';
+import ListaCatalogoImagenes from '../Mantenimientos/CatalogoImagenes/ListaCatalogoImagenes';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -19,7 +19,7 @@ class MantCatalogoImagenes extends Component {
                     <h1>Mantenimiento - MantCatalogoImagenes</h1>
                 </div>
 
-                
+                <ListaCatalogoImagenes />                
             </div>
         );
     }

@@ -39,9 +39,9 @@ const Itemprogramacion = (props) => {
 
 
     useEffect(() => {
-        
-        
-        
+
+
+
         obtenerEventoDetalle(props.Dvm_cNummov);
 
     }, []);
@@ -71,7 +71,7 @@ const Itemprogramacion = (props) => {
                         }
                     />
                 </ListItem>
-                
+
             </List>
 
             <ImageList className="subasta-item" cols={4}>
@@ -79,7 +79,7 @@ const Itemprogramacion = (props) => {
 
                 </ImageListItem>
                 {subastas.map((subasta) => (
-                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel = {props.IndicePanel}/>
+                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} />
                 ))}
 
             </ImageList>

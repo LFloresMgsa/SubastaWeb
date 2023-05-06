@@ -22,6 +22,17 @@ import ListaCatalogo from './Mantenimientos/Catalogo/ListaCatalogo';
 import CreaCatalogo from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaCatalogo from './Mantenimientos/Catalogo/EditaCatalogo';
 
+
+import CreaCatalogoImagenes from './Mantenimientos/Catalogo/CreaCatalogo';
+import EditaCatalogoImagenes from './Mantenimientos/Catalogo/EditaCatalogo';
+
+import CreaVideoteca from './Mantenimientos/Catalogo/CreaCatalogo';
+import EditaVideoteca from './Mantenimientos/Catalogo/EditaCatalogo';
+
+import CreaEvento from './Mantenimientos/Catalogo/CreaCatalogo';
+import EditaEvento from './Mantenimientos/Catalogo/EditaCatalogo';
+
+
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
 
@@ -113,6 +124,36 @@ const AppRoutes = (props) => {
       <Route
         path="/editar/:Emp_cCodigo/:Cab_cCatalogo"
         render={(route) => <EditaCatalogo {...props} {...route} />}
+      />
+
+      <Route
+        path="/crearcatalogoimagenes"
+        render={(route) => <CreaCatalogoImagenes {...props} {...route} />}
+      />
+
+      <Route
+        path="/editarcatalogoimagenes/:Emp_cCodigo/:Cab_cCatalogo/:Cab_nItem"
+        render={(route) => <EditaCatalogoImagenes {...props} {...route} />}
+      />
+
+      <Route
+        path="/crearvideoteca"
+        render={(route) => <CreaVideoteca {...props} {...route} />}
+      />
+
+      <Route
+        path="/editarvideoteca/:Emp_cCodigo/:Cab_cCatalogo/:Cab_nItem"
+        render={(route) => <EditaVideoteca {...props} {...route} />}
+      />
+
+      <Route
+        path="/crearevento"
+        render={(route) => <CreaEvento {...props} {...route} />}
+      />
+
+      <Route
+        path="/editarevento/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov"
+        render={(route) => <EditaEvento {...props} {...route} />}
       />
 
     </Switch>
