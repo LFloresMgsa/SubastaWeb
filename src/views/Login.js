@@ -33,7 +33,6 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [logeo, setLogeo] = useState('');
-
   const [error, setError] = useState('');
 
 
@@ -43,7 +42,7 @@ const Login = () => {
       let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
       let _result;
       let _valor;
-let _oResponse;
+      let _oResponse;
 
 
       await eventoService.obtenerUsuario(_body).then(
@@ -65,26 +64,26 @@ let _oResponse;
         setLogeo(item.Sgm_cUsuario),
         _valor = item.Sgm_cUsuario
 
-        
+
       ));
 
-      
+
 
       if (_valor == username) {
 
-        let objeto ;
-        objeto=_result[0];
+        let objeto;
+        objeto = _result[0];
 
-        cookies.set('Sgm_cUsuario', objeto.Sgm_cUsuario, {path:"/"});
-        cookies.set('Sgm_cNombre', objeto.Sgm_cNombre, {path:"/"});
-        cookies.set('Sgm_cContrasena', objeto.Sgm_cContrasena, {path:"/"});
-        cookies.set('Sgm_cObservaciones', objeto.Sgm_cObservaciones, {path:"/"});
+        cookies.set('Sgm_cUsuario', objeto.Sgm_cUsuario, { path: "/" });
+        cookies.set('Sgm_cNombre', objeto.Sgm_cNombre, { path: "/" });
+        cookies.set('Sgm_cContrasena', objeto.Sgm_cContrasena, { path: "/" });
+        cookies.set('Sgm_cObservaciones', objeto.Sgm_cObservaciones, { path: "/" });
 
 
         alert(`Bienvenido ${objeto.Sgm_cNombre}`);
         setError('');
 
-        window.location.href="./inicio";
+        window.location.href = "./inicio";
 
       } else {
         setError(data.message);

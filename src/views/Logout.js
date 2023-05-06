@@ -1,5 +1,5 @@
 
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect   } from 'react';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -12,13 +12,15 @@ const Logout = () => {
         cookies.remove('Sgm_cContrasena', { path: "/" });
         cookies.remove('Sgm_cObservaciones', { path: "/" });
 
-        window.location.href = './';
+        window.location.href = "./inicio";
     }
 
     // Load de pagina
     useEffect(() => {
         cerrarSesion();
     }, []);
+
+ 
 
     return (
 
