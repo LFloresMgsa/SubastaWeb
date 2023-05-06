@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, Component } from 'react';
-import ListaCatalogo from '../Mantenimientos/Catalogo/ListaCatalogo';
+import ListaEventoDet from '../Mantenimientos/EventoDet/ListaEventoDet';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -16,10 +16,10 @@ class MantEventoDet extends Component {
             <div >
 
                 <div>
-                    <h1>Mantenimiento - MantEventoDet</h1>
+                    <h1>Mantenimiento - Evento Detalle</h1>
                 </div>
 
-                
+                <ListaEventoDet />      
             </div>
         );
     }

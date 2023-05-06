@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Dashboard from './views/Dashboard';
-import Catalogo from './views/Catalogo';
+import Tienda from './views/Tienda';
 import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
 import SubastaDetalle from './views/SubastaDetalle';
@@ -18,7 +18,7 @@ import MantEventoPuja from './views/MantEventoPuja';
 import Login from './views/Login';
 import Logout from './views/Logout';
 
-import ListaCatalogo from './Mantenimientos/Catalogo/ListaCatalogo';
+
 import CreaCatalogo from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaCatalogo from './Mantenimientos/Catalogo/EditaCatalogo';
 
@@ -32,6 +32,12 @@ import EditaVideoteca from './Mantenimientos/Catalogo/EditaCatalogo';
 import CreaEvento from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaEvento from './Mantenimientos/Catalogo/EditaCatalogo';
 
+import CreaEventoDet from './Mantenimientos/Catalogo/CreaCatalogo';
+import EditaEventoDet from './Mantenimientos/Catalogo/EditaCatalogo';
+
+import CreaEventoDetPuja from './Mantenimientos/Catalogo/CreaCatalogo';
+import EditaEventoDetPuja from './Mantenimientos/Catalogo/EditaCatalogo';
+
 
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
@@ -43,8 +49,8 @@ const AppRoutes = (props) => {
         render={(route) => <Dashboard {...props} {...route} />}
       />
       <Route
-        path="/catalogo"
-        render={(route) => <Catalogo {...props} {...route} />}
+        path="/tienda"
+        render={(route) => <Tienda {...props} {...route} />}
       />
       <Route
         path="/videoteca"
@@ -154,6 +160,26 @@ const AppRoutes = (props) => {
       <Route
         path="/editarevento/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov"
         render={(route) => <EditaEvento {...props} {...route} />}
+      />
+
+      <Route
+        path="/creareventodet"
+        render={(route) => <CreaEventoDet {...props} {...route} />}
+      />
+
+      <Route
+        path="/editareventodet/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov/:Cab_cCatalogo"
+        render={(route) => <EditaEventoDet {...props} {...route} />}
+      />
+
+      <Route
+        path="/creareventodetouja"
+        render={(route) => <CreaEventoDetPuja {...props} {...route} />}
+      />
+
+      <Route
+        path="/editareventodetpuja/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov/:Cab_cCatalogo/:Cab_cCatalogo/:Dvd_nCorrel"
+        render={(route) => <EditaEventoDetPuja {...props} {...route} />}
       />
 
     </Switch>

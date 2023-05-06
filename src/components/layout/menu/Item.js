@@ -105,7 +105,7 @@ const Item = React.forwardRef((props, ref) => {
       case 'dashboard':
       case 'inicio':
         return <DashboardOutlinedIcon />;
-      case 'catalogo':
+      case 'tienda':
         return <StoreIcon />;
       case 'videoteca':
         return <MissedVideoCallOutlinedIcon />;

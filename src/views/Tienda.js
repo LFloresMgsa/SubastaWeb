@@ -1,13 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 
-const Catalogo = () => {
+const Tienda = () => {
 
 
   return (
     <div >
       <div>
-        <h1>Catalogo</h1>
+        <h1>Tienda</h1>
       </div>
 
       
@@ -15,4 +15,4 @@ const Catalogo = () => {
   );
 };
 
-export default Catalogo;
+export default Tienda;
