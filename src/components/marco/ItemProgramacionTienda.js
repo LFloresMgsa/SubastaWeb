@@ -39,9 +39,6 @@ const ItemProgramacionTienda = (props) => {
 
 
     useEffect(() => {
-
-
-
         obtenerTiendaDetalle(props.Dvm_cNummov);
 
     }, []);
@@ -74,7 +71,7 @@ const ItemProgramacionTienda = (props) => {
 
             </List>
 
-            <ImageList  cols={3} >
+            <ImageList  cols={4} >
                 {tienda.map((item) => (
                     <ItemTienda key={item.Cab_cCatalogo} {...item} IndicePanel={props.IndicePanel} />
                 ))}

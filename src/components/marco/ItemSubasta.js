@@ -118,17 +118,15 @@ const Item = (props) => {
                                         aria-describedby="modal-modal-description"
                                     >
                                         <Box sx={style}>
-                                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                <b>INFORMACION DEL EJEMPLAR</b>
-                                            </Typography>
-                                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                                <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
-                                                <p><b>Placa:</b> {props.Placa}</p>
-                                                <p><b>Propietario</b>: {props.Propietario}</p>
-                                                <p><b>Padre:</b> {props.Padre}</p>
-                                                <p><b>Madre:</b> {props.Madre}</p>
-                                                <p><b>Info:</b> {props.Info}</p>
-                                            </Typography>
+                                            <h2>
+                                                <b>INFORMACION DEL EJEMPLAR</b></h2>
+                                            <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
+                                            <p><b>Placa:</b> {props.Placa}</p>
+                                            <p><b>Propietario</b>: {props.Propietario}</p>
+                                            <p><b>Padre:</b> {props.Padre}</p>
+                                            <p><b>Madre:</b> {props.Madre}</p>
+                                            <p><b>Info:</b> {props.Info}</p>
+
                                         </Box>
                                     </Modal>
 

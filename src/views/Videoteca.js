@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player'
 import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-
+import ImageList from '@mui/material/ImageList';
 
 
 const useStyles = makeStyles({
@@ -46,53 +46,63 @@ function Videoteca() {
       <div>
         <h1>Videoteca</h1>
       </div>
+      <div >
 
-      {videos.map(video => (
+        <ImageList cols={3} >
+          {videos.map(video => (
 
-        <Paper
-          sx={{
-            p: 1,
-            margin: 2,
-            maxWidth: 'auto',
-            flexGrow: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-          }}
-        >
-
-          <div>
-            <br></br>
-            <h2>{video.Lgt_cTitulo}</h2>
-
-          </div>
-
-          <div style={{ width: '100', height: '100' }}>
-            <ReactPlayer
-              url={video.Lgt_cURL}
-              controls
-              loop
-
-            />
-          </div>
-          <div>
-
-
-            <TextField
-              label=""
-              multiline
-
-              value={video.Lgt_cComentario}
-              InputProps={{
-                readOnly: true,
+            <Paper
+              sx={{
+                p: 1,
+                margin: 2,
+                maxWidth: 'auto',
+                width: 670,
+                flexGrow: 1,
+                backgroundColor: (theme) =>
+                  theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
               }}
-            />
+
+            >
+
+              <div>
+                <br></br>
+                <h2>{video.Lgt_cTitulo}</h2>
+                <br></br>
+              </div>
+
+              <div style={{ width: '100', height: '100' }}>
+                <ReactPlayer
+                  url={video.Lgt_cURL}
+                  controls
+                  loop
+
+                />
+              </div>
+              <div>
+                <br></br>
+                <h3>Contenido: </h3>
+                <TextField
+                  label=""
+                  multiline
+
+                  value={video.Lgt_cComentario}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  sx={{
+                    "& fieldset": { border: 'none' },
+                  }}
+                />
 
 
 
-          </div>
-        </Paper>
-      ))}
+              </div>
+            </Paper>
+          ))}
 
+        </ImageList>
+
+      </div>
 
     </div>
   );
