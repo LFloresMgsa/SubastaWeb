@@ -26,10 +26,13 @@ const Dashboard = () => {
               flexDirection: "column",
               alignItems: "center",
               color: "#fff",
+              fontSize: "30px",
             }}
           >
-            <h1>React.js Image Slider</h1>
-            <p>Nulla vitae elit libero, a pharetra augue.</p>
+            <h1>Galpon Legado</h1>
+            <h4>
+            <p>Bienvenidos a nuestra web oficial</p>
+            </h4>
           </div>
         </ImageSlider>
       </div>
