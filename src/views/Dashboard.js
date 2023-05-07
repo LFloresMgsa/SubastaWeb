@@ -1,61 +1,40 @@
-import React, { Fragment, useState, useEffect} from 'react';
-
-import { css, useTheme } from 'styled-components';
-import { styled } from '@mui/material/styles';
+import React from 'react';
 
 
-
-import Slider from './SliderBackground.js'
-import './SliderBackground.css'
-
-const StyledView = styled('div')(
-  ({ theme }) => css`
-    overflow-y: hidden;
-  `
-);
-
-const  Dashboard = () => {
+import GlobalStyles from './GlobalStyles.jsx';
+import ImageSlider from './SliderBackground.js'
 
 
-  const images = [
-    {
-      id: '1',
-      title: 'Awesome forest',
-      image:
-        'https://cdn.pixabay.com/photo/2020/11/09/15/12/trail-5726987_960_720.jpg',
-    },
-    {
-      id: '2',
-      title: 'A litle bird.',
-      image:
-        'https://cdn.pixabay.com/photo/2011/09/27/18/52/bird-9950_960_720.jpg',
-    },
-    {
-      id: '3',
-      title: 'The best friend.',
-      image:
-        'https://cdn.pixabay.com/photo/2017/12/27/14/02/friends-3042751_960_720.jpg',
-    },
-    {
-      id: '4',
-      title: 'Beautiful desert.',
-      image:
-        'https://cdn.pixabay.com/photo/2016/11/21/17/44/arches-national-park-1846759_960_720.jpg',
-    },
-    {
-      id: '5',
-      title: 'Harley Davidson motorcycle.',
-      image:
-        'https://cdn.pixabay.com/photo/2018/10/26/22/55/harley-davidson-3775527_960_720.jpg',
-    },
-  ]
-  
+import image1 from "../assets/images/slide_1.jpeg";
+import image2 from "../assets/images/slide_2.jpeg";
+import image3 from "../assets/images/slide_3.jpeg";
+import image4 from "../assets/images/slide_4.jpeg";
+import image5 from "../assets/images/slide_5.jpeg";
+import image6 from "../assets/images/slide_6.jpeg";
+import image7 from "../assets/images/slide_7.jpeg";
 
-    return (
-      <div className='App'>
-        <Slider images={images} />
+const Dashboard = () => {
+
+  return (
+    <>
+      <GlobalStyles />
+      <div>
+        <ImageSlider images={[image1, image2, image3, image4, image5, image6, image7]}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#fff",
+            }}
+          >
+            <h1>React.js Image Slider</h1>
+            <p>Nulla vitae elit libero, a pharetra augue.</p>
+          </div>
+        </ImageSlider>
       </div>
-    );
+    </>
+  );
 
 };
 
