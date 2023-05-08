@@ -51,11 +51,13 @@ const Login = () => {
           console.log(error);
         }
       );
-      /*
-            console.log('------------**********');
-            console.log(token);
-            console.log('------------**********');
-      */
+
+      console.log('------------**********');
+      console.log(username);
+      console.log(password);
+      console.log(Token.token);
+      console.log('------------**********');
+
 
       if (Token) {
         cookies.set('token', Token.token, { path: "/" });
@@ -70,10 +72,14 @@ const Login = () => {
   const handleLogin = async () => {
 
     try {
-      BuscarToken();
+
+      // genera un token
+      await BuscarToken();
+
+      // valida si encontro el token
 
       if (!cookies.get('token')) {
-        throw "Token no existe";
+        throw "Error: Token no existe";
       }
 
       let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
@@ -97,20 +103,14 @@ const Login = () => {
         cookies.set('Sgm_cNombre', _result[0].Sgm_cNombre, { path: "/" });
         cookies.set('Sgm_cContrasena', _result[0].Sgm_cContrasena, { path: "/" });
         cookies.set('Sgm_cObservaciones', _result[0].Sgm_cObservaciones, { path: "/" });
-        /*
-                console.log('vvvvvvvvvvvvvvvvvvvvvvvvv');
-                console.log(cookies.get('token'));
-                console.log('vvvvvvvvvvvvvvvvvvvvvvvvv');
-        */
 
-     //   alert(`Bienvenido ${_result[0].Sgm_cNombre}`);
 
         setError('');
 
         if (cookies.get('token')) {
           window.location.href = "./inicio";
         }
-        // window.location.href = "./inicio";
+
 
       }
     } catch (error) {
