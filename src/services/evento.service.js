@@ -10,10 +10,18 @@ export const eventoService = {
     obtenerVideos,
     obtenerCatalogo,
     obtenerUsuario,
-    obtenerToken
+    obtenerToken,
+
+    obtenerEventosCabAuth,
+    obtenerEventosDetAuth,
+    obtenerEventosDetPujaAuth,
+    obtenerCatalogoDetImagenesAuth,
+    obtenerVideosAuth,
+    obtenerCatalogoAuth,
+
 };
 
-
+// SERVICIOS SIN AUTORIZACION
 
 function obtenerEventosCab(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
@@ -90,6 +98,68 @@ function obtenerToken(dataJson) {
   const params = { }; 
 
   const url = `/api/evento/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+// SERVICIOS CON AUTORIZACION
+
+function obtenerEventosCabAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/vtm_evento/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerEventosDetAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/vtd_evento/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerEventosDetPujaAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/vtd_evento_puja/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerCatalogoDetImagenesAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/lgd_catalogo_imagenes/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerCatalogoAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/lgm_catalogo_bs/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerVideosAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/lgm_videoteca/auth`;
   return Fetch.post(url, params, options).then((res) =>
     handleResponse(res, false)
   );

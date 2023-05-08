@@ -114,7 +114,7 @@ const Login = () => {
 
       }
     } catch (error) {
-      setError('An error occurred while trying to login.');
+      setError('');
 
     }
   };

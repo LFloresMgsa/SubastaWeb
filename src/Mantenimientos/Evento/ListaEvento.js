@@ -52,7 +52,7 @@ const ListaEvento = (props) => {
   const listar = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015"  }
 
-    return await eventoService.obtenerEventosCab(_body).then(
+    return await eventoService.obtenerEventosCabAuth(_body).then(
       (res) => {
         setData(res[0]);
       },
@@ -68,7 +68,7 @@ const ListaEvento = (props) => {
 
     let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Dvm_cNummov: Dvm_cNummov })
 
-    await eventoService.obtenerEventosCab(_body).then(
+    await eventoService.obtenerEventosCabAuth(_body).then(
       (res) => {
         setDataDelete(res[0]);
       },

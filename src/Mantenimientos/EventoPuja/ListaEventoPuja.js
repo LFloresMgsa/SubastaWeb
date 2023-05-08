@@ -52,7 +52,7 @@ const ListaEventoPuja = (props) => {
   const listar = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015"  }
 
-    return await eventoService.obtenerEventosDetPuja(_body).then(
+    return await eventoService.obtenerEventosDetPujaAuth(_body).then(
       (res) => {
         setData(res[0]);
       },
@@ -68,7 +68,7 @@ const ListaEventoPuja = (props) => {
 
     let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo:Cab_cCatalogo, Dvd_nCorrel:Dvd_nCorrel })
 
-    await eventoService.obtenerEventosDetPuja(_body).then(
+    await eventoService.obtenerEventosDetPujaAuth(_body).then(
       (res) => {
         setDataDelete(res[0]);
       },

@@ -42,7 +42,7 @@ const EditaCatalogo = (props) => {
             let _result;
             let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo }
 
-            await eventoService.obtenerCatalogo(_body).then(
+            await eventoService.obtenerCatalogoAuth(_body).then(
                 (res) => {
                     setData(res[0]);
                     _result = res[0];
@@ -76,7 +76,7 @@ const EditaCatalogo = (props) => {
     const editarCatalogo = async (e) => {
         try {
             let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
-            await eventoService.obtenerCatalogo(_body).then(
+            await eventoService.obtenerCatalogoAuth(_body).then(
                 (res) => {
                     setData(res[0]);
                 },

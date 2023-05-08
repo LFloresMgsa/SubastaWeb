@@ -52,7 +52,7 @@ const ListaCatalogoImagenes = (props) => {
   const listar = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
 
-    return await eventoService.obtenerCatalogoDetImagenes(_body).then(
+    return await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
       (res) => {
         setData(res[0]);
       },
@@ -68,7 +68,7 @@ const ListaCatalogoImagenes = (props) => {
 
     let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem:Cab_nItem })
 
-     await eventoService.obtenerCatalogoDetImagenes(_body).then(
+     await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
       (res) => {
         setDataDelete(res[0]);
       },

@@ -21,7 +21,10 @@ export function authHeader(isMultiPart, newToken) {
         'x-auth-token': `${Token}`,
       };
     } else {
-      return { 'Content-type': 'application/json' };
+      return {
+        'Content-type': 'application/json',
+        'x-auth-token': 'error',
+      };
     }
   } catch (error) {
     return {
