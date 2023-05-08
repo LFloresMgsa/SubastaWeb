@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <GlobalStyles />
+      
       <div>
         <ImageSlider images={[image1, image2, image3, image4, image5, image6, image7]}>
           <div
@@ -26,7 +26,8 @@ const Dashboard = () => {
               flexDirection: "column",
               alignItems: "center",
               color: "#fff",
-              fontSize: "30px",
+              fontSize: "30px"
+              
             }}
           >
             <h1>Galpon Legado</h1>

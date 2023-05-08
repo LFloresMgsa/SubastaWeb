@@ -1,35 +1,55 @@
-
-import React, { Fragment, useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react'
+import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import fondo from '../assets/images/circulo.png'
+import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons'
 import { eventoService } from '../services/evento.service';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import md5 from 'md5';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-
-const useStyles = makeStyles((theme) => ({
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    margin: theme.spacing(1),
-    width: '100%',
-  },
-  button: {
-    margin: theme.spacing(2),
-  },
-}));
+const useStyles = makeStyles(theme => ({
+	root: {
+		backgroundImage: `url(${fondo})`,
+		backgroundRepeat: 'no-repeat',
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+    
+		height: '100vh'
+	},
+	container: {
+		opacity: '1',
+		height: '60%',
+		marginTop: theme.spacing(10),
+		[theme.breakpoints.down(400 + theme.spacing(2) + 2)]: {
+			marginTop: 0,
+			width: '100%',
+			height: '100%'
+		}
+	},
+	div: {
+		marginTop: theme.spacing(8),
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center'
+	},
+	avatar: {
+		margin: theme.spacing(1),
+		backgroundColor: theme.palette.primary.main
+	},
+	form: {
+		width: '100%',
+		marginTop: theme.spacing(1)
+	},
+	button: {
+		margin: theme.spacing(3, 0, 2)
+	}
+}))
 
 const Login = () => {
-  const classes = useStyles();
+	const [body, setBody] = useState({ nickname: '', password: '' })
+	const classes = useStyles()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [logeo, setLogeo] = useState('');
@@ -51,13 +71,13 @@ const Login = () => {
           console.log(error);
         }
       );
-
+/*
       console.log('------------**********');
       console.log(username);
       console.log(password);
       console.log(Token.token);
       console.log('------------**********');
-
+*/
 
       if (Token) {
         cookies.set('token', Token.token, { path: "/" });
@@ -120,58 +140,52 @@ const Login = () => {
   };
 
 
+	return (
+		<Grid container component='main' className={classes.root}>
+			<CssBaseline />
+			<Container component={Paper} elevation={5} maxWidth='xs' className={classes.container}>
+				<div className={classes.div}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component='h1' variant='h5'>Ingreso al sistema</Typography>
+					<form className={classes.form}>
+						<TextField
+							fullWidth
+							autoFocus
+							color='primary'
+							margin='normal'
+							variant='outlined'
+							label='Usuario'
+							name='nickname'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+						/>
+						<TextField
+							fullWidth
+							type='password'
+							color='primary'
+							margin='normal'
+							variant='outlined'
+							label='Contraseña'
+							name='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+						/>
+						<Button
+							fullWidth
+							variant='contained'
+							color='primary'
+							className={classes.button}
+							onClick={handleLogin}
+						>
+							Ingresar
+						</Button>
+					</form>
+				</div>
+			</Container>
+		</Grid>
+	)
+}
 
-  return (
-
-
-    <form className={classes.form} onSubmit={(e) => e.preventDefault()}>
-
-
-      <Box sx={{ flexGrow: 1 }}>
-
-
-        <Paper
-          sx={{
-            p: 2,
-            margin: 1,
-            maxWidth: 'auto',
-            flexGrow: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-          }}
-        >
-
-
-          <TextField
-            className={classes.input}
-            label="Usuario"
-            variant="outlined"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            className={classes.input}
-            label="Contraseña"
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            onClick={handleLogin}
-          >
-            Ingresar
-          </Button>
-          {error && <p>{error}</p>}
-
-        </Paper>
-      </Box >
-
-    </form>
-  );
-};
-
-export default Login;
+export default Login
