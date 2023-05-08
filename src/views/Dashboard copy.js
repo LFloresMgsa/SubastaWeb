@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+
 
 import GlobalStyles from './GlobalStyles.jsx';
 import ImageSlider from './SliderBackground.js'
@@ -13,29 +13,13 @@ import image5 from "../assets/images/slide_5.jpeg";
 import image6 from "../assets/images/slide_6.jpeg";
 import image7 from "../assets/images/slide_7.jpeg";
 
-const sliderData = [
-  {
-    heading: "Slide One",
-    desc: "This is the description of slide one Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    heading: "Slide Two",
-    desc: "This is the description of slide two Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    heading: "Slide Three",
-    desc: "This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-];
-
-
 const Dashboard = () => {
 
   return (
     <>
-      <GlobalStyles />
+      
       <div>
-        <ImageSlider images={[image1, image2, image3, image4, image5, image6, image7]} data={sliderData}>
+        <ImageSlider images={[image1, image2, image3, image4, image5, image6, image7]}>
           <div
             style={{
               display: "flex",
@@ -47,7 +31,9 @@ const Dashboard = () => {
             }}
           >
             <h1>Galpon Legado</h1>
-            
+            <h4>
+            <p>Bienvenidos a nuestra web oficial</p>
+            </h4>
           </div>
         </ImageSlider>
       </div>

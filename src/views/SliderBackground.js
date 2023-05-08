@@ -5,13 +5,13 @@ const IndicatorWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
   position: absolute;
-  bottom: 15px;
-  right: 15px;
+  top: 15px;
+  left: 15px;
 `;
 
 const Dot = styled.div`
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   border-radius: 6px;
   background-color: white;
   opacity: ${(props) => (props.isActive ? 1 : 0.5)};
@@ -54,8 +54,15 @@ const Slide = styled.div`
 
 const ChildrenWrapper = styled.div`
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const ImageDescription = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 10%;
   transform: translate(-50%, -50%);
 `;
 
@@ -73,6 +80,7 @@ const ImageSlider = ({
   autoPlay = true,
   autoPlayTime = 6000,
   children,
+  data = [],
   ...props
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -100,8 +108,11 @@ const ImageSlider = ({
             backgroundImage: `url(${imageUrl})`,
             marginLeft: index === 0 ? `-${currentSlide * 100}%` : undefined,
           }}
-        ></Slide>
+        >
+        </Slide>
+        
       ))}
+      
       <Gradient />
       <Indicator
         currentSlide={currentSlide}
@@ -109,6 +120,7 @@ const ImageSlider = ({
         nextSlide={nextSlide}
       />
       <ChildrenWrapper>{children}</ChildrenWrapper>
+
     </Wrapper>
   );
 };
