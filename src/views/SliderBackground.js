@@ -56,13 +56,31 @@ const ChildrenWrapper = styled.div`
   position: absolute;
   top: 10%;
   left: 50%;
+  text-shadow: 0 0 0.5rem rgb(9, 9, 34);
   transform: translate(-50%, -50%);
 `;
 
-const ImageDescription = styled.div`
+const ImageTitle = styled.div`
   position: absolute;
   top: 50%;
-  left: 10%;
+  left: 100px;
+  color: #fff;
+  text-shadow: 0 0 0.5rem rgb(9, 9, 34);
+	font-size: 2rem;
+	font-weight: bold;
+  text-align: left;
+  transform: translate(-50%, -50%);
+`;
+
+const ImageContent = styled.div`
+  position: absolute;
+  top: 60%;
+  left: 350px;
+  color: #fff;
+  text-shadow: 0 0 0.5rem rgb(9, 9, 34);
+	font-size: 1.5rem;
+	
+	text-align: left;
   transform: translate(-50%, -50%);
 `;
 
@@ -110,9 +128,9 @@ const ImageSlider = ({
           }}
         >
         </Slide>
-        
+
       ))}
-      
+
       <Gradient />
       <Indicator
         currentSlide={currentSlide}
@@ -120,6 +138,15 @@ const ImageSlider = ({
         nextSlide={nextSlide}
       />
       <ChildrenWrapper>{children}</ChildrenWrapper>
+      <ImageTitle>Titulo</ImageTitle>
+      <ImageContent><ol>
+        <li>Conduce hasta el final de la calle</li>
+        <li>Gira a la derecha</li>
+        <li>Sigue derecho por las dos primeras glorietas</li>
+        <li>Gira a la izquierda en la tercer glorieta</li>
+        <li>El colegio está a tu derecha, 300 metros más adelante</li>
+      </ol>
+      </ImageContent>
 
     </Wrapper>
   );
