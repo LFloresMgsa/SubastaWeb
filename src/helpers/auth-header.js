@@ -1,21 +1,34 @@
-import { store } from '../store';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 export function authHeader(isMultiPart, newToken) {
-  const { accessToken } = store.getState();
-  const token = accessToken?.token || newToken;
 
-  if (token) {
-    if (isMultiPart) {
+
+  try {
+    const Token = cookies.get('token');
+
+
+    console.log('----------------------');
+    console.log(Token);
+    console.log('----------------------');
+
+    if (Token) {
+
       return {
-        // 'Content-type': 'multipart/form-data',
-        Authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+        'x-auth-token': `${Token}`,
       };
+    } else {
+      return { 'Content-type': 'application/json' };
     }
+  } catch (error) {
     return {
       'Content-type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      'x-auth-token': 'error',
     };
-  } else {
-    return { 'Content-type': 'application/json' };
   }
+
+
 }

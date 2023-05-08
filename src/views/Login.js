@@ -34,70 +34,92 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [logeo, setLogeo] = useState('');
   const [error, setError] = useState('');
+  const [Token, setToken] = useState('');
+
+
+  const BuscarToken = async () => {
+
+    try {
+      let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
+
+      // obtenemos el token
+      await eventoService.obtenerToken(_body).then(
+        (res) => {
+          setToken(res)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      /*
+            console.log('------------**********');
+            console.log(token);
+            console.log('------------**********');
+      */
+
+      if (Token) {
+        cookies.set('token', Token.token, { path: "/" });
+        setError('');
+      }
+    } catch (error) {
+      setError('An error occurred while trying to login - token');
+    }
+  };
 
 
   const handleLogin = async () => {
 
     try {
+      BuscarToken();
+
+      if (!cookies.get('token')) {
+        throw "Token no existe";
+      }
+
       let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
       let _result;
-      let _valor;
-      let _oResponse;
 
-
+      // si encontro el token ingresa el login
       await eventoService.obtenerUsuario(_body).then(
 
         (res) => {
-          _oResponse = res
           setLogeo(res[0]);
           _result = res[0];
-
-
         },
         (error) => {
           console.log(error);
         }
       );
 
+      if (_result[0].Sgm_cUsuario == username) {
 
-      _result.map((item) => (
-        setLogeo(item.Sgm_cUsuario),
-        _valor = item.Sgm_cUsuario
+        cookies.set('Sgm_cUsuario', _result[0].Sgm_cUsuario, { path: "/" });
+        cookies.set('Sgm_cNombre', _result[0].Sgm_cNombre, { path: "/" });
+        cookies.set('Sgm_cContrasena', _result[0].Sgm_cContrasena, { path: "/" });
+        cookies.set('Sgm_cObservaciones', _result[0].Sgm_cObservaciones, { path: "/" });
+        /*
+                console.log('vvvvvvvvvvvvvvvvvvvvvvvvv');
+                console.log(cookies.get('token'));
+                console.log('vvvvvvvvvvvvvvvvvvvvvvvvv');
+        */
 
+     //   alert(`Bienvenido ${_result[0].Sgm_cNombre}`);
 
-      ));
-
-
-
-      if (_valor == username) {
-
-        let objeto;
-        objeto = _result[0];
-
-        cookies.set('Sgm_cUsuario', objeto.Sgm_cUsuario, { path: "/" });
-        cookies.set('Sgm_cNombre', objeto.Sgm_cNombre, { path: "/" });
-        cookies.set('Sgm_cContrasena', objeto.Sgm_cContrasena, { path: "/" });
-        cookies.set('Sgm_cObservaciones', objeto.Sgm_cObservaciones, { path: "/" });
-
-
-        alert(`Bienvenido ${objeto.Sgm_cNombre}`);
         setError('');
 
-        window.location.href = "./inicio";
+        if (cookies.get('token')) {
+          window.location.href = "./inicio";
+        }
+        // window.location.href = "./inicio";
 
-      } else {
-        setError(data.message);
       }
     } catch (error) {
       setError('An error occurred while trying to login.');
+
     }
   };
 
 
-  // Load de pagina
-  useEffect(() => {
-
-  }, []);
 
   return (
 

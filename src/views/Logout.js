@@ -11,8 +11,9 @@ const Logout = () => {
         cookies.remove('Sgm_cNombre', { path: "/" });
         cookies.remove('Sgm_cContrasena', { path: "/" });
         cookies.remove('Sgm_cObservaciones', { path: "/" });
+        cookies.remove('token', { path: "/" });
 
-        window.location.href = "./inicio";
+        window.location.href = "./login";
     }
 
     // Load de pagina

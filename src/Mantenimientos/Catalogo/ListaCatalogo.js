@@ -58,6 +58,7 @@ const ListaCatalogo = (props) => {
       },
       (error) => {
         console.log(error);
+        
       }
     );
   };
