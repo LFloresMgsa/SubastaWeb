@@ -9,6 +9,7 @@ export const eventoService = {
     obtenerCatalogoDetImagenes,
     obtenerVideos,
     obtenerCatalogo,
+    obtenerImagenes,
     obtenerUsuario,
     obtenerToken,
 
@@ -82,6 +83,17 @@ function obtenerVideos(dataJson) {
     handleResponse(res, false)
   );
 }
+
+function obtenerImagenes(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = { }; 
+
+  const url = `/api/evento/lgm_imagenes`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
 
 function obtenerUsuario(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
