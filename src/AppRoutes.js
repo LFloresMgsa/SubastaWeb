@@ -23,8 +23,8 @@ import CreaCatalogo from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaCatalogo from './Mantenimientos/Catalogo/EditaCatalogo';
 
 
-import CreaCatalogoImagenes from './Mantenimientos/Catalogo/CreaCatalogo';
-import EditaCatalogoImagenes from './Mantenimientos/Catalogo/EditaCatalogo';
+import CreaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/CreaCatalogoImagenes';
+import EditaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/EditaCatalogoImagenes';
 
 import CreaVideoteca from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaVideoteca from './Mantenimientos/Catalogo/EditaCatalogo';
