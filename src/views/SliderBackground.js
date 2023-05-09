@@ -1,6 +1,44 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+export const sliderData = [
+  {
+    id: 0,
+    title: "Slide One",
+    content: "This is the description of slide one Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+  {
+    id: 1,
+    title: "Slide Two",
+    content: "This is the description of slide two Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+  {
+    id: 2,
+    title: "Slide Three",
+    content: "Three - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+  {
+    id: 3,
+    title: "Slide Four",
+    content: "Four - is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+  {
+    id: 4,
+    title: "Slide Five",
+    content: "Five - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+  {
+    id: 5,
+    title: "Slide Six",
+    content: "Six - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+  {
+    id: 6,
+    title: "Slide Seven",
+    content: "Seven - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  },
+];
+
 const IndicatorWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -18,22 +56,6 @@ const Dot = styled.div`
   margin: 5px;
   transition: 750ms all ease-in-out;
 `;
-
-const Indicator = ({ currentSlide, amountSlides, nextSlide }) => {
-  return (
-    <IndicatorWrapper>
-      {Array(amountSlides)
-        .fill(1)
-        .map((_, i) => (
-          <Dot
-            key={i}
-            isActive={currentSlide === i}
-            onClick={() => nextSlide(i)}
-          />
-        ))}
-    </IndicatorWrapper>
-  );
-};
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -62,8 +84,8 @@ const ChildrenWrapper = styled.div`
 
 const ImageTitle = styled.div`
   position: absolute;
-  top: 50%;
-  left: 100px;
+  top: 60%;
+  left: 50%;
   color: #fff;
   text-shadow: 0 0 0.5rem rgb(9, 9, 34);
 	font-size: 2rem;
@@ -74,13 +96,12 @@ const ImageTitle = styled.div`
 
 const ImageContent = styled.div`
   position: absolute;
-  top: 60%;
-  left: 350px;
+  left: 50%;
   color: #fff;
   text-shadow: 0 0 0.5rem rgb(9, 9, 34);
 	font-size: 1.5rem;
-	
-	text-align: left;
+	font-weight: normal;
+	text-align: center;
   transform: translate(-50%, -50%);
 `;
 
@@ -93,21 +114,47 @@ const Gradient = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
+const Indicator = ({ currentSlide, amountSlides, nextSlide }) => {
+  return (
+    <IndicatorWrapper>
+      {Array(amountSlides)
+        .fill(1)
+        .map((_, i) => (
+          <Dot
+            key={i}
+            isActive={currentSlide === i}
+            onClick={() => nextSlide(i)}
+          />
+        ))}
+    </IndicatorWrapper>
+  );
+};
+
 const ImageSlider = ({
   images = [],
   autoPlay = true,
-  autoPlayTime = 6000,
+  autoPlayTime = 4000,
   children,
   data = [],
   ...props
 }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(-2);
+  const [currentInfo, setCurrentInfo] = useState([]);
+
 
   function nextSlide(slideIndex = currentSlide + 1) {
     const newSlideIndex = slideIndex >= images.length ? 0 : slideIndex;
 
+    let filtro = data.filter(item => item.Lgt_nIndice == newSlideIndex)
+
+
+    setCurrentInfo(filtro);
+
     setCurrentSlide(newSlideIndex);
   }
+
+
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -137,16 +184,28 @@ const ImageSlider = ({
         amountSlides={images.length}
         nextSlide={nextSlide}
       />
+
       <ChildrenWrapper>{children}</ChildrenWrapper>
-      <ImageTitle>Titulo</ImageTitle>
-      <ImageContent><ol>
-        <li>Conduce hasta el final de la calle</li>
-        <li>Gira a la derecha</li>
-        <li>Sigue derecho por las dos primeras glorietas</li>
-        <li>Gira a la izquierda en la tercer glorieta</li>
-        <li>El colegio está a tu derecha, 300 metros más adelante</li>
-      </ol>
-      </ImageContent>
+      {currentInfo.map(item => (
+        <table >
+          <tbody>
+            <tr>
+              <td>
+                <ImageTitle>{item.Lgt_cTitulo}</ImageTitle>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ImageContent><ol>
+                  <li>{item.Lgt_cComentario}</li>
+                </ol>
+                </ImageContent>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      ))}
+
 
     </Wrapper>
   );

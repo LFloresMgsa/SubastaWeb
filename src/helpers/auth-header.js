@@ -8,12 +8,12 @@ export function authHeader(isMultiPart, newToken) {
 
   try {
     const Token = cookies.get('token');
-
+/*
 
     console.log('----------------------');
     console.log(Token);
     console.log('----------------------');
-
+*/
     if (Token) {
 
       return {
