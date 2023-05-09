@@ -5,7 +5,7 @@ import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import ImageList from '@mui/material/ImageList';
-
+import './Video.css';
 
 const useStyles = makeStyles({
   root: {
@@ -48,7 +48,7 @@ function Videoteca() {
       </div>
       <div >
 
-        <ImageList cols={3} >
+        <ImageList cols={1} >
           {videos.map(video => (
 
             <Paper
@@ -56,7 +56,7 @@ function Videoteca() {
                 p: 1,
                 margin: 2,
                 maxWidth: 'auto',
-                width: 670,
+                width: 'auto',
                 flexGrow: 1,
                 backgroundColor: (theme) =>
                   theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -70,11 +70,13 @@ function Videoteca() {
                 <br></br>
               </div>
 
-              <div style={{ width: '100', height: '100' }}>
+              <div >
                 <ReactPlayer
+                  
                   url={video.Lgt_cURL}
                   controls
                   loop
+
 
                 />
               </div>
