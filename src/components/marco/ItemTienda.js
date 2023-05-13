@@ -85,7 +85,7 @@ const ItemTienda = (props) => {
                     p: 1,
                     margin: 0.5,
                     maxWidth: 'auto',
-                    width: 500,
+                    width: 350,
                     flexGrow: 1,
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -98,7 +98,7 @@ const ItemTienda = (props) => {
                         <tbody>
                             <tr>
                                 <td>
-                                    <ButtonBase sx={{ width: 480, height: 480 }}>
+                                    <ButtonBase sx={{ width: 300, height: 300 }}>
                                         <Img alt="complex" src={props.cab_cenlace} onClick={obtenerSubastaSlider} />
                                         <Modal
                                             open={open}
@@ -119,9 +119,9 @@ const ItemTienda = (props) => {
                             </tr>
                             <tr>
                                 <td>
-                                    <h2>
+                                    <h3>
                                         <b>INFORMACION DEL EJEMPLAR</b>
-                                    </h2>
+                                    </h3>
 
                                     <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
                                     <p><b>Placa:</b> {props.Placa}</p>

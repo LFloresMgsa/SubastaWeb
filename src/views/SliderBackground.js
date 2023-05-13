@@ -58,7 +58,7 @@ const Dot = styled.div`
 `;
 
 const Wrapper = styled.div`
-  height: 100vh;
+  height: 91vh;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
@@ -171,6 +171,8 @@ const ImageSlider = ({
           key={index}
           style={{
             backgroundImage: `url(${imageUrl})`,
+            width:'100%',
+            height:'100%',
             marginLeft: index === 0 ? `-${currentSlide * 100}%` : undefined,
           }}
         >

@@ -16,11 +16,12 @@ const useStyles = makeStyles(theme => ({
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
     
-		height: '100vh'
+		height: '91vh'
 	},
 	container: {
 		opacity: '1',
-		height: '60%',
+		height: '70%',
+		
 		marginTop: theme.spacing(10),
 		[theme.breakpoints.down(400 + theme.spacing(2) + 2)]: {
 			marginTop: 0,
@@ -34,6 +35,10 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		alignItems: 'center'
 	},
+
+
+
+
 	avatar: {
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.primary.main
@@ -44,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	button: {
 		margin: theme.spacing(3, 0, 2)
+		
 	}
 }))
 
