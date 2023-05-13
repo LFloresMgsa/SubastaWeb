@@ -26,8 +26,8 @@ import EditaCatalogo from './Mantenimientos/Catalogo/EditaCatalogo';
 import CreaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/CreaCatalogoImagenes';
 import EditaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/EditaCatalogoImagenes';
 
-import CreaVideoteca from './Mantenimientos/Catalogo/CreaCatalogo';
-import EditaVideoteca from './Mantenimientos/Catalogo/EditaCatalogo';
+import CreaVideoteca from './Mantenimientos/Videoteca/CreaVideoteca';
+import EditaVideoteca from './Mantenimientos/Videoteca/EditaVideoteca';
 
 import CreaEvento from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaEvento from './Mantenimientos/Catalogo/EditaCatalogo';
@@ -148,7 +148,7 @@ const AppRoutes = (props) => {
       />
 
       <Route
-        path="/editarvideoteca/:Emp_cCodigo/:Cab_cCatalogo/:Cab_nItem"
+        path="/editarvideoteca/:Emp_cCodigo/:Lgt_nIndice"
         render={(route) => <EditaVideoteca {...props} {...route} />}
       />
 

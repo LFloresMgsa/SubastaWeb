@@ -64,9 +64,9 @@ const ListaVideoteca = (props) => {
 
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
-  const eliminar = async (Emp_cCodigo, Cab_cCatalogo, Cab_nItem) => {
+  const eliminar = async (Emp_cCodigo, Lgt_nIndice) => {
 
-    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem: Cab_nItem })
+    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Lgt_nIndice:Lgt_nIndice})
 
     await eventoService.obtenerVideosAuth(_body).then(
       (res) => {
@@ -83,9 +83,9 @@ const ListaVideoteca = (props) => {
 
 
   // procedimiento para EDITAR un catalogo con SP MySQL
-  const editar = (Emp_cCodigo, Cab_cCatalogo, Cab_nItem) => {
+  const editar = (Emp_cCodigo, Lgt_nIndice) => {
     history.push({
-      pathname: `/editarvideoteca/${Emp_cCodigo}/${Cab_cCatalogo}/${Cab_nItem}`,
+      pathname: `/editarvideoteca/${Emp_cCodigo}/${Lgt_nIndice}`,
       state: { props }
     });
   }
@@ -152,8 +152,8 @@ const ListaVideoteca = (props) => {
                             <StyledTableCell align="left">{item.Lgt_cEstado}</StyledTableCell>
                             <StyledTableCell align="left">{item.Lgt_dFechaCrea}</StyledTableCell>
 
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Cab_cCatalogo, item.Cab_nItem)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo, item.Cab_nItem)} >Eliminar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Lgt_nIndice)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Lgt_nIndice)} >Eliminar</Button></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
