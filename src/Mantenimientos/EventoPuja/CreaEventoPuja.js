@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import { Description } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -9,79 +9,45 @@ import Paper from '@mui/material/Paper';
 import { eventoService } from '../../services/evento.service';
 
 
+const CreaEventoPuja = (props) => {
 
+    const history = useHistory();
 
-const EditaEventoDet = (props) => {
-    const history = useHistory()
-    const [data, setData] = useState([])
-    const [error, setError] = useState([])
-    const [loading, setLoading] = useState([])
-
-      
-    const [Dvd_nOrden, setOrden] = useState('')
+    const [Emp_cCodigo, setEmpresa] = useState('')
+    const [Pan_cAnio, setAnio] = useState('')
+    const [Per_cPeriodo, setPeriodo] = useState('')
+    const [Dvm_cNummov, setMovimiento] = useState('')
+    const [Cab_cCatalogo, setCatalogo] = useState('')
+    const [Dvd_nCorrel, setCorrel] = useState('')
+    const [Dvd_cDocID, setDocID] = useState('')
+    const [Dvd_cNombres, setNombre] = useState('')
+    const [Dvd_cApellidos, setApellido] = useState('')
+    const [Dvd_cTelefono, setTelefono] = useState('')
+    const [Dvd_cCorreo, setCorreo] = useState('')
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
+    const [Dvd_dFechaPuja, setFecha] = useState('')     
+      
 
+   
+    
 
-    const { Emp_cCodigo } = useParams()
-    const { Pan_cAnio } = useParams()
-    const { Per_cPeriodo } = useParams()
-    const { Dvm_cNummov } = useParams()
-    const { Cab_cCatalogo } = useParams()
-
-
-    // Load de Pagina
-    useEffect(() => {
-
-        obtenerEventosDet()
-    }, [])
-
-    // procedimiento para CONSULTA un catalogo con SP MySQL
-    const obtenerEventosDet = async () => {
+    // procedimiento para INSERTAR un catalogo con SP MySQL
+    const insertaEventoPuja = async (e) => {
         try {
-            let _result;
-            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo}
-
-            await eventoService.obtenerEventosDetAuth(_body).then(
-                (res) => {
-                    setData(res[0]);
-                    _result = res[0];
-                },
-                (error) => {
-                    console.log(error)
-                    setError(error);
-                }
-            )
-
-            _result.map((item) => (
-                setOrden(item.Dvd_nOrden),
-                setImporte(item.Dvd_nImporte),
-                setEstado(item.Dvd_cEstado)                                                       
-               
-            ))
-
-        } finally {
-            setLoading(false);
-        }
-    }
-
-
-    // procedimiento para EDITAR un catalogo con SP MySQL
-    const editarEvento = async (e) => {
-        try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo,Dvd_nOrden:Dvd_nOrden,Dvd_nImporte:Dvd_nImporte,Dvd_cEstado:Dvd_cEstado}
-            await eventoService.obtenerEventosDetAuth(_body).then(
-                (res) => {
-                    setData(res[0]);
-                },
-                (error) => {
-                    console.log(error)
-                    setError(error);
-                }
+            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo,Dvd_nCorrel:Dvd_nCorrel,Dvd_cDocID:Dvd_cDocID,Dvd_cNombres:Dvd_cNombres,Dvd_cApellidos:Dvd_cApellidos,Dvd_cTelefono:Dvd_cTelefono,Dvd_cCorreo:Dvd_cCorreo,Dvd_nImporte:Dvd_nImporte,Dvd_cEstado:Dvd_cEstado,Dvd_dFechaPuja:Dvd_dFechaPuja}
+            await eventoService.obtenerEventosDetPujaAuth(_body).then(
+              (res) => {
+                setData(res[0]);
+              },
+              (error) => {
+                console.log(error)
+                setError(error);
+              }
             )
         } finally {
             history.push({
-                pathname: '/MantEventoDet'
+                pathname: '/MantEventoPuja'
             });
             setLoading(false);
         }
@@ -89,13 +55,11 @@ const EditaEventoDet = (props) => {
 
     const cancelar = async (e) => {
         history.push({
-            pathname: '/MantEventoDet'
+            pathname: '/MantEventoPuja'
         });
         setLoading(false);
     }
-
     return (
-
         <div>
             <Paper
                 sx={{
@@ -110,7 +74,7 @@ const EditaEventoDet = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA EVENTOS DETALLE:</h2>
+                        <h2 >CREA EVENTO PUJA:</h2>
                     </div>
 
                     <Grid container spacing={2}>
@@ -159,21 +123,61 @@ const EditaEventoDet = (props) => {
                             />
 
                             <TextField
-                                label="Orden"
-                                value={Dvd_nOrden}
-                                onChange={(e) => setOrden(e.target.value)}
+                                label="Correl"
+                                value={Dvd_nCorrel}
+                                onChange={(e) => setCorrel(e.target.value)}
                                 name="textformat"
-                                id="Orden"
+                                id="Correl"
                                 variant="standard"
                             />
                             <TextField
+                                label="Doc ID"
+                                value={Dvd_cDocID}
+                                onChange={(e) => setDocID(e.target.value)}
+                                name="textformat"
+                                id="Doc ID"
+                                variant="standard"
+                            />                            
+                             <TextField
+                                label="Nombres"
+                                value={Dvd_cNombres}
+                                onChange={(e) => setNombre(e.target.value)}
+                                name="textformat"
+                                id="Nombres"
+                                variant="standard"
+                            />          
+                             <TextField
+                                label="Apellidos"
+                                value={Dvd_cApellidos}
+                                onChange={(e) => setApellido(e.target.value)}
+                                name="textformat"
+                                id="Apellidos"
+                                variant="standard"
+                            />          
+                             <TextField
+                                label="Telefono"
+                                value={Dvd_cTelefono}
+                                onChange={(e) => setTelefono(e.target.value)}
+                                name="textformat"
+                                id="Telefono"
+                                variant="standard"
+                            />          
+                             <TextField
+                                label="Correo"
+                                value={Dvd_cCorreo}
+                                onChange={(e) => setCorreo(e.target.value)}
+                                name="textformat"
+                                id="Correo"
+                                variant="standard"
+                            />  
+                             <TextField
                                 label="Importe"
                                 value={Dvd_nImporte}
                                 onChange={(e) => setImporte(e.target.value)}
                                 name="textformat"
                                 id="Importe"
                                 variant="standard"
-                            />
+                            />       
                              <TextField
                                 label="Estado"
                                 value={Dvd_cEstado}
@@ -181,7 +185,8 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Estado"
                                 variant="standard"
-                            />                         
+                            />       
+                                                             
 
                         </Grid>
 
@@ -193,7 +198,7 @@ const EditaEventoDet = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={editarEvento}>Actualizar</Button>
+                                        <Button variant="contained" size="small" color="primary" onClick={insertaEventoPuja}>Crear</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
@@ -202,13 +207,12 @@ const EditaEventoDet = (props) => {
                                 </tbody>
                             </table>
                         </Grid>
-                    </Grid>
+                    </Grid>                    
                 </Box >
 
             </Paper>
         </div>
     )
-
 }
 
-export default EditaEventoDet
+export default CreaEventoPuja

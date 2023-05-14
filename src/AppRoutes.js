@@ -32,11 +32,11 @@ import EditaVideoteca from './Mantenimientos/Videoteca/EditaVideoteca';
 import CreaEvento from './Mantenimientos/Evento/CreaEvento';
 import EditaEvento from './Mantenimientos/Evento/EditaEvento';
 
-import CreaEventoDet from './Mantenimientos/Catalogo/CreaCatalogo';
-import EditaEventoDet from './Mantenimientos/Catalogo/EditaCatalogo';
+import CreaEventoDet from './Mantenimientos/EventoDet/CreaEventoDet';
+import EditaEventoDet from './Mantenimientos/EventoDet/EditaEventoDet';
 
-import CreaEventoDetPuja from './Mantenimientos/Catalogo/CreaCatalogo';
-import EditaEventoDetPuja from './Mantenimientos/Catalogo/EditaCatalogo';
+import CreaEventoDetPuja from './Mantenimientos/EventoPuja/CreaEventoPuja';
+import EditaEventoDetPuja from './Mantenimientos/EventoPuja/EditaEventoPuja';
 
 
 const AppRoutes = (props) => {
@@ -168,17 +168,17 @@ const AppRoutes = (props) => {
       />
 
       <Route
-        path="/editareventodet/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov/:Cab_cCatalogo"
+        path="/editareventodet/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov/:Cab_cCatalogo"
         render={(route) => <EditaEventoDet {...props} {...route} />}
       />
 
       <Route
-        path="/creareventodetouja"
+        path="/creareventodetpuja"
         render={(route) => <CreaEventoDetPuja {...props} {...route} />}
       />
 
       <Route
-        path="/editareventodetpuja/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov/:Cab_cCatalogo/:Cab_cCatalogo/:Dvd_nCorrel"
+        path="/editareventodetpuja/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov/:Cab_cCatalogo/:Dvd_nCorrel"
         render={(route) => <EditaEventoDetPuja {...props} {...route} />}
       />
 

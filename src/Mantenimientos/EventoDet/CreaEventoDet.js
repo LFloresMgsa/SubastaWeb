@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import { Description } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -9,75 +9,35 @@ import Paper from '@mui/material/Paper';
 import { eventoService } from '../../services/evento.service';
 
 
+const CreaEventoDet = (props) => {
 
+    const history = useHistory();
 
-const EditaEventoDet = (props) => {
-    const history = useHistory()
-    const [data, setData] = useState([])
-    const [error, setError] = useState([])
-    const [loading, setLoading] = useState([])
-
-      
+    const [Emp_cCodigo, setEmpresa] = useState('')
+    const [Pan_cAnio, setAnio] = useState('')
+    const [Per_cPeriodo, setPeriodo] = useState('')
+    const [Dvm_cNummov, setMovimiento] = useState('')
+    const [Cab_cCatalogo, setCatalogo] = useState('')
     const [Dvd_nOrden, setOrden] = useState('')
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
+      
 
+   
+    
 
-    const { Emp_cCodigo } = useParams()
-    const { Pan_cAnio } = useParams()
-    const { Per_cPeriodo } = useParams()
-    const { Dvm_cNummov } = useParams()
-    const { Cab_cCatalogo } = useParams()
-
-
-    // Load de Pagina
-    useEffect(() => {
-
-        obtenerEventosDet()
-    }, [])
-
-    // procedimiento para CONSULTA un catalogo con SP MySQL
-    const obtenerEventosDet = async () => {
+    // procedimiento para INSERTAR un catalogo con SP MySQL
+    const insertaEventoDet = async (e) => {
         try {
-            let _result;
-            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo}
-
+            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo,Dvd_nOrden:Dvd_nOrden,Dvd_nImporte:Dvd_nImporte,Dvd_cEstado:Dvd_cEstado}
             await eventoService.obtenerEventosDetAuth(_body).then(
-                (res) => {
-                    setData(res[0]);
-                    _result = res[0];
-                },
-                (error) => {
-                    console.log(error)
-                    setError(error);
-                }
-            )
-
-            _result.map((item) => (
-                setOrden(item.Dvd_nOrden),
-                setImporte(item.Dvd_nImporte),
-                setEstado(item.Dvd_cEstado)                                                       
-               
-            ))
-
-        } finally {
-            setLoading(false);
-        }
-    }
-
-
-    // procedimiento para EDITAR un catalogo con SP MySQL
-    const editarEvento = async (e) => {
-        try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo,Dvd_nOrden:Dvd_nOrden,Dvd_nImporte:Dvd_nImporte,Dvd_cEstado:Dvd_cEstado}
-            await eventoService.obtenerEventosDetAuth(_body).then(
-                (res) => {
-                    setData(res[0]);
-                },
-                (error) => {
-                    console.log(error)
-                    setError(error);
-                }
+              (res) => {
+                setData(res[0]);
+              },
+              (error) => {
+                console.log(error)
+                setError(error);
+              }
             )
         } finally {
             history.push({
@@ -93,9 +53,7 @@ const EditaEventoDet = (props) => {
         });
         setLoading(false);
     }
-
     return (
-
         <div>
             <Paper
                 sx={{
@@ -110,7 +68,7 @@ const EditaEventoDet = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA EVENTOS DETALLE:</h2>
+                        <h2 >CREA DETALLE DEL EVENTO:</h2>
                     </div>
 
                     <Grid container spacing={2}>
@@ -181,7 +139,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Estado"
                                 variant="standard"
-                            />                         
+                            />                            
 
                         </Grid>
 
@@ -193,7 +151,7 @@ const EditaEventoDet = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={editarEvento}>Actualizar</Button>
+                                        <Button variant="contained" size="small" color="primary" onClick={insertaEventoDet}>Crear</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
@@ -202,13 +160,12 @@ const EditaEventoDet = (props) => {
                                 </tbody>
                             </table>
                         </Grid>
-                    </Grid>
+                    </Grid>                    
                 </Box >
 
             </Paper>
         </div>
     )
-
 }
 
-export default EditaEventoDet
+export default CreaEventoDet
