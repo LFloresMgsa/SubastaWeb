@@ -29,8 +29,8 @@ import EditaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/EditaCatalo
 import CreaVideoteca from './Mantenimientos/Videoteca/CreaVideoteca';
 import EditaVideoteca from './Mantenimientos/Videoteca/EditaVideoteca';
 
-import CreaEvento from './Mantenimientos/Catalogo/CreaCatalogo';
-import EditaEvento from './Mantenimientos/Catalogo/EditaCatalogo';
+import CreaEvento from './Mantenimientos/Evento/CreaEvento';
+import EditaEvento from './Mantenimientos/Evento/EditaEvento';
 
 import CreaEventoDet from './Mantenimientos/Catalogo/CreaCatalogo';
 import EditaEventoDet from './Mantenimientos/Catalogo/EditaCatalogo';
@@ -158,7 +158,7 @@ const AppRoutes = (props) => {
       />
 
       <Route
-        path="/editarevento/:Emp_cCodigo/:Pan_cAnio/:Dvm_cNummov"
+        path="/editarevento/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov"
         render={(route) => <EditaEvento {...props} {...route} />}
       />
 

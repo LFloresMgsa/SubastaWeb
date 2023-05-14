@@ -131,7 +131,7 @@ const EditaCatalogoImagenes = (props) => {
                                 value={Lgt_cCategoria}
                                 onChange={(e) => setCategoria(e.target.value)}
                                 name="textformat"
-                                id="categoria"
+                                id="Categoria"
                                 variant="standard"
                             />
 

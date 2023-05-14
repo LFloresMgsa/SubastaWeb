@@ -64,9 +64,9 @@ const ListaEvento = (props) => {
 
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
-  const eliminar = async (Emp_cCodigo, Pan_cAnio, Dvm_cNummov) => {
+  const eliminar = async (Emp_cCodigo, Pan_cAnio,Per_cPeriodo,Dvm_cNummov) => {
 
-    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Dvm_cNummov: Dvm_cNummov })
+    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio,Per_cPeriodo:Per_cPeriodo, Dvm_cNummov: Dvm_cNummov })
 
     await eventoService.obtenerEventosCabAuth(_body).then(
       (res) => {
@@ -83,9 +83,9 @@ const ListaEvento = (props) => {
 
 
   // procedimiento para EDITAR un catalogo con SP MySQL
-  const editar = (Emp_cCodigo, Pan_cAnio, Dvm_cNummov) => {
+  const editar = (Emp_cCodigo, Pan_cAnio,Per_cPeriodo,Dvm_cNummov) => {
     history.push({
-      pathname: `/editarevento/${Emp_cCodigo}/${Pan_cAnio}/${Dvm_cNummov}`,
+      pathname: `/editarevento/${Emp_cCodigo}/${Pan_cAnio}/${Per_cPeriodo}/${Dvm_cNummov}`,
       state: { props }
     });
   }
@@ -156,8 +156,8 @@ const ListaEvento = (props) => {
                             <StyledTableCell align="left">{item.Dvm_dFin}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvm_cEstado}</StyledTableCell>
 
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Dvm_cNummov)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Dvm_cNummov)} >Eliminar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio,item.Per_cPeriodo,item.Dvm_cNummov)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio,item.Per_cPeriodo,item.Dvm_cNummov)} >Eliminar</Button></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
