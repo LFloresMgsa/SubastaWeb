@@ -65,29 +65,31 @@ const ListaVideoteca = (props) => {
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
   const eliminar = async (Emp_cCodigo, Lgt_nIndice) => {
-    try {
-      let _result;
-      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Lgt_nIndice: Lgt_nIndice })
+    if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
+      try {
+        let _result;
+        let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Lgt_nIndice: Lgt_nIndice })
 
-      await eventoService.obtenerVideosAuth(_body).then(
-        (res) => {
-          _result = res;
-        },
-        (error) => {
-          console.log(error);
+        await eventoService.obtenerVideosAuth(_body).then(
+          (res) => {
+            _result = res;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        if (_result.error) {
+          throw _result.error;
         }
-      );
 
-      if (_result.error) {
-        throw _result.error;
+        alert('El registro fue eliminado');
+
+        listar();
+
+      } catch (error) {
+        alert(error);
       }
-
-      alert('El registro fue eliminado');
-
-      listar();
-
-    } catch (error) {
-      alert(error);
     }
   };
 

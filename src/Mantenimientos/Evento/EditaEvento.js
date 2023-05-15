@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { eventoService } from '../../services/evento.service';
-import {general} from '../../general/general'
+import { general } from '../../general/general'
 
 const EditaEvento = (props) => {
     const history = useHistory()
@@ -17,9 +17,9 @@ const EditaEvento = (props) => {
 
     const [Vtt_cTipoEvento, setTipoEvento] = useState('')
     const [Dvm_cDescripcion, setDescripcion] = useState('')
-    const [Dvm_dInicio, setFinicio] =useState(new Date());
-    const [Dvm_dFin, setFfin] =useState(new Date());
-    const [Dvm_cEstado, setEstado] = useState('')   
+    const [Dvm_dInicio, setFinicio] = useState(new Date());
+    const [Dvm_dFin, setFfin] = useState(new Date());
+    const [Dvm_cEstado, setEstado] = useState('')
 
 
     const { Emp_cCodigo } = useParams()
@@ -37,7 +37,7 @@ const EditaEvento = (props) => {
     const obtenerEventos = async () => {
         try {
             let _result;
-            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov}
+            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov }
 
             await eventoService.obtenerEventosCabAuth(_body).then(
                 (res) => {
@@ -55,8 +55,8 @@ const EditaEvento = (props) => {
                 setDescripcion(item.Dvm_cDescripcion),
                 setFinicio(item.Dvm_dInicio),
                 setFfin(item.Dvm_dFin),
-                setEstado(item.Dvm_cEstado)               
-               
+                setEstado(item.Dvm_cEstado)
+
             ))
 
         } finally {
@@ -65,16 +65,16 @@ const EditaEvento = (props) => {
     }
 
 
-      
+
     // procedimiento para EDITAR un catalogo con SP MySQL
     const editarEvento = async (e) => {
         try {
-            let pDvm_dInicio=general.convertirFechaTextToIsoText(Dvm_dInicio);
-            let pDvm_dFin=general.convertirFechaTextToIsoText(Dvm_dFin);
+            let pDvm_dInicio = general.convertirFechaTextToIsoText(Dvm_dInicio);
+            let pDvm_dFin = general.convertirFechaTextToIsoText(Dvm_dFin);
 
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Vtt_cTipoEvento:Vtt_cTipoEvento,Dvm_cDescripcion:Dvm_cDescripcion,Dvm_dInicio:pDvm_dInicio,Dvm_dFin:pDvm_dFin,Dvm_cEstado:Dvm_cEstado}
+            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Vtt_cTipoEvento: Vtt_cTipoEvento, Dvm_cDescripcion: Dvm_cDescripcion, Dvm_dInicio: pDvm_dInicio, Dvm_dFin: pDvm_dFin, Dvm_cEstado: Dvm_cEstado }
 
-console.log(_body);
+            console.log(_body);
 
             await eventoService.obtenerEventosCabAuth(_body).then(
                 (res) => {
@@ -84,7 +84,15 @@ console.log(_body);
                     console.log(error)
                     setError(error);
                 }
-            )
+            );
+
+
+            alert('El registro fue actualizado');
+
+        } catch (error) {
+            alert(error);
+
+
         } finally {
             history.push({
                 pathname: '/MantEvento'
@@ -195,15 +203,15 @@ console.log(_body);
                                 id="Fecha Fin"
                                 variant="standard"
                             />
-                             <TextField
+                            <TextField
                                 label="Estado"
                                 value={Dvm_cEstado}
                                 onChange={(e) => setEstado(e.target.value)}
                                 name="textformat"
                                 id="Estado"
                                 variant="standard"
-                            />                               
-                               
+                            />
+
 
                         </Grid>
 

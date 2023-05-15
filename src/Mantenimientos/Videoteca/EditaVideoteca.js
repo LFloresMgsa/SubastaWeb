@@ -79,7 +79,15 @@ const EditaVideoteca = (props) => {
                     console.log(error)
                     setError(error);
                 }
-            )
+            );
+
+
+            alert('El registro fue actualizado');
+
+        } catch (error) {
+            alert(error);
+
+            
         } finally {
             history.push({
                 pathname: '/MantVideoteca'

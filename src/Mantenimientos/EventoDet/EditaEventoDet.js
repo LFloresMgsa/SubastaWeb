@@ -17,7 +17,7 @@ const EditaEventoDet = (props) => {
     const [error, setError] = useState([])
     const [loading, setLoading] = useState([])
 
-      
+
     const [Dvd_nOrden, setOrden] = useState('')
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
@@ -40,7 +40,7 @@ const EditaEventoDet = (props) => {
     const obtenerEventosDet = async () => {
         try {
             let _result;
-            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo}
+            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo }
 
             await eventoService.obtenerEventosDetAuth(_body).then(
                 (res) => {
@@ -56,8 +56,8 @@ const EditaEventoDet = (props) => {
             _result.map((item) => (
                 setOrden(item.Dvd_nOrden),
                 setImporte(item.Dvd_nImporte),
-                setEstado(item.Dvd_cEstado)                                                       
-               
+                setEstado(item.Dvd_cEstado)
+
             ))
 
         } finally {
@@ -67,9 +67,9 @@ const EditaEventoDet = (props) => {
 
 
     // procedimiento para EDITAR un catalogo con SP MySQL
-    const editarEvento = async (e) => {
+    const editarEventoDet = async (e) => {
         try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo,Dvd_nOrden:Dvd_nOrden,Dvd_nImporte:Dvd_nImporte,Dvd_cEstado:Dvd_cEstado}
+            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden, Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado }
             await eventoService.obtenerEventosDetAuth(_body).then(
                 (res) => {
                     setData(res[0]);
@@ -78,7 +78,15 @@ const EditaEventoDet = (props) => {
                     console.log(error)
                     setError(error);
                 }
-            )
+            );
+
+
+            alert('El registro fue actualizado');
+
+        } catch (error) {
+            alert(error);
+
+
         } finally {
             history.push({
                 pathname: '/MantEventoDet'
@@ -174,14 +182,14 @@ const EditaEventoDet = (props) => {
                                 id="Importe"
                                 variant="standard"
                             />
-                             <TextField
+                            <TextField
                                 label="Estado"
                                 value={Dvd_cEstado}
                                 onChange={(e) => setEstado(e.target.value)}
                                 name="textformat"
                                 id="Estado"
                                 variant="standard"
-                            />                         
+                            />
 
                         </Grid>
 
@@ -193,7 +201,7 @@ const EditaEventoDet = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={editarEvento}>Actualizar</Button>
+                                            <Button variant="contained" size="small" color="primary" onClick={editarEventoDet}>Actualizar</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>

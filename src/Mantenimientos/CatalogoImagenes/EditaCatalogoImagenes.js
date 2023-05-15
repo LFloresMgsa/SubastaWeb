@@ -20,7 +20,7 @@ const EditaCatalogoImagenes = (props) => {
     const [Lgt_cFamilia, setFamilia] = useState('')
 
     const [Cab_nItem, setItem] = useState('')
-    const [Cab_cEnlace, setEnlace] = useState('')    
+    const [Cab_cEnlace, setEnlace] = useState('')
 
 
     const { Emp_cCodigo } = useParams()
@@ -56,7 +56,7 @@ const EditaCatalogoImagenes = (props) => {
                 setFamilia(item.Lgt_cFamilia),
                 setItem(item.Cab_nItem),
                 setEnlace(item.Cab_cEnlace)
-               
+
             ))
 
         } finally {
@@ -68,7 +68,7 @@ const EditaCatalogoImagenes = (props) => {
     // procedimiento para EDITAR un catalogo con SP MySQL
     const editarCatalogoImagenes = async (e) => {
         try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo,Cab_nItem:Cab_nItem,Cab_cEnlace:Cab_cEnlace}
+            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem: Cab_nItem, Cab_cEnlace: Cab_cEnlace }
             await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
                 (res) => {
                     setData(res[0]);
@@ -77,7 +77,13 @@ const EditaCatalogoImagenes = (props) => {
                     console.log(error)
                     setError(error);
                 }
-            )
+            );
+
+            alert('El registro fue actualizado');
+
+        } catch (error) {
+            alert(error);
+
         } finally {
             history.push({
                 pathname: '/MantCatalogoImagenes'
@@ -161,15 +167,15 @@ const EditaCatalogoImagenes = (props) => {
                                 id="familia"
                                 variant="standard"
                             />
-                           
-                           <TextField
+
+                            <TextField
                                 label="Item"
                                 value={Cab_nItem}
                                 onChange={(e) => setItem(e.target.value)}
                                 name="textformat"
                                 id="Item"
                                 variant="standard"
-                            />                           
+                            />
                             <TextField
                                 label="Enlace"
                                 value={Cab_cEnlace}
@@ -177,7 +183,7 @@ const EditaCatalogoImagenes = (props) => {
                                 name="textformat"
                                 id="Enlace"
                                 variant="standard"
-                            />                           
+                            />
 
                         </Grid>
 

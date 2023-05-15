@@ -65,29 +65,31 @@ const ListaEvento = (props) => {
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
   const eliminar = async (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov) => {
-    try {
-      let _result;
-      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov })
+    if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
+      try {
+        let _result;
+        let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov })
 
-      await eventoService.obtenerEventosCabAuth(_body).then(
-        (res) => {
-          _result = res;
-        },
-        (error) => {
-          console.log(error);
+        await eventoService.obtenerEventosCabAuth(_body).then(
+          (res) => {
+            _result = res;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        if (_result.error) {
+          throw _result.error;
         }
-      );
 
-      if (_result.error) {
-        throw _result.error;
+        alert('El registro fue eliminado');
+
+        listar();
+
+      } catch (error) {
+        alert(error);
       }
-
-      alert('El registro fue eliminado');
-
-      listar();
-
-    } catch (error) {
-      alert(error);
     }
   };
 
