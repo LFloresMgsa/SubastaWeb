@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, Component } from 'react';
-import ListaEventoDet from '../Mantenimientos/EventoDet/ListaEventoDet';
+import ListaEventoDet from '../components/mantenimientos/EventoDet/ListaEventoDet';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 

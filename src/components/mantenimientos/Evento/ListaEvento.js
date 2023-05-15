@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { eventoService } from '../../services/evento.service';
+import { eventoService } from '../../../services/evento.service';
 
 
 
@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ListaEventoPuja = (props) => {
+const ListaEvento = (props) => {
 
   const history = useHistory();
   const [data, setData] = useState([]);
@@ -52,7 +52,7 @@ const ListaEventoPuja = (props) => {
   const listar = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
 
-    return await eventoService.obtenerEventosDetPujaAuth(_body).then(
+    return await eventoService.obtenerEventosCabAuth(_body).then(
       (res) => {
         setData(res[0]);
       },
@@ -64,13 +64,13 @@ const ListaEventoPuja = (props) => {
 
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
-  const eliminar = async (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov, Cab_cCatalogo, Dvd_nCorrel) => {
+  const eliminar = async (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov) => {
     if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
       try {
         let _result;
-        let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nCorrel: Dvd_nCorrel })
+        let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov })
 
-        await eventoService.obtenerEventosDetPujaAuth(_body).then(
+        await eventoService.obtenerEventosCabAuth(_body).then(
           (res) => {
             _result = res;
           },
@@ -96,9 +96,9 @@ const ListaEventoPuja = (props) => {
 
 
   // procedimiento para EDITAR un catalogo con SP MySQL
-  const editar = (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov, Cab_cCatalogo, Dvd_nCorrel) => {
+  const editar = (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov) => {
     history.push({
-      pathname: `/editareventodetpuja/${Emp_cCodigo}/${Pan_cAnio}/${Per_cPeriodo}/${Dvm_cNummov}/${Cab_cCatalogo}/${Dvd_nCorrel}`,
+      pathname: `/editarevento/${Emp_cCodigo}/${Pan_cAnio}/${Per_cPeriodo}/${Dvm_cNummov}`,
       state: { props }
     });
   }
@@ -106,7 +106,7 @@ const ListaEventoPuja = (props) => {
   // procedimiento para CREAR un catalogo con SP MySQL
   const crear = () => {
     history.push({
-      pathname: '/creareventodetpuja',
+      pathname: '/crearevento',
       state: { props }
     });
   }
@@ -145,17 +145,11 @@ const ListaEventoPuja = (props) => {
                           <StyledTableCell align="right">Año</StyledTableCell>
                           <StyledTableCell align="center">Periodo</StyledTableCell>
                           <StyledTableCell align="left">Movimiento</StyledTableCell>
-                          <StyledTableCell align="left">Catalogo</StyledTableCell>
-                          <StyledTableCell align="left">Correl</StyledTableCell>
-                          <StyledTableCell align="left">Doc ID</StyledTableCell>
-                          <StyledTableCell align="left">Nombres</StyledTableCell>
-
-                          <StyledTableCell align="left">Apellidos</StyledTableCell>
-                          <StyledTableCell align="left">Telefono</StyledTableCell>
-                          <StyledTableCell align="left">Correo</StyledTableCell>
-                          <StyledTableCell align="left">Importe</StyledTableCell>
+                          <StyledTableCell align="left">Tipo</StyledTableCell>
+                          <StyledTableCell align="left">Descripción</StyledTableCell>
+                          <StyledTableCell align="left">Inicio</StyledTableCell>
+                          <StyledTableCell align="left">Fin</StyledTableCell>
                           <StyledTableCell align="left">Estado</StyledTableCell>
-                          <StyledTableCell align="left">Fecha</StyledTableCell>
 
                           <StyledTableCell align="left"></StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
@@ -169,20 +163,14 @@ const ListaEventoPuja = (props) => {
                             <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
                             <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
-                            <StyledTableCell align="center">{item.Dvd_nCorrel}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cDocID}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cNombres}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Vtt_cTipoEvento}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Dvm_cDescripcion}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Dvm_dInicio}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Dvm_dFin}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Dvm_cEstado}</StyledTableCell>
 
-                            <StyledTableCell align="left">{item.Dvd_cApellidos}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cTelefono}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cCorreo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_nImporte}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
-
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Eliminar</Button></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
@@ -203,4 +191,4 @@ const ListaEventoPuja = (props) => {
   )
 }
 
-export default ListaEventoPuja
+export default ListaEvento

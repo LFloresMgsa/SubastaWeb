@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect, Component } from 'react';
-import ListaCatalogoImagenes from '../Mantenimientos/CatalogoImagenes/ListaCatalogoImagenes';
+import ListaCatalogoImagenes from '../components/mantenimientos/CatalogoImagenes/ListaCatalogoImagenes';
+
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 

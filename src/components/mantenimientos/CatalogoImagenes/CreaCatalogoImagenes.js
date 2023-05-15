@@ -6,33 +6,32 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { eventoService } from '../../services/evento.service';
+import { eventoService } from '../../../services/evento.service';
 
 
-const CreaEvento = (props) => {
+const CreaCatalogoImagenes = (props) => {
 
     const history = useHistory();
     const [loading, setLoading] = useState([]);
     const [data, setData] = useState([]);
 
-    const [Emp_cCodigo, setEmpresa] = useState('')
-    const [Pan_cAnio, setAnio] = useState('')
-    const [Per_cPeriodo, setPeriodo] = useState('')
-    const [Dvm_cNummov, setMovimiento] = useState('')
-    const [Vtt_cTipoEvento, setTipoEvento] = useState('')
-    const [Dvm_cDescripcion, setDescripcion] = useState('')
-    const [Dvm_dInicio, setFinicio] = useState('')
-    const [Dvm_dFin, setFfin] = useState('')
-    const [Dvm_cEstado, setEstado] = useState('')   
 
-   
+    const [Emp_cCodigo, setEmpresa] = useState('')
+    const [Lgt_cCategoria, setCategoria] = useState('')
+    const [Lgt_cGrupo, setGrupo] = useState('')
+    const [Lgt_cClase, setClase] = useState('')
+    const [Lgt_cFamilia, setFamilia] = useState('')
+    const [Cab_cCatalogo, setCatalogo] = useState('')
+    const [Cab_nItem, setItem] = useState('')
+    const [Cab_cEnlace, setEnlace] = useState('')
+    
     
 
     // procedimiento para INSERTAR un catalogo con SP MySQL
-    const insertaEvento = async (e) => {
+    const insertaCatalogoImagenes = async (e) => {
         try {
-            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Vtt_cTipoEvento:Vtt_cTipoEvento,Dvm_cDescripcion:Dvm_cDescripcion,Dvm_dInicio:Dvm_dInicio,Dvm_dFin:Dvm_dFin,Dvm_cEstado:Dvm_cEstado}
-            await eventoService.obtenerEventosCabAuth(_body).then(
+            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo,Cab_nItem: Cab_nItem,Cab_cEnlace: Cab_cEnlace}
+            await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
               (res) => {
                 setData(res[0]);
               },
@@ -43,7 +42,7 @@ const CreaEvento = (props) => {
             )
         } finally {
             history.push({
-                pathname: '/MantEvento'
+                pathname: '/MantCatalogoImagenes'
             });
             setLoading(false);
         }
@@ -51,7 +50,7 @@ const CreaEvento = (props) => {
 
     const cancelar = async (e) => {
         history.push({
-            pathname: '/MantEvento'
+            pathname: '/MantCatalogoImagenes'
         });
         setLoading(false);
     }
@@ -70,7 +69,7 @@ const CreaEvento = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >CREA EVENTO:</h2>
+                        <h2 >CREA CATALOGO IMAGENES:</h2>
                     </div>
 
                     <Grid container spacing={2}>
@@ -84,74 +83,68 @@ const CreaEvento = (props) => {
                                 id="empresa"
                                 variant="standard"
                             />
-                            <TextField
-                                label="Año"
-                                value={Pan_cAnio}
-                                onChange={(e) => setAnio(e.target.value)}
-                                name="textformat"
-                                id="Año"
-                                variant="standard"
-                            />
-                            <TextField
-                                label="Periodo"
-                                value={Per_cPeriodo}
-                                onChange={(e) => setPeriodo(e.target.value)}
-                                name="textformat"
-                                id="Periodo"
-                                variant="standard"
-                            />
-                            <TextField
-                                label="Movimiento"
-                                value={Dvm_cNummov}
-                                onChange={(e) => setMovimiento(e.target.value)}
-                                name="textformat"
-                                id="Movimiento"
-                                variant="standard"
-                            />
 
                             <TextField
-                                label="Tipo Evento"
-                                value={Vtt_cTipoEvento}
-                                onChange={(e) => setTipoEvento(e.target.value)}
+                                label="Categoria"
+                                value={Lgt_cCategoria}
+                                onChange={(e) => setCategoria(e.target.value)}
                                 name="textformat"
-                                id="Tipo Evento"
+                                id="categoria"
                                 variant="standard"
                             />
 
 
                             <TextField
-                                label="Descripción"
-                                value={Dvm_cDescripcion}
-                                onChange={(e) => setDescripcion(e.target.value)}
+                                label="Grupo"
+                                value={Lgt_cGrupo}
+                                onChange={(e) => setGrupo(e.target.value)}
                                 name="textformat"
-                                id="Descripción"
+                                id="grupo"
                                 variant="standard"
                             />
 
                             <TextField
-                                label="Fecha Inicio"
-                                value={Dvm_dInicio}
-                                onChange={(e) => setFinicio(e.target.value)}
+                                label="Clase"
+                                value={Lgt_cClase}
+                                onChange={(e) => setClase(e.target.value)}
                                 name="textformat"
-                                id="Fecha Inicio"
+                                id="clase"
                                 variant="standard"
                             />
                             <TextField
-                                label="Fecha Fin"
-                                value={Dvm_dFin}
-                                onChange={(e) => setFfin(e.target.value)}
+                                label="Familia"
+                                value={Lgt_cFamilia}
+                                onChange={(e) => setFamilia(e.target.value)}
                                 name="textformat"
-                                id="Fecha Fin"
+                                id="familia"
                                 variant="standard"
                             />
-                             <TextField
-                                label="Estado"
-                                value={Dvm_cEstado}
-                                onChange={(e) => setEstado(e.target.value)}
+
+                            <TextField
+                                label="Catalogo"
+                                value={Cab_cCatalogo}
+                                onChange={(e) => setCatalogo(e.target.value)}
                                 name="textformat"
-                                id="Estado"
+                                id="catalogo"
                                 variant="standard"
-                            />                            
+                            />
+
+                            <TextField
+                                label="Item"
+                                value={Cab_nItem}
+                                onChange={(e) => setItem(e.target.value)}
+                                name="textformat"
+                                id="Item"
+                                variant="standard"
+                            />                           
+                            <TextField
+                                label="Enlace"
+                                value={Cab_cEnlace}
+                                onChange={(e) => setEnlace(e.target.value)}
+                                name="textformat"
+                                id="Enlace"
+                                variant="standard"
+                            />                           
 
                         </Grid>
 
@@ -163,7 +156,7 @@ const CreaEvento = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                        <Button variant="contained" size="small" color="primary" onClick={insertaEvento}>Crear</Button>
+                                        <Button variant="contained" size="small" color="primary" onClick={insertaCatalogoImagenes}>Crear</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
@@ -180,4 +173,4 @@ const CreaEvento = (props) => {
     )
 }
 
-export default CreaEvento
+export default CreaCatalogoImagenes

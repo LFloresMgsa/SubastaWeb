@@ -6,39 +6,41 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { eventoService } from '../../services/evento.service';
+import { eventoService } from '../../../services/evento.service';
 
-const EditaCatalogoImagenes = (props) => {
+const EditaVideoteca = (props) => {
     const history = useHistory()
     const [data, setData] = useState([])
     const [error, setError] = useState([])
     const [loading, setLoading] = useState([])
-
-    const [Lgt_cCategoria, setCategoria] = useState('')
-    const [Lgt_cGrupo, setGrupo] = useState('')
-    const [Lgt_cClase, setClase] = useState('')
-    const [Lgt_cFamilia, setFamilia] = useState('')
-
-    const [Cab_nItem, setItem] = useState('')
-    const [Cab_cEnlace, setEnlace] = useState('')
+     
+    // const [Lgt_nIndice, setIndice] = useState('')
+    const [Lgt_cURL, setURL] = useState('')
+    const [Lgt_cTitulo, setTitulo] = useState('')
+    const [Lgt_cComentario, setComentario] = useState('')
+    const [Lgt_cEstado, setEstado] = useState('')
+    const [Lgt_dFechaCrea, setFecha] = useState('')
 
 
     const { Emp_cCodigo } = useParams()
-    const { Cab_cCatalogo } = useParams()
+    const { Lgt_nIndice } = useParams()
+    
+
+   
 
     // Load de Pagina
     useEffect(() => {
 
-        obtenerCatalogoImagenes()
+        obtenerVideoteca()
     }, [])
 
     // procedimiento para CONSULTA un catalogo con SP MySQL
-    const obtenerCatalogoImagenes = async () => {
+    const obtenerVideoteca = async () => {
         try {
             let _result;
-            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo }
+            let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Lgt_nIndice: Lgt_nIndice}
 
-            await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
+            await eventoService.obtenerVideosAuth(_body).then(
                 (res) => {
                     setData(res[0]);
                     _result = res[0];
@@ -50,13 +52,13 @@ const EditaCatalogoImagenes = (props) => {
             )
 
             _result.map((item) => (
-                setCategoria(item.Lgt_cCategoria),
-                setGrupo(item.Lgt_cGrupo),
-                setClase(item.Lgt_cClase),
-                setFamilia(item.Lgt_cFamilia),
-                setItem(item.Cab_nItem),
-                setEnlace(item.Cab_cEnlace)
-
+                
+                setURL(item.Lgt_cURL),
+                setTitulo(item.Lgt_cTitulo),
+                setComentario(item.Lgt_cComentario),
+                setEstado(item.Lgt_cEstado),
+                setFecha(item.Lgt_dFechaCrea)
+                               
             ))
 
         } finally {
@@ -66,10 +68,10 @@ const EditaCatalogoImagenes = (props) => {
 
 
     // procedimiento para EDITAR un catalogo con SP MySQL
-    const editarCatalogoImagenes = async (e) => {
+    const editarVideoteca = async (e) => {
         try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem: Cab_nItem, Cab_cEnlace: Cab_cEnlace }
-            await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
+            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_nIndice: Lgt_nIndice, Lgt_cURL: Lgt_cURL, Lgt_cTitulo: Lgt_cTitulo, Lgt_cComentario: Lgt_cComentario, Lgt_cEstado: Lgt_cEstado}
+            await eventoService.obtenerVideosAuth(_body).then(
                 (res) => {
                     setData(res[0]);
                 },
@@ -79,14 +81,16 @@ const EditaCatalogoImagenes = (props) => {
                 }
             );
 
+
             alert('El registro fue actualizado');
 
         } catch (error) {
             alert(error);
 
+            
         } finally {
             history.push({
-                pathname: '/MantCatalogoImagenes'
+                pathname: '/MantVideoteca'
             });
             setLoading(false);
         }
@@ -94,7 +98,7 @@ const EditaCatalogoImagenes = (props) => {
 
     const cancelar = async (e) => {
         history.push({
-            pathname: '/MantCatalogoImagenes'
+            pathname: '/MantVideoteca'
         });
         setLoading(false);
     }
@@ -115,7 +119,7 @@ const EditaCatalogoImagenes = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA CATALOGO IMAGENES:</h2>
+                        <h2 >EDITA VIDEOTECA:</h2>
                     </div>
 
                     <Grid container spacing={2}>
@@ -123,68 +127,52 @@ const EditaCatalogoImagenes = (props) => {
                         <Grid item xs={8}>
 
                             <TextField
-                                label="Catalogo"
-                                value={Cab_cCatalogo}
-                                onChange={(e) => setCategoria(e.target.value)}
+                               
+                                label="Indice"
+                                value={Lgt_nIndice}
+                                onChange={(e) => setIndice(e.target.value)}
                                 name="textformat"
-                                id="catalogo"
+                                id="Indice"
                                 variant="standard"
                                 disabled="true"
                             />
 
-                            <TextField
-                                label="Categoria"
-                                value={Lgt_cCategoria}
-                                onChange={(e) => setCategoria(e.target.value)}
-                                name="textformat"
-                                id="Categoria"
-                                variant="standard"
-                            />
-
 
                             <TextField
-                                label="Grupo"
-                                value={Lgt_cGrupo}
-                                onChange={(e) => setGrupo(e.target.value)}
+                                label="Url"
+                                value={Lgt_cURL}
+                                onChange={(e) => setURL(e.target.value)}
                                 name="textformat"
-                                id="grupo"
+                                id="Url"
                                 variant="standard"
                             />
 
                             <TextField
-                                label="Clase"
-                                value={Lgt_cClase}
-                                onChange={(e) => setClase(e.target.value)}
+                                label="Titulo"
+                                value={Lgt_cTitulo}
+                                onChange={(e) => setTitulo(e.target.value)}
                                 name="textformat"
-                                id="clase"
+                                id="Titulo"
                                 variant="standard"
                             />
                             <TextField
-                                label="Familia"
-                                value={Lgt_cFamilia}
-                                onChange={(e) => setFamilia(e.target.value)}
+                                label="Comentario"
+                                value={Lgt_cComentario}
+                                onChange={(e) => setComentario(e.target.value)}
                                 name="textformat"
-                                id="familia"
+                                id="Comentario"
                                 variant="standard"
                             />
 
                             <TextField
-                                label="Item"
-                                value={Cab_nItem}
-                                onChange={(e) => setItem(e.target.value)}
+                                label="Estado"
+                                value={Lgt_cEstado}
+                                onChange={(e) => setEstado(e.target.value)}
                                 name="textformat"
-                                id="Item"
+                                id="Estado"
                                 variant="standard"
                             />
-                            <TextField
-                                label="Enlace"
-                                value={Cab_cEnlace}
-                                onChange={(e) => setEnlace(e.target.value)}
-                                name="textformat"
-                                id="Enlace"
-                                variant="standard"
-                            />
-
+                            
                         </Grid>
 
                     </Grid>
@@ -195,7 +183,7 @@ const EditaCatalogoImagenes = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={editarCatalogoImagenes}>Actualizar</Button>
+                                            <Button variant="contained" size="small" color="primary" onClick={editarVideoteca}>Actualizar</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
@@ -213,4 +201,4 @@ const EditaCatalogoImagenes = (props) => {
 
 }
 
-export default EditaCatalogoImagenes
+export default EditaVideoteca

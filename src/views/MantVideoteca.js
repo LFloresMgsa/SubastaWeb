@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, Component } from 'react';
-import ListaVideoteca from '../Mantenimientos/Videoteca/ListaVideoteca';
+import ListaVideoteca from '../components/mantenimientos/Videoteca/ListaVideoteca';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 

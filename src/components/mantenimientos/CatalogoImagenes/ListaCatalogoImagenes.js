@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { eventoService } from '../../services/evento.service';
+import { eventoService } from '../../../services/evento.service';
 
 
 
@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ListaEvento = (props) => {
+const ListaCatalogoImagenes = (props) => {
 
   const history = useHistory();
   const [data, setData] = useState([]);
@@ -52,7 +52,7 @@ const ListaEvento = (props) => {
   const listar = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
 
-    return await eventoService.obtenerEventosCabAuth(_body).then(
+    return await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
       (res) => {
         setData(res[0]);
       },
@@ -64,13 +64,13 @@ const ListaEvento = (props) => {
 
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
-  const eliminar = async (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov) => {
+  const eliminar = async (Emp_cCodigo, Cab_cCatalogo, Cab_nItem) => {
     if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
       try {
         let _result;
-        let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov })
+        let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem: Cab_nItem })
 
-        await eventoService.obtenerEventosCabAuth(_body).then(
+        await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
           (res) => {
             _result = res;
           },
@@ -96,9 +96,9 @@ const ListaEvento = (props) => {
 
 
   // procedimiento para EDITAR un catalogo con SP MySQL
-  const editar = (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov) => {
+  const editar = (Emp_cCodigo, Cab_cCatalogo, Cab_nItem) => {
     history.push({
-      pathname: `/editarevento/${Emp_cCodigo}/${Pan_cAnio}/${Per_cPeriodo}/${Dvm_cNummov}`,
+      pathname: `/editarcatalogoimagenes/${Emp_cCodigo}/${Cab_cCatalogo}/${Cab_nItem}`,
       state: { props }
     });
   }
@@ -106,7 +106,7 @@ const ListaEvento = (props) => {
   // procedimiento para CREAR un catalogo con SP MySQL
   const crear = () => {
     history.push({
-      pathname: '/crearevento',
+      pathname: '/crearcatalogoimagenes',
       state: { props }
     });
   }
@@ -142,15 +142,15 @@ const ListaEvento = (props) => {
                         <TableRow>
 
                           <StyledTableCell align="right">Empresa</StyledTableCell>
-                          <StyledTableCell align="right">Año</StyledTableCell>
-                          <StyledTableCell align="center">Periodo</StyledTableCell>
-                          <StyledTableCell align="left">Movimiento</StyledTableCell>
-                          <StyledTableCell align="left">Tipo</StyledTableCell>
-                          <StyledTableCell align="left">Descripción</StyledTableCell>
-                          <StyledTableCell align="left">Inicio</StyledTableCell>
-                          <StyledTableCell align="left">Fin</StyledTableCell>
-                          <StyledTableCell align="left">Estado</StyledTableCell>
+                          <StyledTableCell align="right">Categoria</StyledTableCell>
+                          <StyledTableCell align="center">Grupo</StyledTableCell>
+                          <StyledTableCell align="left">Clase</StyledTableCell>
 
+                          <StyledTableCell align="left">Familia</StyledTableCell>
+                          <StyledTableCell align="left">Catalogo</StyledTableCell>
+
+                          <StyledTableCell align="left">Item</StyledTableCell>
+                          <StyledTableCell align="left">Enlace</StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                         </TableRow>
@@ -160,17 +160,17 @@ const ListaEvento = (props) => {
                           <StyledTableRow item={item} key={idx}>
 
                             <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                            <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Vtt_cTipoEvento}</StyledTableCell>
-                            <StyledTableCell align="center">{item.Dvm_cDescripcion}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_dInicio}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_dFin}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_cEstado}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Lgt_cGrupo}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Lgt_cClase}</StyledTableCell>
 
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Eliminar</Button></StyledTableCell>
+                            <StyledTableCell align="right">{item.Lgt_cFamilia}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Cab_nItem}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Cab_cEnlace}</StyledTableCell>
+
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Cab_cCatalogo, item.Cab_nItem)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo, item.Cab_nItem)} >Eliminar</Button></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
@@ -191,4 +191,4 @@ const ListaEvento = (props) => {
   )
 }
 
-export default ListaEvento
+export default ListaCatalogoImagenes

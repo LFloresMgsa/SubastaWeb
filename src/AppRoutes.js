@@ -19,24 +19,24 @@ import Login from './views/Login';
 import Logout from './views/Logout';
 
 
-import CreaCatalogo from './Mantenimientos/Catalogo/CreaCatalogo';
-import EditaCatalogo from './Mantenimientos/Catalogo/EditaCatalogo';
+import CreaCatalogo from './components/mantenimientos/Catalogo/CreaCatalogo';
+import EditaCatalogo from './components/mantenimientos/Catalogo/EditaCatalogo';
 
 
-import CreaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/CreaCatalogoImagenes';
-import EditaCatalogoImagenes from './Mantenimientos/CatalogoImagenes/EditaCatalogoImagenes';
+import CreaCatalogoImagenes from './components/mantenimientos/CatalogoImagenes/CreaCatalogoImagenes';
+import EditaCatalogoImagenes from './components/mantenimientos/CatalogoImagenes/EditaCatalogoImagenes';
 
-import CreaVideoteca from './Mantenimientos/Videoteca/CreaVideoteca';
-import EditaVideoteca from './Mantenimientos/Videoteca/EditaVideoteca';
+import CreaVideoteca from './components/mantenimientos/Videoteca/CreaVideoteca';
+import EditaVideoteca from './components/mantenimientos/Videoteca/EditaVideoteca';
 
-import CreaEvento from './Mantenimientos/Evento/CreaEvento';
-import EditaEvento from './Mantenimientos/Evento/EditaEvento';
+import CreaEvento from './components/mantenimientos/Evento/CreaEvento';
+import EditaEvento from './components/mantenimientos/Evento/EditaEvento';
 
-import CreaEventoDet from './Mantenimientos/EventoDet/CreaEventoDet';
-import EditaEventoDet from './Mantenimientos/EventoDet/EditaEventoDet';
+import CreaEventoDet from './components/mantenimientos/EventoDet/CreaEventoDet';
+import EditaEventoDet from './components/mantenimientos/EventoDet/EditaEventoDet';
 
-import CreaEventoDetPuja from './Mantenimientos/EventoPuja/CreaEventoPuja';
-import EditaEventoDetPuja from './Mantenimientos/EventoPuja/EditaEventoPuja';
+import CreaEventoDetPuja from './components/mantenimientos/EventoPuja/CreaEventoPuja';
+import EditaEventoDetPuja from './components/mantenimientos/EventoPuja/EditaEventoPuja';
 
 
 const AppRoutes = (props) => {

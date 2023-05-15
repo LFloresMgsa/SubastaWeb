@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, Component } from 'react';
-import ListaEventoDetPuja from '../Mantenimientos/EventoPuja/ListaEventoPuja';
+import ListaEventoDetPuja from '../components/mantenimientos/EventoPuja/ListaEventoPuja';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
