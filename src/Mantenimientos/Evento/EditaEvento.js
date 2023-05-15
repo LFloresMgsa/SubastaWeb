@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { eventoService } from '../../services/evento.service';
-import { general } from '../../general/general'
+import { general } from '../../components/general/general'
 
 const EditaEvento = (props) => {
     const history = useHistory()
