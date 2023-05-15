@@ -46,9 +46,8 @@ const Item = (props) => {
 
 
     const handleVerDetalle = () => {
-
         if (props.IndicePanel == 0) {
-            history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}`);
+            history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
         }
         else {
             handleClickOpenMsg();

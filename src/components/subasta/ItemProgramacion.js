@@ -9,7 +9,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
 import { eventoService } from '../../services/evento.service';
-import ItemSubasta from '../../components/marco/ItemSubasta';
+import ItemSubasta from '../../components/subasta/ItemSubasta';
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -79,7 +79,7 @@ const Itemprogramacion = (props) => {
 
                 </ImageListItem>
                 {subastas.map((subasta) => (
-                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} />
+                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo}/>
                 ))}
 
             </ImageList>

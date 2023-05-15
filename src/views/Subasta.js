@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import ItemProgramacion from '../components/marco/ItemProgramacion';
-import Bases from '../components/marco/Bases';
+import ItemProgramacion from '../components/subasta/ItemProgramacion';
+import Bases from '../components/subasta/bases';
 import Button from '@mui/material/Button';
 import { eventoService } from '../services/evento.service';
 

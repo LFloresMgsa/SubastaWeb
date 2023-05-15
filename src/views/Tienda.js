@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import { css, useTheme } from 'styled-components';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import ItemProgramacionTienda from '../components/marco/ItemProgramacionTienda';
+import ItemProgramacionTienda from '../components/tienda/ItemProgramacionTienda';
 import { eventoService } from '../services/evento.service';
 
 

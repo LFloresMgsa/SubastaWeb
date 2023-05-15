@@ -25,6 +25,7 @@ import InputLabel from '@mui/material/InputLabel';
 
 import FormControl from '@mui/material/FormControl';
 import { eventoService } from '../../services/evento.service';
+import CustomAlert from '../mensajes/CustomAlert';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -90,14 +91,15 @@ const ItemContacto = (props) => {
     const [ppuja, setPuja] = useState(0)
 
     const [subastasPuja, setSubastasPuja] = React.useState([]);
+    const [subastasPujaGrabar, setSubastasPujaGrabar] = React.useState([]);
 
 
     const [disabledPujar, setDisabledPujar] = useState(false)
 
 
-    const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
+    const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
-            Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo: "04", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
+            Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo: pPer_cPeriodo, Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
             Dvd_nCorrel: 0, Dvd_cDocID: pDvd_cDocID, Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos,
             Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: ppuja, Dvd_cEstado: "A", Dvd_dFechaPuja: "2023-04-26"
         }
@@ -130,10 +132,38 @@ const ItemContacto = (props) => {
         );
     };
 
-    const handleGrabarSubasta = async () => {
+    //#region Alerta
+    // const [alertOpen, setAlertOpen] = useState(false);
 
-        grabarPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
-        obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
+    // const handleAlertOpen = () => {
+    //     setAlertOpen(true);
+    // };
+    // const handleAlertClose = () => {
+    //     setAlertOpen(false);
+    // };
+    //#endregion
+
+    //#region Alerta de confirmacion
+
+    const [confirmOpen, setConfirmOpen] = useState(false);
+
+    const handleConfirmOpen = () => {
+        setConfirmOpen(true);
+    };
+
+    const handleConfirmClose = (result) => {
+        if (result) {
+            handleGrabarSubasta();
+        }
+
+        setConfirmOpen(false);
+    };
+
+    //#endregion
+
+    const handleGrabarSubasta = async () => {
+        await grabarPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
+        await obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
     }
 
     const handleRegresarSubasta = () => {
@@ -178,10 +208,23 @@ const ItemContacto = (props) => {
 
     return (
         <div >
+            {/* <CustomAlert
+                type="alert"
+                message="¡Esto es una alerta personalizada!"
+                open={alertOpen}
+                onClose={handleAlertClose}
+            /> */}
+            <CustomAlert
+                type="confirm"
+                message="¿Deseas confirmar la Puja?"
+                open={confirmOpen}
+                onClose={handleConfirmClose}
+            />
+
             <Box sx={{ flexGrow: 1 }}>
 
 
-                <Paper 
+                <Paper
                     sx={{
                         p: 2,
                         margin: 1,
@@ -269,7 +312,9 @@ const ItemContacto = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={handleGrabarSubasta} disabled={disabledPujar} >Pujar</Button>
+
+                                            <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen} disabled={disabledPujar} >Pujar</Button>
+
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>

@@ -116,7 +116,7 @@ const AppRoutes = (props) => {
 
       <Route
         exact
-        path="/subasta/detalle/:Cab_cCatalogo/:Dvm_cNummov/:IndicePanel"
+        path="/subasta/detalle/:Cab_cCatalogo/:Dvm_cNummov/:IndicePanel/:Per_cPeriodo"
         render={(route) => <SubastaDetalle {...props} {...route} />}
       />
 

@@ -98,7 +98,7 @@ const ItemDetalle = (props) => {
 
 
 
-        console.log(detalle);
+      //  console.log(detalle);
     }, [detalle]);
 
 
