@@ -12,8 +12,10 @@ import { eventoService } from '../../services/evento.service';
 const CreaCatalogo = (props) => {
 
     const history = useHistory();
+    const [loading, setLoading] = useState([]);
+    const [data, setData] = useState([]);
 
-
+    
     const [Emp_cCodigo, setEmpresa] = useState('')
     const [Lgt_cCategoria, setCategoria] = useState('')
     const [Lgt_cGrupo, setGrupo] = useState('')

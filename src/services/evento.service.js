@@ -1,24 +1,25 @@
 
+import { Try } from '@mui/icons-material';
 import { authHeader, handleResponse } from '../helpers';
 import Fetch from '../helpers/Fetch';
 
 export const eventoService = {
-    obtenerEventosCab,
-    obtenerEventosDet,
-    obtenerEventosDetPuja,
-    obtenerCatalogoDetImagenes,
-    obtenerVideos,
-    obtenerCatalogo,
-    obtenerImagenes,
-    obtenerUsuario,
-    obtenerToken,
+  obtenerEventosCab,
+  obtenerEventosDet,
+  obtenerEventosDetPuja,
+  obtenerCatalogoDetImagenes,
+  obtenerVideos,
+  obtenerCatalogo,
+  obtenerImagenes,
+  obtenerUsuario,
+  obtenerToken,
 
-    obtenerEventosCabAuth,
-    obtenerEventosDetAuth,
-    obtenerEventosDetPujaAuth,
-    obtenerCatalogoDetImagenesAuth,
-    obtenerVideosAuth,
-    obtenerCatalogoAuth,
+  obtenerEventosCabAuth,
+  obtenerEventosDetAuth,
+  obtenerEventosDetPujaAuth,
+  obtenerCatalogoDetImagenesAuth,
+  obtenerVideosAuth,
+  obtenerCatalogoAuth,
 
 };
 
@@ -26,7 +27,7 @@ export const eventoService = {
 
 function obtenerEventosCab(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/vtm_evento`;
   return Fetch.post(url, params, options).then((res) =>
@@ -36,7 +37,7 @@ function obtenerEventosCab(dataJson) {
 
 function obtenerEventosDet(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/vtd_evento`;
   return Fetch.post(url, params, options).then((res) =>
@@ -46,7 +47,7 @@ function obtenerEventosDet(dataJson) {
 
 function obtenerEventosDetPuja(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/vtd_evento_puja`;
   return Fetch.post(url, params, options).then((res) =>
@@ -56,7 +57,7 @@ function obtenerEventosDetPuja(dataJson) {
 
 function obtenerCatalogoDetImagenes(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgd_catalogo_imagenes`;
   return Fetch.post(url, params, options).then((res) =>
@@ -66,7 +67,7 @@ function obtenerCatalogoDetImagenes(dataJson) {
 
 function obtenerCatalogo(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgm_catalogo_bs`;
   return Fetch.post(url, params, options).then((res) =>
@@ -76,7 +77,7 @@ function obtenerCatalogo(dataJson) {
 
 function obtenerVideos(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgm_videoteca`;
   return Fetch.post(url, params, options).then((res) =>
@@ -86,7 +87,7 @@ function obtenerVideos(dataJson) {
 
 function obtenerImagenes(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgm_imagenes`;
   return Fetch.post(url, params, options).then((res) =>
@@ -97,7 +98,7 @@ function obtenerImagenes(dataJson) {
 
 function obtenerUsuario(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/sgm_usuarios`;
   return Fetch.post(url, params, options).then((res) =>
@@ -107,7 +108,7 @@ function obtenerUsuario(dataJson) {
 
 function obtenerToken(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/auth`;
   return Fetch.post(url, params, options).then((res) =>
@@ -119,7 +120,7 @@ function obtenerToken(dataJson) {
 
 function obtenerEventosCabAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/vtm_evento/auth`;
   return Fetch.post(url, params, options).then((res) =>
@@ -129,7 +130,7 @@ function obtenerEventosCabAuth(dataJson) {
 
 function obtenerEventosDetAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/vtd_evento/auth`;
   return Fetch.post(url, params, options).then((res) =>
@@ -139,7 +140,7 @@ function obtenerEventosDetAuth(dataJson) {
 
 function obtenerEventosDetPujaAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/vtd_evento_puja/auth`;
   return Fetch.post(url, params, options).then((res) =>
@@ -149,7 +150,7 @@ function obtenerEventosDetPujaAuth(dataJson) {
 
 function obtenerCatalogoDetImagenesAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgd_catalogo_imagenes/auth`;
   return Fetch.post(url, params, options).then((res) =>
@@ -158,8 +159,9 @@ function obtenerCatalogoDetImagenesAuth(dataJson) {
 }
 
 function obtenerCatalogoAuth(dataJson) {
+
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgm_catalogo_bs/auth`;
   return Fetch.post(url, params, options).then((res) =>
@@ -169,7 +171,7 @@ function obtenerCatalogoAuth(dataJson) {
 
 function obtenerVideosAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
-  const params = { }; 
+  const params = {};
 
   const url = `/api/evento/lgm_videoteca/auth`;
   return Fetch.post(url, params, options).then((res) =>

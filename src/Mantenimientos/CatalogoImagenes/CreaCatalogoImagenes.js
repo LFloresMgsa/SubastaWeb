@@ -12,6 +12,8 @@ import { eventoService } from '../../services/evento.service';
 const CreaCatalogoImagenes = (props) => {
 
     const history = useHistory();
+    const [loading, setLoading] = useState([]);
+    const [data, setData] = useState([]);
 
 
     const [Emp_cCodigo, setEmpresa] = useState('')

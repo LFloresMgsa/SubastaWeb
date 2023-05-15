@@ -43,13 +43,14 @@ const ListaCatalogo = (props) => {
   const [loading, setLoading] = useState([]);
   const [dataDelete, setDataDelete] = useState([]);
 
+
   // Load de pagina
   useEffect(() => {
-    obtenerCatalogos();
+    listar();
   }, []);
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
-  const obtenerCatalogos = async () => {
+  const listar = async () => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
 
     return await eventoService.obtenerCatalogoAuth(_body).then(
@@ -58,33 +59,43 @@ const ListaCatalogo = (props) => {
       },
       (error) => {
         console.log(error);
-        
+
       }
     );
   };
 
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
-  const eliminaCatalogo = async (Emp_cCodigo, Cab_cCatalogo) => {
+  const eliminar = async (Emp_cCodigo, Cab_cCatalogo) => {
+    try {
+      let _result;
+      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo })
 
-    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo })
+      await eventoService.obtenerCatalogoAuth(_body).then(
+        (res) => {
+          _result = res;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-     await eventoService.obtenerCatalogoAuth(_body).then(
-      (res) => {
-        setDataDelete(res[0]);
-      },
-      (error) => {
-        console.log(error);
+      if (_result.error) {
+        throw _result.error;
       }
-    );
 
-    obtenerCatalogos();
+      alert('El registro fue eliminado');
+      listar();
+
+    } catch (error) {
+      alert(error);
+    }
   };
 
 
 
   // procedimiento para EDITAR un catalogo con SP MySQL
-  const editarCatalogo = (Emp_cCodigo, Cab_cCatalogo) => {
+  const editar = (Emp_cCodigo, Cab_cCatalogo) => {
     history.push({
       pathname: `/editar/${Emp_cCodigo}/${Cab_cCatalogo}`,
       state: { props }
@@ -92,7 +103,7 @@ const ListaCatalogo = (props) => {
   }
 
   // procedimiento para CREAR un catalogo con SP MySQL
-  const crearCatalogo = () => {
+  const crear = () => {
     history.push({
       pathname: '/crear',
       state: { props }
@@ -118,7 +129,7 @@ const ListaCatalogo = (props) => {
               <tr>
                 <td>
                   <Button variant="contained" size="small" color="primary"
-                    onClick={() => crearCatalogo()} >Nuevo
+                    onClick={() => crear()} >Nuevo
                   </Button>
                 </td>
               </tr>
@@ -163,8 +174,8 @@ const ListaCatalogo = (props) => {
                             <StyledTableCell align="right">{item.Madre}</StyledTableCell>
                             <StyledTableCell align="center">{item.Info}</StyledTableCell>
                             <StyledTableCell align="left">{item.Placa}</StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editarCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminaCatalogo(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>

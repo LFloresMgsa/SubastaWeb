@@ -50,7 +50,7 @@ const ListaEventoPuja = (props) => {
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const listar = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015"  }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
 
     return await eventoService.obtenerEventosDetPujaAuth(_body).then(
       (res) => {
@@ -64,26 +64,37 @@ const ListaEventoPuja = (props) => {
 
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
-  const eliminar = async (Emp_cCodigo, Pan_cAnio,Per_cPeriodo,Dvm_cNummov,Cab_cCatalogo,Dvd_nCorrel) => {
+  const eliminar = async (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov, Cab_cCatalogo, Dvd_nCorrel) => {
+    try {
+      let _result;
+      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nCorrel: Dvd_nCorrel })
 
-    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo:Per_cPeriodo,Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo:Cab_cCatalogo, Dvd_nCorrel:Dvd_nCorrel })
+      await eventoService.obtenerEventosDetPujaAuth(_body).then(
+        (res) => {
+          _result = res;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-    await eventoService.obtenerEventosDetPujaAuth(_body).then(
-      (res) => {
-        setDataDelete(res[0]);
-      },
-      (error) => {
-        console.log(error);
+      if (_result.error) {
+        throw _result.error;
       }
-    );
 
-    listar();
+      alert('El registro fue eliminado');
+
+      listar();
+
+    } catch (error) {
+      alert(error);
+    }
   };
 
 
 
   // procedimiento para EDITAR un catalogo con SP MySQL
-  const editar = (Emp_cCodigo, Pan_cAnio,Per_cPeriodo,Dvm_cNummov,Cab_cCatalogo,Dvd_nCorrel) => {
+  const editar = (Emp_cCodigo, Pan_cAnio, Per_cPeriodo, Dvm_cNummov, Cab_cCatalogo, Dvd_nCorrel) => {
     history.push({
       pathname: `/editareventodetpuja/${Emp_cCodigo}/${Pan_cAnio}/${Per_cPeriodo}/${Dvm_cNummov}/${Cab_cCatalogo}/${Dvd_nCorrel}`,
       state: { props }
@@ -168,8 +179,8 @@ const ListaEventoPuja = (props) => {
                             <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
 
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo,item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo,item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Editar</Button></StyledTableCell>
+                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>

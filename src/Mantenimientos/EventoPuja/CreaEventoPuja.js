@@ -12,6 +12,8 @@ import { eventoService } from '../../services/evento.service';
 const CreaEventoPuja = (props) => {
 
     const history = useHistory();
+    const [loading, setLoading] = useState([]);
+    const [data, setData] = useState([]);
 
     const [Emp_cCodigo, setEmpresa] = useState('')
     const [Pan_cAnio, setAnio] = useState('')

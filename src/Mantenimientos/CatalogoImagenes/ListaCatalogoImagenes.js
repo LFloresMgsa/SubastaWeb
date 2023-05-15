@@ -65,19 +65,30 @@ const ListaCatalogoImagenes = (props) => {
 
   // procedimiento para ELIMINAR un catalogo con SP MySQL
   const eliminar = async (Emp_cCodigo, Cab_cCatalogo, Cab_nItem) => {
+    try {
+      let _result;
+      let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem: Cab_nItem })
 
-    let _body = ({ Accion: "ELIMINAR", Emp_cCodigo: Emp_cCodigo, Cab_cCatalogo: Cab_cCatalogo, Cab_nItem:Cab_nItem })
+      await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
+        (res) => {
+          _result = res;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-     await eventoService.obtenerCatalogoDetImagenesAuth(_body).then(
-      (res) => {
-        setDataDelete(res[0]);
-      },
-      (error) => {
-        console.log(error);
+      if (_result.error) {
+        throw _result.error;
       }
-    );
 
-    listar();
+      alert('El registro fue eliminado');
+
+      listar();
+
+    } catch (error) {
+      alert(error);
+    }
   };
 
 
@@ -143,8 +154,8 @@ const ListaCatalogoImagenes = (props) => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {data.map((item , idx) => (
-                          <StyledTableRow  item={item} key={idx}>
+                        {data.map((item, idx) => (
+                          <StyledTableRow item={item} key={idx}>
 
                             <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
                             <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
