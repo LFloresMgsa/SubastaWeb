@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
-import ItemCarousel from '../subasta/ItemCarousel';
+import ItemCarousel from './ItemCarouselTienda';
 
 import { eventoService } from '../../services/evento.service';
 
@@ -43,24 +43,6 @@ const style = {
     p: 4,
 };
 
-const obtenerImagenes = async (pCab_cCatalogo) => {
-    try {
-        const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015", Pan_cAnio: "", Cab_cCatalogo: pCab_cCatalogo };
-
-
-        const response = await eventoService.obtenerCatalogoDetImagenes(body);
-
-        if (!response || response.length === 0) {
-            throw new Error("Respuesta inválida de la API");
-        }
-
-        return response[0];
-
-    } catch (error) {
-        console.log(error);
-        throw error; // Lanzar el error para que el componente lo pueda manejar
-    }
-};
 
 
 const ItemProgramacionTienda = (
@@ -83,6 +65,8 @@ const ItemProgramacionTienda = (
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+
+
     const onAddProduct = product => {
         if (allProducts.find(item => item.Cab_cCatalogo === product.Cab_cCatalogo)) {
             const products = allProducts.map(item =>
@@ -100,8 +84,8 @@ const ItemProgramacionTienda = (
         setAllProducts([...allProducts, product]);
     };
 
-    const obtenerSubastaSlider = async () => {
-        return await obtenerImagenes(alltiendas.Cab_cCatalogo).then(
+    const obtenerSubastaSlider = async (pCab_cCatalogo) => {
+        return await obtenerImagenes(pCab_cCatalogo).then(
             (res) => {
 
                 setImagenesSlide(res)
@@ -114,6 +98,24 @@ const ItemProgramacionTienda = (
     };
 
 
+    const obtenerImagenes = async (pCab_cCatalogo) => {
+        try {
+            const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015", Pan_cAnio: "", Cab_cCatalogo: pCab_cCatalogo };
+
+
+            const response = await eventoService.obtenerCatalogoDetImagenes(body);
+
+            if (!response || response.length === 0) {
+                throw new Error("Respuesta inválida de la API");
+            }
+
+            return response[0];
+
+        } catch (error) {
+            console.log(error);
+            throw error; // Lanzar el error para que el componente lo pueda manejar
+        }
+    };
 
     const obtenerTiendaDetalle = async (pDvm_cNummov) => {
         let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov }
@@ -124,7 +126,7 @@ const ItemProgramacionTienda = (
             (res) => {
 
                 setTienda(res[0]);
-                setAllProducts(res[0]);
+                //setAllProducts(res[0]);
             },
             (error) => {
                 console.log(error);
@@ -168,11 +170,7 @@ const ItemProgramacionTienda = (
 
             <ImageList cols={3} >
                 {tienda.map((item) => (
-
-
                     <div>
-
-
                         <Paper
                             sx={{
                                 p: 1,
@@ -192,7 +190,7 @@ const ItemProgramacionTienda = (
                                         <tr>
                                             <td>
                                                 <ButtonBase sx={{ width: 300, height: 300 }}>
-                                                    <Img alt="complex" src={item.cab_cenlace} onClick={obtenerSubastaSlider} />
+                                                    <Img alt="complex" src={item.cab_cenlace} onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)}   />
                                                     <Modal
                                                         open={open}
                                                         onClose={handleClose}

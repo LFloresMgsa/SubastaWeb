@@ -18,9 +18,6 @@ import MantEventoPuja from './views/MantEventoPuja';
 import Login from './views/Login';
 import Logout from './views/Logout';
 
-import Catalogo from './components/carrito/catalogo';
-import Cart from './components/carrito/Cart';
-
 
 import CreaCatalogo from './components/mantenimientos/Catalogo/CreaCatalogo';
 import EditaCatalogo from './components/mantenimientos/Catalogo/EditaCatalogo';
@@ -124,15 +121,7 @@ const AppRoutes = (props) => {
       />
 
 
-      <Route
-        path="/agregaproductos"
-        render={(route) => <Catalogo {...props} {...route} />}
-      />
 
-      <Route
-        path="/vercarrito"
-        render={(route) => <Cart {...props} {...route} />}
-      />
 
 
       <Route

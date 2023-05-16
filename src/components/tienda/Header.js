@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 
+import './catalogo.css';
 
 export const Header = ({
 	allProducts,
@@ -73,7 +74,7 @@ export const Header = ({
 												{product.Cab_cDescripcion}
 											</p>
 											<span className='precio-producto-carrito'>
-												${product.Dvd_nImporte}
+												S/.{product.Dvd_nImporte}
 											</span>
 										</div>
 										<svg
@@ -97,7 +98,7 @@ export const Header = ({
 
 							<div className='cart-total'>
 								<h3>Total:</h3>
-								<span className='total-pagar'>${total}</span>
+								<span className='total-pagar'>S/.{total}</span>
 							</div>
 
 							<button className='btn-clear-all' onClick={onCleanCart}>

@@ -5,10 +5,10 @@ import Box from '@mui/material/Box';
 import ItemProgramacionTienda from '../components/tienda/ItemProgramacionTienda';
 import { eventoService } from '../services/evento.service';
 
-import { Header } from '../components/carrito/Header';
-//import { ProductList } from './ProductList';
+import { Header } from '../components/tienda/Header';
 
-import '../components/carrito/catalogo.css'
+
+
 
 const Tienda = (props) => {
 
