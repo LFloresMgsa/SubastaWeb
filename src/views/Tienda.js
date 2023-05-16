@@ -5,9 +5,17 @@ import Box from '@mui/material/Box';
 import ItemProgramacionTienda from '../components/tienda/ItemProgramacionTienda';
 import { eventoService } from '../services/evento.service';
 
+import { Header } from '../components/carrito/Header';
+//import { ProductList } from './ProductList';
 
+import '../components/carrito/catalogo.css'
 
 const Tienda = (props) => {
+
+  const [allProducts, setAllProducts] = useState([]);
+	const [total, setTotal] = useState(0);
+	const [countProducts, setCountProducts] = useState(0);
+
 
   const [tiendaActual, setTiendaActual] = React.useState([]);
 
@@ -36,11 +44,30 @@ const Tienda = (props) => {
 
   return (
     <div>
+
+      <Header
+        allProducts={allProducts}
+        setAllProducts={setAllProducts}
+        total={total}
+        setTotal={setTotal}
+        countProducts={countProducts}
+        setCountProducts={setCountProducts}
+      />
+
       <Box sx={{ width: '100%' }}>
-        <h1>Tienda Virtual</h1>
+        <h1>Tienda</h1>
 
         {tiendaActual.map((item, index) => (
-          <ItemProgramacionTienda key={index} {...item} IndicePanel="0" />
+          <ItemProgramacionTienda key={index} {...item} IndicePanel="0" 
+          
+          alltiendas={item}
+
+          allProducts={allProducts}
+          setAllProducts={setAllProducts}
+          total={total}
+          setTotal={setTotal}
+          countProducts={countProducts}
+          setCountProducts={setCountProducts}/>
 
         ))}
       </Box>

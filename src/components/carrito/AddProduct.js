@@ -33,33 +33,38 @@ const AddProduct = (props) => {
             }
 
             // Actualizamos el estado del carrito con el arreglo modificado
-            //setCartItems(cartItemsCopy);
-            setCartItems([...cartItems, cartItemsCopy]);
+            setCartItems(cartItemsCopy);
+            //setCartItems([...cartItems, cartItemsCopy]);
 
             // Limpiamos el producto seleccionado
             setSelectedProduct(null);
 
-            console.log(cartItems);
+
 
         }
     };
 
+    useEffect(() => {
+
+        console.log(cartItems);
+
+    }, [cartItems]);
 
 
-    const handleProductSelect = (product) => {
-        setSelectedProduct(product);
-    };
+    // const handleProductSelect = (product) => {
+    //     setSelectedProduct(product);
+    // };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setProduct({ ...product, [name]: value });
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        //onAddProduct(product);
-        setProduct({ code: props.location.state.Cab_cCatalogo, name: props.location.state.Cab_cDescripcion, price: props.location.state.Dvd_nImporte, quantity: 1 });
-    };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     //onAddProduct(product);
+    //     setProduct({ code: props.location.state.Cab_cCatalogo, name: props.location.state.Cab_cDescripcion, price: props.location.state.Dvd_nImporte, quantity: 1 });
+    // };
 
     return (
         <div>

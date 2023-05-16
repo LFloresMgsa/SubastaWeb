@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Cart = ( {products} ) => {
+const Cart = ({ products }) => {
   const [cartItems, setCartItems] = useState(products);
 
   const handleAddToCart = (product) => {

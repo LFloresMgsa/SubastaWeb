@@ -51,8 +51,15 @@ const obtenerImagenes = async (pCab_cCatalogo) => {
     }
 };
 
-const ItemTienda = (props) => {
-    
+const ItemTienda = (props, {
+    allProducts,
+    setAllProducts,
+    countProducts,
+    setCountProducts,
+    total,
+    setTotal,
+}) => {
+
     const history = useHistory();
     const [imagenesSlide, setImagenesSlide] = React.useState([]);
     const [open, setOpen] = React.useState(false);
@@ -74,16 +81,34 @@ const ItemTienda = (props) => {
         );
     };
 
-    const handleBuyProduct = (producto) => {
-         history.push({
-             pathname: `/agregaproductos`,
-             //pathname: `/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`,
-             state:producto ,
-         });
+    const onAddProduct = product => {
+        if (allProducts.find(item => item.Cab_cCatalogo === product.Cab_cCatalogo)) {
+            const products = allProducts.map(item =>
+                item.Cab_cCatalogo === product.Cab_cCatalogo
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+            setTotal(total + product.Dvd_nImporte * product.quantity);
+            setCountProducts(countProducts + product.quantity);
+            return setAllProducts([...products]);
+        }
 
-        //history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
-//        history.push(`/tienda/productos/${props.Cab_cCatalogo}/${props.Cab_cDescripcion}`);
-    }
+        setTotal(total + product.Dvd_nImporte * product.quantity);
+        setCountProducts(countProducts + product.quantity);
+        setAllProducts([...allProducts, product]);
+    };
+
+
+    // const handleBuyProduct = (producto) => {
+    //     history.push({
+    //         pathname: `/agregaproductos`,
+    //         //pathname: `/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`,
+    //         state: producto,
+    //     });
+
+    //     //history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
+    //     //        history.push(`/tienda/productos/${props.Cab_cCatalogo}/${props.Cab_cDescripcion}`);
+    // }
 
     return (
         <div>
@@ -144,7 +169,7 @@ const ItemTienda = (props) => {
                             </tr>
                             <tr>
                                 <td>
-                                    <Button variant="contained" size="small" color="primary" onClick={() => handleBuyProduct(props)}  >Comprar</Button>
+                                    <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(props)}  >Agregar Carrito</Button>
                                 </td>
                             </tr>
                         </tbody>
