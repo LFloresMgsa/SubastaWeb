@@ -92,10 +92,34 @@ const ItemContacto = (props) => {
 
     const [subastasPuja, setSubastasPuja] = React.useState([]);
     const [subastasPujaGrabar, setSubastasPujaGrabar] = React.useState([]);
-
-
     const [disabledPujar, setDisabledPujar] = useState(false)
 
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('');
+
+    let _cMensajesJson;
+    let _msgerror = '';
+    let _mensaje = '';
+
+    const consultaValidacionPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
+        let _body = {
+            Accion: "VALIDACION_PUJA", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo: pPer_cPeriodo, Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
+            Dvd_nCorrel: 0, Dvd_cDocID: pDvd_cDocID, Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos,
+            Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: ppuja, Dvd_cEstado: "A", Dvd_dFechaPuja: "2023-04-26"
+        }
+
+
+        return await eventoService.obtenerEventosDetPuja(_body).then(
+
+            (res) => {
+
+                _cMensajesJson = res[0];
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
 
     const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
@@ -103,6 +127,8 @@ const ItemContacto = (props) => {
             Dvd_nCorrel: 0, Dvd_cDocID: pDvd_cDocID, Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos,
             Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: ppuja, Dvd_cEstado: "A", Dvd_dFechaPuja: "2023-04-26"
         }
+
+
 
         return await eventoService.obtenerEventosDetPuja(_body).then(
 
@@ -133,14 +159,14 @@ const ItemContacto = (props) => {
     };
 
     //#region Alerta
-    // const [alertOpen, setAlertOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = useState(false);
 
-    // const handleAlertOpen = () => {
-    //     setAlertOpen(true);
-    // };
-    // const handleAlertClose = () => {
-    //     setAlertOpen(false);
-    // };
+    const handleAlertOpen = () => {
+        setAlertOpen(true);
+    };
+    const handleAlertClose = () => {
+        setAlertOpen(false);
+    };
     //#endregion
 
     //#region Alerta de confirmacion
@@ -148,6 +174,7 @@ const ItemContacto = (props) => {
     const [confirmOpen, setConfirmOpen] = useState(false);
 
     const handleConfirmOpen = () => {
+        setAlertMessage("¿Deseas confirmar la Puja?");
         setConfirmOpen(true);
     };
 
@@ -161,9 +188,31 @@ const ItemContacto = (props) => {
 
     //#endregion
 
+
     const handleGrabarSubasta = async () => {
-        await grabarPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
-        await obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
+
+        await consultaValidacionPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
+
+        _cMensajesJson.map((item) => (
+            _msgerror = item.msgerror,
+            _mensaje = item.mensaje
+
+        ))
+
+        if (_msgerror == "True") {
+            setAlertMessage(_mensaje);
+            setAlertType("alert");
+            handleAlertOpen();
+        }
+        else {
+            await grabarPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
+            await obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
+
+            setAlertMessage("Se registro la puja correctamente");
+            setAlertType("warning");
+            handleAlertOpen();
+
+        }
     }
 
     const handleRegresarSubasta = () => {
@@ -208,15 +257,15 @@ const ItemContacto = (props) => {
 
     return (
         <div >
-            {/* <CustomAlert
-                type="alert"
-                message="¡Esto es una alerta personalizada!"
+            <CustomAlert
+                type={alertType}
+                message={alertMessage}
                 open={alertOpen}
                 onClose={handleAlertClose}
-            /> */}
+            />
             <CustomAlert
                 type="confirm"
-                message="¿Deseas confirmar la Puja?"
+                message={alertMessage}
                 open={confirmOpen}
                 onClose={handleConfirmClose}
             />
