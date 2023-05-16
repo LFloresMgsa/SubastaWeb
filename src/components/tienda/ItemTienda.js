@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import ItemCarousel from '../subasta/ItemCarousel';
 import { eventoService } from '../../services/evento.service';
+import Button from '@mui/material/Button';
 
 const Img = styled('img')({
     margin: 'auto',
@@ -51,15 +52,13 @@ const obtenerImagenes = async (pCab_cCatalogo) => {
 };
 
 const ItemTienda = (props) => {
-
+    
     const history = useHistory();
     const [imagenesSlide, setImagenesSlide] = React.useState([]);
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-
 
 
     const obtenerSubastaSlider = async () => {
@@ -75,6 +74,16 @@ const ItemTienda = (props) => {
         );
     };
 
+    const handleBuyProduct = (producto) => {
+         history.push({
+             pathname: `/agregaproductos`,
+             //pathname: `/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`,
+             state:producto ,
+         });
+
+        //history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
+//        history.push(`/tienda/productos/${props.Cab_cCatalogo}/${props.Cab_cDescripcion}`);
+    }
 
     return (
         <div>
@@ -122,14 +131,20 @@ const ItemTienda = (props) => {
                                     <h3>
                                         <b>INFORMACION DEL EJEMPLAR</b>
                                     </h3>
-
-                                    <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
+                                    <p><b>Codigo:</b> S/. {props.Cab_cCatalogo}</p>
+                                    <p><b>Nombre:</b> {props.Cab_cDescripcion}</p>
+                                    <p><b>Precio:</b> S/. {props.Dvd_nImporte}</p>
                                     <p><b>Placa:</b> {props.Placa}</p>
                                     <p><b>Propietario</b>: {props.Propietario}</p>
                                     <p><b>Padre:</b> {props.Padre}</p>
                                     <p><b>Madre:</b> {props.Madre}</p>
                                     <p><b>Info:</b> {props.Info}</p>
 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Button variant="contained" size="small" color="primary" onClick={() => handleBuyProduct(props)}  >Comprar</Button>
                                 </td>
                             </tr>
                         </tbody>

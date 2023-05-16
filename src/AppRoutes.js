@@ -18,6 +18,9 @@ import MantEventoPuja from './views/MantEventoPuja';
 import Login from './views/Login';
 import Logout from './views/Logout';
 
+import AddProduct from './components/carrito/AddProduct';
+import Cart from './components/carrito/Cart';
+
 
 import CreaCatalogo from './components/mantenimientos/Catalogo/CreaCatalogo';
 import EditaCatalogo from './components/mantenimientos/Catalogo/EditaCatalogo';
@@ -120,6 +123,16 @@ const AppRoutes = (props) => {
         render={(route) => <SubastaDetalle {...props} {...route} />}
       />
 
+
+      <Route
+        path="/agregaproductos"
+        render={(route) => <AddProduct {...props} {...route} />}
+      />
+
+      <Route
+        path="/vercarrito"
+        render={(route) => <Cart {...props} {...route} />}
+      />
 
 
       <Route
