@@ -7,13 +7,11 @@ import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
 import SubastaDetalle from './views/SubastaDetalle';
 import MantCatalogo from './views/MantCatalogo';
-
 import MantCatalogoImagenes from './views/MantCatalogoImagenes';
 import MantVideoteca from './views/MantVideoteca';
 import MantEvento from './views/MantEvento';
 import MantEventoDet from './views/MantEventoDet';
 import MantEventoPuja from './views/MantEventoPuja';
-
 
 import Login from './views/Login';
 import Logout from './views/Logout';
@@ -21,22 +19,18 @@ import Logout from './views/Logout';
 
 import CreaCatalogo from './components/mantenimientos/Catalogo/CreaCatalogo';
 import EditaCatalogo from './components/mantenimientos/Catalogo/EditaCatalogo';
-
-
 import CreaCatalogoImagenes from './components/mantenimientos/CatalogoImagenes/CreaCatalogoImagenes';
 import EditaCatalogoImagenes from './components/mantenimientos/CatalogoImagenes/EditaCatalogoImagenes';
-
 import CreaVideoteca from './components/mantenimientos/Videoteca/CreaVideoteca';
 import EditaVideoteca from './components/mantenimientos/Videoteca/EditaVideoteca';
-
 import CreaEvento from './components/mantenimientos/Evento/CreaEvento';
 import EditaEvento from './components/mantenimientos/Evento/EditaEvento';
-
 import CreaEventoDet from './components/mantenimientos/EventoDet/CreaEventoDet';
 import EditaEventoDet from './components/mantenimientos/EventoDet/EditaEventoDet';
-
 import CreaEventoDetPuja from './components/mantenimientos/EventoPuja/CreaEventoPuja';
 import EditaEventoDetPuja from './components/mantenimientos/EventoPuja/EditaEventoPuja';
+
+import FinalizarCompra from './components/tienda/FinalizarCompra';
 
 
 const AppRoutes = (props) => {
@@ -113,6 +107,13 @@ const AppRoutes = (props) => {
         path="/Logout"
         render={(route) => <Logout {...props} {...route} />}
       />
+
+      <Route
+        exact
+        path="/FinalizarCompra"
+        render={(route) => <FinalizarCompra {...props} {...route} />}
+      />
+
 
       <Route
         exact

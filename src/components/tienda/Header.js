@@ -1,6 +1,37 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { useHistory, useParams } from 'react-router-dom';
+
 
 import './catalogo.css';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+	[`&.${tableCellClasses.head}`]: {
+		backgroundColor: theme.palette.primary.dark,
+		color: theme.palette.common.white,
+	},
+	[`&.${tableCellClasses.body}`]: {
+		fontSize: 14,
+	},
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+	'&:nth-of-type(odd)': {
+		backgroundColor: theme.palette.action.hover,
+	},
+	// hide last border
+	'&:last-child td, &:last-child th': {
+		border: 0,
+	},
+}));
+
 
 export const Header = ({
 	allProducts,
@@ -11,6 +42,7 @@ export const Header = ({
 	setTotal,
 }) => {
 	const [active, setActive] = useState(false);
+	const history = useHistory();
 
 	const onDeleteProduct = product => {
 		const results = allProducts.filter(
@@ -28,73 +60,88 @@ export const Header = ({
 		setCountProducts(0);
 	};
 
+	const onSaveCart = () => {
+
+		//history.push(`/FinalizarCompra`);
+
+		history.push({
+			pathname: '/FinalizarCompra',
+			state: allProducts
+			
+		  });
+
+		//setAllProducts([]);
+		//setTotal(0);
+		//setCountProducts(0);
+	};
+
 	return (
 		<header>
-			
+
 
 			<div className='container-icon'>
 				<div
 					className='container-cart-icon'
 					onClick={() => setActive(!active)}
 				>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						fill='none'
-						viewBox='0 0 24 24'
-						strokeWidth='1.5'
-						stroke='currentColor'
-						className='icon-cart'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							d='M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'
-						/>
-					</svg>
+					
+					
 					<div className='count-products'>
 						<span id='contador-productos'>{countProducts}</span>
 					</div>
 				</div>
 
 				<div
-					className={`container-cart-products ${
-						active ? '' : 'hidden-cart'
-					}`}
+					className={`container-cart-products ${active ? '' : 'hidden-cart'
+						}`}
 				>
 					{allProducts.length ? (
 						<>
-							<div className='row-product'>
-								{allProducts.map(product => (
-									<div className='cart-product' key={product.Cab_cCatalogo}>
-										<div className='info-cart-product'>
-											<span className='cantidad-producto-carrito'>
-												{product.quantity}
-											</span>
-											<p className='titulo-producto-carrito'>
-												{product.Cab_cDescripcion}
-											</p>
-											<span className='precio-producto-carrito'>
-												S/.{product.Dvd_nImporte}
-											</span>
-										</div>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											fill='none'
-											viewBox='0 0 24 24'
-											strokeWidth='1.5'
-											stroke='currentColor'
-											className='icon-close'
-											onClick={() => onDeleteProduct(product)}
-										>
-											<path
-												strokeLinecap='round'
-												strokeLinejoin='round'
-												d='M6 18L18 6M6 6l12 12'
-											/>
-										</svg>
-									</div>
-								))}
-							</div>
+
+							<TableContainer component={Paper}>
+								<Table aria-label="customized table">
+									<TableHead>
+										<TableRow>
+
+
+											<StyledTableCell align="left">Cant.</StyledTableCell>
+											<StyledTableCell align="left">Descripción</StyledTableCell>
+											<StyledTableCell align="left">Codigo</StyledTableCell>
+											<StyledTableCell align="left">Precio</StyledTableCell>
+											<StyledTableCell align="left">Elim.</StyledTableCell>
+										</TableRow>
+									</TableHead>
+									<TableBody>
+										{allProducts.map((product) => (
+											<StyledTableRow key={product.Cab_cCatalogo}>
+
+
+												<StyledTableCell align="left">{product.quantity}</StyledTableCell>
+												<StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
+												<StyledTableCell align="left"> {product.Cab_cCatalogo}</StyledTableCell>
+												<StyledTableCell align="rigth">S/. {product.Dvd_nImporte}</StyledTableCell>
+												<StyledTableCell align="rigth">
+													<svg
+														xmlns='http://www.w3.org/2000/svg'
+														fill='none'
+														viewBox='0 0 24 24'
+														strokeWidth='1.5'
+														stroke='currentColor'
+														className='icon-close'
+														onClick={() => onDeleteProduct(product)}
+													>
+														<path
+															strokeLinecap='round'
+															strokeLinejoin='round'
+															d='M6 18L18 6M6 6l12 12'
+														/>
+													</svg>
+												</StyledTableCell>
+											</StyledTableRow>
+										))}
+									</TableBody>
+								</Table>
+							</TableContainer>
 
 							<div className='cart-total'>
 								<h3>Total:</h3>
@@ -103,6 +150,10 @@ export const Header = ({
 
 							<button className='btn-clear-all' onClick={onCleanCart}>
 								Vaciar Carrito
+							</button>
+
+							<button className='btn-save-all' onClick={onSaveCart}>
+								Ptoceder el Pago
 							</button>
 						</>
 					) : (

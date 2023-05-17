@@ -66,7 +66,7 @@ img {
 	right: 0;
 
 	background-color: #fff;
-	width: 400px;
+	width: 600px;
 	z-index: 1;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
@@ -89,6 +89,12 @@ img {
 
 .titulo-producto-carrito {
 	font-size: 20px;
+}
+
+.codigo-producto-carrito {
+	font-weight: 700;
+	font-size: 20px;
+	margin-left: 10px;
 }
 
 .precio-producto-carrito {
@@ -196,10 +202,32 @@ img {
 	display: none;
 }
 
+.btn-save-all {
+	border: none;
+	background-color: #032e7d;
+	color: #fff;
+	padding: 15px 0;
+	display: block;
+	width: 100%;
+	margin-top: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-family: inherit;
+	cursor: pointer;
+  font-size: 16px;
+  transition: all .3s ease;
+}
+.btn-save-all:hover{
+	background-color: #032e7d;
+	color: #ffee00;
+	transform: scale(1.03);
+	border-radius: 0;
+  }
+
 .btn-clear-all {
 	border: none;
-	background-color: #000;
-	color: #fff;
+	background-color: #fff;
+	color: #000;
 	padding: 15px 0;
 	display: block;
 	width: 100%;
@@ -213,7 +241,8 @@ img {
 }
 
 .btn-clear-all:hover{
-  background-color: #333;
+  background-color: #3b78da;
+  color: #fff;
   transform: scale(1.03);
   border-radius: 0;
 }

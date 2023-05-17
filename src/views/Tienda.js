@@ -7,14 +7,14 @@ import { eventoService } from '../services/evento.service';
 
 import { Header } from '../components/tienda/Header';
 
-
+import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 
 
 const Tienda = (props) => {
 
   const [allProducts, setAllProducts] = useState([]);
-	const [total, setTotal] = useState(0);
-	const [countProducts, setCountProducts] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
 
 
   const [tiendaActual, setTiendaActual] = React.useState([]);
@@ -55,19 +55,19 @@ const Tienda = (props) => {
       />
 
       <Box sx={{ width: '100%' }}>
-        <h1>Tienda</h1>
+      <h1>Tienda</h1>
 
         {tiendaActual.map((item, index) => (
-          <ItemProgramacionTienda key={index} {...item} IndicePanel="0" 
-          
-          alltiendas={item}
+          <ItemProgramacionTienda key={index} {...item} IndicePanel="0"
 
-          allProducts={allProducts}
-          setAllProducts={setAllProducts}
-          total={total}
-          setTotal={setTotal}
-          countProducts={countProducts}
-          setCountProducts={setCountProducts}/>
+            alltiendas={item}
+
+            allProducts={allProducts}
+            setAllProducts={setAllProducts}
+            total={total}
+            setTotal={setTotal}
+            countProducts={countProducts}
+            setCountProducts={setCountProducts} />
 
         ))}
       </Box>

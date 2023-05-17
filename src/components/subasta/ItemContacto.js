@@ -337,8 +337,6 @@ const ItemContacto = (props) => {
                                     </tr>
                                 </tbody>
                             </table>
-
-
                         </Grid>
 
                     </Grid>
