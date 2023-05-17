@@ -142,101 +142,105 @@ const FinalizarCompra = (props) => {
             <Box sx={{ width: '100%' }}>
                 <h1>Finalizar Compra</h1>
 
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-                    <div align="left">
-                        <h3 >Datos Facturación:</h3>
-                    </div>
-
-                    <Grid container spacing={2}>
-
-                        <Grid item xs={6}>
-                            <Item>
-                                <TextField id="outlined-nombre" label="Nombres" variant="standard"
-                                    value={pnombre}
-                                    onChange={(e) => setNombre(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Item>
-                                <TextField id="outlined-apellido" label="Apellidos" variant="standard"
-                                    value={papellido}
-                                    onChange={(e) => setApellido(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <Item>
-                                <TextField id="outlined-direccion" label="Dirección" variant="standard"
-                                    value={pdireccion}
-                                    onChange={(e) => setDireccion(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <Item>
-                                <TextField id="outlined-distrito" label="Distrito" variant="standard"
-                                    value={pdistrito}
-                                    onChange={(e) => setDistrito(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-                        <Grid item xs={4}>
-                            <Item>
-                                <TextField id="outlined-departamento" label="Departamento" variant="standard"
-                                    value={pdepartamento}
-                                    onChange={(e) => setDepartamento(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-                        <Grid item xs={4}>
-                            <Item>
-                                <TextField id="outlined-documento" label="Documento Id." variant="standard"
-                                    value={pdocumento}
-                                    onChange={(e) => setDocumento(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-                        <Grid item xs={4}>
-                            <Item>
-                                <TextField id="outlined-telefono" label="Teléfono" variant="standard"
-                                    value={ptelefono}
-                                    onChange={(e) => setTelefono(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-
-                        <Grid item xs={6}>
-                            <Item>
-                                <TextField id="outlined-correo" label="Correo" variant="standard"
-                                    value={pcorreo}
-                                    onChange={(e) => setCorreo(e.target.value)}
-                                />
-                            </Item>
-                        </Grid>
-
-
-                    </Grid>
-                </Paper>
 
                 <Grid container spacing={1}>
 
                     <Grid item xs={6}>
+
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+                            <div align="left">
+                                <h3 >Datos Facturación:</h3>
+                            </div>
+
+                            <Grid container spacing={2}>
+
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField id="outlined-nombre" label="Nombres" variant="standard"
+                                            value={pnombre}
+                                            onChange={(e) => setNombre(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField id="outlined-apellido" label="Apellidos" variant="standard"
+                                            value={papellido}
+                                            onChange={(e) => setApellido(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+                                <Grid item xs={4}>
+                                    <Item>
+                                        <TextField id="outlined-documento" label="Documento Id." variant="standard"
+                                            value={pdocumento}
+                                            onChange={(e) => setDocumento(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+                                <Grid item xs={8}>
+                                    <Item>
+                                        <TextField id="outlined-direccion" label="Dirección" variant="standard"
+                                            value={pdireccion}
+                                            onChange={(e) => setDireccion(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField id="outlined-distrito" label="Distrito" variant="standard"
+                                            value={pdistrito}
+                                            onChange={(e) => setDistrito(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField id="outlined-departamento" label="Departamento" variant="standard"
+                                            value={pdepartamento}
+                                            onChange={(e) => setDepartamento(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+
+
+                                <Grid item xs={4}>
+                                    <Item>
+                                        <TextField id="outlined-telefono" label="Teléfono" variant="standard"
+                                            value={ptelefono}
+                                            onChange={(e) => setTelefono(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+
+                                <Grid item xs={8}>
+                                    <Item>
+                                        <TextField id="outlined-correo" label="Correo" variant="standard"
+                                            value={pcorreo}
+                                            onChange={(e) => setCorreo(e.target.value)}
+                                        />
+                                    </Item>
+                                </Grid>
+
+
+                            </Grid>
+                        </Paper>
+
 
                         <Paper
                             sx={{

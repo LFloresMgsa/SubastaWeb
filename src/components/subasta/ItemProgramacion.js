@@ -74,10 +74,8 @@ const Itemprogramacion = (props) => {
 
             </List>
 
-            <ImageList className="subasta-item" cols={4}>
-                <ImageListItem key="Subheader" sx={{ width: "100%", height: 450 }} cols={4} >
+            <ImageList  cols={4}>
 
-                </ImageListItem>
                 {subastas.map((subasta) => (
                     <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo}/>
                 ))}

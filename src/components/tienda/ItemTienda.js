@@ -99,17 +99,6 @@ const ItemTienda = (props, {
     };
 
 
-    // const handleBuyProduct = (producto) => {
-    //     history.push({
-    //         pathname: `/agregaproductos`,
-    //         //pathname: `/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`,
-    //         state: producto,
-    //     });
-
-    //     //history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
-    //     //        history.push(`/tienda/productos/${props.Cab_cCatalogo}/${props.Cab_cDescripcion}`);
-    // }
-
     return (
         <div>
 

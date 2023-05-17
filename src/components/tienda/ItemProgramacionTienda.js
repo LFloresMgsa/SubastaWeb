@@ -182,7 +182,7 @@ const ItemProgramacionTienda = (
                                     theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                             }}
                         >
-                            <ImageListItem >
+                            <ImageListItem key={item.cab_cenlace}>
 
                                 <table>
 
