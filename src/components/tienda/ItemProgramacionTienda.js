@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
-
+import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
@@ -184,54 +184,43 @@ const ItemProgramacionTienda = (
                         >
                             <ImageListItem key={item.cab_cenlace}>
 
-                                <table>
+                                <Grid container spacing={0}>
+                                    <Grid item xs={12}>
+                                        <ButtonBase sx={{ width: 300, height: 300 }}>
+                                            <Img alt="complex" src={item.cab_cenlace} onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)} />
+                                            <Modal
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
+                                            >
+                                                <Box sx={style}>
 
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <ButtonBase sx={{ width: 300, height: 300 }}>
-                                                    <Img alt="complex" src={item.cab_cenlace} onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)}   />
-                                                    <Modal
-                                                        open={open}
-                                                        onClose={handleClose}
-                                                        aria-labelledby="modal-modal-title"
-                                                        aria-describedby="modal-modal-description"
-                                                    >
-                                                        <Box sx={style}>
+                                                    <ItemCarousel images={imagenesSlide} />
 
-                                                            <ItemCarousel images={imagenesSlide} />
+                                                </Box>
+                                            </Modal>
+                                        </ButtonBase>
+                                    </Grid>
 
-                                                        </Box>
-                                                    </Modal>
-                                                </ButtonBase>
-
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h3>
-                                                    <b>INFORMACION DEL EJEMPLAR</b>
-                                                </h3>
-                                                <p><b>Codigo:</b> S/. {item.Cab_cCatalogo}</p>
-                                                <p><b>Nombre:</b> {item.Cab_cDescripcion}</p>
-                                                <p><b>Precio:</b> S/. {item.Dvd_nImporte}</p>
-                                                <p><b>Placa:</b> {item.Placa}</p>
-                                                <p><b>Propietario</b>: {item.Propietario}</p>
-                                                <p><b>Padre:</b> {item.Padre}</p>
-                                                <p><b>Madre:</b> {item.Madre}</p>
-                                                <p><b>Info:</b> {item.Info}</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
+                                    <Grid item xs={12}>
+                                        <h3><b>INFORMACION DEL EJEMPLAR</b></h3>
+                                        <p><b>Codigo:</b> S/. {item.Cab_cCatalogo}</p>
+                                        <p><b>Nombre:</b> {item.Cab_cDescripcion}</p>
+                                        <p><b>Precio:</b> S/. {item.Dvd_nImporte}</p>
+                                        <p><b>Placa:</b> {item.Placa}</p>
+                                        <p><b>Propietario</b>: {item.Propietario}</p>
+                                        <p><b>Padre:</b> {item.Padre}</p>
+                                        <p><b>Madre:</b> {item.Madre}</p>
+                                        <p><b>Info:</b> {item.Info}</p>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    <p><b>_</b> </p>
+                                    </Grid>                                    
+                                    <Grid item xs={12}>
+                                        <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
+                                    </Grid>
+                                </Grid>
 
                             </ImageListItem>
                         </Paper>

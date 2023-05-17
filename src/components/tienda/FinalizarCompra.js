@@ -374,7 +374,7 @@ const FinalizarCompra = (props) => {
                                             </StyledTableRow>
                                         ))}
 
-                                        <TableRow>
+                                        <TableRow > 
                                             <TableCell rowSpan={3} />
                                             <TableCell colSpan={2}>Total</TableCell>
                                             <TableCell align="right">S/. {ccyFormat(invoiceSubtotal)}</TableCell>
