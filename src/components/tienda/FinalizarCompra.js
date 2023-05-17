@@ -119,6 +119,15 @@ const FinalizarCompra = (props) => {
         setConfirmOpen(false);
     };
 
+    const handleRegresarTienda = () => {
+
+
+        history.push({
+            pathname: '/Tienda'
+
+        });
+    }
+
     //#endregion
 
     return (
@@ -225,118 +234,130 @@ const FinalizarCompra = (props) => {
                     </Grid>
                 </Paper>
 
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-                    <div align="left">
-                        <h3 >Notas del Pedido - Opcional:</h3>
-                    </div>
+                <Grid container spacing={1}>
 
-                    <Grid container spacing={2}>
+                    <Grid item xs={6}>
 
-                        <Grid item xs={12}>
-                            <Item>
-                                <TextField id="outlined-notas" label="Comentario" variant="standard"
-                                    value={pnotas}
-                                    onChange={(e) => setNotas(e.target.value)}
-                                    multiline
-                                    maxRows={4}
-                                />
-                            </Item>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+                            <div align="left">
+                                <h3 >Notas del Pedido - Opcional:</h3>
+                            </div>
 
-                        </Grid>
+                            <Grid container spacing={2}>
 
+                                <Grid item xs={12}>
+                                    <Item>
+                                        <TextField id="outlined-notas" label="Comentario" variant="standard"
+                                            value={pnotas}
+                                            onChange={(e) => setNotas(e.target.value)}
+                                            multiline
+                                            maxRows={4}
+                                        />
+                                    </Item>
+
+                                </Grid>
+
+                            </Grid>
+                        </Paper>
+
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+                            <div align="left">
+                                <h3 >Transferencias Bancarias:</h3>
+                            </div>
+
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value="Realiza tu pago directamente en nuestra cuenta bancaria BCP. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta."
+                                        multiline
+
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <p>
+                                        Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web y otros propósitos descritos en nuestra política de privacidad.
+                                    </p>
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <Button variant="outlined" size="small" color="primary" onClick={handleRegresarTienda}  >Regresar</Button>
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen} width="100%" >Realizar Pedido</Button>
+                                </Grid>
+
+                            </Grid>
+                        </Paper>
                     </Grid>
-                </Paper>
+                    <Grid item xs={6}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+                            <h3>Tu Pedido:</h3>
 
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-                    <h3>Tu Pedido</h3>
-
-                    <TableContainer component={Paper}>
-                        <Table aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-
-
-                                    <StyledTableCell align="left">Cant.</StyledTableCell>
-                                    <StyledTableCell align="left">Descripción</StyledTableCell>
-                                    <StyledTableCell align="left">Codigo</StyledTableCell>
-                                    <StyledTableCell align="left">Precio</StyledTableCell>
-
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {props.location.state.map((product) => (
-                                    <StyledTableRow key={product.Cab_cCatalogo}>
-                                        <StyledTableCell align="left">{product.quantity}</StyledTableCell>
-                                        <StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
-                                        <StyledTableCell align="left"> {product.Cab_cCatalogo}</StyledTableCell>
-                                        <StyledTableCell align="rigth">S/. {product.Dvd_nImporte}</StyledTableCell>
-
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-
-                </Paper>
-
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-                    <div align="left">
-                        <h3 >Transferencias Bancarias:</h3>
-                    </div>
-
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                value="Realiza tu pago directamente en nuestra cuenta bancaria BCP. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta."
-                                multiline
-
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                            />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <p>
-                                Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web y otros propósitos descritos en nuestra política de privacidad.
-                            </p>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen}  >Realizar Pedido</Button>
-                        </Grid>
+                            <TableContainer component={Paper}>
+                                <Table aria-label="customized table">
+                                    <TableHead>
+                                        <TableRow>
 
 
+                                            <StyledTableCell align="left">Cant.</StyledTableCell>
+                                            <StyledTableCell align="left">Descripción</StyledTableCell>
+                                            <StyledTableCell align="left">Codigo</StyledTableCell>
+                                            <StyledTableCell align="left">Precio</StyledTableCell>
+
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {props.location.state.map((product) => (
+                                            <StyledTableRow key={product.Cab_cCatalogo}>
+                                                <StyledTableCell align="left">{product.quantity}</StyledTableCell>
+                                                <StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
+                                                <StyledTableCell align="left"> {product.Cab_cCatalogo}</StyledTableCell>
+                                                <StyledTableCell align="rigth">S/. {product.Dvd_nImporte}</StyledTableCell>
+
+                                            </StyledTableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+
+                        </Paper>
                     </Grid>
-                </Paper>
-                
+                </Grid>
+
+
+
             </Box>
         </div>
     );

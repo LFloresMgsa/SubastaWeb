@@ -272,148 +272,140 @@ const ItemContacto = (props) => {
 
             <Box sx={{ flexGrow: 1 }}>
 
+                <Grid container spacing={1}>
 
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-                    <div align="left">
-                        <h2 >Contacto:</h2>
-                    </div>
+                    <Grid item xs={4}>
 
-                    <Grid container spacing={2}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+                            <div align="left">
+                                <h2 >Contacto:</h2>
+                            </div>
 
-                        <Grid item xs={8}>
+                            <Grid container spacing={2}>
 
-                            <table >
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <TextField id="outlined-documento" label="Documento Id." variant="standard"
-                                                value={pdocumento}
-                                                onChange={(e) => setDocumento(e.target.value)}
-                                                disabled={disabledPujar} />
+                                <Grid item xs={12}>
+                                    <TextField id="outlined-documento" label="Documento Id." variant="standard"
+                                        value={pdocumento}
+                                        onChange={(e) => setDocumento(e.target.value)}
+                                        disabled={disabledPujar} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField id="outlined-nombre" label="Nombres" variant="standard"
+                                        value={pnombre}
+                                        onChange={(e) => setNombre(e.target.value)}
+                                        disabled={disabledPujar} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField id="outlined-apellido" label="Apellidos" variant="standard"
+                                        value={papellido}
+                                        onChange={(e) => setApellido(e.target.value)}
+                                        disabled={disabledPujar} />
 
-                                            <TextField id="outlined-nombre" label="Nombres" variant="standard"
-                                                value={pnombre}
-                                                onChange={(e) => setNombre(e.target.value)}
-                                                disabled={disabledPujar} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField id="outlined-telefono" label="Teléfono" variant="standard"
+                                        value={ptelefono}
+                                        onChange={(e) => setTelefono(e.target.value)}
+                                        disabled={disabledPujar} />
 
-                                            <TextField id="outlined-apellido" label="Apellidos" variant="standard"
-                                                value={papellido}
-                                                onChange={(e) => setApellido(e.target.value)}
-                                                disabled={disabledPujar} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField id="outlined-correo" label="Correo" variant="standard"
+                                        value={pcorreo}
+                                        onChange={(e) => setCorreo(e.target.value)}
+                                        disabled={disabledPujar} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        label="Valor de Puja"
+                                        value={ppuja}
+                                        onChange={(e) => setPuja(e.target.value)}
+                                        name="numberformat"
+                                        id="outlined-puja"
+                                        InputProps={{
+                                            inputComponent: NumberFormatCustom,
+                                        }}
+                                        variant="standard"
+                                        disabled={disabledPujar} />
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+                            <Grid container spacing={2}   alignItems="center"  justifyContent="center">
+                                <Grid item xs={6}>
+                                    <Button variant="outlined" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen} disabled={disabledPujar} >Realizar Puja</Button>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+
+                        
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                margin: 1,
+                                maxWidth: 'auto',
+                                flexGrow: 1,
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                            }}
+                        >
+
+                            <TableContainer component={Paper}>
+                                <Table aria-label="customized table">
+                                    <TableHead>
+                                        <TableRow>
 
 
-                                            <TextField id="outlined-telefono" label="Teléfono" variant="standard"
-                                                value={ptelefono}
-                                                onChange={(e) => setTelefono(e.target.value)}
-                                                disabled={disabledPujar} />
+                                            <StyledTableCell align="right">Puja</StyledTableCell>
+                                            <StyledTableCell align="center">Fecha</StyledTableCell>
+                                            <StyledTableCell align="left">Nombre</StyledTableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {subastasPuja.map((row) => (
+                                            <StyledTableRow key={row.Dvd_nCorrel}>
 
 
-                                            <TextField id="outlined-correo" label="Correo" variant="standard"
-                                                value={pcorreo}
-                                                onChange={(e) => setCorreo(e.target.value)}
-                                                disabled={disabledPujar} />
+                                                <StyledTableCell align="right">{row.Dvd_nImporte}</StyledTableCell>
+                                                <StyledTableCell align="center">{row.Dvd_dFechaPuja}</StyledTableCell>
+                                                <StyledTableCell align="left"> {`${row.Dvd_cNombres}, ${row.Dvd_cApellidos} `}</StyledTableCell>
+                                            </StyledTableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
 
-                                            <TextField
-                                                label="Valor de Puja"
-                                                value={ppuja}
-                                                onChange={(e) => setPuja(e.target.value)}
-                                                name="numberformat"
-                                                id="outlined-puja"
-                                                InputProps={{
-                                                    inputComponent: NumberFormatCustom,
-                                                }}
-                                                variant="standard"
-                                                disabled={disabledPujar} />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </Grid>
 
                     </Grid>
-                </Paper>
-
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-                    <Grid container spacing={2}>
-
-                        <Grid item xs={8}>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-
-                                            <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen} disabled={disabledPujar} >Pujar</Button>
-
-                                        </td>
-                                        <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </Grid>
-
-                    </Grid>
-                </Paper>
-
-                <Paper
-                    sx={{
-                        p: 2,
-                        margin: 1,
-                        maxWidth: 'auto',
-                        flexGrow: 1,
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    }}
-                >
-
-                    <TableContainer component={Paper}>
-                        <Table aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-
-
-                                    <StyledTableCell align="right">Puja</StyledTableCell>
-                                    <StyledTableCell align="center">Fecha</StyledTableCell>
-                                    <StyledTableCell align="left">Nombre</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {subastasPuja.map((row) => (
-                                    <StyledTableRow key={row.Dvd_nCorrel}>
-
-
-                                        <StyledTableCell align="right">{row.Dvd_nImporte}</StyledTableCell>
-                                        <StyledTableCell align="center">{row.Dvd_dFechaPuja}</StyledTableCell>
-                                        <StyledTableCell align="left"> {`${row.Dvd_cNombres}, ${row.Dvd_cApellidos} `}</StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Paper>
+                </Grid>
             </Box >
 
-        </div>
+        </div >
     );
 };
 
