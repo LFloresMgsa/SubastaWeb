@@ -1,11 +1,5 @@
 import React, { Fragment, useEffect, useLayoutEffect, useState } from 'react';
-import {
-  AppBar,
-  Button,
-  CssBaseline,
-  Toolbar,
-  useMediaQuery,
-} from '@mui/material';
+import {AppBar,Button,CssBaseline,Toolbar,useMediaQuery} from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, useHistory } from 'react-router-dom';
@@ -16,9 +10,13 @@ import { GlobalStyle } from './GlobalStyles';
 import AppContent from './AppContent';
 import AppTopBar from './components/layout/AppTopBar';
 
+import Dashboard from './views/Dashboard';
 
 
 function App(props) {
+
+
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -119,7 +117,8 @@ function App(props) {
                 </AppBar>
               )
             )} */}
-            
+
+
             <AppContent {...props} viewport={viewport} />
           </BrowserRouter>
         </ThemeProvider>
