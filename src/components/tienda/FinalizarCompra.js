@@ -72,7 +72,28 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
+
+const TAX_RATE = 0.18;
+
+function ccyFormat(num) {
+    return `${num.toFixed(2)}`;
+}
+
+
+
+function subtotal(items) {
+    return items.map(({ Dvd_nImporte , quantity}) => Dvd_nImporte * quantity).reduce((sum, i) => sum + i, 0);
+}
+
+
+
+
 const FinalizarCompra = (props) => {
+
+    const invoiceSubtotal = subtotal(props.location.state);
+    const invoiceTaxes = TAX_RATE * invoiceSubtotal;
+    const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+
 
     //    console.log(props);
     const [pdocumento, setDocumento] = useState('')
@@ -143,7 +164,7 @@ const FinalizarCompra = (props) => {
                 <h1>Finalizar Compra</h1>
 
 
-                <Grid container spacing={1}>
+                <Grid container spacing={0}>
 
                     <Grid item xs={6}>
 
@@ -338,7 +359,7 @@ const FinalizarCompra = (props) => {
                                             <StyledTableCell align="left">Cant.</StyledTableCell>
                                             <StyledTableCell align="left">Descripción</StyledTableCell>
                                             <StyledTableCell align="left">Codigo</StyledTableCell>
-                                            <StyledTableCell align="left">Precio</StyledTableCell>
+                                            <StyledTableCell align="right">Precio</StyledTableCell>
 
                                         </TableRow>
                                     </TableHead>
@@ -348,10 +369,17 @@ const FinalizarCompra = (props) => {
                                                 <StyledTableCell align="left">{product.quantity}</StyledTableCell>
                                                 <StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
                                                 <StyledTableCell align="left"> {product.Cab_cCatalogo}</StyledTableCell>
-                                                <StyledTableCell align="rigth">S/. {product.Dvd_nImporte}</StyledTableCell>
+                                                <StyledTableCell align="right">S/. {product.Dvd_nImporte}</StyledTableCell>
 
                                             </StyledTableRow>
                                         ))}
+
+                                        <TableRow>
+                                            <TableCell rowSpan={3} />
+                                            <TableCell colSpan={2}>Total</TableCell>
+                                            <TableCell align="right">S/. {ccyFormat(invoiceSubtotal)}</TableCell>
+                                        </TableRow>
+
                                     </TableBody>
                                 </Table>
                             </TableContainer>
