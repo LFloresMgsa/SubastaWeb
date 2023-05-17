@@ -28,7 +28,7 @@ const Dashboard = () => {
     return await eventoService.obtenerImagenes(_body).then(
       (res) => {
         setData(res[0]);
-        console.log(res[0]);
+       // console.log(res[0]);
       },
       (error) => {
         console.log(error);

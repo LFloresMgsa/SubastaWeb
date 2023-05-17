@@ -37,7 +37,9 @@ img {
 } */
 
 .container-icon {
-	position: relative;
+	position: absolute;
+	left: 98%;
+	top: 70px;
 }
 
 .count-products {
@@ -62,7 +64,7 @@ img {
 
 .container-cart-products {
 	position: absolute;
-	top: 50px;
+	top: 30px;
 	right: 0;
 
 	background-color: #fff;

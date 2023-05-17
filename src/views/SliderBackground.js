@@ -138,7 +138,7 @@ const ImageSlider = ({
   data = [],
   ...props
 }) => {
-  const [currentSlide, setCurrentSlide] = useState(-2);
+  const [currentSlide, setCurrentSlide] = useState(3);
   const [currentInfo, setCurrentInfo] = useState([]);
 
 
