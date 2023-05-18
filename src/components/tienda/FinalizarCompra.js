@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import NumberFormat from 'react-number-format';
 import CustomAlert from '../mensajes/CustomAlert';
 import Button from '@mui/material/Button';
+import { eventoService } from '../../services/evento.service';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -82,7 +83,7 @@ function ccyFormat(num) {
 
 
 function subtotal(items) {
-    return items.map(({ Dvd_nImporte , quantity}) => Dvd_nImporte * quantity).reduce((sum, i) => sum + i, 0);
+    return items.map(({ Dvd_nImporte, quantity }) => Dvd_nImporte * quantity).reduce((sum, i) => sum + i, 0);
 }
 
 
@@ -96,20 +97,9 @@ const FinalizarCompra = (props) => {
 
 
     //    console.log(props);
-    const [pdocumento, setDocumento] = useState('')
-    const [pnombre, setNombre] = useState('')
-    const [papellido, setApellido] = useState('')
-    const [ptelefono, setTelefono] = useState('')
-    const [pcorreo, setCorreo] = useState('')
-
-
-    const [pdireccion, setDireccion] = useState('')
-    const [pdistrito, setDistrito] = useState('')
-    const [pdepartamento, setDepartamento] = useState('')
-
-    const [pnotas, setNotas] = useState('')
-
     const history = useHistory();
+    const [loading, setLoading] = useState([]);
+    const [data, setData] = useState([]);
 
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
@@ -118,9 +108,51 @@ const FinalizarCompra = (props) => {
     let _msgerror = '';
     let _mensaje = '';
 
-    const handleGrabarPedido = async () => {
+    const [pPdm_cNummov, setPdm_cNummov] = useState('')
+    const [pPer_cPeriodo, setPer_cPeriodo] = useState('')
+    const [pCli_cNombre, setCli_cNombre] = useState('')
+    const [pCli_cApellido, setCli_cApellido] = useState('')
+    const [pCli_cDocId, setCli_cDocId] = useState('')
+    const [pPdm_cDireccion, setPdm_cDireccion] = useState('')
+    const [pPdm_cDistrito, setPdm_cDistrito] = useState('')
+    const [pPdm_cDepartamento, setPdm_cDepartamento] = useState('')
+    const [pCli_cTelefono, setCli_cTelefono] = useState('')
+    const [pCli_cCorreo, setCli_cCorreo] = useState('')
+    const [pPdm_cComentario, setPdm_cComentario] = useState('')
+    const [pPdm_dFecha, setPdm_dFecha] = useState('')
+    const [pPdm_cEstado, setPdm_cEstado] = useState('')
 
-        return;
+    const handleGrabarPedido = async () => {
+        try {
+            let _Cabecera = {
+                Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Pdm_cNummov: "0000000001", Per_cPeriodo: pPer_cPeriodo,
+                Cli_cNombre: pCli_cNombre, Cli_cApellido: pCli_cApellido, Cli_cDocId: pCli_cDocId, Pdm_cDireccion: pPdm_cDireccion, Pdm_cDistrito: pPdm_cDistrito,
+                Pdm_cDepartamento: pPdm_cDepartamento, Cli_cTelefono: pCli_cTelefono, Cli_cCorreo: pCli_cCorreo, Pdm_cComentario: pPdm_cComentario, Pdm_dFecha: "2023-05-17", Pdm_cEstado: pPdm_cEstado
+            }
+
+            const _dataCombinada = {
+                cabecera: _Cabecera,
+                detalle: props.location.state
+            };
+
+            const _body = JSON.stringify(_dataCombinada);
+
+            console.log(_body);
+
+            return;
+
+            await eventoService.GrabarPedido(_body).then(
+                (res) => {
+                    setData(res[0]);
+                },
+                (error) => {
+                    console.log(error)
+                    setError(error);
+                }
+            )
+        } finally {
+            setLoading(false);
+        }
     }
 
     //#region Alerta de confirmacion
@@ -141,11 +173,8 @@ const FinalizarCompra = (props) => {
     };
 
     const handleRegresarTienda = () => {
-
-
         history.push({
             pathname: '/Tienda'
-
         });
     }
 
@@ -187,16 +216,16 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={6}>
                                     <Item>
                                         <TextField id="outlined-nombre" label="Nombres" variant="standard"
-                                            value={pnombre}
-                                            onChange={(e) => setNombre(e.target.value)}
+                                            value={pCli_cNombre}
+                                            onChange={(e) => setCli_cNombre(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Item>
                                         <TextField id="outlined-apellido" label="Apellidos" variant="standard"
-                                            value={papellido}
-                                            onChange={(e) => setApellido(e.target.value)}
+                                            value={pCli_cApellido}
+                                            onChange={(e) => setCli_cApellido(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -204,8 +233,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={4}>
                                     <Item>
                                         <TextField id="outlined-documento" label="Documento Id." variant="standard"
-                                            value={pdocumento}
-                                            onChange={(e) => setDocumento(e.target.value)}
+                                            value={pCli_cDocId}
+                                            onChange={(e) => setCli_cDocId(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -213,8 +242,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={8}>
                                     <Item>
                                         <TextField id="outlined-direccion" label="Dirección" variant="standard"
-                                            value={pdireccion}
-                                            onChange={(e) => setDireccion(e.target.value)}
+                                            value={pPdm_cDireccion}
+                                            onChange={(e) => setPdm_cDireccion(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -222,8 +251,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={6}>
                                     <Item>
                                         <TextField id="outlined-distrito" label="Distrito" variant="standard"
-                                            value={pdistrito}
-                                            onChange={(e) => setDistrito(e.target.value)}
+                                            value={pPdm_cDistrito}
+                                            onChange={(e) => setPdm_cDistrito(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -231,8 +260,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={6}>
                                     <Item>
                                         <TextField id="outlined-departamento" label="Departamento" variant="standard"
-                                            value={pdepartamento}
-                                            onChange={(e) => setDepartamento(e.target.value)}
+                                            value={pPdm_cDepartamento}
+                                            onChange={(e) => setPdm_cDepartamento(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -242,8 +271,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={4}>
                                     <Item>
                                         <TextField id="outlined-telefono" label="Teléfono" variant="standard"
-                                            value={ptelefono}
-                                            onChange={(e) => setTelefono(e.target.value)}
+                                            value={pCli_cTelefono}
+                                            onChange={(e) => setCli_cTelefono(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -252,8 +281,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={8}>
                                     <Item>
                                         <TextField id="outlined-correo" label="Correo" variant="standard"
-                                            value={pcorreo}
-                                            onChange={(e) => setCorreo(e.target.value)}
+                                            value={pCli_cCorreo}
+                                            onChange={(e) => setCli_cCorreo(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
@@ -282,8 +311,8 @@ const FinalizarCompra = (props) => {
                                 <Grid item xs={12}>
                                     <Item>
                                         <TextField id="outlined-notas" label="Comentario" variant="standard"
-                                            value={pnotas}
-                                            onChange={(e) => setNotas(e.target.value)}
+                                            value={pPdm_cComentario}
+                                            onChange={(e) => setPdm_cComentario(e.target.value)}
                                             multiline
                                             maxRows={4}
                                         />
@@ -374,7 +403,7 @@ const FinalizarCompra = (props) => {
                                             </StyledTableRow>
                                         ))}
 
-                                        <TableRow > 
+                                        <TableRow >
                                             <TableCell rowSpan={3} />
                                             <TableCell colSpan={2}>Total</TableCell>
                                             <TableCell align="right">S/. {ccyFormat(invoiceSubtotal)}</TableCell>

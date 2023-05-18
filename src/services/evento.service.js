@@ -13,6 +13,8 @@ export const eventoService = {
   obtenerImagenes,
   obtenerUsuario,
   obtenerToken,
+  obtenerPedidoCab,
+  obtenerPedidoDet,
 
   obtenerEventosCabAuth,
   obtenerEventosDetAuth,
@@ -20,11 +22,24 @@ export const eventoService = {
   obtenerCatalogoDetImagenesAuth,
   obtenerVideosAuth,
   obtenerCatalogoAuth,
+  obtenerPedidoCabAuth,
+  obtenerPedidoDetAuth,
 
 };
 
 // SERVICIOS SIN AUTORIZACION
 
+function GrabarPedido(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/pedido`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+// SERVICIOS SIN AUTORIZACION
 function obtenerEventosCab(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
   const params = {};
@@ -44,6 +59,27 @@ function obtenerEventosDet(dataJson) {
     handleResponse(res, false)
   );
 }
+
+function obtenerPedidoCab(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/vtm_pedido`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerPedidoDet(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/vtd_pedido`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
 
 function obtenerEventosDetPuja(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
@@ -174,6 +210,26 @@ function obtenerVideosAuth(dataJson) {
   const params = {};
 
   const url = `/api/evento/lgm_videoteca/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerPedidoCabAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/vtm_pedido/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+function obtenerPedidoDetAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/vtd_pedido/auth`;
   return Fetch.post(url, params, options).then((res) =>
     handleResponse(res, false)
   );
