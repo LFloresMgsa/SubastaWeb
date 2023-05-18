@@ -103,6 +103,7 @@ const FinalizarCompra = (props) => {
 
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
+    const [error, setError] = useState([]);
 
     let _cMensajesJson;
     let _msgerror = '';
@@ -125,23 +126,19 @@ const FinalizarCompra = (props) => {
     const handleGrabarPedido = async () => {
         try {
             let _Cabecera = {
-                Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Pdm_cNummov: "0000000001", Per_cPeriodo: pPer_cPeriodo,
+                Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Pdm_cNummov: pPdm_cNummov, Per_cPeriodo: pPer_cPeriodo,
                 Cli_cNombre: pCli_cNombre, Cli_cApellido: pCli_cApellido, Cli_cDocId: pCli_cDocId, Pdm_cDireccion: pPdm_cDireccion, Pdm_cDistrito: pPdm_cDistrito,
-                Pdm_cDepartamento: pPdm_cDepartamento, Cli_cTelefono: pCli_cTelefono, Cli_cCorreo: pCli_cCorreo, Pdm_cComentario: pPdm_cComentario, Pdm_dFecha: "2023-05-17", Pdm_cEstado: pPdm_cEstado
+                Pdm_cDepartamento: pPdm_cDepartamento, Cli_cTelefono: pCli_cTelefono, Cli_cCorreo: pCli_cCorreo, Pdm_cComentario: pPdm_cComentario, Pdm_dFecha: null, Pdm_cEstado: pPdm_cEstado
             }
 
-            const _dataCombinada = {
+            const _Pedido = {
                 cabecera: _Cabecera,
                 detalle: props.location.state
             };
 
-            const _body = JSON.stringify(_dataCombinada);
+            console.log(_Pedido);
 
-            console.log(_body);
-
-            return;
-
-            await eventoService.GrabarPedido(_body).then(
+            await eventoService.GrabarPedido(_Pedido).then(
                 (res) => {
                     setData(res[0]);
                 },
@@ -389,6 +386,7 @@ const FinalizarCompra = (props) => {
                                             <StyledTableCell align="left">Descripción</StyledTableCell>
                                             <StyledTableCell align="left">Codigo</StyledTableCell>
                                             <StyledTableCell align="right">Precio</StyledTableCell>
+                                            <StyledTableCell align="right">Total</StyledTableCell>
 
                                         </TableRow>
                                     </TableHead>
@@ -398,14 +396,15 @@ const FinalizarCompra = (props) => {
                                                 <StyledTableCell align="left">{product.quantity}</StyledTableCell>
                                                 <StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
                                                 <StyledTableCell align="left"> {product.Cab_cCatalogo}</StyledTableCell>
-                                                <StyledTableCell align="right">S/. {product.Dvd_nImporte}</StyledTableCell>
+                                                <StyledTableCell align="right">S/. {ccyFormat(product.Dvd_nImporte)}</StyledTableCell>
+                                                <StyledTableCell align="right">S/. {ccyFormat(product.Dvd_nImporte * product.quantity)}</StyledTableCell>
 
                                             </StyledTableRow>
                                         ))}
 
                                         <TableRow >
                                             <TableCell rowSpan={3} />
-                                            <TableCell colSpan={2}>Total</TableCell>
+                                            <TableCell colSpan={3} >Total</TableCell>
                                             <TableCell align="right">S/. {ccyFormat(invoiceSubtotal)}</TableCell>
                                         </TableRow>
 
