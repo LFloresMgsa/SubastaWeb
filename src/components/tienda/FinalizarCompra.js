@@ -136,8 +136,6 @@ const FinalizarCompra = (props) => {
                 detalle: props.location.state
             };
 
-            console.log(_Pedido);
-
             await eventoService.GrabarPedido(_Pedido).then(
                 (res) => {
                     setData(res[0]);
@@ -164,6 +162,7 @@ const FinalizarCompra = (props) => {
     const handleConfirmClose = (result) => {
         if (result) {
             handleGrabarPedido();
+            handleRegresarTienda();
         }
 
         setConfirmOpen(false);
