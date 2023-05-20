@@ -162,7 +162,7 @@ const FinalizarCompra = (props) => {
     const handleConfirmClose = (result) => {
         if (result) {
             handleGrabarPedido();
-            handleRegresarTienda();
+            //handleRegresarTienda();
         }
 
         setConfirmOpen(false);
