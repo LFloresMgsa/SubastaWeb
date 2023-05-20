@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route,Redirect } from 'react-router-dom';
 
 import Dashboard from './views/Dashboard';
 import Tienda from './views/Tienda';
@@ -29,6 +29,7 @@ import CreaEventoDet from './components/mantenimientos/EventoDet/CreaEventoDet';
 import EditaEventoDet from './components/mantenimientos/EventoDet/EditaEventoDet';
 import CreaEventoDetPuja from './components/mantenimientos/EventoPuja/CreaEventoPuja';
 import EditaEventoDetPuja from './components/mantenimientos/EventoPuja/EditaEventoPuja';
+import MantPedido from './views/MantPedido';
 
 import FinalizarCompra from './components/tienda/FinalizarCompra';
 
@@ -38,6 +39,10 @@ const AppRoutes = (props) => {
 
   return (
     <Switch>
+        
+      <Route exact path="/">
+          <Redirect to="/inicio" />
+      </Route>
       <Route
         path="/inicio"
         render={(route) => <Dashboard {...props} {...route} />}
@@ -92,6 +97,11 @@ const AppRoutes = (props) => {
         render={(route) => <MantEventoPuja {...props} {...route} />}
       />
 
+       <Route
+        exact
+        path="/MantPedido"
+        render={(route) => <MantPedido {...props} {...route} />}
+      />
 
       <Route
         exact
