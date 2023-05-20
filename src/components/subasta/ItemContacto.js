@@ -174,8 +174,26 @@ const ItemContacto = (props) => {
     const [confirmOpen, setConfirmOpen] = useState(false);
 
     const handleConfirmOpen = () => {
-        setAlertMessage("¿Deseas confirmar la Puja?");
-        setConfirmOpen(true);
+
+        let _mensaje = "";
+
+        if (ppuja <= 0) { _mensaje = "El importe de la puja debe ser mayor a cero" }
+        
+        if (ptelefono == "") { _mensaje = "Ingrese su Teléfono" }
+        if (papellido == "") { _mensaje = "Ingrese su Apellido" }
+        if (pnombre == "") { _mensaje = "Ingrese su número Nombre" }
+        if (pdocumento == "") { _mensaje = "Ingrese su Documento de Id." }        
+
+        if (_mensaje != "") {
+
+            setAlertMessage(_mensaje);
+            setAlertType("alert");
+            handleAlertOpen();
+        }
+        else {
+            setAlertMessage("¿Deseas confirmar la Puja?");
+            setConfirmOpen(true);
+            }        
     };
 
     const handleConfirmClose = (result) => {
@@ -191,6 +209,7 @@ const ItemContacto = (props) => {
 
     const handleGrabarSubasta = async () => {
 
+        
         await consultaValidacionPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
 
         _cMensajesJson.map((item) => (

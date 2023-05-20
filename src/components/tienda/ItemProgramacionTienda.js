@@ -43,6 +43,9 @@ const style = {
     p: 4,
 };
 
+function ccyFormat(num) {
+    return `${num.toFixed(2)}`;
+}
 
 
 const ItemProgramacionTienda = (
@@ -167,16 +170,15 @@ const ItemProgramacionTienda = (
                 </ListItem>
 
             </List>
+            <Box sx={{ width: '100%' }}>
+                <ImageList cols={4} >
+                    {tienda.map((item) => (
 
-            <ImageList cols={3} >
-                {tienda.map((item) => (
-                    <div>
                         <Paper
                             sx={{
                                 p: 1,
                                 margin: 0.5,
                                 maxWidth: 'auto',
-                                width: 350,
                                 flexGrow: 1,
                                 backgroundColor: (theme) =>
                                     theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -186,8 +188,9 @@ const ItemProgramacionTienda = (
 
                                 <Grid container spacing={0}>
                                     <Grid item xs={12}>
-                                        <ButtonBase sx={{ width: 300, height: 300 }}>
-                                            <Img alt="complex" src={item.cab_cenlace} onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)} />
+                                        <ButtonBase sx={{ width: '100%' }} >
+                                            <Img alt="complex" src={item.cab_cenlace}
+                                                onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)} />
                                             <Modal
                                                 open={open}
                                                 onClose={handleClose}
@@ -204,20 +207,24 @@ const ItemProgramacionTienda = (
                                     </Grid>
 
                                     <Grid item xs={12}>
-                                        <h3><b>INFORMACION DEL EJEMPLAR</b></h3>
-                                        <p><b>Codigo:</b> S/. {item.Cab_cCatalogo}</p>
-                                        <p><b>Nombre:</b> {item.Cab_cDescripcion}</p>
-                                        <p><b>Precio:</b> S/. {item.Dvd_nImporte}</p>
-                                        <p><b>Placa:</b> {item.Placa}</p>
-                                        <p><b>Propietario</b>: {item.Propietario}</p>
-                                        <p><b>Padre:</b> {item.Padre}</p>
-                                        <p><b>Madre:</b> {item.Madre}</p>
-                                        <p><b>Info:</b> {item.Info}</p>
+                                        <ul>
+                                            <li><b>Codigo:</b>{item.Cab_cCatalogo}</li>
+                                            <li><p><b>Nombre:</b> {item.Cab_cDescripcion}</p></li>
+
+                                            <li><p><b>Placa:</b> {item.Placa}</p></li>
+                                            <li><p><b>Propietario</b>: {item.Propietario}</p></li>
+                                            {/* <li><p><b>Padre:</b> {item.Padre}</p></li>
+                                            <li><p><b>Madre:</b> {item.Madre}</p></li> */}
+                                            <li><p><b>Info:</b> {item.Info}</p></li>
+                                            <li><p><b>Precio:</b> S/. {ccyFormat(item.Dvd_nImporte)}</p></li>
+                                        </ul>
+
+
                                     </Grid>
                                     <Grid item xs={12}>
-                                    <p><b>_</b> </p>
-                                    </Grid>                                    
-                                    <Grid item xs={12}>
+                                        <p>.</p>
+                                    </Grid>
+                                    <Grid item xs={12} alignContent={"end"}>
                                         <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
                                     </Grid>
                                 </Grid>
@@ -225,13 +232,13 @@ const ItemProgramacionTienda = (
                             </ImageListItem>
                         </Paper>
 
-                    </div>
-                ))}
 
-            </ImageList>
+                    ))}
 
+                </ImageList>
+            </Box>
 
-        </div>
+        </div >
     );
 };
 
