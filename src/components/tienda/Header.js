@@ -153,7 +153,7 @@ export const Header = ({
 							</button>
 
 							<button className='btn-save-all' onClick={onSaveCart}>
-								Ptoceder el Pago
+								Proceder con el Pago
 							</button>
 						</>
 					) : (

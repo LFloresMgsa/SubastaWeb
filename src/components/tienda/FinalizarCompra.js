@@ -87,7 +87,24 @@ function subtotal(items) {
 }
 
 
+function Izquierda(cadena, cantidad) {
+    return cadena.slice(0, cantidad);
+}
 
+function validarRuc(data) {
+    //Elimina cualquier caracter espacio o signos habituales y comprueba validez
+    var ruc = data.replace(/[-.,[\]()\s]+/g, "")
+    // Devuelve un booleano si es un RUC válido
+    // (deben ser 11 dígitos sin otro caracter en el medio)
+    //11 dígitos y empieza en 10,15,16,17 o 20
+    if (!(ruc >= 1e10 && ruc < 11e9
+        || ruc >= 15e9 && ruc < 18e9
+        || ruc >= 2e10 && ruc < 21e9))
+        return false;
+    for (var suma = -(ruc % 10 < 2), i = 0; i < 11; i++, ruc = ruc / 10 | 0)
+        suma += (ruc % 10) * (i % 7 + (i / 7 | 0) + 1);
+    return suma % 11 === 0;
+}
 
 const FinalizarCompra = (props) => {
 
@@ -123,7 +140,8 @@ const FinalizarCompra = (props) => {
     const [pPdm_dFecha, setPdm_dFecha] = useState('')
     const [pPdm_cEstado, setPdm_cEstado] = useState('')
 
-    const handleGrabarPedido = async () => {
+    async function handleGrabarPedido() {
+        let _resultado;
         try {
             let _Cabecera = {
                 Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Pdm_cNummov: pPdm_cNummov, Per_cPeriodo: pPer_cPeriodo,
@@ -138,7 +156,9 @@ const FinalizarCompra = (props) => {
 
             await eventoService.GrabarPedido(_Pedido).then(
                 (res) => {
-                    setData(res[0]);
+                    //console.log(res);
+                    _resultado = res
+                    //setData(res);
                 },
                 (error) => {
                     console.log(error)
@@ -147,22 +167,81 @@ const FinalizarCompra = (props) => {
             )
         } finally {
             setLoading(false);
+
+            return _resultado;
         }
     }
+
+    //#region Alerta
+    const [alertOpen, setAlertOpen] = useState(false);
+
+    const handleAlertOpen = () => {
+        setAlertOpen(true);
+    };
+    const handleAlertClose = () => {
+        setAlertOpen(false);
+    };
+    //#endregion
+
+
 
     //#region Alerta de confirmacion
 
     const [confirmOpen, setConfirmOpen] = useState(false);
 
     const handleConfirmOpen = () => {
-        setAlertMessage("¿Deseas confirmar el Pedido?");
-        setConfirmOpen(true);
+
+        let _mensaje = "";
+
+        if (pCli_cCorreo == "") { _mensaje = "Ingrese su Correo" }
+        if (pCli_cTelefono == "") { _mensaje = "Ingrese su número Telefónico" }
+        if (pPdm_cDepartamento == "") { _mensaje = "Ingrese su Departamento" }
+        if (pPdm_cDistrito == "") { _mensaje = "Ingrese su Distrito" }
+        if (pPdm_cDireccion == "") { _mensaje = "Ingrese su Dirección" }
+
+        if (pCli_cDocId.length != 8 && pCli_cDocId.length != 12 && pCli_cDocId.length != 15) {
+            _mensaje = "Ingrese un documento de identidad correcto"
+        }
+
+        if (pCli_cDocId.length == 11 && validarRuc(pCli_cDocId)==false) {
+            _mensaje = "Ingrese un RUC valido"
+        }
+
+        
+
+        if (pCli_cDocId == "") { _mensaje = "Ingrese su Documento de Identidad / RUC" }
+
+        if (pCli_cNombre == "") { _mensaje = "Ingrese su Nombre / Razon Social" }
+
+
+        if (_mensaje != "") {
+
+            setAlertMessage(_mensaje);
+            setAlertType("alert");
+            handleAlertOpen();
+        }
+        else {
+            setAlertMessage("¿Deseas confirmar el Pedido?");
+            setConfirmOpen(true);
+        }
+
     };
 
-    const handleConfirmClose = (result) => {
+    const handleConfirmClose = async (result) => {
+
         if (result) {
-            handleGrabarPedido();
-            //handleRegresarTienda();
+
+            let _estadoPedido = await handleGrabarPedido();
+
+            if (_estadoPedido.message == "OK") {
+                alert("Se grabo correctamente el pedido");
+
+                handleRegresarTienda();
+            }
+            else {
+                alert("Ocurrio un problema al grabar el pedido");
+            }
+
         }
 
         setConfirmOpen(false);
@@ -178,6 +257,13 @@ const FinalizarCompra = (props) => {
 
     return (
         <div>
+            <CustomAlert
+                type={alertType}
+                message={alertMessage}
+                open={alertOpen}
+                onClose={handleAlertClose}
+            />
+
             <CustomAlert
                 type="confirm"
                 message={alertMessage}
@@ -209,15 +295,15 @@ const FinalizarCompra = (props) => {
 
                             <Grid container spacing={2}>
 
-                                <Grid item xs={6}>
+                                <Grid item xs={12}>
                                     <Item>
-                                        <TextField id="outlined-nombre" label="Nombres" variant="standard"
+                                        <TextField id="outlined-nombre" label="Nombres / Razón Social" variant="standard"
                                             value={pCli_cNombre}
                                             onChange={(e) => setCli_cNombre(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={4}>
                                     <Item>
                                         <TextField id="outlined-apellido" label="Apellidos" variant="standard"
                                             value={pCli_cApellido}
@@ -226,16 +312,16 @@ const FinalizarCompra = (props) => {
                                     </Item>
                                 </Grid>
 
-                                <Grid item xs={4}>
+                                <Grid item xs={8}>
                                     <Item>
-                                        <TextField id="outlined-documento" label="Documento Id." variant="standard"
+                                        <TextField id="outlined-documento" label="Documento Id. (DNI, RUC, Otros)" variant="standard"
                                             value={pCli_cDocId}
                                             onChange={(e) => setCli_cDocId(e.target.value)}
                                         />
                                     </Item>
                                 </Grid>
 
-                                <Grid item xs={8}>
+                                <Grid item xs={12}>
                                     <Item>
                                         <TextField id="outlined-direccion" label="Dirección" variant="standard"
                                             value={pPdm_cDireccion}
