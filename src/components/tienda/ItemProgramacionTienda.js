@@ -69,9 +69,7 @@ const ItemProgramacionTienda = (
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
-
-    const onAddProduct =async( product) => {
+    const onAddProduct = async (product) => {
 
         onRecalcula();
 
@@ -85,7 +83,7 @@ const ItemProgramacionTienda = (
             setCountProducts(countProducts + product.quantity);
 
             storage.SetStorageObj("Carrito", [...products]);
-           // console.log(storage.GetStorageObj("Carrito"));
+            // console.log(storage.GetStorageObj("Carrito"));
 
             return setAllProducts([...products]);
         }
@@ -150,7 +148,7 @@ const ItemProgramacionTienda = (
     };
 
 
-    function onRecalcula  () {
+    function onRecalcula() {
 
         let countFila = 0;
         let totalFila = 0;
@@ -163,7 +161,7 @@ const ItemProgramacionTienda = (
             totalFila = totalFila + nFila.quantity * nFila.Dvd_nImporte;
 
         }
-        countProducts=countFila;
+        countProducts = countFila;
         total = totalFila;
 
         setTotal(totalFila);
@@ -181,6 +179,32 @@ const ItemProgramacionTienda = (
     useEffect(() => {
         onRecalcula();
     }, [allProducts]);
+
+
+
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.keyCode === 116) {
+                event.preventDefault();
+            }
+        };
+
+        const handleBeforeUnload = (event) => {
+            event.preventDefault();
+            event.returnValue = ''; // Necesario para que funcione en Chrome
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
+
 
 
     return (
