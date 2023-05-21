@@ -14,6 +14,8 @@ import image4 from "../assets/images/slide_4.jpeg";
 import image5 from "../assets/images/slide_5.jpeg";
 import image6 from "../assets/images/slide_6.jpeg";
 import image7 from "../assets/images/slide_7.jpeg";
+import { storage } from "../storage.js";
+
 
 
 
@@ -23,7 +25,8 @@ const Dashboard = () => {
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const obtenerImagenes = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo:  storage.GetStorage("Emp_cCodigo") }
+
 
     return await eventoService.obtenerImagenes(_body).then(
       (res) => {
@@ -42,6 +45,8 @@ const Dashboard = () => {
 
   }, []);
 
+
+  
   return (
     <>
       <GlobalStyles />

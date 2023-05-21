@@ -17,6 +17,8 @@ import CustomAlert from '../mensajes/CustomAlert';
 import Button from '@mui/material/Button';
 import { eventoService } from '../../services/evento.service';
 
+import { storage } from "../../storage.js";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.primary.dark,
@@ -144,7 +146,7 @@ const FinalizarCompra = (props) => {
         let _resultado;
         try {
             let _Cabecera = {
-                Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Pdm_cNummov: pPdm_cNummov, Per_cPeriodo: pPer_cPeriodo,
+                Accion: "INSERTAR", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov, Per_cPeriodo: pPer_cPeriodo,
                 Cli_cNombre: pCli_cNombre, Cli_cApellido: pCli_cApellido, Cli_cDocId: pCli_cDocId, Pdm_cDireccion: pPdm_cDireccion, Pdm_cDistrito: pPdm_cDistrito,
                 Pdm_cDepartamento: pPdm_cDepartamento, Cli_cTelefono: pCli_cTelefono, Cli_cCorreo: pCli_cCorreo, Pdm_cComentario: pPdm_cComentario, Pdm_dFecha: null, Pdm_cEstado: pPdm_cEstado
             }

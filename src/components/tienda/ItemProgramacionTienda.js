@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
+import { Prompt } from 'react-router-dom';
 import { css, useTheme } from 'styled-components';
 import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
@@ -12,6 +13,7 @@ import ItemCarousel from './ItemCarouselTienda';
 
 import { eventoService } from '../../services/evento.service';
 
+import { storage } from "../../storage.js";
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -68,9 +70,10 @@ const ItemProgramacionTienda = (
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const onAddProduct = async (product) => {
 
+        onRecalcula();
 
-    const onAddProduct = product => {
         if (allProducts.find(item => item.Cab_cCatalogo === product.Cab_cCatalogo)) {
             const products = allProducts.map(item =>
                 item.Cab_cCatalogo === product.Cab_cCatalogo
@@ -79,12 +82,20 @@ const ItemProgramacionTienda = (
             );
             setTotal(total + product.Dvd_nImporte * product.quantity);
             setCountProducts(countProducts + product.quantity);
+
+            storage.SetStorageObj("Carrito", [...products]);
+            // console.log(storage.GetStorageObj("Carrito"));
+
             return setAllProducts([...products]);
         }
 
         setTotal(total + product.Dvd_nImporte * product.quantity);
         setCountProducts(countProducts + product.quantity);
+
         setAllProducts([...allProducts, product]);
+
+        storage.SetStorageObj("Carrito", [...allProducts, product]);
+        //console.log(storage.GetStorageObj("Carrito"));
     };
 
     const obtenerSubastaSlider = async (pCab_cCatalogo) => {
@@ -103,7 +114,7 @@ const ItemProgramacionTienda = (
 
     const obtenerImagenes = async (pCab_cCatalogo) => {
         try {
-            const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015", Pan_cAnio: "", Cab_cCatalogo: pCab_cCatalogo };
+            const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Cab_cCatalogo: pCab_cCatalogo };
 
 
             const response = await eventoService.obtenerCatalogoDetImagenes(body);
@@ -121,7 +132,7 @@ const ItemProgramacionTienda = (
     };
 
     const obtenerTiendaDetalle = async (pDvm_cNummov) => {
-        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov }
+        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
 
 
         return await eventoService.obtenerEventosDet(_body).then(
@@ -138,13 +149,103 @@ const ItemProgramacionTienda = (
     };
 
 
+    function onRecalcula() {
+
+        let countFila = 0;
+        let totalFila = 0;
+
+        for (let i = 0; i < allProducts.length; i++) {
+
+            const nFila = allProducts[i];
+
+            countFila = countFila + nFila.quantity;
+            totalFila = totalFila + nFila.quantity * nFila.Dvd_nImporte;
+
+        }
+        countProducts = countFila;
+        total = totalFila;
+
+        setTotal(totalFila);
+        setCountProducts(countFila);
+
+        return countFila;
+    };
+
+
     useEffect(() => {
         obtenerTiendaDetalle(alltiendas.Dvm_cNummov);
-
+        setAllProducts(storage.GetStorageObj("Carrito"));
     }, []);
+
+    useEffect(() => {
+        onRecalcula();
+    }, [allProducts]);
+
+    //#region Validacion al presionar la tecloa f5
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.keyCode === 116 ) {
+                event.preventDefault();
+            }
+        };
+
+        const handleBeforeUnload = (event) => {
+            event.preventDefault();
+            event.returnValue = ''; // Necesario para que funcione en Chrome
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+    //#endregion
+
+    //#region Validacion Salir de ventana 
+    const [isNavigating, setIsNavigating] = useState(false);
+
+    const handleBeforeUnload = (event) => {
+        event.preventDefault();
+        event.returnValue = '';
+    };
+
+    const handleNavigation = (nextLocation) => {
+        if (isNavigating) {
+            return true; // Permitir navegación
+        } else {
+
+            if (allProducts.length > 0) {
+                // Mostrar la alerta de confirmación
+                const confirmed = window.confirm('¿Seguro que quieres abandonar esta página? Puede perderse el Carrito.');
+                if (confirmed) {
+                    setIsNavigating(true);
+                    window.removeEventListener('beforeunload', handleBeforeUnload);
+                    return true; // Permitir navegación
+                } else {
+                    return false; // Cancelar la navegación
+                }
+            }
+
+
+        }
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
+    //#endregion
 
     return (
         <div>
+            <Prompt when={!isNavigating} message={handleNavigation} />
+
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
@@ -227,6 +328,8 @@ const ItemProgramacionTienda = (
                                     <Grid item xs={12} alignContent={"end"}>
                                         <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
                                     </Grid>
+
+
                                 </Grid>
 
                             </ImageListItem>

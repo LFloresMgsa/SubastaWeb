@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { eventoService } from '../../../services/evento.service';
 
+import { storage } from "../../../storage.js";
 
 
 
@@ -51,7 +52,7 @@ const ListaPedido = (props) => {
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const listar = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" , Pan_cAnio: "2023" }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
 
     return await eventoService.obtenerPedidoCabAuth(_body).then(
       (res) => {

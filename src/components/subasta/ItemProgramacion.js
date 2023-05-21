@@ -17,12 +17,14 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import imagenes from '../../assets/images/imagenes';
 
+import { storage } from "../../storage.js";
+
 const Itemprogramacion = (props) => {
 
     const [subastas, setSubastas] = React.useState([]);
 
     const obtenerEventoDetalle = async (pDvm_cNummov) => {
-        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov }
+        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
 
 
         return await eventoService.obtenerEventosDet(_body).then(
