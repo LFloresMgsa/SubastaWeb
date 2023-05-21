@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
+import { Prompt } from 'react-router-dom';
 import { css, useTheme } from 'styled-components';
 import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
@@ -180,12 +181,10 @@ const ItemProgramacionTienda = (
         onRecalcula();
     }, [allProducts]);
 
-
-
-
+    //#region Validacion al presionar la tecloa f5
     useEffect(() => {
         const handleKeyDown = (event) => {
-            if (event.keyCode === 116) {
+            if (event.keyCode === 116 ) {
                 event.preventDefault();
             }
         };
@@ -203,12 +202,50 @@ const ItemProgramacionTienda = (
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
+    //#endregion
+
+    //#region Validacion Salir de ventana 
+    const [isNavigating, setIsNavigating] = useState(false);
+
+    const handleBeforeUnload = (event) => {
+        event.preventDefault();
+        event.returnValue = '';
+    };
+
+    const handleNavigation = (nextLocation) => {
+        if (isNavigating) {
+            return true; // Permitir navegación
+        } else {
+
+            if (allProducts.length > 0) {
+                // Mostrar la alerta de confirmación
+                const confirmed = window.confirm('¿Seguro que quieres abandonar esta página? Puede perderse el Carrito.');
+                if (confirmed) {
+                    setIsNavigating(true);
+                    window.removeEventListener('beforeunload', handleBeforeUnload);
+                    return true; // Permitir navegación
+                } else {
+                    return false; // Cancelar la navegación
+                }
+            }
 
 
+        }
+    };
 
+    React.useEffect(() => {
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
+    //#endregion
 
     return (
         <div>
+            <Prompt when={!isNavigating} message={handleNavigation} />
+
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
