@@ -126,6 +126,9 @@ const Item = React.forwardRef((props, ref) => {
       case 'MantEventoPuja':
         return <LibraryAddCheckOutlinedIcon />;
 
+      case 'MantPedido':
+        return <LibraryAddCheckOutlinedIcon />;
+
       case 'Login':
         return <LoginIcon />;
       case 'Logout':

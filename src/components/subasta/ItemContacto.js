@@ -27,6 +27,7 @@ import FormControl from '@mui/material/FormControl';
 import { eventoService } from '../../services/evento.service';
 import CustomAlert from '../mensajes/CustomAlert';
 
+import { storage } from "../../storage.js";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -103,7 +104,7 @@ const ItemContacto = (props) => {
 
     const consultaValidacionPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
-            Accion: "VALIDACION_PUJA", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo: pPer_cPeriodo, Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
+            Accion: "VALIDACION_PUJA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Per_cPeriodo: pPer_cPeriodo, Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
             Dvd_nCorrel: 0, Dvd_cDocID: pDvd_cDocID, Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos,
             Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: ppuja, Dvd_cEstado: "A", Dvd_dFechaPuja: "2023-04-26"
         }
@@ -123,7 +124,7 @@ const ItemContacto = (props) => {
 
     const grabarPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
-            Accion: "INSERTAR", Emp_cCodigo: "015", Pan_cAnio: "2023", Per_cPeriodo: pPer_cPeriodo, Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
+            Accion: "INSERTAR", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Per_cPeriodo: pPer_cPeriodo, Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo,
             Dvd_nCorrel: 0, Dvd_cDocID: pDvd_cDocID, Dvd_cNombres: pDvd_cNombres, Dvd_cApellidos: pDvd_cApellidos,
             Dvd_cTelefono: pDvd_cTelefono, Dvd_cCorreo: pDvd_cCorreo, Dvd_nImporte: ppuja, Dvd_cEstado: "A", Dvd_dFechaPuja: "2023-04-26"
         }
@@ -143,7 +144,7 @@ const ItemContacto = (props) => {
     };
 
     const obtenerPujasDetalle = async (pCab_cCatalogo, pDvm_cNummov) => {
-        let _body = { Accion: "EVENTOABIERTO_DET_PUJA", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo }
+        let _body = { Accion: "EVENTOABIERTO_DET_PUJA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo }
 
 
         return await eventoService.obtenerEventosDetPuja(_body).then(

@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import ImageList from '@mui/material/ImageList';
 import './Video.css';
+import { storage } from "../storage.js";
 
 const useStyles = makeStyles({
   root: {
@@ -18,7 +19,7 @@ function Videoteca() {
   const [contenido, setContenido] = useState('');
 
   const obtenerVideos = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
 
 
     return await eventoService.obtenerVideos(_body).then(

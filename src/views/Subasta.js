@@ -9,7 +9,7 @@ import ItemProgramacion from '../components/subasta/ItemProgramacion';
 import Bases from '../components/subasta/bases';
 import Button from '@mui/material/Button';
 import { eventoService } from '../services/evento.service';
-
+import { storage } from "../storage.js";
 
 const SubastaStyled = styled('div')(
   ({ theme }) => css`
@@ -66,7 +66,7 @@ const Subasta = (props) => {
 
 
   const obtenerSubastaactual = async () => {
-    let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: "015", Pan_cAnio: "2023" }
+    let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
 
     return await eventoService.obtenerEventosCab(_body).then(
@@ -83,7 +83,7 @@ const Subasta = (props) => {
 
 
   const obtenerSubastasproximas = async () => {
-    let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: "015", Pan_cAnio: "2023" }
+    let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
 
     return await eventoService.obtenerEventosCab(_body).then(
@@ -99,7 +99,7 @@ const Subasta = (props) => {
   };
 
   const obtenerSubastascerradas = async () => {
-    let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: "015", Pan_cAnio: "2023" }
+    let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
 
     return await eventoService.obtenerEventosCab(_body).then(

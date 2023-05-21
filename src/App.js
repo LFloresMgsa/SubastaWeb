@@ -10,7 +10,7 @@ import { GlobalStyle } from './GlobalStyles';
 import AppContent from './AppContent';
 import AppTopBar from './components/layout/AppTopBar';
 
-import Dashboard from './views/Dashboard';
+
 
 
 function App(props) {

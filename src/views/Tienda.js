@@ -6,6 +6,7 @@ import ItemProgramacionTienda from '../components/tienda/ItemProgramacionTienda'
 import { eventoService } from '../services/evento.service';
 
 import { Header } from '../components/tienda/Header';
+import { storage } from "../storage.js";
 
 import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 
@@ -20,7 +21,7 @@ const Tienda = (props) => {
   const [tiendaActual, setTiendaActual] = React.useState([]);
 
   const obtenerTiendaActual = async () => {
-    let _body = { Accion: "TIENDAABIERTA", Emp_cCodigo: "015", Pan_cAnio: "2023" }
+    let _body = { Accion: "TIENDAABIERTA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
 
     return await eventoService.obtenerEventosCab(_body).then(

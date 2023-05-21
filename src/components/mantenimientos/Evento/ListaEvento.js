@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { eventoService } from '../../../services/evento.service';
-
+import { storage } from "../../../storage.js";
 
 
 
@@ -50,7 +50,7 @@ const ListaEvento = (props) => {
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const listar = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
 
     return await eventoService.obtenerEventosCabAuth(_body).then(
       (res) => {

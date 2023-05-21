@@ -12,6 +12,7 @@ import ItemCarousel from './ItemCarouselTienda';
 
 import { eventoService } from '../../services/evento.service';
 
+import { storage } from "../../storage.js";
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -103,7 +104,7 @@ const ItemProgramacionTienda = (
 
     const obtenerImagenes = async (pCab_cCatalogo) => {
         try {
-            const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015", Pan_cAnio: "", Cab_cCatalogo: pCab_cCatalogo };
+            const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Cab_cCatalogo: pCab_cCatalogo };
 
 
             const response = await eventoService.obtenerCatalogoDetImagenes(body);
@@ -121,7 +122,7 @@ const ItemProgramacionTienda = (
     };
 
     const obtenerTiendaDetalle = async (pDvm_cNummov) => {
-        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov }
+        let _body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
 
 
         return await eventoService.obtenerEventosDet(_body).then(

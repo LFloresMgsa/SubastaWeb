@@ -15,6 +15,8 @@ import Modal from '@mui/material/Modal';
 import ItemCarousel from './ItemCarousel';
 import { eventoService } from '../../services/evento.service';
 
+import { storage } from "../../storage.js";
+
 const Img = styled('img')({
     margin: 'auto',
     display: 'block',
@@ -38,7 +40,7 @@ const style = {
 // Función para hacer la solicitud a la API
 const obtenerDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
     try {
-        const body = { Accion: "EVENTO_DET", Emp_cCodigo: "015", Pan_cAnio: "2023", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo };
+        const body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo };
 
         const response = await eventoService.obtenerEventosDet(body);
 
@@ -56,7 +58,7 @@ const obtenerDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
 
 const obtenerImagenes = async (pCab_cCatalogo, pDvm_cNummov) => {
     try {
-        const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: "015", Pan_cAnio: "", Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo };
+        const body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo };
 
 
         const response = await eventoService.obtenerCatalogoDetImagenes(body);

@@ -5,6 +5,7 @@ import {
 } from 'redux-state-sync';
 
 import { browserName } from 'react-device-detect';
+import {storage} from './storage.js'
 
 let nsActiveTabID = localStorage.getItem('NSActiveTabID')
   ? parseInt(JSON.parse(localStorage.getItem('NSActiveTabID')))
@@ -20,7 +21,7 @@ let currentTheme = localStorage.getItem('NSThemeMode')
 
 const hiddenMenuWidth = '0px';
 const iconsMenuWidth = '65px';
-const expandedMenuWidth = '240px';
+const expandedMenuWidth = '250px';
 
 const initialState = {
   browser: browserName,
@@ -64,6 +65,10 @@ const reduxStateSyncConfig = {
 // acction reprenset the current action begin proceessed
 // reducer always return a new state or the old stat. It never modify the state
 const reducer = (state = initialState, action) => {
+
+  storage.IniciaVariablesGlobales();
+
+
   switch (action.type) {
     case 'SET_GLOBALS':
       return { ...state, global: action.payload };
