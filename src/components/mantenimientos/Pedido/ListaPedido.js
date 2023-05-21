@@ -52,7 +52,7 @@ const ListaPedido = (props) => {
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
   const listar = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: "015" }
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo:storage.GetStorage("Emp_cCodigo") , Pan_cAnio:storage.GetStorage("Pan_cAnio")  }
 
     return await eventoService.obtenerPedidoCabAuth(_body).then(
       (res) => {

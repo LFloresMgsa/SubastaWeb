@@ -217,8 +217,12 @@ const ItemProgramacionTienda = (
             return true; // Permitir navegación
         } else {
 
-            if (allProducts.length > 0) {
+            // solo debe validar el cambio de pagina si el carrito tiene items y la pafina es diferente de finalizart compra
+            if (allProducts.length > 0  &&  nextLocation.pathname !="/FinalizarCompra") {
                 // Mostrar la alerta de confirmación
+                
+
+
                 const confirmed = window.confirm('¿Seguro que quieres abandonar esta página? Puede perderse el Carrito.');
                 if (confirmed) {
                     setIsNavigating(true);
