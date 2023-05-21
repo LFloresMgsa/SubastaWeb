@@ -71,7 +71,10 @@ const ItemProgramacionTienda = (
 
 
 
-    const onAddProduct = product => {
+    const onAddProduct =async( product) => {
+
+        onRecalcula();
+
         if (allProducts.find(item => item.Cab_cCatalogo === product.Cab_cCatalogo)) {
             const products = allProducts.map(item =>
                 item.Cab_cCatalogo === product.Cab_cCatalogo
@@ -80,12 +83,20 @@ const ItemProgramacionTienda = (
             );
             setTotal(total + product.Dvd_nImporte * product.quantity);
             setCountProducts(countProducts + product.quantity);
+
+            storage.SetStorageObj("Carrito", [...products]);
+           // console.log(storage.GetStorageObj("Carrito"));
+
             return setAllProducts([...products]);
         }
 
         setTotal(total + product.Dvd_nImporte * product.quantity);
         setCountProducts(countProducts + product.quantity);
+
         setAllProducts([...allProducts, product]);
+
+        storage.SetStorageObj("Carrito", [...allProducts, product]);
+        //console.log(storage.GetStorageObj("Carrito"));
     };
 
     const obtenerSubastaSlider = async (pCab_cCatalogo) => {
@@ -139,10 +150,38 @@ const ItemProgramacionTienda = (
     };
 
 
+    function onRecalcula  () {
+
+        let countFila = 0;
+        let totalFila = 0;
+
+        for (let i = 0; i < allProducts.length; i++) {
+
+            const nFila = allProducts[i];
+
+            countFila = countFila + nFila.quantity;
+            totalFila = totalFila + nFila.quantity * nFila.Dvd_nImporte;
+
+        }
+        countProducts=countFila;
+        total = totalFila;
+
+        setTotal(totalFila);
+        setCountProducts(countFila);
+
+        return countFila;
+    };
+
+
     useEffect(() => {
         obtenerTiendaDetalle(alltiendas.Dvm_cNummov);
-
+        setAllProducts(storage.GetStorageObj("Carrito"));
     }, []);
+
+    useEffect(() => {
+        onRecalcula();
+    }, [allProducts]);
+
 
     return (
         <div>
@@ -228,6 +267,8 @@ const ItemProgramacionTienda = (
                                     <Grid item xs={12} alignContent={"end"}>
                                         <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
                                     </Grid>
+
+
                                 </Grid>
 
                             </ImageListItem>

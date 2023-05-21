@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useHistory, useParams } from 'react-router-dom';
-
+import { storage } from "../../storage.js";
 
 import './tienda.css';
 
@@ -51,10 +51,14 @@ export const Header = ({
 
 		setTotal(total - product.Dvd_nImporte * product.quantity);
 		setCountProducts(countProducts - product.quantity);
+
+		storage.SetStorageObj("Carrito",results);
+
 		setAllProducts(results);
 	};
 
 	const onCleanCart = () => {
+		storage.SetStorageObj("Carrito",[]);
 		setAllProducts([]);
 		setTotal(0);
 		setCountProducts(0);
