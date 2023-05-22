@@ -16,9 +16,32 @@ import { eventoService } from '../../../services/evento.service';
 
 import { storage } from "../../../storage.js";
 
+const TAX_RATE = 0.18;
+
+function totalPedido(items) {
+ 
+  if (items) {
+    
+    let ntotal= items.map(({ Pdd_nPrecioNeto }) => Pdd_nPrecioNeto).reduce((sum, i) => sum + i, 0);
+    
+    
+
+    return ntotal;
+  }
+  else {
+    return 0;
+  }
+
+}
+
 function ccyFormat(num) {
   return `${num.toFixed(2)}`;
 }
+
+function ccyFormatInt(num) {
+  return `${num.toFixed(0)}`;
+}
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -59,6 +82,8 @@ const columns = [
 
 
 
+
+
 function Derecha(cadena, cantidad) {
   if (cantidad >= 0 && cantidad <= cadena.length) {
     return cadena.slice(-cantidad);
@@ -69,7 +94,13 @@ function Derecha(cadena, cantidad) {
 
 
 const CabeceraDetalle = (props) => {
+  
+  
+  const [invoiceTotal, setInvoiceTotal] = useState(0);
 
+  const nsubtotal = invoiceTotal /(TAX_RATE+1) ;
+  const nimpuestos = invoiceTotal-nsubtotal;
+  
   const [data, setData] = useState([]);
 
   const [error, setError] = useState([]);
@@ -81,6 +112,8 @@ const CabeceraDetalle = (props) => {
 
   const handleRowClick = async (param) => {
     let pPdm_cNummov = Derecha(param[0], 10);
+    
+//    invoiceSubtotal = subtotal(selectedRow);
 
     await listarDetalle(pPdm_cNummov);
 
@@ -106,12 +139,13 @@ const CabeceraDetalle = (props) => {
   const listarDetalle = async (pPdm_cNummov) => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
 
-    console.log(pPdm_cNummov);
+    //console.log(pPdm_cNummov);
 
     return await eventoService.obtenerPedidoDetAuth(_body).then(
       (res) => {
         setSelectedRow(res[0]);
-        console.log(res[0]);
+        setInvoiceTotal(totalPedido(res[0]));
+        //console.log(res[0]);
       },
       (error) => {
         console.log(error);
@@ -122,7 +156,9 @@ const CabeceraDetalle = (props) => {
 
   // Load de pagina
   useEffect(() => {
+
     listarCabecera();
+
 
   }, []);
 
@@ -132,8 +168,8 @@ const CabeceraDetalle = (props) => {
 
   return (
     <div>
-      <Box sx={{ width: '80%' ,flexGrow: 1 }}>
-     
+      <Box sx={{ width: '80%', flexGrow: 1 }}>
+
         <Grid container spacing={0}>
           <Grid item xs={6}>
             <Paper
@@ -204,10 +240,34 @@ const CabeceraDetalle = (props) => {
                               <StyledTableCell align="right">{ccyFormat(detail.Pdd_nPrecioNeto)}</StyledTableCell>
                             </StyledTableRow>
                           ))
+
                         )}
+                        <TableRow >
+                          <TableCell rowSpan={1} />
+                          <TableCell colSpan={4} >Sub Total</TableCell>
+                          <TableCell align="right">S/. {ccyFormat(nsubtotal)}</TableCell>
+                        </TableRow>
+
+                        <TableRow >
+                          <TableCell rowSpan={1} />
+                          <TableCell colSpan={4} >IGV {ccyFormatInt(TAX_RATE*100)} % </TableCell>
+                          <TableCell align="right">S/. {ccyFormat(nimpuestos)}</TableCell>
+                        </TableRow>
+
+                        <TableRow >
+                          <TableCell rowSpan={1} />
+                          <TableCell colSpan={4} >Total</TableCell>
+                          <TableCell align="right">S/. {ccyFormat(invoiceTotal)}</TableCell>
+                        </TableRow>
+
+
+
+
                       </TableBody>
                     </Table>
                   </TableContainer>
+
+
                 </div>
               )}
 

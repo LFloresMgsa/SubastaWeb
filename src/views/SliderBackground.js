@@ -1,43 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-export const sliderData = [
-  {
-    id: 0,
-    title: "Slide One",
-    content: "This is the description of slide one Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    id: 1,
-    title: "Slide Two",
-    content: "This is the description of slide two Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    id: 2,
-    title: "Slide Three",
-    content: "Three - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    id: 3,
-    title: "Slide Four",
-    content: "Four - is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    id: 4,
-    title: "Slide Five",
-    content: "Five - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    id: 5,
-    title: "Slide Six",
-    content: "Six - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-  {
-    id: 6,
-    title: "Slide Seven",
-    content: "Seven - This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-  },
-];
 
 const IndicatorWrapper = styled.div`
   display: flex;
