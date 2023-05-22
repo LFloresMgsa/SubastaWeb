@@ -31,7 +31,6 @@ import CreaEventoDetPuja from './components/mantenimientos/EventoPuja/CreaEvento
 import EditaEventoDetPuja from './components/mantenimientos/EventoPuja/EditaEventoPuja';
 import MantPedido from './views/MantPedido';
 
-import CabeceraDetalle from './components/mantenimientos/Pedido/cabeceradetalle';
 
 import FinalizarCompra from './components/tienda/FinalizarCompra';
 
@@ -104,13 +103,6 @@ const AppRoutes = (props) => {
         path="/MantPedido"
         render={(route) => <MantPedido {...props} {...route} />}
       />
-
-      <Route
-        exact
-        path="/CabeceraDetalle"
-        render={(route) => <CabeceraDetalle {...props} {...route} />}
-      />
-
 
 
       <Route

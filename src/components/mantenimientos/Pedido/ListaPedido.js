@@ -21,37 +21,36 @@ function ccyFormat(num) {
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-	[`&.${tableCellClasses.head}`]: {
-		backgroundColor: theme.palette.primary.dark,
-		color: theme.palette.common.white,
-	},
-	[`&.${tableCellClasses.body}`]: {
-		fontSize: 14,
-	},
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-	'&:nth-of-type(odd)': {
-		backgroundColor: theme.palette.action.hover,
-	},
-	// hide last border
-	'&:last-child td, &:last-child th': {
-		border: 0,
-	},
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
 }));
 
 const columns = [
-  { field: 'Emp_cCodigo', headerName: 'Empresa', width: 70 },
   { field: 'Pan_cAnio', headerName: 'Año', width: 70 },
   { field: 'Per_cPeriodo', headerName: 'Periodo', width: 70 },
-  { field: 'Pdm_cNummov', headerName: 'Movimiento', width: 200 },
-  { field: 'Cli_cNombre', headerName: 'Nombre', width: 200 },
-  { field: 'Cli_cApellido', headerName: 'Apellido', width: 200 },
-  { field: 'Cli_cDocId', headerName: 'D.N.I', width: 150 },
+  { field: 'Pdm_cNummov', headerName: 'Movimiento', width: 110 },
+  { field: 'Cli_cNombre', headerName: 'Nombre', width: 110 },
+  { field: 'Cli_cApellido', headerName: 'Apellido', width: 110 },
+  { field: 'Cli_cDocId', headerName: 'D.N.I', width: 110 },
   { field: 'Pdm_cDireccion', headerName: 'Dirección', width: 200 },
-  { field: 'Pdm_cDistrito', headerName: 'Distrito', width: 200 },
-  { field: 'Pdm_cDepartamento', headerName: 'Departamento', width: 200 },
-  { field: 'Cli_cTelefono', headerName: 'Telefono', width: 150 },
+  { field: 'Pdm_cDistrito', headerName: 'Distrito', width: 110 },
+  { field: 'Pdm_cDepartamento', headerName: 'Departamento', width: 110 },
+  { field: 'Cli_cTelefono', headerName: 'Telefono', width: 110 },
   { field: 'Cli_cCorreo', headerName: 'Correo', width: 150 },
   { field: 'Pdm_cComentario', headerName: 'Comentario', width: 100 },
   { field: 'Pdm_dFecha', headerName: 'Fecha', width: 200 },
@@ -133,15 +132,15 @@ const CabeceraDetalle = (props) => {
 
   return (
     <div>
-      <Box sx={{ width: '100%' }}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
+      <Box sx={{ width: '80%' }}>
+        <Grid container spacing={0}>
+          <Grid item xs={6}>
             <Paper
               sx={{
                 p: 2,
                 margin: 1,
                 maxWidth: 'auto',
-                height: '60%',
+                height: '100%',
                 flexGrow: 1,
                 backgroundColor: (theme) =>
                   theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -162,8 +161,8 @@ const CabeceraDetalle = (props) => {
                 }}
               />
             </Paper>
-
-
+          </Grid>
+          <Grid item xs={6}>
             <Paper
               sx={{
                 p: 2,
@@ -216,10 +215,7 @@ const CabeceraDetalle = (props) => {
 
           </Grid>
         </Grid>
-
-
       </Box>
-
     </div>
   );
 };
