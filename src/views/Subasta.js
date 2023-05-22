@@ -153,40 +153,25 @@ const Subasta = (props) => {
       </Box>
 
 
-
       <TabPanel value={value} index={0}>
         <h1>Bienvenido a la Subasta</h1>
-
-        <SubastaStyled>
-          {subastasActual.map((subastaactual, index) => (
-            <ItemProgramacion key={index} {...subastaactual}  IndicePanel="0"/>
-
-          ))}
-
-
-        </SubastaStyled>
-
+        {subastasActual.map((subastaactual, index) => (
+          <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />
+        ))}
       </TabPanel>
 
       <TabPanel value={value} index={1}>
         <h1>Proximas Subastas</h1>
-
-        <SubastaStyled >
-          {subastasProximas.map((subastaproxima, index) => (
-            <ItemProgramacion key={index} {...subastaproxima}  IndicePanel="1"/>
-          ))}
-        </SubastaStyled>
-      </TabPanel>
+        {subastasProximas.map((subastaproxima, index) => (
+          <ItemProgramacion key={index} {...subastaproxima} IndicePanel="1" />
+        ))}
+      </TabPanel>s
 
       <TabPanel value={value} index={2}>
         <h1>Subastas Cerradas</h1>
-
-        <SubastaStyled >
-          {subastasCerradas.map((subastacerrada, index) => (
-            <ItemProgramacion key={index} {...subastacerrada}  IndicePanel="2"/>
-          ))}
-        </SubastaStyled>
-
+        {subastasCerradas.map((subastacerrada, index) => (
+          <ItemProgramacion key={index} {...subastacerrada} IndicePanel="2" />
+        ))}
       </TabPanel>
 
       <TabPanel value={value} index={3}>

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useLayoutEffect, useState } from 'react';
-import {AppBar,Button,CssBaseline,Toolbar,useMediaQuery} from '@mui/material';
+import { AppBar, Button, CssBaseline, Toolbar, useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, useHistory } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { appThemes, appColors } from './theme/AppThemes';
 import { GlobalStyle } from './GlobalStyles';
 import AppContent from './AppContent';
 import AppTopBar from './components/layout/AppTopBar';
+import AppFooter from './components/layout/AppFooter';
 
 
 
@@ -73,7 +74,7 @@ function App(props) {
         break;
     }
     // }
-    return () => {};
+    return () => { };
   }, [viewport, currentUser.detail]);
 
   function getConfirmation(message, callback) {
@@ -92,39 +93,14 @@ function App(props) {
           <BrowserRouter getUserConfirmation={getConfirmation}>
             <CssBaseline />
             <GlobalStyle theme={theme} />
-
-            
             <AppTopBar />
-            {/* {currentUser.detail ? (
-              <AppTopBar />
-            ) : (
-              showLoginBar && (
-                <AppBar color="inherit" position="fixed">
-                  <Toolbar
-                    variant="dense"
-                    style={{ justifyContent: 'flex-end' }}
-                  // >
-                    <Button
-                      color="inherit"
-                      onClick={() => {
-                        history.push('/login');
-                        history.go('/login');
-                      }}
-                    >
-                      Login
-                    </Button>
-                  </Toolbar>
-                </AppBar>
-              )
-            )} */}
-
-
             <AppContent {...props} viewport={viewport} />
+            <AppFooter />
           </BrowserRouter>
         </ThemeProvider>
       )}
     </Fragment>
-    
+
   );
 }
 

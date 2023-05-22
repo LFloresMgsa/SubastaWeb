@@ -19,6 +19,11 @@ import imagenes from '../../assets/images/imagenes';
 
 import { storage } from "../../storage.js";
 
+import Paper from '@mui/material/Paper';
+
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
 const Itemprogramacion = (props) => {
 
     const [subastas, setSubastas] = React.useState([]);
@@ -50,41 +55,51 @@ const Itemprogramacion = (props) => {
 
     return (
         <div>
-            <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Calendar" src={imagenes[0].img} />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={props.Dvm_cDescripcion}
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    sx={{ display: 'inline' }}
-                                    component="span"
-                                    variant="body2"
-                                    color="text.primary"
-                                >
+            <Box sx={{ flexGrow: 1 }}>
+                <Paper
+                    sx={{
+                        p: 0,
+                        margin: 1,
+                        maxWidth: 'auto',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                    }}
+                >
 
-                                </Typography>
-                                {`Inicio : ${props.Dvm_dInicio} - Termino: ${props.Dvm_dFin}`}
+                    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                        <ListItem alignItems="flex-start">
+                            <ListItemAvatar>
+                                <Avatar alt="Calendar" src={imagenes[0].img} />
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={props.Dvm_cDescripcion}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            sx={{ display: 'inline' }}
+                                            component="span"
+                                            variant="body2"
+                                            color="text.primary"
+                                        >
 
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
+                                        </Typography>
+                                        {`Inicio : ${props.Dvm_dInicio} - Termino: ${props.Dvm_dFin}`}
 
-            </List>
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                    </List>
 
-            <ImageList  cols={4}>
+                    <ImageList cols={4}>
+                        {subastas.map((subasta) => (
+                            <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo} />
+                        ))}
+                    </ImageList>
 
-                {subastas.map((subasta) => (
-                    <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo}/>
-                ))}
-
-            </ImageList>
-
-
+                </Paper>
+            </Box>
         </div>
     );
 };
