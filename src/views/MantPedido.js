@@ -14,7 +14,6 @@ class MantPedido extends Component {
     render() {
         return (
             <div >
-
                 <div>
                     <h1>Mantenimiento - Pedido</h1>
                 </div>

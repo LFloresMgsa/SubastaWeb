@@ -132,7 +132,8 @@ const CabeceraDetalle = (props) => {
 
   return (
     <div>
-      <Box sx={{ width: '80%' }}>
+      <Box sx={{ width: '80%' ,flexGrow: 1 }}>
+     
         <Grid container spacing={0}>
           <Grid item xs={6}>
             <Paper
