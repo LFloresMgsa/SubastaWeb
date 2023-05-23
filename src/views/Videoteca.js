@@ -5,7 +5,7 @@ import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import ImageList from '@mui/material/ImageList';
-import './Video.css';
+import './css/Video.css';
 import { storage } from "../storage.js";
 
 const useStyles = makeStyles({
