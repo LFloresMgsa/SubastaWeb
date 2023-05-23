@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+
 import MeNavBarDisplay from '../common/others/MeNavBarDisplay';
 import { useDispatch } from 'react-redux';
 import { store } from '../../store';
@@ -28,7 +29,7 @@ const AppTopBar = (props) => {
                 dispatch({
                   type: 'SET_MENU_STATE',
                   payload:
-                    menuState.current === 'expanded' ? 'icons' : 'expanded',
+                    menuState.current === 'expanded' ? 'hidden' : 'expanded',
                 })
               }
               size="large"

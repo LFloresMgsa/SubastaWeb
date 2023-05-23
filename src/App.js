@@ -69,7 +69,7 @@ function App(props) {
       default:
         dispatch({
           type: 'SET_MENU_STATE',
-          payload: 'expanded',
+          payload: 'hidden',
         });
         break;
     }

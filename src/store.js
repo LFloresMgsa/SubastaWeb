@@ -21,7 +21,7 @@ let currentTheme = localStorage.getItem('NSThemeMode')
 
 const hiddenMenuWidth = '0px';
 const iconsMenuWidth = '65px';
-const expandedMenuWidth = '250px';
+const expandedMenuWidth = '200px';
 
 const initialState = {
   browser: browserName,
@@ -161,6 +161,7 @@ const reducer = (state = initialState, action) => {
             menuState: { current: action.payload, width: expandedMenuWidth },
           };
         default:
+          
           break;
       }
     case 'SET_APP_VIEWPORT':
