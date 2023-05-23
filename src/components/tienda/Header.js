@@ -10,7 +10,8 @@ import Paper from '@mui/material/Paper';
 import { useHistory, useParams } from 'react-router-dom';
 import { storage } from "../../storage.js";
 
-import './tienda.css';
+
+import '../../css/carrito.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {

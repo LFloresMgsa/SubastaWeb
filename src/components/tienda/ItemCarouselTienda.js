@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'infinite-react-carousel';
 
-import './SliderTienda.css';
+import '../../css/SliderTienda.css';
 
 const ItemCarousel = ({ images }) => {
 	return (
