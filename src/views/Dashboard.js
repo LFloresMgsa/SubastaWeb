@@ -16,7 +16,7 @@ import image6 from "../assets/images/slide_6.jpeg";
 import image7 from "../assets/images/slide_7.jpeg";
 import { storage } from "../storage.js";
 
-import WebPage from "./Web.js"
+import WebPage from "./WebPage.js"
 
 
 const Dashboard = () => {
@@ -63,7 +63,7 @@ const Dashboard = () => {
           >
           </div>
         </ImageSlider>
-        <WebPage />
+        <WebPage/>
       </div>
     </>
   );
