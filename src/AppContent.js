@@ -11,6 +11,8 @@ const AppBarOffset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const useStyles = makeStyles((theme) => ({
   root: ({ isUserLogged }) => ({
+
+
     display: isUserLogged ? 'flex' : 'block',
     '& .MuiAppBar-positionFixed': { zIndex: 1201 },
 
@@ -38,11 +40,13 @@ const useStyles = makeStyles((theme) => ({
   }),
 }));
 
+
+
+
+
 function AppContent(props) {
   const { accessToken, portalTabs, menuState, viewport } = props;
-
   const appAlerts = useSelector((state) => state.appAlerts);
-
   const classes = useStyles({
     // isUserLogged: accessToken.token ? true : false,
     isUserLogged: accessToken.token ? true : true,

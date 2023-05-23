@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import MeNavBarDisplay from '../common/others/MeNavBarDisplay';
 import { useDispatch } from 'react-redux';
 import { store } from '../../store';
 
 const AppTopBar = (props) => {
+  
+
   const dispatch = useDispatch();
   const { global, menuState } = store.getState();
 
   return (
-    <AppBar color="inherit" position="fixed">
+    <AppBar color="inherit" 
+      
+    >
+
       <Toolbar variant="dense" style={{ justifyContent: 'space-between' }}>
+        
         <div className="toolbar-left">
           <div>
             <IconButton
@@ -28,7 +33,9 @@ const AppTopBar = (props) => {
               }
               size="large"
             >
+
               <MenuIcon />
+              {/* {appBarLabel('Sistema Web de Subastas')} */}
             </IconButton>
             {menuState.current === 'icons' && <span>{global.portalName}</span>}
           </div>

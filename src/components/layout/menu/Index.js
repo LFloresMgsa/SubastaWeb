@@ -172,7 +172,7 @@ const _temp_tabs = [
     index: 6,
     tabID: 6,
     portalID: 9,
-    tabName: 'Mant. Cat. Imagenes',
+    tabName: 'Mant. Cat.Imagenes',
     title: '',
     description: '',
     parentId: -1,
