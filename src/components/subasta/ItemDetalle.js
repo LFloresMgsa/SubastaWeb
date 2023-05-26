@@ -154,7 +154,7 @@ const ItemDetalle = (props) => {
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2} a>
+                        <Grid item xs container direction="column" spacing={2} >
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1" component="div" align="left">
 
@@ -162,13 +162,21 @@ const ItemDetalle = (props) => {
 
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    <p><b>Propietario</b>: {detalle.Propietario}</p>
+                                    <b>Propietario</b>: {detalle.Propietario}
 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-                                    <p><b>Padre:</b> {detalle.Padre}</p>
-                                    <p><b>Madre:</b> {detalle.Madre}</p>
-                                    <p><b>Info:</b> {detalle.Info}</p>
+                                    <b>Padre:</b> {detalle.Padre}
+                                    </Typography>
+                                <Typography variant="body2" color="text.secondary" align="left">
+
+                                    <b>Madre:</b> {detalle.Madre}
+                                    </Typography>
+                                <Typography variant="body2" color="text.secondary" align="left">
+
+                                    <b>Info:</b> {detalle.Info}
+
+
                                 </Typography>
                             </Grid>
 
