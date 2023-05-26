@@ -134,7 +134,7 @@ const ImageSlider = ({
     <Wrapper {...props}>
       {images.map((imageUrl, index) => (
         <Slide
-          key={index}
+          key={index} {...imageUrl}
           style={{
             backgroundImage: `url(${imageUrl})`,
             width: '100%',
@@ -154,21 +154,18 @@ const ImageSlider = ({
       />
 
       <ChildrenWrapper>{children}</ChildrenWrapper>
-      {currentInfo.map(item => (
-        <div >
-          <Grid container spacing={1}>
-
-            <Grid item xs={12}>
-              <ImageContent>
-                <h2> {item.Lgt_cTitulo}</h2>
-                <br />
-                {item.Lgt_cComentario}
-              </ImageContent>
-            </Grid>
-          </Grid>
+      {currentInfo && (currentInfo.map((item, index) => (
+        <div key={item.Lgt_nIndice}>
+          <ImageContent >
+            <h2> {item.Lgt_cTitulo}</h2>
+            <br />
+            {item.Lgt_cComentario}
+          </ImageContent>
         </div>
 
-      ))}
+      ))
+      )
+      }
 
 
     </Wrapper>

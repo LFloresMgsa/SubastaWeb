@@ -279,7 +279,7 @@ const ItemProgramacionTienda = (
 
                 <Grid container spacing={1}>
                     {tienda.map((item) => (
-                        <Grid item xs={6} lg={3}>
+                        <Grid item xs={6} lg={3} key={`${item.Dvm_cNummov}-${item.Cab_cCatalogo}`}>
                             <Paper
                                 sx={{
                                     p: 1,
@@ -343,7 +343,6 @@ const ItemProgramacionTienda = (
                                 </ImageListItem>
                             </Paper>
                         </Grid>
-
                     ))}
                 </Grid>
 

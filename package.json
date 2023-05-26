@@ -66,6 +66,7 @@
         "react-dom": "^18.2.0",
         "react-dropzone": "^12.1.0",
         "react-google-recaptcha": "^2.1.0",
+        "react-helmet": "^6.1.0",
         "react-i18next": "^11.8.12",
         "react-icons": "^4.8.0",
         "react-imask": "^6.4.3",

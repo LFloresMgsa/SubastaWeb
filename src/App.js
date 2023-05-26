@@ -11,7 +11,7 @@ import AppContent from './AppContent';
 import AppTopBar from './components/layout/AppTopBar';
 import AppFooter from './components/layout/AppFooter';
 
-
+import { Helmet } from 'react-helmet';
 
 
 function App(props) {
@@ -84,6 +84,10 @@ function App(props) {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Galpon Legado</title>
+      </Helmet>
+
       {onServerError ? (
         <ThemeProvider theme={theme}>
           <h1>Error por el servicio no esta listo.</h1>

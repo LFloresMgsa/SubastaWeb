@@ -118,7 +118,7 @@ const EditaEventoDet = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA EVENTOS DETALLE:</h2>
+                        <h3>EDITA EVENTOS DETALLE:</h3>
                     </div>
 
                     <Grid container spacing={2}>
@@ -131,6 +131,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="empresa"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Año"

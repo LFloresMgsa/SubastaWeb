@@ -115,7 +115,7 @@ const EditaCatalogoImagenes = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA CATALOGO IMAGENES:</h2>
+                        <h3 >EDITA CATALOGO IMAGENES:</h3>
                     </div>
 
                     <Grid container spacing={2}>
@@ -129,7 +129,7 @@ const EditaCatalogoImagenes = (props) => {
                                 name="textformat"
                                 id="catalogo"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
 
                             <TextField

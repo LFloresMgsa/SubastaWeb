@@ -124,7 +124,7 @@ const EditaEvento = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA EVENTOS:</h2>
+                        <h3>EDITA EVENTOS:</h3>
                     </div>
 
                     <Grid container spacing={2}>
@@ -137,7 +137,7 @@ const EditaEvento = (props) => {
                                 name="textformat"
                                 id="Nro Movimiento"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
                             <TextField
                                 label="Año"
@@ -146,7 +146,7 @@ const EditaEvento = (props) => {
                                 name="textformat"
                                 id="Nro Movimiento"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
                             <TextField
                                 label="Periodo"
@@ -155,7 +155,7 @@ const EditaEvento = (props) => {
                                 name="textformat"
                                 id="Nro Movimiento"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
 
                             <TextField
@@ -165,7 +165,7 @@ const EditaEvento = (props) => {
                                 name="textformat"
                                 id="Nro Movimiento"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
 
                             <TextField

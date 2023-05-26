@@ -162,6 +162,7 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="empresa"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Año"
