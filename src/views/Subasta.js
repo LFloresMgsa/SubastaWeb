@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import { css, useTheme } from 'styled-components';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import ItemProgramacion from '../components/subasta/ItemProgramacion';
@@ -144,13 +144,18 @@ const Subasta = (props) => {
 
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="Subastas Activas" {...a11yProps(0)} />
-              <Tab label="Proximas Subastas" {...a11yProps(1)} />
-              <Tab label="Subastas Cerradas" {...a11yProps(2)} />
-              <Tab label="Bases" {...a11yProps(3)} />
-          </Tabs>
+
+        <Tabs value={value} onChange={handleChange}
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          aria-label="scrollable force tabs example"
+        >
+          <Tab label="Activas" {...a11yProps(0)} />
+          <Tab label="Proximamente" {...a11yProps(1)} />
+          <Tab label="Cerradas" {...a11yProps(2)} />
+          <Tab label="Bases" {...a11yProps(3)} />
+        </Tabs>
       </Box>
 
 
