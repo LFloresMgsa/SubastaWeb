@@ -2,17 +2,29 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
+
+import { Grid, Button, makeStyles } from '@material-ui/core';
+
+//import Button from '@mui/material/Button';
+//import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { eventoService } from '../../../services/evento.service';
 
 
-
+const useStyles = makeStyles({
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
 
 const EditaEventoPuja = (props) => {
+
+    const classes = useStyles();
+
     const history = useHistory()
     const [data, setData] = useState([])
     const [error, setError] = useState([])
@@ -118,6 +130,9 @@ const EditaEventoPuja = (props) => {
         setLoading(false);
     }
 
+
+
+
     return (
 
         <div>
@@ -139,7 +154,7 @@ const EditaEventoPuja = (props) => {
 
                     <Grid container spacing={2}>
 
-                        <Grid item xs={8}>
+                        <Grid item xs={12}>
                             <TextField
                                 label="Empresa"
                                 value={Emp_cCodigo}
@@ -260,20 +275,15 @@ const EditaEventoPuja = (props) => {
 
                     </Grid>
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={8}>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={editarEventoPuja}>Actualizar</Button>
-                                        </td>
-                                        <td>
-                                            <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <Grid container spacing={2} >
+                        <Grid item xs={6} className={classes.buttonContainer}>
+
+                            <Button variant="contained" size="small" color="primary" onClick={editarEventoPuja}>Actualizar</Button>
+
+                        </Grid>
+                        <Grid item xs={6} className={classes.buttonContainer}>
+                            <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
+
                         </Grid>
                     </Grid>
                 </Box >

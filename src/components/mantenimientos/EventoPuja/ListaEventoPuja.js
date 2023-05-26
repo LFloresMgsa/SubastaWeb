@@ -9,7 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+
 import { eventoService } from '../../../services/evento.service';
 
 import { storage } from "../../../storage.js";
@@ -113,93 +115,90 @@ const ListaEventoPuja = (props) => {
 
   return (
     <div>
-      <Paper
-        sx={{
-          p: 2,
-          margin: 1,
-          maxWidth: 'auto',
-          flexGrow: 1,
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        }}
-      >
-        <Box>
+      <Box sx={{ flexGrow: 1 }}>
 
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <Button variant="contained" size="small" color="primary"
-                    onClick={() => crear()} >Nuevo
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <TableContainer component={Paper}>
-                    <Table aria-label="customized table">
-                      <TableHead>
-                        <TableRow>
-
-                          <StyledTableCell align="right">Empresa</StyledTableCell>
-                          <StyledTableCell align="right">Año</StyledTableCell>
-                          <StyledTableCell align="center">Periodo</StyledTableCell>
-                          <StyledTableCell align="left">Movimiento</StyledTableCell>
-                          <StyledTableCell align="left">Catalogo</StyledTableCell>
-                          <StyledTableCell align="left">Correl</StyledTableCell>
-                          <StyledTableCell align="left">Doc ID</StyledTableCell>
-                          <StyledTableCell align="left">Nombres</StyledTableCell>
-
-                          <StyledTableCell align="left">Apellidos</StyledTableCell>
-                          <StyledTableCell align="left">Telefono</StyledTableCell>
-                          <StyledTableCell align="left">Correo</StyledTableCell>
-                          <StyledTableCell align="left">Importe</StyledTableCell>
-                          <StyledTableCell align="left">Estado</StyledTableCell>
-                          <StyledTableCell align="left">Fecha</StyledTableCell>
-
-                          <StyledTableCell align="left"></StyledTableCell>
-                          <StyledTableCell align="left"></StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {data.map((item, idx) => (
-                          <StyledTableRow item={item} key={idx}>
-
-                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                            <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
-                            <StyledTableCell align="center">{item.Dvd_nCorrel}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cDocID}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cNombres}</StyledTableCell>
-
-                            <StyledTableCell align="left">{item.Dvd_cApellidos}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cTelefono}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cCorreo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_nImporte}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
-
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell>
-                          </StyledTableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <Grid container spacing={1}>
 
 
+          <Paper
+            sx={{
+              p: 2,
+              margin: 1,
+              maxWidth: 'auto',
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+
+            <Grid item xs={12} >
+
+              <Button variant="contained" size="small" color="primary"
+                onClick={() => crear()} >Nuevo
+              </Button>
+
+            </Grid>
+            <Grid item xs={12} >
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+
+                      <StyledTableCell align="right">Empresa</StyledTableCell>
+                      <StyledTableCell align="right">Año</StyledTableCell>
+                      <StyledTableCell align="center">Periodo</StyledTableCell>
+                      <StyledTableCell align="left">Movimiento</StyledTableCell>
+                      <StyledTableCell align="left">Catalogo</StyledTableCell>
+                      <StyledTableCell align="left">Correl</StyledTableCell>
+                      <StyledTableCell align="left">Doc ID</StyledTableCell>
+                      <StyledTableCell align="left">Nombres</StyledTableCell>
+
+                      <StyledTableCell align="left">Apellidos</StyledTableCell>
+                      <StyledTableCell align="left">Telefono</StyledTableCell>
+                      <StyledTableCell align="left">Correo</StyledTableCell>
+                      <StyledTableCell align="left">Importe</StyledTableCell>
+                      <StyledTableCell align="left">Estado</StyledTableCell>
+                      <StyledTableCell align="left">Fecha</StyledTableCell>
+
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {data.map((item, idx) => (
+                      <StyledTableRow item={item} key={idx}>
+
+                        <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
+                        <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
+                        <StyledTableCell align="center">{item.Dvd_nCorrel}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_cDocID}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_cNombres}</StyledTableCell>
+
+                        <StyledTableCell align="left">{item.Dvd_cApellidos}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_cTelefono}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_cCorreo}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_nImporte}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
+
+                        <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Editar</Button></StyledTableCell>
+                        <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+          </Paper>
+
+        </Grid>
+      </Box >
 
 
-        </Box>
-
-      </Paper>
-    </div>
+    </div >
   )
 }
 

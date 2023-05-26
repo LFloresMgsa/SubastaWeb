@@ -171,7 +171,7 @@ const CabeceraDetalle = (props) => {
       <Box sx={{ width: '100%', flexGrow: 1 }}>
 
         <Grid container spacing={0}>
-          <Grid item xs={6}>
+          <Grid item xs={12} lg={6}>
             <Paper
               sx={{
                 p: 2,
@@ -199,7 +199,7 @@ const CabeceraDetalle = (props) => {
               />
             </Paper>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} lg={6}>
             <Paper
               sx={{
                 p: 2,
