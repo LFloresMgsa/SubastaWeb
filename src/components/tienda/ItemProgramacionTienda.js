@@ -184,7 +184,7 @@ const ItemProgramacionTienda = (
     //#region Validacion al presionar la tecloa f5
     useEffect(() => {
         const handleKeyDown = (event) => {
-            if (event.keyCode === 116 ) {
+            if (event.keyCode === 116) {
                 event.preventDefault();
             }
         };
@@ -218,9 +218,9 @@ const ItemProgramacionTienda = (
         } else {
 
             // solo debe validar el cambio de pagina si el carrito tiene items y la pafina es diferente de finalizart compra
-            if (allProducts.length > 0  &&  nextLocation.pathname !="/FinalizarCompra") {
+            if (allProducts.length > 0 && nextLocation.pathname != "/FinalizarCompra") {
                 // Mostrar la alerta de confirmación
-                
+
 
 
                 const confirmed = window.confirm('¿Seguro que quieres abandonar esta página? Puede perderse el Carrito.');
@@ -276,73 +276,77 @@ const ItemProgramacionTienda = (
 
             </List>
             <Box sx={{ width: '100%' }}>
-                <ImageList cols={4} >
+
+                <Grid container spacing={1}>
                     {tienda.map((item) => (
+                        <Grid item xs={6} lg={3}>
+                            <Paper
+                                sx={{
+                                    p: 1,
+                                    margin: 0.5,
+                                    maxWidth: 'auto',
+                                    flexGrow: 1,
+                                    backgroundColor: (theme) =>
+                                        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                                }}
+                            >
+                                <ImageListItem key={item.cab_cenlace}>
 
-                        <Paper
-                            sx={{
-                                p: 1,
-                                margin: 0.5,
-                                maxWidth: 'auto',
-                                flexGrow: 1,
-                                backgroundColor: (theme) =>
-                                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                            }}
-                        >
-                            <ImageListItem key={item.cab_cenlace}>
+                                    <Grid container spacing={0}>
+                                        <Grid item xs={12}>
+                                            <ButtonBase sx={{ width: '100%' }} >
+                                                <Img alt="complex" src={item.cab_cenlace}
+                                                    onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)} />
+                                                <Modal
+                                                    open={open}
+                                                    onClose={handleClose}
+                                                    aria-labelledby="modal-modal-title"
+                                                    aria-describedby="modal-modal-description"
+                                                >
+                                                    <Box sx={style}>
 
-                                <Grid container spacing={0}>
-                                    <Grid item xs={12}>
-                                        <ButtonBase sx={{ width: '100%' }} >
-                                            <Img alt="complex" src={item.cab_cenlace}
-                                                onClick={() => obtenerSubastaSlider(item.Cab_cCatalogo)} />
-                                            <Modal
-                                                open={open}
-                                                onClose={handleClose}
-                                                aria-labelledby="modal-modal-title"
-                                                aria-describedby="modal-modal-description"
-                                            >
-                                                <Box sx={style}>
+                                                        <ItemCarousel images={imagenesSlide} />
 
-                                                    <ItemCarousel images={imagenesSlide} />
+                                                    </Box>
+                                                </Modal>
+                                            </ButtonBase>
+                                        </Grid>
 
-                                                </Box>
-                                            </Modal>
-                                        </ButtonBase>
-                                    </Grid>
+                                        <Grid item xs={12}>
+                                            <p><br /></p>
+                                        </Grid>
 
-                                    <Grid item xs={12}>
-                                        <ul>
-                                            <li><b>Codigo:</b>{item.Cab_cCatalogo}</li>
-                                            <li><p><b>Nombre:</b> {item.Cab_cDescripcion}</p></li>
 
-                                            <li><p><b>Placa:</b> {item.Placa}</p></li>
-                                            <li><p><b>Propietario</b>: {item.Propietario}</p></li>
-                                            {/* <li><p><b>Padre:</b> {item.Padre}</p></li>
+                                        <Grid item xs={12}>
+                                            <ul>
+                                                <li><b>Codigo:</b>{item.Cab_cCatalogo}</li>
+                                                <li><p><b>Nombre:</b> {item.Cab_cDescripcion}</p></li>
+
+                                                <li><p><b>Placa:</b> {item.Placa}</p></li>
+                                                <li><p><b>Propietario</b>: {item.Propietario}</p></li>
+                                                {/* <li><p><b>Padre:</b> {item.Padre}</p></li>
                                             <li><p><b>Madre:</b> {item.Madre}</p></li> */}
-                                            <li><p><b>Info:</b> {item.Info}</p></li>
-                                            <li><p><b>Precio:</b> S/. {ccyFormat(item.Dvd_nImporte)}</p></li>
-                                        </ul>
+                                                <li><p><b>Info:</b> {item.Info}</p></li>
+                                                <li><p><b>Precio:</b> S/. {ccyFormat(item.Dvd_nImporte)}</p></li>
+                                            </ul>
 
 
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <p><br /></p>
+                                        </Grid>
+                                        <Grid item xs={12} alignContent={"end"}>
+                                            <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <p>.</p>
-                                    </Grid>
-                                    <Grid item xs={12} alignContent={"end"}>
-                                        <Button variant="contained" size="small" color="primary" onClick={() => onAddProduct(item)}  >Agregar Carrito</Button>
-                                    </Grid>
 
-
-                                </Grid>
-
-                            </ImageListItem>
-                        </Paper>
-
+                                </ImageListItem>
+                            </Paper>
+                        </Grid>
 
                     ))}
+                </Grid>
 
-                </ImageList>
             </Box>
 
         </div >

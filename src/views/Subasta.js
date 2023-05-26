@@ -10,6 +10,7 @@ import Bases from '../components/subasta/bases';
 import Button from '@mui/material/Button';
 import { eventoService } from '../services/evento.service';
 import { storage } from "../storage.js";
+import Grid from '@mui/material/Grid';
 
 const SubastaStyled = styled('div')(
   ({ theme }) => css`
@@ -143,13 +144,13 @@ const Subasta = (props) => {
 
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-
-          <Tab label="Subastas Activas" {...a11yProps(0)} />
-          <Tab label="Proximas Subastas" {...a11yProps(1)} />
-          <Tab label="Subastas Cerradas" {...a11yProps(2)} />
-          <Tab label="Bases" {...a11yProps(3)} />
-        </Tabs>
+        
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="Subastas Activas" {...a11yProps(0)} />
+              <Tab label="Proximas Subastas" {...a11yProps(1)} />
+              <Tab label="Subastas Cerradas" {...a11yProps(2)} />
+              <Tab label="Bases" {...a11yProps(3)} />
+          </Tabs>
       </Box>
 
 
@@ -165,7 +166,7 @@ const Subasta = (props) => {
         {subastasProximas.map((subastaproxima, index) => (
           <ItemProgramacion key={index} {...subastaproxima} IndicePanel="1" />
         ))}
-      </TabPanel>s
+      </TabPanel>
 
       <TabPanel value={value} index={2}>
         <h1>Subastas Cerradas</h1>
