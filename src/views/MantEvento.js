@@ -16,7 +16,7 @@ class MantVideoteca extends Component {
             <div >
 
                 <div>
-                    <h1>Mantenimiento - Eventos</h1>
+                    <h3>Mantenimiento - Eventos</h3>
                 </div>
 
                 <ListaEvento />      

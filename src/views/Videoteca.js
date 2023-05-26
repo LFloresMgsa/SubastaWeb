@@ -6,15 +6,15 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import ImageList from '@mui/material/ImageList';
 import '../css/Video.css';
-
+import Grid from '@mui/material/Grid';
 
 import { storage } from "../storage.js";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     maxWidth: 345,
+//   },
+// });
 
 function Videoteca() {
   const [videos, setVideos] = useState([]);
@@ -37,6 +37,32 @@ function Videoteca() {
   };
 
 
+  const [playerWidth, setPlayerWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPlayerWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  let gridItemSize;
+  let playerAspectRatio;
+
+  if (playerWidth >= 1280) {
+    // En una computadora (Grid dividido en 3 partes)
+    gridItemSize = 4;
+    playerAspectRatio = 16 / 9;
+  } else {
+    // En un equipo móvil (Grid en una columna del 100%)
+    gridItemSize = 12;
+    playerAspectRatio = 4 / 3;
+  }
 
   useEffect(() => {
     obtenerVideos();
@@ -47,64 +73,62 @@ function Videoteca() {
 
     <div>
       <div>
-        <h1>Videoteca</h1>
+        <h3>Videoteca</h3>
       </div>
       <div >
 
         <ImageList cols={1} >
-          {videos.map(video => (
+          <Grid container spacing={1}>
+            {videos.map(video => (
 
-            <Paper
-              sx={{
-                p: 1,
-                margin: 2,
-                maxWidth: 'auto',
-                width: 'auto',
-                flexGrow: 1,
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-              }}
-
-            >
-
-              <div>
-                <br></br>
-                <h2>{video.Lgt_cTitulo}</h2>
-                <br></br>
-              </div>
-
-              <div >
-                <ReactPlayer
-                  
-                  url={video.Lgt_cURL}
-                  controls
-                  loop
-
-
-                />
-              </div>
-              <div>
-                <br></br>
-                <h3>Contenido: </h3>
-                <TextField
-                  label=""
-                  multiline
-
-                  value={video.Lgt_cComentario}
-                  InputProps={{
-                    readOnly: true,
-                  }}
+              <Grid item xs={gridItemSize}>
+                <Paper
                   sx={{
-                    "& fieldset": { border: 'none' },
+                    p: 2,
+                    margin: 1,
+                    maxWidth: 'auto',
+                    flexGrow: 1,
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                   }}
-                />
+                >
+                  <div>
+                    <div>
+                      <h3>{video.Lgt_cTitulo}</h3>
+                    </div>
 
+                    <div >
+                      <ReactPlayer
+                        url={video.Lgt_cURL}
+                        style={{ width: '100%' }}
+                        width="100%"
+                        height="100%"
+                        controls
+                        loop
+                      />
+                    </div>
+                    <div>
+                      <br></br>
+                      <h3>Contenido: </h3>
+                      <TextField
+                        label=""
+                        multiline
 
+                        value={video.Lgt_cComentario}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        sx={{
+                          "& fieldset": { border: 'none' },
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Paper>
+              </Grid>
 
-              </div>
-            </Paper>
-          ))}
-
+            ))}
+          </Grid>
         </ImageList>
 
       </div>

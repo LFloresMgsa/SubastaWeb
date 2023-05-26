@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Grid from '@mui/material/Grid';
 
 
 const IndicatorWrapper = styled.div`
@@ -47,8 +48,9 @@ const ChildrenWrapper = styled.div`
 
 const ImageTitle = styled.div`
   position: absolute;
-  top: 60%;
   left: 50%;
+  top: 45%;
+  
   color: #fff;
   text-shadow: 0 0 0.5rem rgb(9, 9, 34);
 	font-size: 2rem;
@@ -60,6 +62,7 @@ const ImageTitle = styled.div`
 const ImageContent = styled.div`
   position: absolute;
   left: 50%;
+  top: 70%;
   color: #fff;
   text-shadow: 0 0 0.5rem rgb(9, 9, 34);
 	font-size: 1.5rem;
@@ -134,8 +137,8 @@ const ImageSlider = ({
           key={index}
           style={{
             backgroundImage: `url(${imageUrl})`,
-            width:'100%',
-            height:'100%',
+            width: '100%',
+            height: '100%',
             marginLeft: index === 0 ? `-${currentSlide * 100}%` : undefined,
           }}
         >
@@ -152,23 +155,19 @@ const ImageSlider = ({
 
       <ChildrenWrapper>{children}</ChildrenWrapper>
       {currentInfo.map(item => (
-        <table >
-          <tbody>
-            <tr>
-              <td>
-                <ImageTitle>{item.Lgt_cTitulo}</ImageTitle>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <ImageContent><ol>
-                  <li>{item.Lgt_cComentario}</li>
-                </ol>
-                </ImageContent>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div >
+          <Grid container spacing={1}>
+
+            <Grid item xs={12}>
+              <ImageContent>
+                <h2> {item.Lgt_cTitulo}</h2>
+                <br />
+                {item.Lgt_cComentario}
+              </ImageContent>
+            </Grid>
+          </Grid>
+        </div>
+
       ))}
 
 

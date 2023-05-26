@@ -16,7 +16,7 @@ class MantCatalogo extends Component {
             <div >
 
                 <div>
-                    <h1>Mantenimiento - Catalogo</h1>
+                    <h3>Mantenimiento - Catalogo</h3>
                 </div>
 
                 <ListaCatalogo />

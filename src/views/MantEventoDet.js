@@ -16,7 +16,7 @@ class MantEventoDet extends Component {
             <div >
 
                 <div>
-                    <h1>Mantenimiento - Evento Detalle</h1>
+                    <h3>Mantenimiento - Evento Detalle</h3>
                 </div>
 
                 <ListaEventoDet />      

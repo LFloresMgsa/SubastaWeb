@@ -17,7 +17,7 @@ class MantCatalogoImagenes extends Component {
             <div >
 
                 <div>
-                    <h1>Mantenimiento - Catalogo Imagenes</h1>
+                    <h3>Mantenimiento - Catalogo Imagenes</h3>
                 </div>
 
                 <ListaCatalogoImagenes />                

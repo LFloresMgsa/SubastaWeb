@@ -68,7 +68,7 @@ img {
 	right: 0;
 
 	background-color: #fff;
-	width: 600px;
+	width: 320px;
 	z-index: 1;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
@@ -206,7 +206,7 @@ img {
 
 .btn-save-all {
 	border: none;
-	background-color: #032e7d;
+	background-color: #7e7e7e;
 	color: #fff;
 	padding: 15px 0;
 	display: block;
@@ -220,9 +220,9 @@ img {
   transition: all .3s ease;
 }
 .btn-save-all:hover{
-	background-color: #032e7d;
+	background-color: #7e7e7e;
 	color: #ffee00;
-	transform: scale(1.03);
+	transform: scale(1);
 	border-radius: 0;
   }
 
@@ -243,8 +243,8 @@ img {
 }
 
 .btn-clear-all:hover{
-  background-color: #3b78da;
+  background-color: #c8c8c8;
   color: #fff;
-  transform: scale(1.03);
+  transform: scale(1);
   border-radius: 0;
 }

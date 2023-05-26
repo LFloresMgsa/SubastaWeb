@@ -15,7 +15,7 @@ class MantPedido extends Component {
         return (
             <div >
                 <div>
-                    <h1>Mantenimiento - Pedido</h1>
+                    <h3>Mantenimiento - Pedido</h3>
                 </div>
 
                 <ListaPedido />

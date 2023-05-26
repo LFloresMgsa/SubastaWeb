@@ -56,7 +56,7 @@ const Tienda = (props) => {
       />
 
       <Box sx={{ width: '100%' }}>
-      <h1>Tienda</h1>
+      <h3>Tienda</h3>
 
         {tiendaActual.map((item, index) => (
           <ItemProgramacionTienda key={index} {...item} IndicePanel="0"

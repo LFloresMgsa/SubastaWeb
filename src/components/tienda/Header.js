@@ -6,9 +6,10 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+
 import { useHistory, useParams } from 'react-router-dom';
 import { storage } from "../../storage.js";
+import Paper from '@mui/material/Paper';
 
 
 import '../../css/carrito.css';
@@ -53,13 +54,13 @@ export const Header = ({
 		setTotal(total - product.Dvd_nImporte * product.quantity);
 		setCountProducts(countProducts - product.quantity);
 
-		storage.SetStorageObj("Carrito",results);
+		storage.SetStorageObj("Carrito", results);
 
 		setAllProducts(results);
 	};
 
 	const onCleanCart = () => {
-		storage.SetStorageObj("Carrito",[]);
+		storage.SetStorageObj("Carrito", []);
 		setAllProducts([]);
 		setTotal(0);
 		setCountProducts(0);
@@ -72,8 +73,8 @@ export const Header = ({
 		history.push({
 			pathname: '/FinalizarCompra',
 			state: allProducts
-			
-		  });
+
+		});
 
 		//setAllProducts([]);
 		//setTotal(0);
@@ -81,7 +82,6 @@ export const Header = ({
 	};
 
 	return (
-		<header>
 
 
 			<div className='container-icon'>
@@ -89,16 +89,15 @@ export const Header = ({
 					className='container-cart-icon'
 					onClick={() => setActive(!active)}
 				>
-					
-					
+
+
 					<div className='count-products'>
 						<span id='contador-productos'>{countProducts}</span>
 					</div>
 				</div>
 
 				<div
-					className={`container-cart-products ${active ? '' : 'hidden-cart'
-						}`}
+					className={`container-cart-products ${active ? '' : 'hidden-cart'}`}
 				>
 					{allProducts.length ? (
 						<>
@@ -111,9 +110,9 @@ export const Header = ({
 
 											<StyledTableCell align="left">Cant.</StyledTableCell>
 											<StyledTableCell align="left">Descripción</StyledTableCell>
-											<StyledTableCell align="left">Codigo</StyledTableCell>
+											
 											<StyledTableCell align="left">Precio</StyledTableCell>
-											<StyledTableCell align="left">Elim.</StyledTableCell>
+											<StyledTableCell align="left">Quitar</StyledTableCell>
 										</TableRow>
 									</TableHead>
 									<TableBody>
@@ -123,7 +122,7 @@ export const Header = ({
 
 												<StyledTableCell align="left">{product.quantity}</StyledTableCell>
 												<StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
-												<StyledTableCell align="left"> {product.Cab_cCatalogo}</StyledTableCell>
+												
 												<StyledTableCell align="rigth">S/. {product.Dvd_nImporte}</StyledTableCell>
 												<StyledTableCell align="rigth">
 													<svg
@@ -166,6 +165,6 @@ export const Header = ({
 					)}
 				</div>
 			</div>
-		</header>
+	
 	);
 };

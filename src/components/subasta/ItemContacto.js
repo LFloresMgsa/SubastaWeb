@@ -294,7 +294,7 @@ const ItemContacto = (props) => {
 
                 <Grid container spacing={1}>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={12} lg={4}>
 
                         <Paper
                             sx={{
@@ -382,7 +382,7 @@ const ItemContacto = (props) => {
 
                         
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} lg={8}>
                         <Paper
                             sx={{
                                 p: 2,
