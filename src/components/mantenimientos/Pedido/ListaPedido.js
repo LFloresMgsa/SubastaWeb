@@ -274,6 +274,21 @@ const CabeceraDetalle = (props) => {
 
             </Paper>
 
+            <Paper
+              sx={{
+                p: 2,
+                margin: 1,
+                maxWidth: 'auto',
+                height: '100%',
+                flexGrow: 1,
+                backgroundColor: (theme) =>
+                  theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+              }}
+            >
+                <div>
+                  <h2>Cambio de Estado de Pedido : {data.Pdm_cNummov}</h2>              
+                  </div>
+            </Paper>
           </Grid>
         </Grid>
       </Box>
