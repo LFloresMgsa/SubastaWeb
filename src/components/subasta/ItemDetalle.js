@@ -285,7 +285,7 @@ const ItemDetalle = (props) => {
                             </Grid>
 
                         </Grid>
-                        <Grid item xs={12} lg={6}>
+                        <Grid item xs={12} lg={6} >
                             <Typography variant="h6" component="div" color="primary">
 
                                 <b>Precio Base : S/. {detalle.Dvd_nImporte}</b>
