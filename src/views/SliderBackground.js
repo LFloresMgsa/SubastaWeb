@@ -77,7 +77,7 @@ const Gradient = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0);
 `;
 
 const Indicator = ({ currentSlide, amountSlides, nextSlide }) => {
@@ -99,7 +99,7 @@ const Indicator = ({ currentSlide, amountSlides, nextSlide }) => {
 const ImageSlider = ({
   images = [],
   autoPlay = true,
-  autoPlayTime = 4000,
+  autoPlayTime = 10000,
   children,
   data = [],
   ...props

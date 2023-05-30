@@ -307,7 +307,7 @@ const ItemContacto = (props) => {
                             }}
                         >
                             <div align="left">
-                                <h2 >Contacto:</h2>
+                                <h3 >Contacto:</h3>
                             </div>
 
                             <Grid container spacing={2}>

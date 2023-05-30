@@ -70,9 +70,9 @@ const Itemprogramacion = (props) => {
                                     variant="body2"
                                     color="text.primary"
                                 >
-
+                                    {`Inicio : ${props.Dvm_dInicio} - Término: ${props.Dvm_dFin}`}
                                 </Typography>
-                                {`Inicio : ${props.Dvm_dInicio} - Termino: ${props.Dvm_dFin}`}
+
 
                             </React.Fragment>
                         }
@@ -80,11 +80,11 @@ const Itemprogramacion = (props) => {
                 </ListItem>
             </List>
             <Grid container spacing={1}>
-                    {subastas.map((subasta) => (
-                        <Grid item xs={6} lg={3}  key={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`}>
-                            <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo} />
-                        </Grid>
-                    ))}
+                {subastas.map((subasta) => (
+                    <Grid item xs={6} lg={3} key={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`}>
+                        <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo} />
+                    </Grid>
+                ))}
             </Grid>
         </div>
     );

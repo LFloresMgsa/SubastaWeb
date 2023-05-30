@@ -154,7 +154,7 @@ const Login = () => {
 					<Avatar className={classes.avatar}>
 						<LockOutlinedIcon />
 					</Avatar>
-					<Typography component='h1' variant='h5'>Ingreso al sistema</Typography>
+					<Typography component='h1' variant='h5'>Galpón Legado</Typography>
 					<form className={classes.form}>
 						<TextField
 							fullWidth

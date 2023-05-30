@@ -13,7 +13,7 @@ const Logout = () => {
         cookies.remove('Sgm_cObservaciones', { path: "/" });
         cookies.remove('token', { path: "/" });
 
-        window.location.href = "./login";
+        window.location.href = "./inicio";
     }
 
     // Load de pagina

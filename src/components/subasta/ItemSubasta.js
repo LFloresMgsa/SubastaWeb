@@ -20,6 +20,39 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
+import img1020 from '../../assets/ejemplares/1020.jpg'
+import img1032 from '../../assets/ejemplares/1032.jpg'
+import img1054 from '../../assets/ejemplares/1054.jpg'
+import img1056 from '../../assets/ejemplares/1056.jpg'
+import img7302 from '../../assets/ejemplares/7302.jpg'
+import img7399 from '../../assets/ejemplares/7399.jpg'
+import img7610 from '../../assets/ejemplares/7610.jpg'
+import img7656 from '../../assets/ejemplares/7656.jpg'
+import img7664 from '../../assets/ejemplares/7664.jpg'
+import img7680 from '../../assets/ejemplares/7680.jpg'
+import img7699 from '../../assets/ejemplares/7699.jpg'
+import img7796 from '../../assets/ejemplares/7796.jpg'
+import img7799 from '../../assets/ejemplares/7799.jpg'
+import img7821 from '../../assets/ejemplares/7821.jpg'
+import img7874 from '../../assets/ejemplares/7874.jpg'
+import img7905 from '../../assets/ejemplares/7905.jpg'
+import img7906 from '../../assets/ejemplares/7906.jpg'
+import img7908 from '../../assets/ejemplares/7908.jpg'
+import img7935 from '../../assets/ejemplares/7935.jpg'
+import img7936 from '../../assets/ejemplares/7936.jpg'
+import img7945 from '../../assets/ejemplares/7945.jpg'
+import img7946 from '../../assets/ejemplares/7946.jpg'
+import img7961 from '../../assets/ejemplares/7961.jpg'
+import img8038 from '../../assets/ejemplares/8038.jpg'
+import img8039 from '../../assets/ejemplares/8039.jpg'
+import img8053 from '../../assets/ejemplares/8053.jpg'
+import img8057 from '../../assets/ejemplares/8057.jpg'
+import img8075 from '../../assets/ejemplares/8075.jpg'
+import img8128 from '../../assets/ejemplares/8128.jpg'
+import img8163 from '../../assets/ejemplares/8163.jpg'
+
+
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -85,14 +118,15 @@ const Item = (props) => {
             >
                 <ImageListItem >
                     <img
-                        src={`${props.cab_cenlace}?w=248&fit=crop&auto=format`}
-                        srcSet={`${props.cab_cenlace}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    //src={props.cab_cenlace}
+                         src={`${props.cab_cenlace}?w=248&fit=crop&auto=format`}
+                         srcSet={`${props.cab_cenlace}?w=248&fit=crop&auto=format&dpr=2 2x`}
                         alt={props.Cab_cDescripcion}
                         loading="lazy"
                     />
                     <ImageListItemBar
-                        title={`${props.Placa} - PUJAR POR N° ${props.Cab_cCatalogo} `}
-                        subtitle={props.Propietario}
+                        title={`PUJAR POR: ${props.Placa}`}
+                        subtitle={`PROPIETARIO:${props.Propietario}`}
                         actionicon={
                             <IconButton
                                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
@@ -109,7 +143,7 @@ const Item = (props) => {
                             <tr>
                                 <td>
 
-                                    <Button variant="contained" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
+                                    <Button variant="outlined" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
                                     <Modal
                                         open={open}
                                         onClose={handleClose}
@@ -117,8 +151,8 @@ const Item = (props) => {
                                         aria-describedby="modal-modal-description"
                                     >
                                         <Box sx={style}>
-                                            <h2>
-                                                <b>INFORMACION DEL EJEMPLAR</b></h2>
+                                            <h3>
+                                                <b>INFORMACION DEL EJEMPLAR</b></h3>
                                             <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
                                             <p><b>Placa:</b> {props.Placa}</p>
                                             <p><b>Propietario</b>: {props.Propietario}</p>
@@ -130,7 +164,10 @@ const Item = (props) => {
                                     </Modal>
 
                                 </td>
+                                <td>
+                                    <p>-</p>
 
+                                </td>
                                 <td>
                                     <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Subasta</Button>
 
@@ -146,3 +183,4 @@ const Item = (props) => {
 };
 
 export default Item;
+

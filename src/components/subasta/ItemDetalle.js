@@ -17,6 +17,37 @@ import { eventoService } from '../../services/evento.service';
 
 import { storage } from "../../storage.js";
 
+import img1020 from '../../assets/ejemplares/1020.jpg'
+import img1032 from '../../assets/ejemplares/1032.jpg'
+import img1054 from '../../assets/ejemplares/1054.jpg'
+import img1056 from '../../assets/ejemplares/1056.jpg'
+import img7302 from '../../assets/ejemplares/7302.jpg'
+import img7399 from '../../assets/ejemplares/7399.jpg'
+import img7610 from '../../assets/ejemplares/7610.jpg'
+import img7656 from '../../assets/ejemplares/7656.jpg'
+import img7664 from '../../assets/ejemplares/7664.jpg'
+import img7680 from '../../assets/ejemplares/7680.jpg'
+import img7699 from '../../assets/ejemplares/7699.jpg'
+import img7796 from '../../assets/ejemplares/7796.jpg'
+import img7799 from '../../assets/ejemplares/7799.jpg'
+import img7821 from '../../assets/ejemplares/7821.jpg'
+import img7874 from '../../assets/ejemplares/7874.jpg'
+import img7905 from '../../assets/ejemplares/7905.jpg'
+import img7906 from '../../assets/ejemplares/7906.jpg'
+import img7908 from '../../assets/ejemplares/7908.jpg'
+import img7935 from '../../assets/ejemplares/7935.jpg'
+import img7936 from '../../assets/ejemplares/7936.jpg'
+import img7945 from '../../assets/ejemplares/7945.jpg'
+import img7946 from '../../assets/ejemplares/7946.jpg'
+import img7961 from '../../assets/ejemplares/7961.jpg'
+import img8038 from '../../assets/ejemplares/8038.jpg'
+import img8039 from '../../assets/ejemplares/8039.jpg'
+import img8053 from '../../assets/ejemplares/8053.jpg'
+import img8057 from '../../assets/ejemplares/8057.jpg'
+import img8075 from '../../assets/ejemplares/8075.jpg'
+import img8128 from '../../assets/ejemplares/8128.jpg'
+import img8163 from '../../assets/ejemplares/8163.jpg'
+
 const Img = styled('img')({
     margin: 'auto',
     display: 'block',
@@ -100,7 +131,7 @@ const ItemDetalle = (props) => {
 
 
 
-      //  console.log(detalle);
+        //  console.log(detalle);
     }, [detalle]);
 
 
@@ -136,9 +167,13 @@ const ItemDetalle = (props) => {
                 }}
             >
                 <Grid container spacing={2}>
-                    <Grid item>
-                        <ButtonBase sx={{ width: 150, height: 150 }}>
-                            <Img alt="complex" src={detalle.cab_cenlace} onClick={obtenerSubastaSlider} />
+                    <Grid item sx={{ width: 200, height: 200 }}>
+                        <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} />
+                        {/* <ButtonBase sx={{ width: 150, height: 150 }}>
+                            
+                            
+                            
+                            <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} onClick={obtenerSubastaSlider} /> 
                             <Modal
                                 open={open}
                                 onClose={handleClose}
@@ -151,14 +186,14 @@ const ItemDetalle = (props) => {
 
                                 </Box>
                             </Modal>
-                        </ButtonBase>
+                        </ButtonBase>  */}
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2} >
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1" component="div" align="left">
 
-                                    <b>Placa: {detalle.Placa} - PUJAR POR N° {detalle.Cab_cCatalogo}</b>
+                                    <b>PUJAR POR N° {detalle.Placa}</b>
 
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
@@ -167,16 +202,15 @@ const ItemDetalle = (props) => {
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
                                     <b>Padre:</b> {detalle.Padre}
-                                    </Typography>
+                                </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-
                                     <b>Madre:</b> {detalle.Madre}
-                                    </Typography>
+                                </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-
                                     <b>Info:</b> {detalle.Info}
-
-
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" align="left">
+                                    <b>Codigo:</b> {detalle.Cab_cCatalogo}
                                 </Typography>
                             </Grid>
 

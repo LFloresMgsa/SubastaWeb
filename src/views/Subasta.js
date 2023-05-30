@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import { eventoService } from '../services/evento.service';
 import { storage } from "../storage.js";
 import Grid from '@mui/material/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const SubastaStyled = styled('div')(
   ({ theme }) => css`
@@ -59,11 +60,59 @@ function a11yProps(index) {
 
 const Subasta = (props) => {
   const [value, setValue] = React.useState(0);
+  
+  const [serverTime, setServerTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const [subastasActual, setSubastasActual] = React.useState([]);
   const [subastasProximas, setSubastasProximas] = React.useState([]);
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
 
+
+  useEffect(() => {
+    const fetchServerTime = async () => {
+      try {
+
+        let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+
+        return await eventoService.horaservidor(_body).then(
+          (res) => {
+            const timeString = res.time;
+            const [hours, minutes, seconds] = timeString.split(':');
+            const date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            date.setSeconds(seconds);
+
+            setCurrentTime(date);
+          },
+          (error) => {
+            console.log(error);
+
+          }
+        );
+
+
+      } catch (error) {
+        console.error('Error fetching server time:', error);
+      }
+    };
+
+    fetchServerTime();
+  }, []);
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
 
 
   const obtenerSubastaactual = async () => {
@@ -160,28 +209,33 @@ const Subasta = (props) => {
 
 
       <TabPanel value={value} index={0}>
-        <h3>Bienvenido a la Subasta</h3>
+      
+      
+        <h3>Subasta Activa</h3>
+        <Typography variant="h6" component="h3">
+        <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
+        </Typography>
         {subastasActual.map((subastaactual, index) => (
           <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />
         ))}
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <h1>Proximas Subastas</h1>
+        <h3>Proximas Subastas</h3>
         {subastasProximas.map((subastaproxima, index) => (
           <ItemProgramacion key={index} {...subastaproxima} IndicePanel="1" />
         ))}
       </TabPanel>
 
       <TabPanel value={value} index={2}>
-        <h1>Subastas Cerradas</h1>
+        <h3>Subastas Cerradas</h3>
         {subastasCerradas.map((subastacerrada, index) => (
           <ItemProgramacion key={index} {...subastacerrada} IndicePanel="2" />
         ))}
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <h1>Bases de la Subasta</h1>
+        <h3>Bases de la Subasta</h3>
         <Bases />
 
       </TabPanel>

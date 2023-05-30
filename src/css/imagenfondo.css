@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh; /* Ajusta el valor según sea necesario */
+    overflow: hidden;
+  }
+  
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -100px;
+  }
+  
+  .centered-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  

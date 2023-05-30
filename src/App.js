@@ -85,7 +85,7 @@ function App(props) {
   return (
     <Fragment>
       <Helmet>
-        <title>Galpon Legado</title>
+        <title>Galpón Legado</title>
       </Helmet>
 
       {onServerError ? (

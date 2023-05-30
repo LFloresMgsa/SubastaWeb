@@ -16,6 +16,7 @@ export const eventoService = {
   obtenerPedidoCab,
   obtenerPedidoDet,
   GrabarPedido,
+  horaservidor,
 
   obtenerEventosCabAuth,
   obtenerEventosDetAuth,
@@ -153,6 +154,17 @@ function obtenerToken(dataJson) {
   );
 }
 
+function horaservidor(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/time`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+
 // SERVICIOS CON AUTORIZACION
 
 function obtenerEventosCabAuth(dataJson) {
@@ -235,3 +247,4 @@ function obtenerPedidoDetAuth(dataJson) {
     handleResponse(res, false)
   );
 }
+

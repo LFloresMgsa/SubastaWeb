@@ -60,7 +60,7 @@ const AppFooter = () => {
 
       <Divider />
       <div >
-        <div>Copyright 2023 Management Group S.A.</div>
+        <div>Copyright 2023 Galpon Legado</div>
         <div>.</div>
 
       </div>

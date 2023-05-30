@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { eventoService } from '../services/evento.service.js';
-
-
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import GlobalStyles from './GlobalStyles.jsx';
 import ImageSlider from './SliderBackground.js'
+import '../css/imagenfondo.css'
+
 
 
 import image1 from "../assets/images/slide_1.jpeg";
@@ -18,6 +20,7 @@ import { storage } from "../storage.js";
 
 import WebPage from "./WebPage.js"
 
+import fondo from '../assets/eventos/campeonato202305B.png'
 
 const Dashboard = () => {
 
@@ -49,9 +52,36 @@ const Dashboard = () => {
 
   return (
     <>
-      <GlobalStyles />
-      <div>
-        <ImageSlider images={[image1, image2, image3, image4, image5, image6, image7]} data={data}>
+      {/* <GlobalStyles /> */}
+
+      <Box sx={{ flexGrow: 1 }}>
+
+
+        <Paper
+          sx={{
+            p: 2,
+            margin: 1,
+            maxWidth: 'auto',
+            flexGrow: 1,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+          <div className="container">
+            <div className="image-container">
+              <img className="centered-image" src={fondo} alt="campeonato" />
+            </div>
+          </div>
+
+
+          <div >
+            {/* <ImageSlider images={[image1, image2, image3, image4, image5, image6, image7]} data={data}> */}
+            {/* <img
+              src={fondo}
+              alt="campeonato"
+            /> */}
+
+            {/* <ImageSlider images={[evento01, evento01, evento01]} data={data}>
           <div
             style={{
               display: "flex",
@@ -62,9 +92,16 @@ const Dashboard = () => {
             }}
           >
           </div>
-        </ImageSlider>
-         <WebPage/> 
-      </div>
+        </ImageSlider> */}
+            {/* <WebPage/>  */}
+          </div>
+
+        </Paper>
+
+
+      </Box >
+
+
     </>
   );
 
