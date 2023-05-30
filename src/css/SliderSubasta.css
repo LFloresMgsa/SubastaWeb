@@ -3,6 +3,7 @@
 	height: 100%;
 	overflow: hidden;
 	left: 0;
+	position: absolute;
 }
 .slider__title {
 	position: absolute;
@@ -24,7 +25,7 @@
 
 .slider__content--item img {
 	width: 100vh;
-	height: 100vh;
+	height: 100%;
 }
 
 .slider-description {

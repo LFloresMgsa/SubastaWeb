@@ -17,6 +17,10 @@ import { eventoService } from '../../services/evento.service';
 
 import { storage } from "../../storage.js";
 
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardMedia, Zoom } from '@material-ui/core';
+
+
 import img1020 from '../../assets/ejemplares/1020.jpg'
 import img1032 from '../../assets/ejemplares/1032.jpg'
 import img1054 from '../../assets/ejemplares/1054.jpg'
@@ -48,19 +52,54 @@ import img8075 from '../../assets/ejemplares/8075.jpg'
 import img8128 from '../../assets/ejemplares/8128.jpg'
 import img8163 from '../../assets/ejemplares/8163.jpg'
 
+
+const useStyles = makeStyles((theme) => ({
+
+    image: {
+        width: 200,
+        height: 200,
+        transition: 'transform 0.3s',
+        cursor: 'pointer',
+        '&:hover': {
+            transform: 'scale(1.5)',
+        },
+    },
+    zoomedIn: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    zoomedImage: {
+        width: '100%',
+        height: 'auto',
+        boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.3)',
+        borderRadius: 10,
+    },
+}));
+
+
+
 const Img = styled('img')({
     margin: 'auto',
-    display: 'block',
+
     maxWidth: '100%',
     maxHeight: '100%',
 });
 
 const style = {
-    position: 'absolute',
-    top: '50%',
+
+    top: '5%',
     left: '0%',
-    transform: 'translate(0%, -50%)',
-    width: 'auto',
+    transform: 'translate(0px, 5%)',
+    width: '100%',
+    height: '100%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -107,6 +146,13 @@ const obtenerImagenes = async (pCab_cCatalogo, pDvm_cNummov) => {
 };
 
 const ItemDetalle = (props) => {
+
+    const classes = useStyles();
+    const [isZoomed, setIsZoomed] = useState(false);
+
+    const toggleZoom = () => {
+        setIsZoomed(!isZoomed);
+    };
 
 
     const [imagenesSlide, setImagenesSlide] = React.useState([]);
@@ -156,6 +202,7 @@ const ItemDetalle = (props) => {
 
     return (
         <div>
+
             <Paper
                 sx={{
                     p: 2,
@@ -166,14 +213,37 @@ const ItemDetalle = (props) => {
                         theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                 }}
             >
+                      
                 <Grid container spacing={2}>
-                    <Grid item sx={{ width: 200, height: 200 }}>
+                    <Grid item >
+                    <div className={classes.root}>
+                            <Card onClick={toggleZoom}>
+                                <CardMedia
+                                    component="img"
+                                    alt="Example Image"
+                                    image={`../../../${detalle.cab_cenlace}`} // Reemplaza con la URL de tu imagen
+                                    className={classes.image}
+                                />
+                            </Card>
+                            {isZoomed && (
+                                <div className={classes.zoomedIn} onClick={toggleZoom}>
+                                    <Zoom in={isZoomed} timeout={300}>
+                                        <img
+                                            src={`../../../${detalle.cab_cenlace}`} // Reemplaza con la URL de tu imagen
+                                            alt="Zoomed Image"
+                                            className={classes.zoomedImage}
+                                        />
+                                    </Zoom>
+                                </div>
+                            )}
+                        </div>
+
                         {/* <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} /> */}
-                        <ButtonBase sx={{ width: '100%', height: '100%' }}>
-                            
-                            
-                            
-                            <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} onClick={obtenerSubastaSlider} /> 
+                        {/* <ButtonBase sx={{ width: '100%', height: '100%' }}>
+
+
+
+                            <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} onClick={obtenerSubastaSlider} />
                             <Modal
                                 open={open}
                                 onClose={handleClose}
@@ -186,7 +256,7 @@ const ItemDetalle = (props) => {
 
                                 </Box>
                             </Modal>
-                        </ButtonBase>  
+                        </ButtonBase> */}
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2} >

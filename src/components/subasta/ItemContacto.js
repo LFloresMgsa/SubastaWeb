@@ -49,7 +49,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-
+function esMultiploDeCincuenta(numero) {
+    return numero % 50 === 0;
+  }
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
     const { onChange, ...other } = props;
@@ -178,12 +180,18 @@ const ItemContacto = (props) => {
 
         let _mensaje = "";
 
+        
+        if (esMultiploDeCincuenta(ppuja) == false) { _mensaje = "El importe de la puja debe ser multiplo de S/. 50.00" }
+
+
         if (ppuja <= 0) { _mensaje = "El importe de la puja debe ser mayor a cero" }
         
         if (ptelefono == "") { _mensaje = "Ingrese su Teléfono" }
         if (papellido == "") { _mensaje = "Ingrese su Apellido" }
         if (pnombre == "") { _mensaje = "Ingrese su número Nombre" }
         if (pdocumento == "") { _mensaje = "Ingrese su Documento de Id." }        
+
+        
 
         if (_mensaje != "") {
 
