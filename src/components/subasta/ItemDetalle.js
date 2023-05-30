@@ -260,7 +260,7 @@ const ItemDetalle = (props) => {
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2} >
-                            <Grid item xs>
+                            <Grid item xs={12} lg={6}>
                                 <Typography gutterBottom variant="subtitle1" component="div" align="left">
 
                                     <b>PUJAR POR N° {detalle.Placa}</b>
@@ -285,7 +285,7 @@ const ItemDetalle = (props) => {
                             </Grid>
 
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} lg={6}>
                             <Typography variant="h6" component="div" color="primary">
 
                                 <b>Precio Base : S/. {detalle.Dvd_nImporte}</b>
