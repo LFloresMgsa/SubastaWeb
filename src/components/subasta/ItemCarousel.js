@@ -37,13 +37,13 @@ import img8163 from '../../assets/ejemplares/8163.jpg'
 const ItemCarousel = ({ images }) => {
 	console.log(images);
 	return (
-		<section className='slider'>
+		<section >
 			
 			
 					<div key={images.Cab_cCatalogo} >
 						<img src={`../../../../${images.cab_cenlace}`} 
 						alt={images.Cab_cCatalogo} />
-						<p className='slider-description'>PLACA: {images.Placa}</p> 
+						{/* <p className='slider-description'>PLACA: {images.Placa}</p>  */}
 					</div>
 
 			

@@ -58,13 +58,13 @@ const Img = styled('img')({
 const style = {
     position: 'absolute',
     top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    left: '0%',
+    transform: 'translate(0%, -50%)',
     width: 'auto',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 1,
 };
 
 
@@ -169,7 +169,7 @@ const ItemDetalle = (props) => {
                 <Grid container spacing={2}>
                     <Grid item sx={{ width: 200, height: 200 }}>
                         {/* <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} /> */}
-                        <ButtonBase sx={{ width: 150, height: 150 }}>
+                        <ButtonBase sx={{ width: '100%', height: '100%' }}>
                             
                             
                             
