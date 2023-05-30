@@ -14,13 +14,19 @@ import Paper from '@mui/material/Paper';
 
 import '../../css/carrito.css';
 
+function ccyFormat(num) {
+    return `${num.toFixed(2)}`;
+}
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: theme.palette.primary.dark,
 		color: theme.palette.common.white,
 	},
 	[`&.${tableCellClasses.body}`]: {
-		fontSize: 14,
+		fontSize: 11,
 	},
 }));
 
@@ -121,9 +127,9 @@ export const Header = ({
 
 
 												<StyledTableCell align="left">{product.quantity}</StyledTableCell>
-												<StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
+												<StyledTableCell align="left">{product.Cab_cDescripcion} , PLACA: {product.Placa}</StyledTableCell>
 												
-												<StyledTableCell align="right">S/. {product.Dvd_nImporte}</StyledTableCell>
+												<StyledTableCell align="right">S/. {ccyFormat(product.Dvd_nImporte)}</StyledTableCell>
 												<StyledTableCell align="right">
 													<svg
 														xmlns='http://www.w3.org/2000/svg'
@@ -149,7 +155,7 @@ export const Header = ({
 
 							<div className='cart-total'>
 								<h3>Total:</h3>
-								<span className='total-pagar'>S/.{total}</span>
+								<span className='total-pagar'>S/.{ccyFormat(total)}</span>
 							</div>
 
 							<button className='btn-clear-all' onClick={onCleanCart}>
