@@ -158,7 +158,7 @@ const Item = (props) => {
                                             <p><b>Propietario</b>: {props.Propietario}</p>
                                             <p><b>Padre:</b> {props.Padre}</p>
                                             <p><b>Madre:</b> {props.Madre}</p>
-                                            <p><b>Info:</b> {props.Info}</p>
+                                            <p><b>Edad:</b> {props.Info}</p>
 
                                         </Box>
                                     </Modal>
