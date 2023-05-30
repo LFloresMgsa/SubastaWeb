@@ -451,6 +451,7 @@ const FinalizarCompra = (props) => {
                         </Paper>
                         
                     </Grid>
+                    
                     <Grid item xs={12} lg={6}>
                         <Paper
                             sx={{
