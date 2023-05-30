@@ -81,7 +81,7 @@ const Itemprogramacion = (props) => {
             </List>
             <Grid container spacing={1}>
                 {subastas.map((subasta) => (
-                    <Grid item xs={6} lg={3} key={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`}>
+                    <Grid item xs={12} lg={3} key={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`}>
                         <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo} />
                     </Grid>
                 ))}

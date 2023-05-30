@@ -20,7 +20,7 @@ import { storage } from "../storage.js";
 
 import WebPage from "./WebPage.js"
 
-import fondo from '../assets/eventos/campeonato202305B.png'
+import fondo from '../assets/portada/HECHIZO.jpg'
 
 const Dashboard = () => {
 

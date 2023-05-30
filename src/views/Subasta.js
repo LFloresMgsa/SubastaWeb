@@ -200,15 +200,16 @@ const Subasta = (props) => {
           allowScrollButtonsMobile
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Activas" {...a11yProps(0)} />
-          <Tab label="Proximamente" {...a11yProps(1)} />
-          <Tab label="Cerradas" {...a11yProps(2)} />
-          <Tab label="Bases" {...a11yProps(3)} />
+          <Tab label="Bases" {...a11yProps(0)} />
+          <Tab label="Activas" {...a11yProps(1)} />
+          <Tab label="Proximamente" {...a11yProps(2)} />
+          <Tab label="Cerradas" {...a11yProps(3)} />
+          
         </Tabs>
       </Box>
 
 
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={1}>
       
       
         <h3>Subasta Activa</h3>
@@ -220,21 +221,21 @@ const Subasta = (props) => {
         ))}
       </TabPanel>
 
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={2}>
         <h3>Proximas Subastas</h3>
         {subastasProximas.map((subastaproxima, index) => (
           <ItemProgramacion key={index} {...subastaproxima} IndicePanel="1" />
         ))}
       </TabPanel>
 
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={3}>
         <h3>Subastas Cerradas</h3>
         {subastasCerradas.map((subastacerrada, index) => (
           <ItemProgramacion key={index} {...subastacerrada} IndicePanel="2" />
         ))}
       </TabPanel>
 
-      <TabPanel value={value} index={3}>
+      <TabPanel value={value} index={0}>
         <h3>Bases de la Subasta</h3>
         <Bases />
 

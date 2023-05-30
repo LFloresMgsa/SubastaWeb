@@ -58,7 +58,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 350,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -143,7 +143,7 @@ const Item = (props) => {
                             <tr>
                                 <td>
 
-                                    <Button variant="outlined" size="small" color="primary" onClick={handleOpen}>Resumen</Button>
+                                    <Button variant="outlined" size="small" color="primary" onClick={handleOpen}>Detalles</Button>
                                     <Modal
                                         open={open}
                                         onClose={handleClose}
@@ -152,7 +152,7 @@ const Item = (props) => {
                                     >
                                         <Box sx={style}>
                                             <h3>
-                                                <b>INFORMACION DEL EJEMPLAR</b></h3>
+                                            <b>INFORMACION:</b></h3>
                                             <p><b>Precio Base:</b> S/. {props.Dvd_nImporte}</p>
                                             <p><b>Placa:</b> {props.Placa}</p>
                                             <p><b>Propietario</b>: {props.Propietario}</p>
@@ -169,7 +169,7 @@ const Item = (props) => {
 
                                 </td>
                                 <td>
-                                    <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Subasta</Button>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Pujar</Button>
 
                                 </td>
                             </tr>

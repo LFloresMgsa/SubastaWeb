@@ -168,8 +168,8 @@ const ItemDetalle = (props) => {
             >
                 <Grid container spacing={2}>
                     <Grid item sx={{ width: 200, height: 200 }}>
-                        <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} />
-                        {/* <ButtonBase sx={{ width: 150, height: 150 }}>
+                        {/* <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} /> */}
+                        <ButtonBase sx={{ width: 150, height: 150 }}>
                             
                             
                             
@@ -182,11 +182,11 @@ const ItemDetalle = (props) => {
                             >
                                 <Box sx={style}>
 
-                                    <ItemCarousel images={imagenesSlide} />
+                                    <ItemCarousel images={detalle} />
 
                                 </Box>
                             </Modal>
-                        </ButtonBase>  */}
+                        </ButtonBase>  
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2} >
