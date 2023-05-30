@@ -81,7 +81,7 @@ function Videoteca() {
           <Grid container spacing={1}>
             {videos.map(video => (
 
-              <Grid item xs={gridItemSize}>
+              <Grid item xs={gridItemSize}  key={`${video.Emp_cCodigo}-${video.Lgt_nIndice}`}>
                 <Paper
                   sx={{
                     p: 2,

@@ -30,7 +30,7 @@ const CreaCatalogo = (props) => {
     const [Placa, setPlaca] = useState('')
 
     // procedimiento para INSERTAR un catalogo con SP MySQL
-    const insertaCatalogo = async (e) => {
+    const insertaCatalogo = async (e) =>  {
         try {
             let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
             await eventoService.obtenerCatalogoAuth(_body).then(

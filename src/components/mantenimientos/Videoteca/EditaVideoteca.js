@@ -119,7 +119,7 @@ const EditaVideoteca = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA VIDEOTECA:</h2>
+                        <h3 >EDITA VIDEOTECA:</h3>
                     </div>
 
                     <Grid container spacing={2}>
@@ -134,7 +134,7 @@ const EditaVideoteca = (props) => {
                                 name="textformat"
                                 id="Indice"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
 
 

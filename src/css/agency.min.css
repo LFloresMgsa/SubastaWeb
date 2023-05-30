@@ -182,11 +182,11 @@ img::-moz-selection {
 header.masthead {
     text-align: center;
     color: #fff;
-    background-image: url('');
-    background-repeat: no-repeat;
+    /* background-image: url(''); */
+    /* background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
-    background-size: cover
+    background-size: cover */
 }
 
 header.masthead .intro-text {
@@ -611,9 +611,9 @@ header.masthead .intro-text .intro-heading {
 
 section#contact {
     background-color: #212529;
-    background-image: url('');
-    background-repeat: no-repeat;
-    background-position: center
+    /* background-image: url(''); */
+    /* background-repeat: no-repeat;
+    background-position: center */
 }
 
 section#contact .section-heading {

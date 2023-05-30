@@ -122,7 +122,7 @@ const EditaCatalogo = (props) => {
 
                 <Box sx={{ flexGrow: 1 }}>
                     <div align="left">
-                        <h2 >EDITA CATALOGO:</h2>
+                        <h3 >EDITA CATALOGO:</h3>
                     </div>
 
                     <Grid container spacing={2}>
@@ -136,7 +136,7 @@ const EditaCatalogo = (props) => {
                                 name="textformat"
                                 id="catalogo"
                                 variant="standard"
-                                disabled="true"
+                                disabled
                             />
 
                             <TextField

@@ -279,7 +279,7 @@ const ItemProgramacionTienda = (
 
                 <Grid container spacing={1}>
                     {tienda.map((item) => (
-                        <Grid item xs={6} lg={3}>
+                        <Grid item xs={6} lg={3} key={`${item.Emp_cCodigo}-${item.Pan_cAnio}-${item.Dvm_cNummov}-${item.Cab_cCatalogo}`}>
                             <Paper
                                 sx={{
                                     p: 1,
@@ -290,7 +290,7 @@ const ItemProgramacionTienda = (
                                         theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                                 }}
                             >
-                                <ImageListItem key={item.cab_cenlace}>
+                                <ImageListItem key={`${item.Emp_cCodigo}-${item.Dvm_cNummov}-${item.cab_cenlace}`}>
 
                                     <Grid container spacing={0}>
                                         <Grid item xs={12}>
@@ -343,7 +343,6 @@ const ItemProgramacionTienda = (
                                 </ImageListItem>
                             </Paper>
                         </Grid>
-
                     ))}
                 </Grid>
 

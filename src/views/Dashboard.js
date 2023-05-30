@@ -63,7 +63,7 @@ const Dashboard = () => {
           >
           </div>
         </ImageSlider>
-        <WebPage/>
+         <WebPage/> 
       </div>
     </>
   );

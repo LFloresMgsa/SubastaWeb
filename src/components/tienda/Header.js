@@ -123,8 +123,8 @@ export const Header = ({
 												<StyledTableCell align="left">{product.quantity}</StyledTableCell>
 												<StyledTableCell align="left">{product.Cab_cDescripcion}</StyledTableCell>
 												
-												<StyledTableCell align="rigth">S/. {product.Dvd_nImporte}</StyledTableCell>
-												<StyledTableCell align="rigth">
+												<StyledTableCell align="right">S/. {product.Dvd_nImporte}</StyledTableCell>
+												<StyledTableCell align="right">
 													<svg
 														xmlns='http://www.w3.org/2000/svg'
 														fill='none'

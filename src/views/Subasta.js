@@ -160,7 +160,7 @@ const Subasta = (props) => {
 
 
       <TabPanel value={value} index={0}>
-        <h1>Bienvenido a la Subasta</h1>
+        <h3>Bienvenido a la Subasta</h3>
         {subastasActual.map((subastaactual, index) => (
           <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />
         ))}
