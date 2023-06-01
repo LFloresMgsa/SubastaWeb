@@ -111,6 +111,7 @@ const ItemContacto = (props) => {
     let _mensaje = '';
 
     let _HoraDetalleEventoItem;
+    let _HoraDetalleServidor;
 
     const consultaValidacionPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
@@ -236,7 +237,7 @@ const ItemContacto = (props) => {
             let _fechaServidor = await fetchServerTime();
 
             _HoraDetalleEventoItem=_fechaDetalle;
-
+            _HoraDetalleServidor=_fechaServidor;
             //console.log(_fechaDetalle);
             //console.log(_fechaServidor);
 
@@ -289,7 +290,7 @@ const ItemContacto = (props) => {
         let _respuestaHorario = await EsValidoHorarioPuja();
 
 
-        if ( _respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem } 
+        if ( _respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem + "   Hora servidor: " + _HoraDetalleServidor} 
 
         //console.log(_mensaje);
 
