@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { eventoService } from '../../../services/evento.service';
-
+import { format } from 'date-fns';
 
 
 
@@ -21,6 +21,10 @@ const EditaEventoDet = (props) => {
     const [Dvd_nOrden, setOrden] = useState('')
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
+
+    const [Dvd_dInicio, setInicio] = useState('')
+    const [Dvd_dFin, setFin] = useState('')
+    const [Dvd_cComentario, setComentario] = useState('')
 
 
     const { Emp_cCodigo } = useParams()
@@ -56,7 +60,12 @@ const EditaEventoDet = (props) => {
             _result.map((item) => (
                 setOrden(item.Dvd_nOrden),
                 setImporte(item.Dvd_nImporte),
-                setEstado(item.Dvd_cEstado)
+                setEstado(item.Dvd_cEstado),
+
+                setInicio(item.Dvd_dInicio),
+                setFin(item.Dvd_dFin),
+                
+                setComentario(item.Dvd_cComentario)
 
             ))
 
@@ -69,7 +78,13 @@ const EditaEventoDet = (props) => {
     // procedimiento para EDITAR un catalogo con SP MySQL
     const editarEventoDet = async (e) => {
         try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden, Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado }
+            let _body = {
+                Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio,
+                Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, 
+                Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden, 
+                Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado,
+                Dvd_dInicio:Dvd_dInicio,Dvd_dFin:Dvd_dFin,Dvd_cComentario:Dvd_cComentario
+            }
             await eventoService.obtenerEventosDetAuth(_body).then(
                 (res) => {
                     setData(res[0]);
@@ -140,6 +155,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Año"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Periodo"
@@ -148,6 +164,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Periodo"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Movimiento"
@@ -156,6 +173,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Movimiento"
                                 variant="standard"
+                                disabled
                             />
 
                             <TextField
@@ -165,6 +183,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Catalogo"
                                 variant="standard"
+                                disabled
                             />
 
                             <TextField
@@ -174,6 +193,7 @@ const EditaEventoDet = (props) => {
                                 name="textformat"
                                 id="Orden"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Importe"
@@ -192,6 +212,32 @@ const EditaEventoDet = (props) => {
                                 variant="standard"
                             />
 
+                            <TextField
+                                label="Inicio"
+                                value={Dvd_dInicio}
+                                onChange={(e) => setInicio(e.target.value)}
+                                name="textformat"
+                                id="Inicio"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Fin"
+                                value={Dvd_dFin}
+                                onChange={(e) => setFin(e.target.value)}
+                                name="textformat"
+                                id="Fin"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Comentario"
+                                value={Dvd_cComentario}
+                                onChange={(e) => setComentario(e.target.value)}
+                                name="textformat"
+                                id="Comentario"
+                                variant="standard"
+                            />
                         </Grid>
 
                     </Grid>
@@ -221,3 +267,4 @@ const EditaEventoDet = (props) => {
 }
 
 export default EditaEventoDet
+

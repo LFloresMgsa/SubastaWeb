@@ -171,6 +171,7 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Año"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Periodo"
@@ -179,6 +180,7 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Periodo"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Movimiento"
@@ -187,6 +189,7 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Movimiento"
                                 variant="standard"
+                                disabled
                             />
 
                             <TextField
@@ -196,6 +199,7 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Catalogo"
                                 variant="standard"
+                                disabled
                             />
 
                             <TextField
@@ -205,6 +209,7 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Correl"
                                 variant="standard"
+                                disabled
                             />
                             <TextField
                                 label="Doc ID"

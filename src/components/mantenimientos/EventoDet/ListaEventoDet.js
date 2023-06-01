@@ -148,6 +148,11 @@ const ListaEventoDet = (props) => {
                           <StyledTableCell align="left">Importe</StyledTableCell>
                           <StyledTableCell align="left">Estado</StyledTableCell>
 
+                          <StyledTableCell align="left">Inicio</StyledTableCell>
+                          <StyledTableCell align="left">Fin</StyledTableCell>
+                          <StyledTableCell align="left">Comentario</StyledTableCell>
+
+
                           <StyledTableCell align="left"></StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                         </TableRow>
@@ -164,6 +169,11 @@ const ListaEventoDet = (props) => {
                             <StyledTableCell align="center">{item.Dvd_nOrden}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvd_nImporte}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
+
+                            <StyledTableCell align="center">{item.Dvd_dInicio}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Dvd_dFin}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Dvd_cComentario}</StyledTableCell>
+
 
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>

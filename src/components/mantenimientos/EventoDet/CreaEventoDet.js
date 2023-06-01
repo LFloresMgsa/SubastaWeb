@@ -23,23 +23,30 @@ const CreaEventoDet = (props) => {
     const [Dvd_nOrden, setOrden] = useState('')
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
-      
 
-   
-    
+
+    const [Dvd_dInicio, setInicio] = useState('')
+    const [Dvd_dFin, setFin] = useState('')
+    const [Dvd_cComentario, setComentario] = useState('')
+
 
     // procedimiento para INSERTAR un catalogo con SP MySQL
     const insertaEventoDet = async (e) => {
         try {
-            let _body = { Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio:Pan_cAnio,Per_cPeriodo:Per_cPeriodo,Dvm_cNummov:Dvm_cNummov,Cab_cCatalogo:Cab_cCatalogo,Dvd_nOrden:Dvd_nOrden,Dvd_nImporte:Dvd_nImporte,Dvd_cEstado:Dvd_cEstado}
+            let _body = {
+                Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo,
+                Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden, 
+                Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado,
+                Dvd_dInicio:Dvd_dInicio,Dvd_dFin:Dvd_dFin,Dvd_cComentario:Dvd_cComentario
+            }
             await eventoService.obtenerEventosDetAuth(_body).then(
-              (res) => {
-                setData(res[0]);
-              },
-              (error) => {
-                console.log(error)
-                setError(error);
-              }
+                (res) => {
+                    setData(res[0]);
+                },
+                (error) => {
+                    console.log(error)
+                    setError(error);
+                }
             )
         } finally {
             history.push({
@@ -134,15 +141,41 @@ const CreaEventoDet = (props) => {
                                 id="Importe"
                                 variant="standard"
                             />
-                             <TextField
+                            <TextField
                                 label="Estado"
                                 value={Dvd_cEstado}
                                 onChange={(e) => setEstado(e.target.value)}
                                 name="textformat"
                                 id="Estado"
                                 variant="standard"
-                            />                            
+                            />
 
+                            <TextField
+                                label="Inicio"
+                                value={Dvd_dInicio}
+                                onChange={(e) => setInicio(e.target.value)}
+                                name="textformat"
+                                id="Inicio"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Fin"
+                                value={Dvd_dFin}
+                                onChange={(e) => setFin(e.target.value)}
+                                name="textformat"
+                                id="Fin"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Comentario"
+                                value={Dvd_cComentario}
+                                onChange={(e) => setComentario(e.target.value)}
+                                name="textformat"
+                                id="Comentario"
+                                variant="standard"
+                            />
                         </Grid>
 
                     </Grid>
@@ -153,7 +186,7 @@ const CreaEventoDet = (props) => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                        <Button variant="contained" size="small" color="primary" onClick={insertaEventoDet}>Crear</Button>
+                                            <Button variant="contained" size="small" color="primary" onClick={insertaEventoDet}>Crear</Button>
                                         </td>
                                         <td>
                                             <Button variant="contained" size="small" color="primary" onClick={cancelar}>Cancelar</Button>
@@ -162,7 +195,7 @@ const CreaEventoDet = (props) => {
                                 </tbody>
                             </table>
                         </Grid>
-                    </Grid>                    
+                    </Grid>
                 </Box >
 
             </Paper>

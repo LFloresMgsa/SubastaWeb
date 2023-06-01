@@ -69,32 +69,30 @@ const Subasta = (props) => {
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
 
 
-  const ActualizaFechasFinalesItems = async () => {
-    try {
-      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+  // const ActualizaFechasFinalesItems = async () => {
+  //   try {
+  //     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
 
-      return await eventoService.obtenerCatalogo(_body).then(
-        (res) => {
-          console.log(res[0]);
-          setData(res[0]);
-        },
-        (error) => {
-          console.log(error);
+  //     return await eventoService.obtenerCatalogo(_body).then(
+  //       (res) => {
+  //         console.log(res[0]);
+  //         setData(res[0]);
+  //       },
+  //       (error) => {
+  //         console.log(error);
 
-        }
-      );
-    } catch (error) {
-      console.error('Error fetching server time:', error);
-    }
-  };
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.error('Error fetching server time:', error);
+  //   }
+  // };
 
 
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-
-      //ActualizaFechasFinalesItems();
 
     }, 1000);
 
