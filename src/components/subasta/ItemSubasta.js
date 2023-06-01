@@ -84,52 +84,60 @@ const Item = (props) => {
 
     const fetchServerTime = async () => {
         try {
-  
-          let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
-  
-          return await eventoService.horaservidor(_body).then(
-            (res) => {
-              const timeString = res.time;
-              const [hours, minutes, seconds] = timeString.split(':');
-              const date = new Date();
-              date.setHours(hours);
-              date.setMinutes(minutes);
-              date.setSeconds(seconds);
-  
-              setCurrentTime(date);
-            },
-            (error) => {
-              console.log(error);
-  
-            }
-          );
-  
-  
+
+            let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+
+            return await eventoService.horaservidor(_body).then(
+                (res) => {
+                    const timeString = res.time;
+                    const [hours, minutes, seconds] = timeString.split(':');
+                    const date = new Date();
+                    date.setHours(hours);
+                    date.setMinutes(minutes);
+                    date.setSeconds(seconds);
+
+                    setCurrentTime(date);
+                },
+                (error) => {
+                    console.log(error);
+
+                }
+            );
+
+
         } catch (error) {
-          console.error('Error fetching server time:', error);
+            console.error('Error fetching server time:', error);
         }
-      };
+    };
 
     const handleVerDetalle = async () => {
-        
+
         await fetchServerTime();
 
         const fechaHora1 = currentTime;
         const fechaHora2 = new Date(props.Final);
 
+        const estado = props.Estado;
         //console.log(fechaHora1);
         //console.log(fechaHora2);
+        
+        if (estado == 'CERRADO') {
+            handleClickOpenMsg();
+        }
+        else {
 
-        if (fechaHora1 < fechaHora2) {
-            if (props.IndicePanel == 0) {
-                history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
-            }
-            else {
+
+            if (fechaHora1 < fechaHora2) {
+                if (props.IndicePanel == 0) {
+                    history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
+                }
+                else {
+                    handleClickOpenMsg();
+                }
+
+            } else {
                 handleClickOpenMsg();
             }
-
-        } else {
-            handleClickOpenMsg();
         }
 
     }
@@ -201,7 +209,7 @@ const Item = (props) => {
                             <Typography variant='caption' style={{ fontStyle: 'italic', fontWeight: 'bold' }} color={props.Estado === 'ACTIVO' ? 'primary' : 'error'}>
                                 {`ESTADO: ${props.Estado}`}
                             </Typography>
-                        </Grid>                        
+                        </Grid>
                         <Grid item xs={12} lg={12}>
                             <Grid container spacing={1}>
                                 <Grid item xs={6} lg={6}>

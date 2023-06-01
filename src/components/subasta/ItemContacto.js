@@ -28,6 +28,8 @@ import { eventoService } from '../../services/evento.service';
 import CustomAlert from '../mensajes/CustomAlert';
 
 import { storage } from "../../storage.js";
+import { format } from 'date-fns';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -51,7 +53,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function esMultiploDeCincuenta(numero) {
     return numero % 50 === 0;
-  }
+}
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
     const { onChange, ...other } = props;
@@ -93,6 +95,7 @@ const ItemContacto = (props) => {
     const [pcorreo, setCorreo] = useState('')
     const [ppuja, setPuja] = useState(0)
 
+    const [fechaHoraPuja, setFechaHoraPuja] = React.useState('');
     const [subastasPuja, setSubastasPuja] = React.useState([]);
     const [subastasPujaGrabar, setSubastasPujaGrabar] = React.useState([]);
     const [disabledPujar, setDisabledPujar] = useState(false)
@@ -100,9 +103,14 @@ const ItemContacto = (props) => {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
 
+    const [serverTime, setServerTime] = useState(new Date());
+    const [currentTime, setCurrentTime] = useState(new Date());
+
     let _cMensajesJson;
     let _msgerror = '';
     let _mensaje = '';
+
+    let _HoraDetalleEventoItem;
 
     const consultaValidacionPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov, pPer_cPeriodo, pDvd_cDocID, pDvd_cNombres, pDvd_cApellidos, pDvd_cTelefono, pDvd_cCorreo, pDvd_nImporte) => {
         let _body = {
@@ -161,6 +169,93 @@ const ItemContacto = (props) => {
         );
     };
 
+    const obtenerFechaHoraPujaDetalle = async (pCab_cCatalogo, pDvm_cNummov) => {
+        try {
+            let _body = { Accion: "FECHA_HORA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo }
+            let _result;
+            let _fecha;
+
+            await eventoService.obtenerEventosDet(_body).then(
+                (res) => {
+                    _result = res[0];
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+
+
+            _result.map((item) => (
+                _fecha = item.Dvd_dFin
+            ));
+
+
+            return _fecha
+
+        } catch (error) {
+            return null
+
+        };
+
+
+    };
+
+    const fetchServerTime = async () => {
+        try {
+
+            let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+
+            return await eventoService.horaservidor(_body).then(
+                (res) => {
+                    const timeString = res.time;
+                    const [hours, minutes, seconds] = timeString.split(':');
+                    const date = new Date();
+                    date.setHours(hours);
+                    date.setMinutes(minutes);
+                    date.setSeconds(seconds);
+
+                    return format(date, 'yyyy-MM-dd HH:mm:ss');;
+                },
+                (error) => {
+                    return null;
+
+                }
+            );
+
+
+        } catch (error) {
+            console.error('Error fetching server time:', error);
+        }
+    };
+
+
+    const EsValidoHorarioPuja = async () => {
+        try {
+            let _fechaDetalle = await obtenerFechaHoraPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
+
+            let _fechaServidor = await fetchServerTime();
+
+            _HoraDetalleEventoItem=_fechaDetalle;
+
+            //console.log(_fechaDetalle);
+            //console.log(_fechaServidor);
+
+            if (_fechaServidor <= _fechaDetalle) {
+                //console.log('true');
+                return true;
+            } else {
+                //console.log('false');
+                return false;
+            };
+
+        } catch (error) {
+            return false;
+        }
+
+
+
+    }
+
     //#region Alerta
     const [alertOpen, setAlertOpen] = useState(false);
 
@@ -176,22 +271,27 @@ const ItemContacto = (props) => {
 
     const [confirmOpen, setConfirmOpen] = useState(false);
 
-    const handleConfirmOpen = () => {
+    const handleConfirmOpen = async () => {
 
         let _mensaje = "";
 
-        
+
         if (esMultiploDeCincuenta(ppuja) == false) { _mensaje = "El importe de la puja debe ser multiplo de S/. 50.00" }
 
 
         if (ppuja <= 0) { _mensaje = "El importe de la puja debe ser mayor a cero" }
-        
+
         if (ptelefono == "") { _mensaje = "Ingrese su Teléfono" }
         if (papellido == "") { _mensaje = "Ingrese su Apellido" }
         if (pnombre == "") { _mensaje = "Ingrese su número Nombre" }
-        if (pdocumento == "") { _mensaje = "Ingrese su Documento de Id." }        
+        if (pdocumento == "") { _mensaje = "Ingrese su Documento de Id." }
 
-        
+        let _respuestaHorario = await EsValidoHorarioPuja();
+
+
+        if ( _respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem } 
+
+        //console.log(_mensaje);
 
         if (_mensaje != "") {
 
@@ -202,7 +302,7 @@ const ItemContacto = (props) => {
         else {
             setAlertMessage("¿Deseas confirmar la Puja?");
             setConfirmOpen(true);
-            }        
+        }
     };
 
     const handleConfirmClose = (result) => {
@@ -218,7 +318,7 @@ const ItemContacto = (props) => {
 
     const handleGrabarSubasta = async () => {
 
-        
+
         await consultaValidacionPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
 
         _cMensajesJson.map((item) => (
@@ -377,7 +477,7 @@ const ItemContacto = (props) => {
                                     theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                             }}
                         >
-                            <Grid container spacing={2}   alignItems="center"  justifyContent="center">
+                            <Grid container spacing={2} alignItems="center" justifyContent="center">
                                 <Grid item xs={6}>
                                     <Button variant="outlined" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
                                 </Grid>
@@ -388,7 +488,7 @@ const ItemContacto = (props) => {
                             </Grid>
                         </Paper>
 
-                        
+
                     </Grid>
                     <Grid item xs={12} lg={8}>
                         <Paper
