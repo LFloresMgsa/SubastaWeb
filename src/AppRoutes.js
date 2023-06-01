@@ -45,6 +45,7 @@ const AppRoutes = (props) => {
         <Redirect to="/inicio" />
       </Route>
 
+
       <Route exact path="/index.html">
         <Redirect to="/subasta" />
       </Route>      
