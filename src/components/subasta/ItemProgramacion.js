@@ -62,20 +62,20 @@ const Itemprogramacion = (props) => {
                     </ListItemAvatar>
                     <ListItemText
                         primary={props.Dvm_cDescripcion}
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    sx={{ display: 'inline' }}
-                                    component="span"
-                                    variant="body2"
-                                    color="text.primary"
-                                >
-                                    {`Inicio : ${props.Dvm_dInicio} - Término: ${props.Dvm_dFin}`}
-                                </Typography>
+                        // secondary={
+                        //     <React.Fragment>
+                        //         <Typography
+                        //             sx={{ display: 'inline' }}
+                        //             component="span"
+                        //             variant="body2"
+                        //             color="text.primary"
+                        //         >
+                        //             {`Inicio : ${props.Dvm_dInicio} - Término: ${props.Dvm_dFin}`}
+                        //         </Typography>
 
 
-                            </React.Fragment>
-                        }
+                        //     </React.Fragment>
+                        // }
                     />
                 </ListItem>
             </List>

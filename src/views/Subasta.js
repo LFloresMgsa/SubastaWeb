@@ -12,6 +12,7 @@ import { eventoService } from '../services/evento.service';
 import { storage } from "../storage.js";
 import Grid from '@mui/material/Grid';
 import Typography from '@material-ui/core/Typography';
+import { format } from 'date-fns';
 
 const SubastaStyled = styled('div')(
   ({ theme }) => css`
@@ -60,8 +61,7 @@ function a11yProps(index) {
 
 const Subasta = (props) => {
   const [value, setValue] = React.useState(0);
-  
-  const [serverTime, setServerTime] = useState(new Date());
+  const [data, setData] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [subastasActual, setSubastasActual] = React.useState([]);
@@ -69,42 +69,33 @@ const Subasta = (props) => {
   const [subastasCerradas, setSubastasCerradas] = React.useState([]);
 
 
-  useEffect(() => {
-    const fetchServerTime = async () => {
-      try {
+  const ActualizaFechasFinalesItems = async () => {
+    try {
+      let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
 
-        let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+      return await eventoService.obtenerCatalogo(_body).then(
+        (res) => {
+          console.log(res[0]);
+          setData(res[0]);
+        },
+        (error) => {
+          console.log(error);
 
-        return await eventoService.horaservidor(_body).then(
-          (res) => {
-            const timeString = res.time;
-            const [hours, minutes, seconds] = timeString.split(':');
-            const date = new Date();
-            date.setHours(hours);
-            date.setMinutes(minutes);
-            date.setSeconds(seconds);
+        }
+      );
+    } catch (error) {
+      console.error('Error fetching server time:', error);
+    }
+  };
 
-            setCurrentTime(date);
-          },
-          (error) => {
-            console.log(error);
-
-          }
-        );
-
-
-      } catch (error) {
-        console.error('Error fetching server time:', error);
-      }
-    };
-
-    fetchServerTime();
-  }, []);
 
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
+
+      //ActualizaFechasFinalesItems();
+
     }, 1000);
 
     return () => {
@@ -204,17 +195,17 @@ const Subasta = (props) => {
           <Tab label="Activas" {...a11yProps(1)} />
           <Tab label="Proximamente" {...a11yProps(2)} />
           <Tab label="Cerradas" {...a11yProps(3)} />
-          
+
         </Tabs>
       </Box>
 
 
       <TabPanel value={value} index={1}>
-      
-      
+
+
         <h3>Subasta Activa</h3>
         <Typography variant="h6" component="h3">
-        <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
+          <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
         </Typography>
         {subastasActual.map((subastaactual, index) => (
           <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />

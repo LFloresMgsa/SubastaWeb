@@ -15,6 +15,7 @@ function IniciaVariablesGlobales() {
   SetStorage('Emp_cCodigo', '015');
   SetStorage('Pan_cAnio', '2023');
   SetStorage('Carrito', []);
+  
 
   return true;
 }
