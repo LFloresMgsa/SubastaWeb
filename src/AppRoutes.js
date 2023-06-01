@@ -42,7 +42,7 @@ const AppRoutes = (props) => {
     <Switch>
 
       <Route exact path="/">
-        <Redirect to="/inicio" />
+        <Redirect to="/subasta" />
       </Route>
 
 
