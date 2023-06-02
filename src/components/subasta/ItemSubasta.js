@@ -127,7 +127,7 @@ const Item = (props) => {
         // else {
 
 
-            if (fechaHora1 < fechaHora2) {
+        //    if (fechaHora1 < fechaHora2) {
                 if (props.IndicePanel == 0) {
                     history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
                 }
@@ -135,9 +135,9 @@ const Item = (props) => {
                     handleClickOpenMsg();
                 }
 
-            } else {
-                handleClickOpenMsg();
-            }
+        //    } else {
+       //         handleClickOpenMsg();
+       //     }
       //  }
 
     }
