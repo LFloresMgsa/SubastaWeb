@@ -121,10 +121,10 @@ const Item = (props) => {
         //console.log(fechaHora1);
         //console.log(fechaHora2);
         
-        if (estado == 'CERRADO') {
-            handleClickOpenMsg();
-        }
-        else {
+        // if (estado == 'CERRADO') {
+        //     handleClickOpenMsg();
+        // }
+        // else {
 
 
             if (fechaHora1 < fechaHora2) {
@@ -138,7 +138,7 @@ const Item = (props) => {
             } else {
                 handleClickOpenMsg();
             }
-        }
+      //  }
 
     }
 
