@@ -133,6 +133,7 @@ const Item = (props) => {
                 }
                 else {
                     handleClickOpenMsg();
+                    
                 }
 
         //    } else {
