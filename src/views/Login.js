@@ -129,7 +129,7 @@ const Login = () => {
         cookies.set('Sgm_cNombre', _result[0].Sgm_cNombre, { path: "/" });
         cookies.set('Sgm_cContrasena', _result[0].Sgm_cContrasena, { path: "/" });
         cookies.set('Sgm_cObservaciones', _result[0].Sgm_cObservaciones, { path: "/" });
-
+		cookies.set('Sgm_cPerfil', _result[0].Sgm_cPerfil, { path: "/" });
 
         setError('');
 
