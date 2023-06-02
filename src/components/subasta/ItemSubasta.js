@@ -132,8 +132,9 @@ const Item = (props) => {
                     history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
                 }
                 else {
-                    handleClickOpenMsg();
+                    handleClickOpenMsg(); 
                     
+
                 }
 
         //    } else {
