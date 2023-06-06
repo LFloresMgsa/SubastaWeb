@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard';
 import Tienda from './views/Tienda';
 import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
+import Bases from './views/Bases';
 import SubastaDetalle from './views/SubastaDetalle';
 import MantCatalogo from './views/MantCatalogo';
 import MantCatalogoImagenes from './views/MantCatalogoImagenes';
@@ -47,11 +48,11 @@ const AppRoutes = (props) => {
 
       <Route exact path="/subasta.html">
         <Redirect to="/subasta" />
-      </Route>      
+      </Route>
 
       <Route exact path="/index.html">
         <Redirect to="/subasta" />
-      </Route>      
+      </Route>
 
       <Route
         path="/inicio"
@@ -68,8 +69,15 @@ const AppRoutes = (props) => {
       <Route
         exact
         path="/subasta"
+        render={(route) => <Bases {...props} {...route} />}
+      />
+
+      <Route
+        exact
+        path="/pujas"
         render={(route) => <Subasta {...props} {...route} />}
       />
+
 
       <Route
         exact
