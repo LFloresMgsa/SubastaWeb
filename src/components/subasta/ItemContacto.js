@@ -290,7 +290,7 @@ const ItemContacto = (props) => {
         let _respuestaHorario = await EsValidoHorarioPuja();
 
 
-    //    if ( _respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem    } 
+        if ( _respuestaHorario == false) { _mensaje = "La puja esta CERRADA , Día y Hora de cierre: " + _HoraDetalleEventoItem    } 
 
         //console.log(_mensaje);
 
@@ -348,7 +348,7 @@ const ItemContacto = (props) => {
 
         console.log("handleRegresarSubasta");
         history.push({
-            pathname: '/Subasta'
+            pathname: '/pujas'
 
         });
     }

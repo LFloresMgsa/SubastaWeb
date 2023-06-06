@@ -99,7 +99,7 @@ function App(props) {
             <GlobalStyle theme={theme} />
             <AppTopBar />
             <AppContent {...props} viewport={viewport} />
-            <AppFooter />
+            {/* <AppFooter /> */}
           </BrowserRouter>
         </ThemeProvider>
       )}

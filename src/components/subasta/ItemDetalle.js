@@ -1,24 +1,14 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
-import { css, useTheme } from 'styled-components';
 
-import { styled } from '@mui/material/styles';
-import { useLocation } from 'react-router-dom';
-
-import { useHistory } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
 import Paper from '@mui/material/Paper';
 
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import ItemCarousel from './ItemCarousel';
 import { eventoService } from '../../services/evento.service';
 
 import { storage } from "../../storage.js";
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardMedia, Zoom } from '@material-ui/core';
 
 
 import img1020 from '../../assets/ejemplares/1020.jpg'
@@ -53,58 +43,6 @@ import img8128 from '../../assets/ejemplares/8128.jpg'
 import img8163 from '../../assets/ejemplares/8163.jpg'
 
 
-const useStyles = makeStyles((theme) => ({
-
-    image: {
-        width: 200,
-        height: 200,
-        transition: 'transform 0.3s',
-        cursor: 'pointer',
-        '&:hover': {
-            transform: 'scale(1.5)',
-        },
-    },
-    zoomedIn: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 9999,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    zoomedImage: {
-        width: '100%',
-        height: 'auto',
-        boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.3)',
-        borderRadius: 10,
-    },
-}));
-
-
-
-const Img = styled('img')({
-    margin: 'auto',
-
-    maxWidth: '100%',
-    maxHeight: '100%',
-});
-
-const style = {
-
-    top: '5%',
-    left: '0%',
-    transform: 'translate(0px, 5%)',
-    width: '100%',
-    height: '100%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 1,
-};
 
 
 // Función para hacer la solicitud a la API
@@ -146,13 +84,6 @@ const obtenerImagenes = async (pCab_cCatalogo, pDvm_cNummov) => {
 };
 
 const ItemDetalle = (props) => {
-
-    const classes = useStyles();
-    const [isZoomed, setIsZoomed] = useState(false);
-
-    const toggleZoom = () => {
-        setIsZoomed(!isZoomed);
-    };
 
 
     const [imagenesSlide, setImagenesSlide] = React.useState([]);
@@ -199,6 +130,11 @@ const ItemDetalle = (props) => {
     const handleClose = () => setOpen(false);
 
 
+    const [isImageExpanded, setIsImageExpanded] = useState(false);
+
+    const handleImageClick = () => {
+        setIsImageExpanded(!isImageExpanded);
+    };
 
     return (
         <div>
@@ -213,50 +149,36 @@ const ItemDetalle = (props) => {
                         theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                 }}
             >
-                      
+
                 <Grid container spacing={2}>
                     <Grid item >
-                    <div className={classes.root}>
-                            <Card onClick={toggleZoom}>
-                                <CardMedia
-                                    component="img"
-                                    alt="Example Image"
-                                    image={`../../../${detalle.cab_cenlace}`} // Reemplaza con la URL de tu imagen
-                                    className={classes.image}
-                                />
-                            </Card>
-                            {isZoomed && (
-                                <div className={classes.zoomedIn} onClick={toggleZoom}>
-                                    <Zoom in={isZoomed} timeout={300}>
-                                        <img
-                                            src={`../../../${detalle.cab_cenlace}`} // Reemplaza con la URL de tu imagen
-                                            alt="Zoomed Image"
-                                            className={classes.zoomedImage}
-                                        />
-                                    </Zoom>
-                                </div>
-                            )}
+                        <div >
+
+                            <Grid container justify="center" alignItems="center">
+                                <Grid item>
+                                    <img
+
+                                        src={`../../../${detalle.cab_cenlace}`}
+                                        alt="Imagen"
+                                        onClick={handleImageClick}
+                                        style={{ width: '150px', height: 'auto' }}
+                                    />
+                                </Grid>
+                                <Modal open={isImageExpanded} onClose={handleImageClick}>
+                                    <img
+                                        src={`../../../${detalle.cab_cenlace}`}
+                                        alt="Imagen"
+                                        onClick={handleImageClick}
+                                        style={{
+                                            cursor: 'pointer',
+                                            width: isImageExpanded ? 'auto' : '150px',
+                                            height: isImageExpanded ? '100vh' : 'auto',
+                                        }}
+                                    />
+                                </Modal>
+                            </Grid>
                         </div>
 
-                        {/* <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} /> */}
-                        {/* <ButtonBase sx={{ width: '100%', height: '100%' }}>
-
-
-
-                            <Img alt="imagen" src={`../../../${detalle.cab_cenlace}`} onClick={obtenerSubastaSlider} />
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                            >
-                                <Box sx={style}>
-
-                                    <ItemCarousel images={detalle} />
-
-                                </Box>
-                            </Modal>
-                        </ButtonBase> */}
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2} >

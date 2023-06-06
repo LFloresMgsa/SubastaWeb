@@ -121,13 +121,13 @@ const Item = (props) => {
         //console.log(fechaHora1);
         //console.log(fechaHora2);
         
-        // if (estado == 'CERRADO') {
-        //     handleClickOpenMsg();
-        // }
-        // else {
+         if (estado == 'CERRADO') {
+             handleClickOpenMsg();
+         }
+         else {
 
 
-        //    if (fechaHora1 < fechaHora2) {
+      //      if (fechaHora1 < fechaHora2) {
                 if (props.IndicePanel == 0) {
                     history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
                 }
@@ -138,9 +138,9 @@ const Item = (props) => {
                 }
 
         //    } else {
-       //         handleClickOpenMsg();
-       //     }
-      //  }
+                //handleClickOpenMsg();
+            //}
+        }
 
     }
 

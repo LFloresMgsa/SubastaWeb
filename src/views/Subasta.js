@@ -107,6 +107,7 @@ const Subasta = (props) => {
   const obtenerSubastaactual = async () => {
     let _body = { Accion: "EVENTOABIERTO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
 
+    console.log('obtenerSubastaactual');
 
     return await eventoService.obtenerEventosCab(_body).then(
       (res) => {
@@ -121,56 +122,56 @@ const Subasta = (props) => {
   };
 
 
-  const obtenerSubastasproximas = async () => {
-    let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
+  // const obtenerSubastasproximas = async () => {
+  //   let _body = { Accion: "EVENTOPROXIMO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
+
+  //   console.log('obtenerSubastasproximas');
+
+  //   return await eventoService.obtenerEventosCab(_body).then(
+
+  //     (res) => {
+  //       setSubastasProximas(res[0])
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // };
+
+  // const obtenerSubastascerradas = async () => {
+  //   let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
+
+  //   console.log('obtenerSubastascerradas');
+
+  //   return await eventoService.obtenerEventosCab(_body).then(
+
+  //     (res) => {
+  //       setSubastasCerradas(res[0])
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // };
+
+  // const handleChange = async (event, newValue) => {
+  //   setValue(newValue);
 
 
-    return await eventoService.obtenerEventosCab(_body).then(
+  //   if (newValue == 1) {
 
-      (res) => {
-        //  console.log(res)
-        setSubastasProximas(res[0])
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
+  //     await obtenerSubastaactual();
+  //   }
 
-  const obtenerSubastascerradas = async () => {
-    let _body = { Accion: "EVENTOCERRADO", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") }
+  //   if (newValue == 2) {
+  //     await obtenerSubastasproximas();
+  //   }
 
+  //   if (newValue == 3) {
+  //     await obtenerSubastascerradas();
+  //   }
 
-    return await eventoService.obtenerEventosCab(_body).then(
-
-      (res) => {
-        //  console.log(res)
-        setSubastasCerradas(res[0])
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-
-
-    if (newValue == 0) {
-
-      obtenerSubastaactual();
-    }
-
-    if (newValue == 1) {
-      obtenerSubastasproximas();
-    }
-
-    if (newValue == 2) {
-      obtenerSubastascerradas();
-    }
-
-  };
+  // };
 
   useEffect(() => {
 
@@ -181,7 +182,7 @@ const Subasta = (props) => {
   return (
 
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
         <Tabs value={value} onChange={handleChange}
           variant="scrollable"
@@ -189,46 +190,42 @@ const Subasta = (props) => {
           allowScrollButtonsMobile
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Bases" {...a11yProps(0)} />
-          <Tab label="Activas" {...a11yProps(1)} />
-          <Tab label="Proximamente" {...a11yProps(2)} />
-          <Tab label="Cerradas" {...a11yProps(3)} />
+          <Tab label="Activas" {...a11yProps(0)} />
+          <Tab label="Proximamente" {...a11yProps(1)} />
+          <Tab label="Cerradas" {...a11yProps(2)} />
 
         </Tabs>
-      </Box>
+      </Box> */}
 
 
-      <TabPanel value={value} index={1}>
 
 
-        <h3>Subasta Activa</h3>
-        <Typography variant="h6" component="h3">
-          <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
-        </Typography>
-        {subastasActual.map((subastaactual, index) => (
-          <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />
-        ))}
-      </TabPanel>
 
-      <TabPanel value={value} index={2}>
+      <h3>Subasta Activa</h3>
+      <Typography variant="h6" component="h3">
+        <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
+      </Typography>
+      {subastasActual.map((subastaactual, index) => (
+        <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />
+      ))}
+
+      {/* <TabPanel value={value} index={0}>
+      </TabPanel> */}
+
+      {/* <TabPanel value={value} index={1}>
         <h3>Proximas Subastas</h3>
         {subastasProximas.map((subastaproxima, index) => (
           <ItemProgramacion key={index} {...subastaproxima} IndicePanel="1" />
         ))}
       </TabPanel>
 
-      <TabPanel value={value} index={3}>
+      <TabPanel value={value} index={2}>
         <h3>Subastas Cerradas</h3>
         {subastasCerradas.map((subastacerrada, index) => (
           <ItemProgramacion key={index} {...subastacerrada} IndicePanel="2" />
         ))}
-      </TabPanel>
+      </TabPanel> */}
 
-      <TabPanel value={value} index={0}>
-        <h3>Bases de la Subasta</h3>
-        <Bases />
-
-      </TabPanel>
 
     </Box>
 
