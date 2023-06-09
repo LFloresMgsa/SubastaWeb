@@ -26,27 +26,27 @@ const Dashboard = () => {
 
   const [data, setData] = useState([]);
 
-  // procedimiento para CONSULTA un catalogo con SP MySQL
-  const obtenerImagenes = async () => {
-    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+  // // procedimiento para CONSULTA un catalogo con SP MySQL
+  // const obtenerImagenes = async () => {
+  //   let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
 
 
-    return await eventoService.obtenerImagenes(_body).then(
-      (res) => {
-        setData(res[0]);
-        // console.log(res[0]);
-      },
-      (error) => {
-        console.log(error);
+  //   return await eventoService.obtenerImagenes(_body).then(
+  //     (res) => {
+  //       setData(res[0]);
+  //       // console.log(res[0]);
+  //     },
+  //     (error) => {
+  //       console.log(error);
 
-      }
-    );
-  };
+  //     }
+  //   );
+  // };
 
-  useEffect(() => {
-    obtenerImagenes();
+  // useEffect(() => {
+  //   obtenerImagenes();
 
-  }, []);
+  // }, []);
 
 
 

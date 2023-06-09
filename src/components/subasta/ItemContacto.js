@@ -270,6 +270,13 @@ const ItemContacto = (props) => {
 
     //#region Alerta de confirmacion
 
+
+    
+    const handleActualizaSubasta = async () => {
+        await obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
+    };
+
+
     const [confirmOpen, setConfirmOpen] = useState(false);
 
     const handleConfirmOpen = async () => {
@@ -332,6 +339,8 @@ const ItemContacto = (props) => {
             setAlertMessage(_mensaje);
             setAlertType("alert");
             handleAlertOpen();
+
+            await obtenerPujasDetalle(props.pCab_cCatalogo, props.pDvm_cNummov);
         }
         else {
             await grabarPujaDetalle(props.pCab_cCatalogo, props.pDvm_cNummov, props.pPer_cPeriodo, pdocumento, pnombre, papellido, ptelefono, pcorreo, ppuja);
@@ -479,12 +488,16 @@ const ItemContacto = (props) => {
                             }}
                         >
                             <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                <Grid item xs={6}>
+                                <Grid item xs={4}>
                                     <Button variant="outlined" size="small" color="primary" onClick={handleRegresarSubasta}>Regresar</Button>
                                 </Grid>
 
-                                <Grid item xs={6}>
-                                    <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen} disabled={disabledPujar} >Realizar Puja</Button>
+                                <Grid item xs={4}>
+                                    <Button variant="outlined" size="small" color="primary" onClick={handleActualizaSubasta}>Actualizar</Button>
+                                </Grid>
+
+                                <Grid item xs={4}>
+                                    <Button variant="contained" size="small" color="primary" onClick={handleConfirmOpen} disabled={disabledPujar} >Pujar</Button>
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -536,6 +549,6 @@ const ItemContacto = (props) => {
 
         </div >
     );
-};
+}; 
 
 export default ItemContacto;
