@@ -15,10 +15,7 @@ module.exports = merge(common, {
         NODE_ENV: JSON.stringify('production'),
       },
       BUILD_ENV: JSON.stringify('production'),
-      SERVICE_URL: JSON.stringify('http://52.14.235.171:80'),
-     
+      SERVICE_URL: JSON.stringify('https://galponlegado.com'),
     }),
   ],
-  
 });
-
