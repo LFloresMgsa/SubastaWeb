@@ -549,6 +549,6 @@ const ItemContacto = (props) => {
 
         </div >
     );
-};
+}; 
 
 export default ItemContacto;
