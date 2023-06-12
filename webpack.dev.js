@@ -15,7 +15,7 @@ module.exports = merge(common, {
         NODE_ENV: JSON.stringify('development'),
       },
       BUILD_ENV: JSON.stringify('development'),
-      SERVICE_URL: JSON.stringify('http://localhost:5000'),
+      SERVICE_URL: JSON.stringify('https://localhost'),
       RECAPTCHA_KEY: JSON.stringify('xyz'),
       // WEBSITE_USER_PASSWORDS is being used for development only
       // WEBSITE_USER_PASSWORDS: fs.readFileSync(
