@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'inline-source-map',
   output: {
-    publicPath: '/',
+    publicPath: '/', 
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -15,7 +15,7 @@ module.exports = merge(common, {
         NODE_ENV: JSON.stringify('production'),
       },
       BUILD_ENV: JSON.stringify('production'),
-      SERVICE_URL: JSON.stringify('https://galponlegado.com'),
+      SERVICE_URL: JSON.stringify('https://5t6galponlegado.com'),
     }),
   ],
 });
