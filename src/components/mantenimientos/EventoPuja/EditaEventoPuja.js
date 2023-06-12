@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { eventoService } from '../../../services/evento.service';
 
+import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+
 
 const useStyles = makeStyles({
     buttonContainer: {
@@ -40,6 +42,8 @@ const EditaEventoPuja = (props) => {
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
     const [Dvd_dFechaPuja, setFecha] = useState(new Date());
+    const [Dvd_cComentario, setComentario] = useState('')
+    const [Dvd_dFechaModificacion, setFechaModifica] = useState(new Date());
 
 
     const { Emp_cCodigo } = useParams()
@@ -48,6 +52,13 @@ const EditaEventoPuja = (props) => {
     const { Dvm_cNummov } = useParams()
     const { Cab_cCatalogo } = useParams()
     const { Dvd_nCorrel } = useParams()
+
+
+    const [estado, setEstadoLista] = React.useState('');
+
+    const handleChange = (event) => {
+        setEstado(event.target.value);
+    };
 
 
     // Load de Pagina
@@ -82,9 +93,9 @@ const EditaEventoPuja = (props) => {
                 setCorreo(item.Dvd_cCorreo),
                 setImporte(item.Dvd_nImporte),
                 setEstado(item.Dvd_cEstado),
-                setFecha(item.Dvd_dFechaPuja)
-
-
+                setFecha(item.Dvd_dFechaPuja),
+                setComentario(item.Dvd_cComentario),
+                setFechaModifica(item.Dvd_dFechaModificacion)
             ))
 
         } finally {
@@ -97,7 +108,13 @@ const EditaEventoPuja = (props) => {
     const editarEventoPuja = async (e) => {
         try {
 
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nCorrel: Dvd_nCorrel, Dvd_cDocID: Dvd_cDocID, Dvd_cNombres: Dvd_cNombres, Dvd_cApellidos: Dvd_cApellidos, Dvd_cTelefono: Dvd_cTelefono, Dvd_cCorreo: Dvd_cCorreo, Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado }
+            let _body = {
+                Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo,
+                Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nCorrel: Dvd_nCorrel,
+                Dvd_cDocID: Dvd_cDocID, Dvd_cNombres: Dvd_cNombres, Dvd_cApellidos: Dvd_cApellidos,
+                Dvd_cTelefono: Dvd_cTelefono, Dvd_cCorreo: Dvd_cCorreo, Dvd_nImporte: Dvd_nImporte,
+                Dvd_cEstado: Dvd_cEstado, Dvd_cComentario: Dvd_cComentario, Dvd_dFechaModificacion: Dvd_dFechaModificacion
+            }
             await eventoService.obtenerEventosDetPujaAuth(_body).then(
                 (res) => {
                     setData(res[0]);
@@ -154,7 +171,7 @@ const EditaEventoPuja = (props) => {
 
                     <Grid container spacing={2}>
 
-                        <Grid item xs={12}>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Empresa"
                                 value={Emp_cCodigo}
@@ -164,6 +181,8 @@ const EditaEventoPuja = (props) => {
                                 variant="standard"
                                 disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Año"
                                 value={Pan_cAnio}
@@ -173,6 +192,8 @@ const EditaEventoPuja = (props) => {
                                 variant="standard"
                                 disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Periodo"
                                 value={Per_cPeriodo}
@@ -182,6 +203,8 @@ const EditaEventoPuja = (props) => {
                                 variant="standard"
                                 disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Movimiento"
                                 value={Dvm_cNummov}
@@ -191,7 +214,8 @@ const EditaEventoPuja = (props) => {
                                 variant="standard"
                                 disabled
                             />
-
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Catalogo"
                                 value={Cab_cCatalogo}
@@ -201,7 +225,8 @@ const EditaEventoPuja = (props) => {
                                 variant="standard"
                                 disabled
                             />
-
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Correl"
                                 value={Dvd_nCorrel}
@@ -211,6 +236,8 @@ const EditaEventoPuja = (props) => {
                                 variant="standard"
                                 disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Doc ID"
                                 value={Dvd_cDocID}
@@ -218,15 +245,10 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Doc ID"
                                 variant="standard"
+                                disabled
                             />
-                            <TextField
-                                label="Estado"
-                                value={Dvd_cEstado}
-                                onChange={(e) => setEstado(e.target.value)}
-                                name="textformat"
-                                id="Estado"
-                                variant="standard"
-                            />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Nombres"
                                 value={Dvd_cNombres}
@@ -234,7 +256,10 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Nombres"
                                 variant="standard"
+                                disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Apellidos"
                                 value={Dvd_cApellidos}
@@ -242,7 +267,10 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Apellidos"
                                 variant="standard"
+                                disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Telefono"
                                 value={Dvd_cTelefono}
@@ -250,7 +278,10 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Telefono"
                                 variant="standard"
+                                disabled
                             />
+                        </Grid>
+                        <Grid item xs={8}>
                             <TextField
                                 label="Correo"
                                 value={Dvd_cCorreo}
@@ -258,7 +289,10 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Correo"
                                 variant="standard"
+                                disabled
                             />
+                        </Grid>
+                        <Grid item xs={4}>
                             <TextField
                                 label="Importe"
                                 value={Dvd_nImporte}
@@ -266,19 +300,64 @@ const EditaEventoPuja = (props) => {
                                 name="textformat"
                                 id="Importe"
                                 variant="standard"
+                                disabled
                             />
+                        </Grid>
+                        <Grid item xs={8}>
                             <TextField
-                                label="Estado"
-                                value={Dvd_cEstado}
-                                onChange={(e) => setEstado(e.target.value)}
+                                label="Fecha"
+                                value={Dvd_dFechaPuja}
+                                onChange={(e) => setFecha(e.target.value)}
                                 name="textformat"
-                                id="Estado"
+                                id="Fecha"
                                 variant="standard"
+                                disabled
                             />
-
-
                         </Grid>
 
+                        <Grid item xs={4}>
+                            <TextField
+                                label="Fecha Modificación"
+                                value={Dvd_dFechaModificacion}
+                                onChange={(e) => setFechaModifica(e.target.value)}
+                                name="textformat"
+                                id="FechaModifica"
+                                variant="standard"
+                                disabled
+                            />
+                        </Grid>
+
+                        
+
+                        <Grid item xs={8}>
+                            <TextField
+                                label="Comentario"
+                                value={Dvd_cComentario}
+                                onChange={(e) => setComentario(e.target.value)}
+                                name="textformat"
+                                id="Comentario"
+                                variant="standard"
+
+                            />
+                        </Grid>
+
+
+
+                        <Grid item xs={12}>
+                            <FormControl>
+                                <InputLabel id="estado-label">Estado</InputLabel>
+                                <Select
+                                    labelId="estado-label"
+                                    id="estado-select"
+                                    value={Dvd_cEstado}
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value="A">Puja Activ</MenuItem>
+                                    <MenuItem value="X">Puja Cancelada</MenuItem>
+                                    <MenuItem value="P">Puja Pendiente</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
                     </Grid>
 
                     <Grid container spacing={2} >

@@ -11,11 +11,14 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
+import TextField from '@mui/material/TextField';
 import { eventoService } from '../../../services/evento.service';
 
 import { storage } from "../../../storage.js";
 
+function ccyFormat(num) {
+  return `${num.toFixed(2)}`;
+}
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,9 +48,18 @@ const ListaEventoPuja = (props) => {
   const [loading, setLoading] = useState([]);
   const [dataDelete, setDataDelete] = useState([]);
 
+
+  const [filterPlaca, setFilterPlaca] = useState('');
+  const [filterDocID, setFilterDocID] = useState('');
+  const [filterNombres, setFilterNombres] = useState('');
+
+  const [filteredData, setFilteredData] = useState(data);
+
+
   // Load de pagina
   useEffect(() => {
     listar();
+
   }, []);
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
@@ -57,6 +69,7 @@ const ListaEventoPuja = (props) => {
     return await eventoService.obtenerEventosDetPujaAuth(_body).then(
       (res) => {
         setData(res[0]);
+        setFilteredData(res[0]);
       },
       (error) => {
         console.log(error);
@@ -113,43 +126,82 @@ const ListaEventoPuja = (props) => {
     });
   }
 
+
+  const handleFilterChangePlaca = (event) => {
+    setFilterPlaca(event.target.value);
+  };
+  const handleFilterChangeDocID = (event) => {
+    setFilterDocID(event.target.value);
+  };
+  const handleFilterChangeNombres = (event) => {
+    setFilterNombres(event.target.value);
+  };
+
+  const handleFilterSubmit = () => {
+    let filtered;
+    filtered = data.filter(item => item.Placa.toLowerCase().includes(filterPlaca.toLowerCase()));
+    filtered = filtered.filter(item => item.Dvd_cDocID.toLowerCase().includes(filterDocID.toLowerCase()));
+    filtered = filtered.filter(item => item.Dvd_cNombres.toLowerCase().includes(filterNombres.toLowerCase()));
+
+    setFilteredData(filtered);
+  };
+
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
 
-        <Grid container spacing={1}>
 
 
-          <Paper
-            sx={{
-              p: 2,
-              margin: 1,
-              maxWidth: 'auto',
-              flexGrow: 1,
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-            }}
-          >
 
+        <Paper
+          sx={{
+            p: 2,
+            margin: 1,
+            maxWidth: 'auto',
+            flexGrow: 1,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+          <Grid container spacing={1}>
             <Grid item xs={12} >
 
-              <Button variant="contained" size="small" color="primary"
-                onClick={() => crear()} >Nuevo
-              </Button>
+              <div>
+                <Grid container spacing={1}>
+                  <Grid item xs={5} lg={3}>
+                    <TextField label="Filtrar por Placa" value={filterPlaca} onChange={handleFilterChangePlaca} />
+                  </Grid>
+                  <Grid item xs={7} lg={3}>
+                    <TextField label="Filtrar por Doc ID" value={filterDocID} onChange={handleFilterChangeDocID} />
+                  </Grid>
+                  <Grid item xs={8} lg={3}>
+                    <TextField label="Filtrar por Nombres" value={filterNombres} onChange={handleFilterChangeNombres} />
+                  </Grid>
+                  <Grid item xs={4} lg={3}>
+                    <Button variant="contained" color="primary" onClick={handleFilterSubmit}>
+                      Filtrar
+                    </Button>
+                  </Grid>
+                </Grid>
+              </div>
 
             </Grid>
             <Grid item xs={12} >
               <TableContainer component={Paper}>
+
+
+
+
                 <Table aria-label="customized table">
                   <TableHead>
                     <TableRow>
 
-                      <StyledTableCell align="right">Empresa</StyledTableCell>
-                      <StyledTableCell align="right">Año</StyledTableCell>
-                      <StyledTableCell align="center">Periodo</StyledTableCell>
-                      <StyledTableCell align="left">Movimiento</StyledTableCell>
+                      <StyledTableCell align="left">Llave</StyledTableCell>
                       <StyledTableCell align="left">Catalogo</StyledTableCell>
-                      <StyledTableCell align="left">Correl</StyledTableCell>
+
+                      <StyledTableCell align="left">Placa</StyledTableCell>
+
                       <StyledTableCell align="left">Doc ID</StyledTableCell>
                       <StyledTableCell align="left">Nombres</StyledTableCell>
 
@@ -165,36 +217,38 @@ const ListaEventoPuja = (props) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.map((item, idx) => (
+                    {filteredData.map((item, idx) => (
                       <StyledTableRow item={item} key={idx}>
 
-                        <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                        <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
-                        <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
-                        <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
+                        <StyledTableCell align="right">{item.Llave}</StyledTableCell>
                         <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
-                        <StyledTableCell align="center">{item.Dvd_nCorrel}</StyledTableCell>
+
+                        <StyledTableCell align="left">{item.Placa}</StyledTableCell>
+
                         <StyledTableCell align="left">{item.Dvd_cDocID}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cNombres}</StyledTableCell>
 
                         <StyledTableCell align="left">{item.Dvd_cApellidos}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cTelefono}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cCorreo}</StyledTableCell>
-                        <StyledTableCell align="left">{item.Dvd_nImporte}</StyledTableCell>
+                        <StyledTableCell align="left">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
 
                         <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Editar</Button></StyledTableCell>
-                        <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell>
+                        {/* <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo, item.Dvd_nCorrel)} >Eliminar</Button></StyledTableCell> */}
                       </StyledTableRow>
                     ))}
                   </TableBody>
                 </Table>
+
+
               </TableContainer>
             </Grid>
-          </Paper>
+          </Grid>
+        </Paper>
 
-        </Grid>
+
       </Box >
 
 
