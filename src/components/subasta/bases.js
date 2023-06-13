@@ -60,7 +60,7 @@ const Bases = () => {
 
 
                 <div>
-                    <ListItem>La subasta iniciará el día viernes 2 de junio al mediodía y culminará el día domingo 4 de junio a las 8:00 pm, momento en el que se determinarán a los ganadores de los ejemplares subastados.</ListItem>
+                    <ListItem>La subasta iniciará el día martes 13 de junio al mediodía y culminará el día jueves 15 a las 8:00 pm, momento en el que se determinarán a los ganadores de los ejemplares subastados.</ListItem>
                     <ListItem>Cada puja se realizará por múltiplos de S/50.00 (cincuenta soles) sobre el precio base de cada ejemplar.</ListItem>
                     <ListItem>De existir 2 (dos) o más pujas por algún ejemplar a falta de 10 (diez) minutos para el cierre de la subasta, se aumentarán 10 (diez) minutos adicionales, generando una nueva hora de cierre, y así sucesivamente, hasta definir a un ganador. La hora límite para el cierre será indefectiblemente a las 00:00 horas del lunes 5 de junio.</ListItem>
                     <ListItem>Se eliminarán las pujas de quienes coloquen DNI y/o celular falsos o de otra persona. Toda puja se verificará por vía telefónica, por transparencia.</ListItem>
