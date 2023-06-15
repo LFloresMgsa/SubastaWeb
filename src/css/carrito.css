@@ -138,6 +138,16 @@ img {
 	font-weight: 900;
 }
 
+.cart-total h4 {
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.total-pagar-sm {
+	font-size: 15px;
+	font-weight: 900;
+}
+
 .hidden-cart {
 	display: none;
 }
