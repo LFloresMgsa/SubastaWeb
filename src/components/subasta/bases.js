@@ -4,9 +4,9 @@ import { styled } from '@mui/material/styles';
 import imagenes from '../../assets/images/imagenes';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-
-import { Typography, makeStyles } from '@material-ui/core';
-
+import { Typography } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core'; // import incorrecto. makeStyles viene de @mui/styles
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
     paragraph: {

@@ -26,6 +26,7 @@ export const eventoService = {
   obtenerCatalogoAuth,
   obtenerPedidoCabAuth,
   obtenerPedidoDetAuth,
+  obtenerAccesosAuth,
 
 };
 
@@ -248,3 +249,13 @@ function obtenerPedidoDetAuth(dataJson) {
   );
 }
 
+
+function obtenerAccesosAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/lgt_accesos/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}

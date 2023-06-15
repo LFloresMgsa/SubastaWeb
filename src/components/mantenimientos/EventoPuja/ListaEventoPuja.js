@@ -150,10 +150,6 @@ const ListaEventoPuja = (props) => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-
-
-
-
         <Paper
           sx={{
             p: 2,

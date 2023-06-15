@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import ReactPlayer from 'react-player'
 import { eventoService } from '../services/evento.service';
 import Paper from '@mui/material/Paper';

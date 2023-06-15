@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles';
 import fondo from '../assets/images/circulo.png'
 import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons'
 import { eventoService } from '../services/evento.service';
