@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import MenuItems from './MenuItems';
 import { css, useTheme } from 'styled-components';
 import { styled } from '@mui/material/styles';
@@ -6,6 +6,8 @@ import { styled } from '@mui/material/styles';
 import { Avatar, Chip, Drawer } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
+
+import { storage } from "../../../storage.js";
 
 const cookies = new Cookies();
 
@@ -143,9 +145,51 @@ const _temp_tabs = [
     isDisabled: false,
     isDeleted: false,
     wasUpdated: false,
-    tabChildren: [],
+    tabChildren: [
+      {
+        index: 100,
+        tabID: 100,
+        portalID: 9,
+        tabName: 'Subasta Hijo',
+        title: '',
+        description: '',
+        parentId: 4,
+        level: 1,
+        authorizedRoles: '65;68;-3;',
+        authorizedRolesAllString: ' Administrators, All, Users',
+        administratorRoles: '65;',
+        tabOrder: 4,
+        isVisible: true,
+        componentName: '',
+        routeName: 'Subasta',
+        isDisabled: false,
+        isDeleted: false,
+        wasUpdated: false,
+        tabChildren: [],
+      },
+      {
+        index: 101,
+        tabID: 101,
+        portalID: 9,
+        tabName: 'Menu Item 2',
+        title: '',
+        description: '',
+        parentId: 4,
+        level: 1,
+        authorizedRoles: '65;68;-3;',
+        authorizedRolesAllString: ' Administrators, All, Users',
+        administratorRoles: '65;',
+        tabOrder: 4,
+        isVisible: true,
+        componentName: '',
+        routeName: 'Inicio',
+        isDisabled: false,
+        isDeleted: false,
+        wasUpdated: false,
+        tabChildren: [],
+      },
+    ],
   },
-
   {
     index: 5,
     tabID: 5,
@@ -341,22 +385,31 @@ const _temp_tabs = [
     isDeleted: false,
     wasUpdated: false,
     tabChildren: [],
-  },  
+  },
 ];
+
+
+
 
 const Menu = (props) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { viewport, state, global } = props;
+  const { viewport, state, global} = props;
+
+
+//console.log(props.dataMenu);
+
+  //let _temp_tabs = props.dataMenu;
 
   let tabs = _temp_tabs.filter(_temp_tabs => _temp_tabs.authorizedRolesAllString.indexOf("All") > 0);
 
   if (cookies.get('Sgm_cUsuario') != "" && cookies.get('Sgm_cUsuario') != null) {
-    
+
     tabs = _temp_tabs.filter(_temp_tabs => _temp_tabs.authorizedRolesAllString.indexOf(cookies.get('Sgm_cPerfil')) > 0);
   }
 
   const sortMenuItems = tabs.sort((a, b) => (a.tabOrder > b.tabOrder ? 1 : -1));
+
 
 
 
@@ -374,6 +427,8 @@ const Menu = (props) => {
 
   const container = !window ? () => window().document.body : undefined;
 
+
+ 
   return (
     <>
       <StyledMenu
