@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 import AppRoutes from './AppRoutes';
 import Menu from './components/layout/menu/Index';
 import ComponentAlert from './components/common/others/ComponentAlert';
-import { eventoService } from './services/evento.service';
-import { storage } from "./storage.js";
+
 
 const AppBarOffset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -55,33 +54,7 @@ function AppContent(props) {
     isUserLogged: accessToken.token ? true : true,
   });
 
- //const [data, setData] = useState([]);  
 
-
-  // Load de pagina
-  // useEffect( () => {
-
-  //   const listarAccesos = async () => {
-  //     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
-
-  //     return await eventoService.obtenerAccesosAuth(_body).then(
-  //       (res) => {
-  //         setData(res[0]);
-
-  //       },
-  //       (error) => {
-  //         console.log(error);
-
-  //       }
-  //     );
-  //   };
-
-  //   listarAccesos();
-
-  // }, [storage.GetStorage("Emp_cCodigo")]);
-
-
-//dataMenu={data}
 
   return (
     <div className={classes.root}>

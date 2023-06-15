@@ -7,7 +7,6 @@ import { Avatar, Chip, Drawer } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 
-import { storage } from "../../../storage.js";
 
 const cookies = new Cookies();
 
@@ -422,10 +421,6 @@ const Menu = (props) => {
   const dispatch = useDispatch();
   const { viewport, state, global } = props;
 
-
-  //console.log(props.dataMenu);
-
-  //let _temp_tabs = props.dataMenu;
 
   let tabs = _temp_tabs
     .map(item => {
