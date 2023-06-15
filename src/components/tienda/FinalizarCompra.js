@@ -142,13 +142,29 @@ const FinalizarCompra = (props) => {
     const [pPdm_dFecha, setPdm_dFecha] = useState('')
     const [pPdm_cEstado, setPdm_cEstado] = useState('')
 
+    const [pPdm_cComentarioUser, setPdm_cComentarioUser] = useState('')
+    const [pPdm_dFechaCrea, setPdm_dFechaCrea] = useState('')
+    const [pPdm_dFechaModifica, setPdm_dFechaModifica] = useState('')
+    const [pPdm_cUserModifica, setPdm_cUserModifica] = useState('')
+
     async function handleGrabarPedido() {
+
+//console.log(props.location.state);
+
         let _resultado;
         try {
             let _Cabecera = {
-                Accion: "INSERTAR", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov, Per_cPeriodo: pPer_cPeriodo,
-                Cli_cNombre: pCli_cNombre, Cli_cApellido: pCli_cApellido, Cli_cDocId: pCli_cDocId, Pdm_cDireccion: pPdm_cDireccion, Pdm_cDistrito: pPdm_cDistrito,
-                Pdm_cDepartamento: pPdm_cDepartamento, Cli_cTelefono: pCli_cTelefono, Cli_cCorreo: pCli_cCorreo, Pdm_cComentario: pPdm_cComentario, Pdm_dFecha: null, Pdm_cEstado: pPdm_cEstado
+                Accion: "INSERTAR", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), 
+                Pdm_cNummov: pPdm_cNummov, Per_cPeriodo: pPer_cPeriodo,
+                Cli_cNombre: pCli_cNombre, Cli_cApellido: pCli_cApellido, 
+                Cli_cDocId: pCli_cDocId, Pdm_cDireccion: pPdm_cDireccion, 
+                Pdm_cDistrito: pPdm_cDistrito,Pdm_cDepartamento: pPdm_cDepartamento, 
+                Cli_cTelefono: pCli_cTelefono, Cli_cCorreo: pCli_cCorreo, Pdm_cComentario: pPdm_cComentario, 
+                Pdm_dFecha: null, Pdm_cEstado: pPdm_cEstado,
+                Pdm_cComentarioUser: ''  ,
+                Pdm_dFechaCrea: null,
+                Pdm_dFechaModifica : null,
+                Pdm_cUserModifica  : null  
             }
 
             const _Pedido = {
@@ -370,6 +386,7 @@ const FinalizarCompra = (props) => {
                                         />
                                     </Item>
                                 </Grid>
+
 
 
                             </Grid>

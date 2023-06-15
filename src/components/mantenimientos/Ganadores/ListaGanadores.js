@@ -173,6 +173,7 @@ const ListaGanadores = (props) => {
                       <StyledTableCell align="left">Apellidos</StyledTableCell>
                       <StyledTableCell align="left">Telefono</StyledTableCell>
                       <StyledTableCell align="left">Correo</StyledTableCell>
+                      <StyledTableCell align="right">N° Pujas</StyledTableCell>
                       <StyledTableCell align="left">Importe</StyledTableCell>
                       <StyledTableCell align="left">Fecha</StyledTableCell>
                       <StyledTableCell align="left">Evento</StyledTableCell>
@@ -188,6 +189,9 @@ const ListaGanadores = (props) => {
                         <StyledTableCell align="left">{item.Dvd_cApellidos}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cTelefono}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cCorreo}</StyledTableCell>
+
+                        <StyledTableCell align="right">{item.Contador}</StyledTableCell>
+
                         <StyledTableCell align="right">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvm_cDescripcion}</StyledTableCell>

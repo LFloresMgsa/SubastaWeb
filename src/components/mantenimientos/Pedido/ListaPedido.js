@@ -11,20 +11,18 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-
 import { eventoService } from '../../../services/evento.service';
-
 import { storage } from "../../../storage.js";
+import Button from '@mui/material/Button';
+import { FormControl, InputLabel, Select, MenuItem, TextField} from '@material-ui/core';
 
 const TAX_RATE = 0.18;
 
 function totalPedido(items) {
- 
+
   if (items) {
-    
-    let ntotal= items.map(({ Pdd_nPrecioNeto }) => Pdd_nPrecioNeto).reduce((sum, i) => sum + i, 0);
-    
-    
+
+    let ntotal = items.map(({ Pdd_nPrecioNeto }) => Pdd_nPrecioNeto).reduce((sum, i) => sum + i, 0);
 
     return ntotal;
   }
@@ -94,14 +92,18 @@ function Derecha(cadena, cantidad) {
 
 
 const CabeceraDetalle = (props) => {
-  
-  
+
+
+
   const [invoiceTotal, setInvoiceTotal] = useState(0);
 
-  const nsubtotal = invoiceTotal /(TAX_RATE+1) ;
-  const nimpuestos = invoiceTotal-nsubtotal;
-  
+  const nsubtotal = invoiceTotal / (TAX_RATE + 1);
+  const nimpuestos = invoiceTotal - nsubtotal;
+
   const [data, setData] = useState([]);
+
+
+  const [dataRowSelCab, setDataRowSelCab] = useState([]);
 
   const [error, setError] = useState([]);
   const [loading, setLoading] = useState([]);
@@ -110,10 +112,32 @@ const CabeceraDetalle = (props) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
 
+  const handleChange = (event) => {
+    _RowSelCab(event.target.value);
+};
+  const _RowSelCab = FiltraCab();
+ 
+
+  function FiltraCab() {
+
+    let pPdm_cNummov = "";
+
+    if (selectedRow) {
+      //      console.log(selectedRow[0]);
+      pPdm_cNummov = selectedRow[0].Pdm_cNummov;
+    }
+
+    let rowCabSel = data.filter(_temps =>_temps.Pdm_cNummov == pPdm_cNummov);
+
+    return rowCabSel[0];
+  }
+
+
   const handleRowClick = async (param) => {
     let pPdm_cNummov = Derecha(param[0], 10);
-    
-//    invoiceSubtotal = subtotal(selectedRow);
+
+
+    //    invoiceSubtotal = subtotal(selectedRow);
 
     await listarDetalle(pPdm_cNummov);
 
@@ -126,6 +150,7 @@ const CabeceraDetalle = (props) => {
 
     return await eventoService.obtenerPedidoCabAuth(_body).then(
       (res) => {
+
         setData(res[0]);
 
       },
@@ -136,16 +161,29 @@ const CabeceraDetalle = (props) => {
     );
   };
 
+  const handleConfirmEstado = () => {
+
+   
+
+};
+
+
   const listarDetalle = async (pPdm_cNummov) => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
 
-    //console.log(pPdm_cNummov);
+
+
+
 
     return await eventoService.obtenerPedidoDetAuth(_body).then(
       (res) => {
         setSelectedRow(res[0]);
         setInvoiceTotal(totalPedido(res[0]));
-        //console.log(res[0]);
+
+
+
+
+        //console.log(rowCabSel);
       },
       (error) => {
         console.log(error);
@@ -154,7 +192,15 @@ const CabeceraDetalle = (props) => {
     );
   };
 
-  // Load de pagina
+  // // Load de pagina
+  // useEffect(() => {
+
+  //   console.log(dataRowSelCab);
+
+  // }, [dataRowSelCab]);
+
+
+
   useEffect(() => {
 
     listarCabecera();
@@ -168,52 +214,64 @@ const CabeceraDetalle = (props) => {
 
   return (
     <div>
-      <Box sx={{ width: '100%', flexGrow: 1 }}>
 
-        <Grid container spacing={0}>
-          <Grid item xs={12} lg={6}>
-            <Paper
-              sx={{
-                p: 2,
-                margin: 1,
-                maxWidth: 'auto',
-                height: '100%',
-                flexGrow: 1,
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-              }}
-            >
-              <DataGrid
-                rows={data}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                getRowId={getRowId}
-                onRowSelectionModelChange={(newRowSelectionModel) => {
-                  handleRowClick(newRowSelectionModel);
+      <Box sx={{ flexGrow: 1 }}>
+        <Paper
+          sx={{
+            p: 2,
+            margin: 1,
+            maxWidth: 'auto',
+            flexGrow: 1,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+
+          <Grid container spacing={1}>
+
+            <Grid item xs={12} lg={12}>
+              <Paper
+                sx={{
+                  p: 2,
+                  margin: 1,
+                  maxWidth: 'auto',
+                  height: '100%',
+                  flexGrow: 1,
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                 }}
-                rowSelectionModel={rowSelectionModel}
-                components={{
-                  Toolbar: GridToolbar,
+              >
+                <DataGrid
+                  rows={data}
+                  columns={columns}
+                  pageSize={5}
+                  rowsPerPageOptions={[5]}
+                  getRowId={getRowId}
+                  onRowSelectionModelChange={(newRowSelectionModel) => {
+                    handleRowClick(newRowSelectionModel);
+                  }}
+                  rowSelectionModel={rowSelectionModel}
+                  components={{
+                    Toolbar: GridToolbar,
+                  }}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Paper
+                sx={{
+                  p: 2,
+                  margin: 1,
+                  maxWidth: 'auto',
+                  height: '100%',
+                  flexGrow: 1,
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                 }}
-              />
-            </Paper>
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Paper
-              sx={{
-                p: 2,
-                margin: 1,
-                maxWidth: 'auto',
-                height: '100%',
-                flexGrow: 1,
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-              }}
-            >
-              {data && (
+              >
+
                 <div>
-                  <h2>Detalle del Pedido : {data.Pdm_cNummov}</h2>
+                  <h2>Detalle del Pedido :</h2>
 
 
                   <TableContainer component={Paper}>
@@ -250,7 +308,7 @@ const CabeceraDetalle = (props) => {
 
                         <TableRow >
                           <TableCell rowSpan={1} />
-                          <TableCell colSpan={4} >IGV {ccyFormatInt(TAX_RATE*100)} % </TableCell>
+                          <TableCell colSpan={4} >IGV {ccyFormatInt(TAX_RATE * 100)} % </TableCell>
                           <TableCell align="right">S/. {ccyFormat(nimpuestos)}</TableCell>
                         </TableRow>
 
@@ -269,28 +327,99 @@ const CabeceraDetalle = (props) => {
 
 
                 </div>
-              )}
 
 
-            </Paper>
 
-            <Paper
-              sx={{
-                p: 2,
-                margin: 1,
-                maxWidth: 'auto',
-                height: '100%',
-                flexGrow: 1,
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-              }}
-            >
-                <div>
-                  <h2>Cambio de Estado de Pedido : {data.Pdm_cNummov}</h2>              
-                  </div>
-            </Paper>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} lg={6}>
+
+              <Paper
+                sx={{
+                  p: 2,
+                  margin: 1,
+                  maxWidth: 'auto',
+                  height: '100%',
+                  flexGrow: 1,
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                }}
+              >
+                {_RowSelCab && (
+                  
+                  <form onSubmit={handleConfirmEstado}>
+                  <h2>Cambio de Estado de Pedido :</h2>
+                  <TextField
+                    name="pedido"
+                    label="Nro.Pedido"
+                    value={_RowSelCab.Pdm_cNummov}
+                    onChange={handleChange}
+                    // fullWidth
+                    margin="normal"
+                  />
+                  
+                  <FormControl fullWidth margin="normal">
+                  <InputLabel id="state-label">Estado</InputLabel>
+                  <Select
+                    labelId="Estado"
+                    name="Estado"
+                    value={_RowSelCab.Pdm_cEstado}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="A">Activo</MenuItem>
+                    <MenuItem value="X">Inactivo</MenuItem>
+                    <MenuItem value="P">Pendiente</MenuItem>
+                  </Select>
+                  </FormControl>
+                  <TextField
+                    name="comentario"
+                    label="Comentario Users"
+                    value={_RowSelCab.Pdm_cComentarioUser}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                    multiline
+                    rows={4}
+                  />
+                  <br></br>
+                 
+                   <Grid item lg={12}>
+                      <Button variant="contained" size="small" color="primary" onClick={handleConfirmEstado} width="100%"  >Grabar</Button>
+                    </Grid>
+                  </form>             
+
+
+                  // <div>
+                  //   <h2>Cambio de Estado de Pedido :</h2>
+                  //   <h2>Pedido : {_RowSelCab.Pdm_cNummov}</h2>
+                  //   {/* <h2>Estado : {_RowSelCab.Pdm_cEstado}</h2> */}
+                  //   <Grid item xs={12}>
+                  //           <FormControl>
+                  //               <InputLabel id="estado-label">Estado</InputLabel>
+                  //               <Select
+                  //                   labelId="estado-label"
+                  //                   id="estado-select"
+                  //                   value={_RowSelCab.Pdm_cEstado}
+                  //                   onChange={handleChange}
+                  //               >
+                  //                   <MenuItem value="A">Estado Activ</MenuItem>
+                  //                   <MenuItem value="X">Estado Cancelada</MenuItem>
+                  //                   <MenuItem value="P">Estado Pendiente</MenuItem>
+                  //               </Select>
+                  //           </FormControl>
+                  //    </Grid>
+                  //    <h2>Comentario User : {_RowSelCab.Pdm_cComentarioUser}</h2>
+                   
+
+                    
+                  // </div>
+                )}
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
+
+        </Paper>
+
       </Box>
     </div>
   );
