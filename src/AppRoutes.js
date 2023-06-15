@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard';
 import Tienda from './views/Tienda';
 import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
+import Ganadores from './views/Ganadores';
 import Bases from './views/Bases';
 import SubastaDetalle from './views/SubastaDetalle';
 import MantCatalogo from './views/MantCatalogo';
@@ -76,6 +77,12 @@ const AppRoutes = (props) => {
         exact
         path="/pujas"
         render={(route) => <Subasta {...props} {...route} />}
+      />
+
+      <Route
+        exact
+        path="/ganadores"
+        render={(route) => <Ganadores {...props} {...route} />}
       />
 
 

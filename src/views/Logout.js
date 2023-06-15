@@ -8,6 +8,7 @@ const Logout = () => {
     const cerrarSesion = () => {
 
         cookies.remove('Sgm_cUsuario', { path: "/" });
+        cookies.remove('Sgm_cPerfil', { path: "/" });
         cookies.remove('Sgm_cNombre', { path: "/" });
         cookies.remove('Sgm_cContrasena', { path: "/" });
         cookies.remove('Sgm_cObservaciones', { path: "/" });
