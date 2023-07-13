@@ -14,7 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import { eventoService } from '../../../services/evento.service';
 import { storage } from "../../../storage.js";
 import Button from '@mui/material/Button';
-import { FormControl, InputLabel, Select, MenuItem, TextField} from '@material-ui/core';
+import { FormControl, InputLabel, Select, MenuItem, TextField } from '@material-ui/core';
 
 const TAX_RATE = 0.18;
 
@@ -65,6 +65,7 @@ const columns = [
   { field: 'Pan_cAnio', headerName: 'Año', width: 70 },
   { field: 'Per_cPeriodo', headerName: 'Periodo', width: 70 },
   { field: 'Pdm_cNummov', headerName: 'Movimiento', width: 110 },
+  { field: 'Pdm_cEstado', headerName: 'Estado', width: 50 },
   { field: 'Cli_cNombre', headerName: 'Nombre', width: 110 },
   { field: 'Cli_cApellido', headerName: 'Apellido', width: 110 },
   { field: 'Cli_cDocId', headerName: 'D.N.I', width: 110 },
@@ -75,11 +76,9 @@ const columns = [
   { field: 'Cli_cCorreo', headerName: 'Correo', width: 150 },
   { field: 'Pdm_cComentario', headerName: 'Comentario', width: 100 },
   { field: 'Pdm_dFecha', headerName: 'Fecha', width: 200 },
-  { field: 'Pdm_cEstado', headerName: 'Estado', width: 50 },
+  
 ];
-
-
-
+    
 
 
 function Derecha(cadena, cantidad) {
@@ -102,6 +101,8 @@ const CabeceraDetalle = (props) => {
 
   const [data, setData] = useState([]);
 
+  const [dataLog, setDataLog] = useState([0]);
+
 
   const [dataRowSelCab, setDataRowSelCab] = useState([]);
 
@@ -112,35 +113,146 @@ const CabeceraDetalle = (props) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
 
+
+
+  const [Emp_cCodigo, setEmpresa] = useState('')
+  const [Pan_cAnio, setAnio] = useState('')
+  const [Per_cPeriodo, setPeriodo] = useState('')
+  const [Cli_cNombre, setCliente] = useState('')
+  const [Cli_cApellido, setApellido] = useState('')
+  const [Cli_cDocID, setDocId] = useState('')
+  const [Pdm_cDireccion, setDireccion] = useState('')
+  const [Pdm_cDistrito, setDistrito] = useState('')
+  const [Pdm_cDepartamento, setDepartamento] = useState('')
+  const [Cli_cTelefono, setTelefono] = useState('')
+  const [Cli_cCorreo, setCorreo] = useState('')
+  const [Pdm_cComentario, setComentario] = useState('')
+  const [Pdm_dFecha, setFecha] = useState('')
+  const [Pdm_nItem, setItem] = useState('')
+  const [Pdm_cEstado, setEstado] = useState('')
+  const [Pdm_dFechaCrea, setFechaCrea] = useState('')
+  const [Pdm_dFechaModifica, setFechaModifica] = useState('')
+  const [Pdm_cUserModifica, setFechaUser] = useState('')
+  const [Pdm_cComentarioUser, setComentarioUser] = useState('')
+
+
+
   const handleChange = (event) => {
     _RowSelCab(event.target.value);
-};
+  };
+
+  const handleChangeEstado = (event) => {
+    _RowSelCab.Pdm_cEstado=event.target.value;
+    
+    setEstado(event.target.value);
+  };
+
   const _RowSelCab = FiltraCab();
- 
+
 
   function FiltraCab() {
 
     let pPdm_cNummov = "";
 
+
+    
+
     if (selectedRow) {
-      //      console.log(selectedRow[0]);
       pPdm_cNummov = selectedRow[0].Pdm_cNummov;
+
     }
 
-    let rowCabSel = data.filter(_temps =>_temps.Pdm_cNummov == pPdm_cNummov);
+    let rowCabSel = data.filter(_temps => _temps.Pdm_cNummov == pPdm_cNummov);
 
+
+    
+    
     return rowCabSel[0];
   }
 
+  const actualizar = async () => {
 
-  const handleRowClick = async (param) => {
+    await actualizaEstado();
+
+    let nunmmov = "";
+
+    if (_RowSelCab) {
+      nunmmov = _RowSelCab.Pdm_cNummov;
+    }
+
+   
+    await obtenerEstadoLog(nunmmov);
+
+    setComentarioUser('');
+
+  }
+
+  const actualizaEstado = async () => {
+
+    let nunmmov = "";
+
+    if (_RowSelCab) {
+      nunmmov = _RowSelCab.Pdm_cNummov;
+    }
+
+    
+
+    let _body = {
+      Accion: "ACTUALIZA_ESTADOPED", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"),
+      Pdm_cNummov: nunmmov, Per_cPeriodo: Per_cPeriodo, Cli_cNombre: Cli_cNombre, Cli_cApellido: Cli_cApellido, Cli_cDocID: Cli_cDocID,
+      Pdm_cDireccion: Pdm_cDireccion, Pdm_cDistrito: Pdm_cDistrito, Pdm_cDepartamento: Pdm_cDepartamento,
+      Cli_cTelefono: Cli_cTelefono, Cli_cCorreo: Cli_cCorreo, Pdm_cComentario: Pdm_cComentario, Pdm_dFecha: null,
+      Pdm_cEstado: Pdm_cEstado, Pdm_cComentarioUser: Pdm_cComentarioUser, Pdm_dFechaCrea: null,
+      Pdm_dFechaModifica: null, Pdm_cUserModifica: Pdm_cUserModifica, Pdm_nItem: 0
+    }
+
+    
+    return await eventoService.actualizaPedidoAuth(_body).then(
+      (res) => {
+        FiltraCab(res[0]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  const obtenerEstadoLog = async (pPdm_cNummov) => {
+
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
+
+    return await eventoService.actualizaPedidoAuth(_body).then(
+      (res) => {
+        setDataLog(res[0]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+
+
+
+  const handleRowClickCab = async (param) => {
     let pPdm_cNummov = Derecha(param[0], 10);
 
 
-    //    invoiceSubtotal = subtotal(selectedRow);
+    
 
     await listarDetalle(pPdm_cNummov);
 
+
+    if (_RowSelCab){
+      setEstado(_RowSelCab.Pdm_cEstado);
+    }
+
+
+    await obtenerEstadoLog(pPdm_cNummov);
+
+        //setEstado(Pdm_cEstado[0].Pdm_cEstado);  
+
+    
 
   };
 
@@ -161,19 +273,9 @@ const CabeceraDetalle = (props) => {
     );
   };
 
-  const handleConfirmEstado = () => {
-
-   
-
-};
-
 
   const listarDetalle = async (pPdm_cNummov) => {
     let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Pdm_cNummov: pPdm_cNummov }
-
-
-
-
 
     return await eventoService.obtenerPedidoDetAuth(_body).then(
       (res) => {
@@ -181,9 +283,7 @@ const CabeceraDetalle = (props) => {
         setInvoiceTotal(totalPedido(res[0]));
 
 
-
-
-        //console.log(rowCabSel);
+        
       },
       (error) => {
         console.log(error);
@@ -192,18 +292,18 @@ const CabeceraDetalle = (props) => {
     );
   };
 
-  // // Load de pagina
-  // useEffect(() => {
+  
 
-  //   console.log(dataRowSelCab);
-
-  // }, [dataRowSelCab]);
-
-
-
+  
   useEffect(() => {
 
+    
     listarCabecera();
+ 
+
+    
+    
+
 
 
   }, []);
@@ -248,7 +348,7 @@ const CabeceraDetalle = (props) => {
                   rowsPerPageOptions={[5]}
                   getRowId={getRowId}
                   onRowSelectionModelChange={(newRowSelectionModel) => {
-                    handleRowClick(newRowSelectionModel);
+                    handleRowClickCab(newRowSelectionModel);
                   }}
                   rowSelectionModel={rowSelectionModel}
                   components={{
@@ -346,75 +446,95 @@ const CabeceraDetalle = (props) => {
                 }}
               >
                 {_RowSelCab && (
-                  
-                  <form onSubmit={handleConfirmEstado}>
-                  <h2>Cambio de Estado de Pedido :</h2>
-                  <TextField
-                    name="pedido"
-                    label="Nro.Pedido"
-                    value={_RowSelCab.Pdm_cNummov}
-                    onChange={handleChange}
-                    // fullWidth
-                    margin="normal"
-                  />
-                  
-                  <FormControl fullWidth margin="normal">
-                  <InputLabel id="state-label">Estado</InputLabel>
-                  <Select
-                    labelId="Estado"
-                    name="Estado"
-                    value={_RowSelCab.Pdm_cEstado}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="A">Activo</MenuItem>
-                    <MenuItem value="X">Inactivo</MenuItem>
-                    <MenuItem value="P">Pendiente</MenuItem>
-                  </Select>
-                  </FormControl>
-                  <TextField
-                    name="comentario"
-                    label="Comentario Users"
-                    value={_RowSelCab.Pdm_cComentarioUser}
-                    onChange={handleChange}
-                    fullWidth
-                    margin="normal"
-                    multiline
-                    rows={4}
-                  />
-                  <br></br>
-                 
-                   <Grid item lg={12}>
-                      <Button variant="contained" size="small" color="primary" onClick={handleConfirmEstado} width="100%"  >Grabar</Button>
+
+                  <form onSubmit={actualizar}>
+                    <h2>Cambio de Estado de Pedido :</h2>
+                    <TextField
+                      name="pedido"
+                      label="Nro.Pedido"
+                      value={_RowSelCab.Pdm_cNummov}
+                      //onChange={handleChange}
+                      disabled
+                      // fullWidth
+                      margin="normal"
+                    />
+
+                    <FormControl fullWidth margin="normal">
+                      <InputLabel id="state-label">Estado</InputLabel>
+                      <Select
+                        labelId="Estado"
+                        name="Estado"
+                        value={_RowSelCab.Pdm_cEstado}
+                        onChange={handleChangeEstado}
+                      >
+                        <MenuItem value="A">Activo</MenuItem>
+                        <MenuItem value="X">Inactivo</MenuItem>
+                        <MenuItem value="P">Pendiente</MenuItem>
+                        <MenuItem value="F">Finalizado</MenuItem>
+                      </Select>
+                    </FormControl>
+
+
+
+                    <TextField
+                      name="comentario"
+                      label="Comentario Users"
+                      value={Pdm_cComentarioUser}
+
+                      onChange={(e) => setComentarioUser(e.target.value)}
+                      fullWidth
+                      margin="normal"
+                      multiline
+                      minRows={4}
+                    />
+
+                    <Grid item lg={12}>                      
+                      <Button variant="contained" size="small" color="primary" onClick={actualizar} width="100%"  >Actualizar Estado</Button>
                     </Grid>
-                  </form>             
 
-
-                  // <div>
-                  //   <h2>Cambio de Estado de Pedido :</h2>
-                  //   <h2>Pedido : {_RowSelCab.Pdm_cNummov}</h2>
-                  //   {/* <h2>Estado : {_RowSelCab.Pdm_cEstado}</h2> */}
-                  //   <Grid item xs={12}>
-                  //           <FormControl>
-                  //               <InputLabel id="estado-label">Estado</InputLabel>
-                  //               <Select
-                  //                   labelId="estado-label"
-                  //                   id="estado-select"
-                  //                   value={_RowSelCab.Pdm_cEstado}
-                  //                   onChange={handleChange}
-                  //               >
-                  //                   <MenuItem value="A">Estado Activ</MenuItem>
-                  //                   <MenuItem value="X">Estado Cancelada</MenuItem>
-                  //                   <MenuItem value="P">Estado Pendiente</MenuItem>
-                  //               </Select>
-                  //           </FormControl>
-                  //    </Grid>
-                  //    <h2>Comentario User : {_RowSelCab.Pdm_cComentarioUser}</h2>
-                   
-
-                    
-                  // </div>
+                  </form>
                 )}
               </Paper>
+            </Grid>
+            <Grid item xs={12} lg={12}>
+              <Paper
+                sx={{
+                  p: 2,
+                  margin: 1,
+                  maxWidth: 'auto',
+                  flexGrow: 1,
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                }}
+              >
+
+                <TableContainer component={Paper}>
+                  <h2>Log de estados :</h2>
+                  <Table aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell align="left">Nro. Movimiento</StyledTableCell>
+                        <StyledTableCell align="left">Item</StyledTableCell>
+                        <StyledTableCell align="left">Estado</StyledTableCell>
+                        <StyledTableCell align="left">Comentario</StyledTableCell>
+
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                     {dataLog.map((row,index) => (
+                                                <StyledTableRow key={index} >                                      
+                                                <StyledTableCell align="left">{row.Pdm_cNummov}</StyledTableCell>
+                                                <StyledTableCell align="left">{row.Pdm_nItem}</StyledTableCell>
+                                                <StyledTableCell align="left">{row.Pdm_cEstado}</StyledTableCell>
+                                                <StyledTableCell align="left">{row.Pdm_cComentarioUser}</StyledTableCell>
+                                            </StyledTableRow>
+                     ))} 
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+
+
             </Grid>
           </Grid>
 

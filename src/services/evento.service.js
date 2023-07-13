@@ -27,6 +27,7 @@ export const eventoService = {
   obtenerPedidoCabAuth,
   obtenerPedidoDetAuth,
   obtenerAccesosAuth,
+  actualizaPedidoAuth
 
 };
 
@@ -255,6 +256,17 @@ function obtenerAccesosAuth(dataJson) {
   const params = {};
 
   const url = `/api/evento/lgt_accesos/auth`;
+  return Fetch.post(url, params, options).then((res) =>
+    handleResponse(res, false)
+  );
+}
+
+
+function actualizaPedidoAuth(dataJson) {
+  const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
+  const params = {};
+
+  const url = `/api/evento/vtm_pedido_estados/auth`; 
   return Fetch.post(url, params, options).then((res) =>
     handleResponse(res, false)
   );
