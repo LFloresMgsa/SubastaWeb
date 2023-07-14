@@ -33,11 +33,11 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 350,
+    width: 360,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 1,
 };
 
 
@@ -204,6 +204,9 @@ const Item = (props) => {
                                             <p><b>Padre:</b> {props.Padre}</p>
                                             <p><b>Madre:</b> {props.Madre}</p>
                                             <p><b>Edad:</b> {props.Info}</p>
+                                            <p><b>Detalles:</b> {props.Cab_cDescripcion}</p>
+                                            <p><b>Observaciones:</b> {props.Cab_cObservaciones}</p>
+                                            
 
                                         </Box>
                                     </Modal>
