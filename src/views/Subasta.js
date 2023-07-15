@@ -201,7 +201,7 @@ const Subasta = (props) => {
 
 
 
-      <h3>Subasta Activa</h3>
+      <h3>Galpón Legado - Subasta</h3>
       <Typography variant="h6" component="h3">
         <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
       </Typography>

@@ -5,6 +5,11 @@ import { styled } from '@mui/material/styles';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
+
+
+import Medalla from '@mui/icons-material/GavelRounded';
+
+
 import InfoIcon from '@mui/icons-material/Info';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -92,25 +97,25 @@ const Item = (props) => {
         const estado = props.Estado;
         //console.log(fechaHora1);
         //console.log(fechaHora2);
-        
-         if (estado == 'CERRADO') {
-             handleClickOpenMsg();
-         }
-         else {
+
+        if (estado == 'CERRADO') {
+            handleClickOpenMsg();
+        }
+        else {
 
 
-      //      if (fechaHora1 < fechaHora2) {
-                if (props.IndicePanel == 0) {
-                    history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
-                }
-                else {
-                    handleClickOpenMsg(); 
-                    
+            //      if (fechaHora1 < fechaHora2) {
+            if (props.IndicePanel == 0) {
+                history.push(`/Subasta/detalle/${props.Cab_cCatalogo}/${props.Dvm_cNummov}/${props.IndicePanel}/${props.Per_cPeriodo}`);
+            }
+            else {
+                handleClickOpenMsg();
 
-                }
 
-        //    } else {
-                //handleClickOpenMsg();
+            }
+
+            //    } else {
+            //handleClickOpenMsg();
             //}
         }
 
@@ -146,6 +151,41 @@ const Item = (props) => {
                 }}
             >
                 <ImageListItem >
+
+                    <img
+                        //src={props.cab_cenlace}
+                        src={`../../assets/images/barra.jpg`}
+                        srcSet={`../../assets/images/barra.jpg`}
+
+                        loading="lazy"
+                    />
+
+                    <ImageListItemBar
+
+                        sx={{
+                            background:
+                                'white',
+                            "& .MuiImageListItemBar-title": { color: "black" }, //styles for title                                
+                        }}
+
+                        title={`Pujas : ${props.pujas}`}
+
+                        actionIcon={
+                            <IconButton
+                                sx={{ color: 'black' }}
+                                aria-label={`star ${props.pujas}`}
+                            >
+                                <Medalla />
+                            </IconButton>
+                        }
+                        position="top"
+                        actionPosition="left"
+
+                    />
+                </ImageListItem>
+
+
+                <ImageListItem >
                     <img
                         //src={props.cab_cenlace}
                         src={`${props.cab_cenlace}?w=248&fit=crop&auto=format`}
@@ -153,34 +193,35 @@ const Item = (props) => {
                         alt={props.Cab_cDescripcion}
                         loading="lazy"
                     />
-                    <ImageListItemBar
-                        title={`PUJAR POR: ${props.Placa}`}
-                        subtitle={`PROPIETARIO:${props.Propietario}`}
-                        actionicon={
-                            <IconButton
-                                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                aria-label={`info about ${props.Info}`}
-                            >
-                                <InfoIcon />
-                            </IconButton>
-                        }
-                        position="below"
 
-                    />
                     <Grid container spacing={1}>
 
+
                         <Grid item xs={12} lg={12}>
-                            <Typography variant='caption' style={{ fontStyle: 'italic', fontWeight: 'normal' }}>
+                            <Typography variant='body1' style={{ fontStyle: 'normal', fontWeight: 'bold' }}>
+                                {`PUJAR POR: ${props.Placa}`}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={12} lg={12}>
+                            <Typography variant='caption' style={{ fontStyle: 'normal', fontWeight: 'normal' }}>
+                                {`PROPIETARIO:${props.Propietario}`}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={12} lg={12}>
+                            <Typography variant='caption' style={{ fontStyle: 'normal', fontWeight: 'normal' }}>
                                 {`INICIO: ${props.Dvd_dInicio}`}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} lg={12}>
-                            <Typography variant='caption' style={{ fontStyle: 'italic', fontWeight: 'normal' }}>
+                            <Typography variant='caption' style={{ fontStyle: 'normal', fontWeight: 'normal' }}>
                                 {`FIN: ${props.Dvd_dFin}`}
                             </Typography>
                         </Grid>
+
                         <Grid item xs={12} lg={12}>
-                            <Typography variant='caption' style={{ fontStyle: 'italic', fontWeight: 'bold' }} color={props.Estado === 'ACTIVO' ? 'primary' : 'error'}>
+                            <Typography variant='caption' style={{ fontStyle: 'normal', fontWeight: 'bold' }} color={props.Estado === 'ACTIVO' ? 'primary' : 'error'}>
                                 {`ESTADO: ${props.Estado}`}
                             </Typography>
                         </Grid>
@@ -206,7 +247,7 @@ const Item = (props) => {
                                             <p><b>Edad:</b> {props.Info}</p>
                                             <p><b>Detalles:</b> {props.Cab_cDescripcion}</p>
                                             <p><b>Observaciones:</b> {props.Cab_cObservaciones}</p>
-                                            
+
 
                                         </Box>
                                     </Modal>

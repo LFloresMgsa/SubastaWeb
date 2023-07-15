@@ -20,7 +20,7 @@ import { storage } from "../storage.js";
 
 import WebPage from "./WebPage.js"
 
-import fondo from '../assets/portada/HECHIZO.jpg'
+import fondo from '../assets/portada/fondo.png'
 
 const Dashboard = () => {
 
@@ -64,7 +64,7 @@ const Dashboard = () => {
             maxWidth: 'auto',
             flexGrow: 1,
             backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+              theme.palette.mode === 'dark' ? '#1A2027' : 'black',
           }}
         >
           <div className="container">

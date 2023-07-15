@@ -156,21 +156,25 @@ const ItemDetalle = (props) => {
 
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    <b>Propietario</b>: {detalle.Propietario}
+                                    <b>PROPIETARIO</b>: {detalle.Propietario}
 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-                                    <b>Padre:</b> {detalle.Padre}
+                                    <b>PADRE:</b> {detalle.Padre}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-                                    <b>Madre:</b> {detalle.Madre}
+                                    <b>MADRE:</b> {detalle.Madre}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-                                    <b>Info:</b> {detalle.Info}
+                                    <b>EDAD:</b> {detalle.Info}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
-                                    <b>Codigo:</b> {detalle.Cab_cCatalogo}
+                                    <b>DETALLE:</b> {detalle.Cab_cDescripcion}
                                 </Typography>
+                                <Typography variant="body2" color="text.secondary" align="left">
+                                    <b>OBSERVACIONES:</b> {detalle.Cab_cObservaciones}
+                                </Typography>
+
                             </Grid>
 
                         </Grid>
