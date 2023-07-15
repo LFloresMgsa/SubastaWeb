@@ -181,7 +181,7 @@ const Subasta = (props) => {
 
   return (
 
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ p:2, width: '100%' }}>
       {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
         <Tabs value={value} onChange={handleChange}

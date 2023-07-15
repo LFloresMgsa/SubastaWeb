@@ -48,6 +48,8 @@ const style = {
 
 const Item = (props) => {
 
+    
+
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
     const [openMsg, setOpenMsg] = React.useState(false);
@@ -121,6 +123,37 @@ const Item = (props) => {
 
     }
 
+    //const [subastasDet, setSubastasDet] = React.useState([]);
+    const [nPujas, setnPujas] = React.useState(0);
+
+    const obtenerEventoDetalleSel = async (pDvm_cNummov, pCab_cCatalogo) => {
+        let _body = { Accion: "EVENTO_DET_PUJA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo:pCab_cCatalogo }
+        let _result;
+
+        return await eventoService.obtenerEventosDet(_body).then(
+
+            (res) => {
+                _result = res[0];
+                _result.map((item) => (
+                    setnPujas(item.pujas)
+                ))                
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+
+    const handleIconButtonClick = () => {
+        // Lógica que se ejecutará al hacer clic en el IconButton
+        obtenerEventoDetalleSel (props.Dvm_cNummov, props.Cab_cCatalogo)
+        
+      };
+
+      useEffect(() => {
+        setnPujas(props.pujas);
+    }, []);
+
     return (
         <div>
 
@@ -168,12 +201,13 @@ const Item = (props) => {
                             "& .MuiImageListItemBar-title": { color: "black" }, //styles for title                                
                         }}
 
-                        title={`Pujas : ${props.pujas}`}
+                        title={` Pujas : ${nPujas}`}
 
                         actionIcon={
                             <IconButton
                                 sx={{ color: 'black' }}
                                 aria-label={`star ${props.pujas}`}
+                                onClick={ handleIconButtonClick} 
                             >
                                 <Medalla />
                             </IconButton>

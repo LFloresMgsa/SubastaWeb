@@ -30,7 +30,7 @@ const Itemprogramacion = (props) => {
 
     const obtenerEventoDetalle = async (pDvm_cNummov) => {
         let _body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
-
+        
 
         return await eventoService.obtenerEventosDet(_body).then(
 
@@ -50,11 +50,7 @@ const Itemprogramacion = (props) => {
     }
 
     useEffect(() => {
-
-
-
         obtenerEventoDetalle(props.Dvm_cNummov);
-
     }, []);
 
     return (
@@ -71,7 +67,7 @@ const Itemprogramacion = (props) => {
             </List>
 
 
-            <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Actualizar Pujas</Button>
+            <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Actualizar Todas las Pujas</Button>
 
 
             <Grid container spacing={1}>
