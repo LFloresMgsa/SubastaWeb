@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
-
+import Button from '@mui/material/Button';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
@@ -37,6 +37,7 @@ const Itemprogramacion = (props) => {
             (res) => {
 
                 setSubastas(res[0])
+              
             },
             (error) => {
                 console.log(error);
@@ -44,6 +45,9 @@ const Itemprogramacion = (props) => {
         );
     };
 
+    const handleVerDetalle = async () => {
+        obtenerEventoDetalle(props.Dvm_cNummov);
+    }
 
     useEffect(() => {
 
@@ -62,23 +66,14 @@ const Itemprogramacion = (props) => {
                     </ListItemAvatar>
                     <ListItemText
                         primary={props.Dvm_cDescripcion}
-                        // secondary={
-                        //     <React.Fragment>
-                        //         <Typography
-                        //             sx={{ display: 'inline' }}
-                        //             component="span"
-                        //             variant="body2"
-                        //             color="text.primary"
-                        //         >
-                        //             {`Inicio : ${props.Dvm_dInicio} - Término: ${props.Dvm_dFin}`}
-                        //         </Typography>
-
-
-                        //     </React.Fragment>
-                        // }
                     />
                 </ListItem>
             </List>
+
+
+            <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Actualizar Pujas</Button>
+
+
             <Grid container spacing={1}>
                 {subastas.map((subasta) => (
                     <Grid item xs={12} lg={3} key={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`}>

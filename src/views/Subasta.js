@@ -101,7 +101,7 @@ const Subasta = (props) => {
     };
   }, []);
 
-  const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+  const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false };
 
 
   const obtenerSubastaactual = async () => {
