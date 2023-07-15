@@ -30,7 +30,7 @@ import { storage } from "../../storage.js";
 
 import imagenes from '../../components/subasta/imagenes.js'
 
-
+import barra from '../../assets/images/barra.jpg'
 
 
 const style = {

@@ -1,4 +1,3 @@
-import barra from '../../assets/images/barra.jpg'
 
 // 1er evento
 import img000001 from '../../assets/ejemplares/1020.jpg'
@@ -62,3 +61,4 @@ import img000057 from '../../assets/ejemplares/741.jpg'
 import img000058 from '../../assets/ejemplares/773.jpg'
 import img000059 from '../../assets/ejemplares/778.jpg'
 import img000060 from '../../assets/ejemplares/1028.jpg'
+
