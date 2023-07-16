@@ -105,7 +105,7 @@ const Subasta = (props) => {
 
       {/* <h3>Subasta</h3> */}
       <Typography variant="h6" component="h3">
-        <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
+        <p>Subasta hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
       </Typography>
       {subastasActual.map((subastaactual, index) => (
         <ItemProgramacion key={index} {...subastaactual} IndicePanel="0" />

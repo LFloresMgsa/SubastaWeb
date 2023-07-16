@@ -62,6 +62,21 @@ const Itemprogramacion = (props) => {
                     </ListItemAvatar>
                     <ListItemText
                         primary={props.Dvm_cDescripcion}
+
+                        secondary={
+                            <React.Fragment>
+                              <Typography
+                                sx={{ display: 'inline' }}
+                                component="span"
+                                variant="body2"
+                                color="text.primary"
+                              >
+                                
+                              </Typography>
+                              {props.Dvm_cDescripcionSec}
+                            </React.Fragment>
+                          }
+
                     />
                 </ListItem>
             </List>
