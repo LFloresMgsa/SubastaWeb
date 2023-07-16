@@ -103,7 +103,7 @@ const Subasta = (props) => {
 
     <Box sx={{ p: 2, width: '100%' }}>
 
-      <h3>Subasta</h3>
+      {/* <h3>Subasta</h3> */}
       <Typography variant="h6" component="h3">
         <p>Hora actual: {currentTime.toLocaleTimeString(undefined, options)}</p>
       </Typography>

@@ -48,7 +48,7 @@ const style = {
 
 const Item = (props) => {
 
-    
+
 
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
@@ -123,11 +123,16 @@ const Item = (props) => {
 
     }
 
-    //const [subastasDet, setSubastasDet] = React.useState([]);
+
     const [nPujas, setnPujas] = React.useState(0);
+    // Estado para controlar el color del IconButton
+    const [iconColor, setIconColor] = useState('black');
+    // Estado para controlar si el botón está siendo presionado
+    const [isPressed, setIsPressed] = useState(false);
+
 
     const obtenerEventoDetalleSel = async (pDvm_cNummov, pCab_cCatalogo) => {
-        let _body = { Accion: "EVENTO_DET_PUJA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo:pCab_cCatalogo }
+        let _body = { Accion: "EVENTO_DET_PUJA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov, Cab_cCatalogo: pCab_cCatalogo }
         let _result;
 
         return await eventoService.obtenerEventosDet(_body).then(
@@ -136,7 +141,7 @@ const Item = (props) => {
                 _result = res[0];
                 _result.map((item) => (
                     setnPujas(item.pujas)
-                ))                
+                ))
             },
             (error) => {
                 console.log(error);
@@ -144,13 +149,21 @@ const Item = (props) => {
         );
     };
 
-    const handleIconButtonClick = () => {
-        // Lógica que se ejecutará al hacer clic en el IconButton
-        obtenerEventoDetalleSel (props.Dvm_cNummov, props.Cab_cCatalogo)
-        
-      };
 
-      useEffect(() => {
+
+    const handleClick = async () => {
+        setIsPressed(true);
+        setIconColor('red');
+        await obtenerEventoDetalleSel(props.Dvm_cNummov, props.Cab_cCatalogo)
+    };
+
+    const handleRelease = () => {
+        setIsPressed(false);
+        setIconColor('black');
+    };
+
+
+    useEffect(() => {
         setnPujas(props.pujas);
     }, []);
 
@@ -192,8 +205,9 @@ const Item = (props) => {
                         sx={{
                             background:
                                 'white',
-                            "& .MuiImageListItemBar-title": { color: "black" }, //styles for title                                
+                            "& .MuiImageListItemBar-title": { color: isPressed ? 'red' : 'black' }, //styles for title                                
                         }}
+
 
                         title={`. Pujas : ${nPujas}`}
 
@@ -201,7 +215,10 @@ const Item = (props) => {
                             <IconButton
                                 sx={{ color: 'black' }}
                                 aria-label={`star ${props.pujas}`}
-                                onClick={ handleIconButtonClick} 
+                                onClick={handleClick}
+                                onMouseLeave={handleRelease}
+
+                                style={{ color: isPressed ? 'red' : 'black' }}
                             >
                                 <Medalla />
                             </IconButton>
