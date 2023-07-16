@@ -13,9 +13,8 @@ import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
 import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import StoreIcon from '@mui/icons-material/Store';
-import LoginIcon from '@mui/icons-material/Login';
+
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
-import LogoutIcon from '@mui/icons-material/Logout';
 import ReportIcon from '@mui/icons-material/BarChart';
 import { Link } from 'react-router-dom';
 
@@ -135,10 +134,10 @@ const Item = React.forwardRef((props, ref) => {
       case 'MantPedido':
         return <LibraryAddCheckOutlinedIcon />;
 
-      case 'Login':
-        return <LoginIcon />;
-      case 'Logout':
-        return <LogoutIcon />;
+      // case 'Login':
+      //   return <LoginIcon />;
+      // case 'Logout':
+      //   return <LogoutIcon />;
 
 
       case 'signing-request':

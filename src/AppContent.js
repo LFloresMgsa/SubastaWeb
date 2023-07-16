@@ -65,6 +65,9 @@ function AppContent(props) {
         tabs={portalTabs}
         
       />
+
+
+
       <main className="content">
         {appAlerts.length > 0 && <ComponentAlert menuState={menuState} />}
         <AppBarOffset />

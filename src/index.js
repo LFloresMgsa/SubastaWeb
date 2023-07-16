@@ -14,6 +14,8 @@ const defaultTheme = createTheme({
   ...appThemes[storedTheme.customTheme],
 });
 
+
+
 const container = document.getElementById('app');
 const root = createRoot(container);
 

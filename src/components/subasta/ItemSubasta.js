@@ -185,13 +185,7 @@ const Item = (props) => {
             >
                 <ImageListItem >
 
-                    <img
-                        //src={props.cab_cenlace}
-                        src={`../../assets/images/barra.jpg`}
-                        srcSet={`../../assets/images/barra.jpg`}
-
-                        loading="lazy"
-                    />
+                    <img src={barra} srcSet={barra} />
 
                     <ImageListItemBar
 
@@ -201,7 +195,7 @@ const Item = (props) => {
                             "& .MuiImageListItemBar-title": { color: "black" }, //styles for title                                
                         }}
 
-                        title={` Pujas : ${nPujas}`}
+                        title={`. Pujas : ${nPujas}`}
 
                         actionIcon={
                             <IconButton

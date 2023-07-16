@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import {
   Button,
@@ -28,6 +28,12 @@ import { userService } from '../../../services';
 import { useDispatch } from 'react-redux';
 import { appThemes, appColors } from '../../../theme/AppThemes';
 import { AccountBoxOutlined } from '@mui/icons-material';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 const StyledMenu = styled(Menu)(
   ({ theme }) => css`
@@ -76,6 +82,8 @@ const MeNavBarDisplay = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [localize, setLocalize] = useState('English');
 
+  const [isLoged, setIsLoged] = useState(false);
+
   const openMenu = Boolean(anchorEl);
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,49 +93,59 @@ const MeNavBarDisplay = (props) => {
     setAnchorEl(null);
   };
 
+  const handleLogin = () => {
+
+    window.location.href = "../../login";
+  };
+
   const handleLogout = () => {
-    userService.logout().then((re) => {
-      if (!mixedRoute) {
-        history.push('/login');
-        // history.go('/login');
-      }
-    });
+
+    window.location.href = "../../logout";
   };
 
-  const handleProfile = () => {
-    history.push(
-      currentUser.userRoles.includes('Customer')
-        ? `/profile/customer/${currentUser.detail.userID}`
-        : `/profile/agent/${currentUser.detail.publicID}`
-    );
-  };
 
-  const languageButtons = [
-    <Button
-      color={'default'}
-      key="en"
-      onClick={(e) => {
-        setLocalize('English');
-        i18n.changeLanguage('en');
-      }}
-    >
-      <span className={`${localize === 'English' ? 'activeBtnInGroup' : ''}`}>
-        EN
-      </span>
-    </Button>,
-    <Button
-      color={'default'}
-      key="es"
-      onClick={(e) => {
-        setLocalize('Spanish');
-        i18n.changeLanguage('es');
-      }}
-    >
-      <span className={`${localize === 'Spanish' ? 'activeBtnInGroup' : ''}`}>
-        ES
-      </span>
-    </Button>,
-  ];
+  // const handleProfile = () => {
+  //   history.push(
+  //     currentUser.userRoles.includes('Customer')
+  //       ? `/profile/customer/${currentUser.detail.userID}`
+  //       : `/profile/agent/${currentUser.detail.publicID}`
+  //   );
+  // };
+
+  // const languageButtons = [
+  //   <Button
+  //     color={'default'}
+  //     key="en"
+  //     onClick={(e) => {
+  //       setLocalize('English');
+  //       i18n.changeLanguage('en');
+  //     }}
+  //   >
+  //     <span className={`${localize === 'English' ? 'activeBtnInGroup' : ''}`}>
+  //       EN
+  //     </span>
+  //   </Button>,
+  //   <Button
+  //     color={'default'}
+  //     key="es"
+  //     onClick={(e) => {
+  //       setLocalize('Spanish');
+  //       i18n.changeLanguage('es');
+  //     }}
+  //   >
+  //     <span className={`${localize === 'Spanish' ? 'activeBtnInGroup' : ''}`}>
+  //       ES
+  //     </span>
+  //   </Button>,
+  // ];
+
+
+  // Load de Pagina
+  useEffect(() => {
+    setIsLoged(cookies.get('IsLoged'));
+
+
+  }, [])
 
   return (
     <React.Fragment>
@@ -153,8 +171,10 @@ const MeNavBarDisplay = (props) => {
               <Avatar fontSize="small" />
             </ListItemIcon>
           </MenuItem>
+
           <Divider />
-          {!(
+          
+          {/* {!(
             currentUser.userRoles.includes('SuperUser') ||
             currentUser.userRoles.includes('ServiceOwner')
           ) && (
@@ -164,8 +184,9 @@ const MeNavBarDisplay = (props) => {
               </ListItemIcon>
               <ListItemText>Profile Settings</ListItemText>
             </MenuItem>
-          )}
-          <MenuItem>
+          )} */}
+
+          {/* <MenuItem>
             <div className="menuItemLabel">
               <ListItemIcon>
                 <TranslateIcon fontSize="small" />
@@ -175,10 +196,11 @@ const MeNavBarDisplay = (props) => {
             <Box className="menu-list-box">
               <ButtonGroup size="small">{languageButtons}</ButtonGroup>
             </Box>
-          </MenuItem>
+          </MenuItem> */}
+
           <MenuItem>
             <div className="menuItemLabel">
-              <ListItemText>Dark/Light Theme</ListItemText>
+              <ListItemText>Oscuro/Claro Tema</ListItemText>
             </div>
             <Box className="menu-list-box">
               <ButtonGroup size="small">
@@ -220,9 +242,12 @@ const MeNavBarDisplay = (props) => {
               </ButtonGroup>
             </Box>
           </MenuItem>
+
+          <Divider />
+
           <MenuItem>
             <div className="menuItemLabel">
-              <ListItemText>Appearance</ListItemText>
+              <ListItemText>Apariencia</ListItemText>
             </div>
             <Box className="menu-list-box">
               <ButtonGroup size="small" sx={{ minWidth: '30px' }}>
@@ -240,14 +265,13 @@ const MeNavBarDisplay = (props) => {
                       sx={{ paddingLeft: '2px', paddingRight: '2px' }}
                     >
                       {currentPrimaryAppColor ===
-                      appColors[color].palette.primary.main ? (
+                        appColors[color].palette.primary.main ? (
                         <CircleIcon
                           sx={{
                             width: '0.7em',
                             color: appColors[color].palette.primary.main,
-                            border: `1px solid ${
-                              theme.palette.mode === 'dark' ? 'white' : 'black'
-                            }`,
+                            border: `1px solid ${theme.palette.mode === 'dark' ? 'white' : 'black'
+                              }`,
                             borderRadius: '50%',
                             height: '17px',
                           }}
@@ -266,18 +290,34 @@ const MeNavBarDisplay = (props) => {
               </ButtonGroup>
             </Box>
           </MenuItem>
-          <MenuItem>
+
+          {/* <MenuItem>
             <ListItemIcon>
               <SettingsOutlined fontSize="small" />
             </ListItemIcon>
             <ListItemText>Settings</ListItemText>
-          </MenuItem>
-          <MenuItem onClick={handleLogout}>
-            <ListItemIcon>
-              <ExitToAppOutlinedIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Logout</ListItemText>
-          </MenuItem>
+          </MenuItem> */}
+
+          <Divider />
+
+          {!isLoged &&
+            <MenuItem onClick={handleLogin} >
+              <ListItemIcon>
+                <LoginIcon fontSize="small" />
+
+              </ListItemIcon>
+              <ListItemText>Iniciar Sesion</ListItemText>
+            </MenuItem>
+          }
+          
+          {isLoged &&
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Cerrar Sesion</ListItemText>
+            </MenuItem>
+          }
         </div>
       </StyledMenu>
     </React.Fragment>

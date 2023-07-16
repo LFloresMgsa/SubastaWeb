@@ -65,10 +65,10 @@ const Itemprogramacion = (props) => {
                     />
                 </ListItem>
             </List>
-
+            <div>.</div>
 
             <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Actualizar Todas las Pujas</Button>
-
+            <div>.</div>
 
             <Grid container spacing={1}>
                 {subastas.map((subasta) => (

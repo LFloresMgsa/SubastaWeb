@@ -5,7 +5,7 @@ import {
 } from 'redux-state-sync';
 
 import { browserName } from 'react-device-detect';
-import {storage} from './storage.js'
+import { storage } from './storage.js'
 
 let nsActiveTabID = localStorage.getItem('NSActiveTabID')
   ? parseInt(JSON.parse(localStorage.getItem('NSActiveTabID')))
@@ -51,8 +51,10 @@ const initialState = {
     width: expandedMenuWidth,
   },
   themeAppearance: {
-    customTheme: currentTheme ? currentTheme.split('|')[0] : 'lightTheme',
-    customColor: currentTheme ? currentTheme.split('|')[1] : 'green',
+    //customTheme: currentTheme ? currentTheme.split('|')[0] : 'lightTheme',
+    //customColor: currentTheme ? currentTheme.split('|')[1] : 'green',
+    customTheme: 'lightTheme',
+    customColor:  'indigo',
   },
 };
 
@@ -161,7 +163,7 @@ const reducer = (state = initialState, action) => {
             menuState: { current: action.payload, width: expandedMenuWidth },
           };
         default:
-          
+
           break;
       }
     case 'SET_APP_VIEWPORT':
@@ -170,10 +172,15 @@ const reducer = (state = initialState, action) => {
         appViewport: action.payload,
       };
     case 'SET_CURRENT_THEME':
+
+      
+
       let customTheme =
         action.payload.customTheme || state.themeAppearance.customTheme;
       let customColor =
         action.payload.customColor || state.themeAppearance.customColor;
+
+        
 
       localStorage.setItem('NSThemeMode', customTheme + '|' + customColor);
 

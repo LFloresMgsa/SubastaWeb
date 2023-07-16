@@ -131,6 +131,8 @@ const Login = () => {
 				cookies.set('Sgm_cObservaciones', _result[0].Sgm_cObservaciones, { path: "/" });
 				cookies.set('Sgm_cPerfil', _result[0].Sgm_cPerfil, { path: "/" });
 
+				cookies.set('IsLoged', true , { path: "/" });
+
 				setError('');
 
 				if (cookies.get('token')) {

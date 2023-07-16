@@ -17,7 +17,7 @@ const Subasta = (props) => {
 
     return (
 
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{  p: 2,width: '100%' }}>
             <h3>Bases de la Subasta</h3>
             <Bases />
 
