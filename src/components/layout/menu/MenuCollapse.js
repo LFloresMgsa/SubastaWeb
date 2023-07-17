@@ -20,7 +20,7 @@ const findRoute = (array = [], tabID = 'home') => {
 const styles = makeStyles((theme) => ({
   root: {
     '& .MuiListItemText-root': {
-      color: 'gold',
+      color: 'white',
       fontFamily: 'system-ui',
     },
 
