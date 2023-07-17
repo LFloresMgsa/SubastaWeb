@@ -32,6 +32,7 @@ const styles = makeStyles((theme) => ({
     '& .MuiCollapse-root': {
       '& .MuiSvgIcon-root': {
         left: '40px',
+        
       },
       '& .Mui-selected .MuiSvgIcon-root': {
         left: '35px',

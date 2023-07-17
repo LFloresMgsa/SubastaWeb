@@ -52,22 +52,11 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* <GlobalStyles /> */}
+      {/* <GlobalStyles />  */}
 
-      <Box sx={{ flexGrow: 1 }}>
+  
 
-
-        <Paper
-          sx={{
-            p: 2,
-            margin: 1,
-            maxWidth: 'auto',
-            flexGrow: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : 'black',
-          }}
-        >
-          <div className="container">
+          <div className="container" >
             <div className="image-container">
               <img className="centered-image" src={fondo} alt="campeonato" />
             </div>
@@ -96,10 +85,8 @@ const Dashboard = () => {
             {/* <WebPage/>  */}
           </div>
 
-        </Paper>
 
 
-      </Box >
 
 
     </>

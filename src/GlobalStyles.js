@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
         overscroll-behavior: none;
         width: 100%;
         font-size: 0.85rem;
+        
         padding-right: 0px !important;
             overflow: auto !important;
     }

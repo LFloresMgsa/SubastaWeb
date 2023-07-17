@@ -17,9 +17,63 @@ import { createTheme } from '@mui/material/styles';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-
+    typeFullName: 'darkTheme1',
+    default: {
+      main: '#c7c4c4',
+    },
+    primary: {
+      main: '#15d683',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#1976d2',
+    },
+    danger: {
+      main: '#C62828',
+    },
+    error: {
+      main: '#E53935',
+    },
+    nsAppBG: {
+      main: '',
+    },
+    nsAppDialogHeaderBG: {
+      main: '#1976d2',
+    },
+    nsTileHeaderBG: {
+      main: '',
+    },
+    nsTileBodyBG: {
+      main: '',
+    },
+    nsAppHeaderBG: {
+      main: '',
+    },
+    nsLeftMenuTextColor: '#cfcfcf',
+    nsDangerColor: {
+      main: '#C62828',
+      hover: '#8c1c1c',
+      contrastText: '#ffffff',
+    },
+    nsTableRowUpload: {
+      main: '#6b6e6e',
+    },
+    nsTableHeaderBG: {
+      main: '#424242',
+    },
+    nsTableBodyBG: {
+      main: '',
+    },
+    nsTableRowHoverBG: {
+      main: '#424242',
+    },
+    nsStickDivBG: {
+      main: '#303030',
+    },
+    nsPanelInfoBG: {
+      main: '',
+    },
   },
-  
   
 });
 
@@ -45,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 
           '& div:first-child': {
             marginRight: '15px',
+            
           },
         },
         '& .toolbar-right': {},

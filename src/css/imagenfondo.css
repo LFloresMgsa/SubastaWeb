@@ -1,20 +1,22 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-     /* height: 80vh; Ajusta el valor según sea necesario */
-    overflow: hidden;
-  }
-  
-  .image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
-  }
-  
-  .centered-image {
-    max-width: 73%;
-    max-height: 73%;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 80vh; Ajusta el valor según sea necesario */
+  overflow: hidden;
+
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+.centered-image {
+
+  max-width: 73%;
+  max-height: 73%;
+}
