@@ -1,4 +1,4 @@
-import React, { useState ,  useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -8,11 +8,26 @@ import AppRoutes from './AppRoutes';
 import Menu from './components/layout/menu/Index';
 import ComponentAlert from './components/common/others/ComponentAlert';
 
+import { ThemeProvider } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
+
+
+
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+
+  },
+  
+  
+});
 
 const AppBarOffset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const useStyles = makeStyles((theme) => ({
   root: ({ isUserLogged }) => ({
+
 
 
     display: isUserLogged ? 'flex' : 'block',
@@ -49,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
 function AppContent(props) {
   const { accessToken, portalTabs, menuState, viewport } = props;
   const appAlerts = useSelector((state) => state.appAlerts);
+ 
+  
   const classes = useStyles({
     // isUserLogged: accessToken.token ? true : false,
     isUserLogged: accessToken.token ? true : true,
@@ -57,15 +74,17 @@ function AppContent(props) {
 
 
   return (
-    <div className={classes.root}>
-      <Menu
-        viewport={viewport}
-        state={menuState}
-        global={props.global}
-        tabs={portalTabs}
-        
-      />
+    <div className={classes.root} >
 
+      <ThemeProvider theme={darkTheme} > 
+
+        <Menu
+          viewport={viewport}
+          state={menuState}
+          global={props.global}
+          tabs={portalTabs}
+        />
+       </ThemeProvider>
 
 
       <main className="content">
@@ -78,3 +97,4 @@ function AppContent(props) {
 }
 
 export default AppContent;
+

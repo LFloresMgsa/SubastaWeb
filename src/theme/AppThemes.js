@@ -3,7 +3,7 @@ import {
   green,
   indigo,
   lightBlue,
-  pink,
+  grey,
   purple,
 } from '@mui/material/colors';
 
@@ -506,13 +506,13 @@ const appThemes = {
 };
 
 const appColors = {
-  pink: {
+  grey: {
     palette: {
       primary: {
-        main: pink[500],
+        main: grey[800],
       },
       secondary: {
-        main: pink[50],
+        main: grey[50],
       },
     },
   },
@@ -539,7 +539,7 @@ const appColors = {
   indigo: {
     palette: {
       primary: {
-        main: indigo[500],
+        main: indigo[800],
       },
       secondary: {
         main: indigo[50],
@@ -556,13 +556,13 @@ const appColors = {
       },
     },
   },
-  lightBlue: {
+  black: {
     palette: {
       primary: {
-        main: lightBlue[500],
+        main: grey[900],
       },
       secondary: {
-        main: lightBlue[50],
+        main: grey[50],
       },
     },
   },

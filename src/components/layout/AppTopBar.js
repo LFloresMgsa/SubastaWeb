@@ -15,9 +15,11 @@ const AppTopBar = (props) => {
   const { global, menuState } = store.getState();
 
   return (
-    <AppBar color="inherit"
 
-    >
+
+    <AppBar color="primary" style={{ backgroundColor: '#101010' }}>
+
+
 
       <Toolbar variant="dense" style={{ justifyContent: 'space-between' }}>
 
@@ -55,7 +57,11 @@ const AppTopBar = (props) => {
           <MeNavBarDisplay setTheme={(event) => props.setter(event)} />
         </div>
       </Toolbar>
+      
+
+
     </AppBar>
+
   );
 };
 

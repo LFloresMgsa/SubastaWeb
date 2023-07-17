@@ -62,8 +62,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const columns = [
-  { field: 'Pan_cAnio', headerName: 'Año', width: 70 },
-  { field: 'Per_cPeriodo', headerName: 'Periodo', width: 70 },
   { field: 'Pdm_cNummov', headerName: 'Movimiento', width: 110 },
   { field: 'Pdm_cEstado', headerName: 'Estado', width: 50 },
   { field: 'Cli_cNombre', headerName: 'Nombre', width: 110 },
@@ -76,9 +74,10 @@ const columns = [
   { field: 'Cli_cCorreo', headerName: 'Correo', width: 150 },
   { field: 'Pdm_cComentario', headerName: 'Comentario', width: 100 },
   { field: 'Pdm_dFecha', headerName: 'Fecha', width: 200 },
-  
+  { field: 'Pan_cAnio', headerName: 'Año', width: 70 },
+  { field: 'Per_cPeriodo', headerName: 'Periodo', width: 70 },
 ];
-    
+
 
 
 function Derecha(cadena, cantidad) {
@@ -142,8 +141,8 @@ const CabeceraDetalle = (props) => {
   };
 
   const handleChangeEstado = (event) => {
-    _RowSelCab.Pdm_cEstado=event.target.value;
-    
+    _RowSelCab.Pdm_cEstado = event.target.value;
+
     setEstado(event.target.value);
   };
 
@@ -155,7 +154,7 @@ const CabeceraDetalle = (props) => {
     let pPdm_cNummov = "";
 
 
-    
+
 
     if (selectedRow) {
       pPdm_cNummov = selectedRow[0].Pdm_cNummov;
@@ -165,8 +164,8 @@ const CabeceraDetalle = (props) => {
     let rowCabSel = data.filter(_temps => _temps.Pdm_cNummov == pPdm_cNummov);
 
 
-    
-    
+
+
     return rowCabSel[0];
   }
 
@@ -180,7 +179,7 @@ const CabeceraDetalle = (props) => {
       nunmmov = _RowSelCab.Pdm_cNummov;
     }
 
-   
+
     await obtenerEstadoLog(nunmmov);
 
     setComentarioUser('');
@@ -195,7 +194,7 @@ const CabeceraDetalle = (props) => {
       nunmmov = _RowSelCab.Pdm_cNummov;
     }
 
-    
+
 
     let _body = {
       Accion: "ACTUALIZA_ESTADOPED", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"),
@@ -206,7 +205,7 @@ const CabeceraDetalle = (props) => {
       Pdm_dFechaModifica: null, Pdm_cUserModifica: Pdm_cUserModifica, Pdm_nItem: 0
     }
 
-    
+
     return await eventoService.actualizaPedidoAuth(_body).then(
       (res) => {
         FiltraCab(res[0]);
@@ -238,21 +237,21 @@ const CabeceraDetalle = (props) => {
     let pPdm_cNummov = Derecha(param[0], 10);
 
 
-    
+
 
     await listarDetalle(pPdm_cNummov);
 
 
-    if (_RowSelCab){
+    if (_RowSelCab) {
       setEstado(_RowSelCab.Pdm_cEstado);
     }
 
 
     await obtenerEstadoLog(pPdm_cNummov);
 
-        //setEstado(Pdm_cEstado[0].Pdm_cEstado);  
+    //setEstado(Pdm_cEstado[0].Pdm_cEstado);  
 
-    
+
 
   };
 
@@ -283,7 +282,7 @@ const CabeceraDetalle = (props) => {
         setInvoiceTotal(totalPedido(res[0]));
 
 
-        
+
       },
       (error) => {
         console.log(error);
@@ -292,17 +291,17 @@ const CabeceraDetalle = (props) => {
     );
   };
 
-  
 
-  
+
+
   useEffect(() => {
 
-    
-    listarCabecera();
- 
 
-    
-    
+    listarCabecera();
+
+
+
+
 
 
 
@@ -318,7 +317,7 @@ const CabeceraDetalle = (props) => {
       <Box sx={{ flexGrow: 1 }}>
         <Paper
           sx={{
-            p: 2,
+            p: 1,
             margin: 1,
             maxWidth: 'auto',
             flexGrow: 1,
@@ -329,7 +328,7 @@ const CabeceraDetalle = (props) => {
 
           <Grid container spacing={1}>
 
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={6}>
               <Paper
                 sx={{
                   p: 2,
@@ -351,6 +350,7 @@ const CabeceraDetalle = (props) => {
                     handleRowClickCab(newRowSelectionModel);
                   }}
                   rowSelectionModel={rowSelectionModel}
+                  density='compact'
                   components={{
                     Toolbar: GridToolbar,
                   }}
@@ -371,7 +371,7 @@ const CabeceraDetalle = (props) => {
               >
 
                 <div>
-                  <h2>Detalle del Pedido :</h2>
+                  <h6>Detalle del Pedido :</h6>
 
 
                   <TableContainer component={Paper}>
@@ -448,55 +448,63 @@ const CabeceraDetalle = (props) => {
                 {_RowSelCab && (
 
                   <form onSubmit={actualizar}>
-                    <h2>Cambio de Estado de Pedido :</h2>
-                    <TextField
-                      name="pedido"
-                      label="Nro.Pedido"
-                      value={_RowSelCab.Pdm_cNummov}
-                      //onChange={handleChange}
-                      disabled
-                      // fullWidth
-                      margin="normal"
-                    />
-
-                    <FormControl fullWidth margin="normal">
-                      <InputLabel id="state-label">Estado</InputLabel>
-                      <Select
-                        labelId="Estado"
-                        name="Estado"
-                        value={_RowSelCab.Pdm_cEstado}
-                        onChange={handleChangeEstado}
-                      >
-                        <MenuItem value="A">Activo</MenuItem>
-                        <MenuItem value="X">Inactivo</MenuItem>
-                        <MenuItem value="P">Pendiente</MenuItem>
-                        <MenuItem value="F">Finalizado</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <h6>Cambio de Estado de Pedido :</h6>
 
 
+                    <Grid container spacing={1}>
 
-                    <TextField
-                      name="comentario"
-                      label="Comentario Users"
-                      value={Pdm_cComentarioUser}
+                      <Grid item xs={12} lg={3}>
+                        <TextField
+                          name="pedido"
+                          label="Nro.Pedido"
+                          value={_RowSelCab.Pdm_cNummov}
+                          //onChange={handleChange}
+                          disabled
+                          // fullWidth
+                          margin="normal"
+                        />
+                      </Grid>
+                      <Grid item xs={12} lg={3}>
+                        <FormControl fullWidth margin="normal">
+                          <InputLabel id="state-label">Estado</InputLabel>
+                          <Select
+                            labelId="Estado"
+                            name="Estado"
+                            value={_RowSelCab.Pdm_cEstado}
+                            onChange={handleChangeEstado}
+                          >
+                            <MenuItem value="A">Activo</MenuItem>
+                            <MenuItem value="X">Inactivo</MenuItem>
+                            <MenuItem value="P">Pendiente</MenuItem>
+                            <MenuItem value="F">Finalizado</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={12} lg={6}>
 
-                      onChange={(e) => setComentarioUser(e.target.value)}
-                      fullWidth
-                      margin="normal"
-                      multiline
-                      minRows={4}
-                    />
+                        <TextField
+                          name="comentario"
+                          label="Comentario"
+                          value={Pdm_cComentarioUser}
 
-                    <Grid item lg={12}>                      
-                      <Button variant="contained" size="small" color="primary" onClick={actualizar} width="100%"  >Actualizar Estado</Button>
+                          onChange={(e) => setComentarioUser(e.target.value)}
+                          fullWidth
+                          margin="normal"
+                          multiline
+                          minRows={1}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} lg={12}>
+                        <Button variant="contained" size="small" color="primary" onClick={actualizar} width="100%"  >Actualizar Estado</Button>
+                      </Grid>
+
                     </Grid>
-
                   </form>
                 )}
               </Paper>
             </Grid>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={6}>
               <Paper
                 sx={{
                   p: 2,
@@ -508,30 +516,31 @@ const CabeceraDetalle = (props) => {
                 }}
               >
 
-                <TableContainer component={Paper}>
-                  <h2>Log de estados :</h2>
-                  <Table aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell align="left">Nro. Movimiento</StyledTableCell>
-                        <StyledTableCell align="left">Item</StyledTableCell>
-                        <StyledTableCell align="left">Estado</StyledTableCell>
-                        <StyledTableCell align="left">Comentario</StyledTableCell>
+                <h6>Log de estados :</h6>
+                <Table aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell align="left">Nro. Movimiento</StyledTableCell>
+                      <StyledTableCell align="left">Item</StyledTableCell>
+                      <StyledTableCell align="left">Estado</StyledTableCell>
+                      <StyledTableCell align="left">Comentario</StyledTableCell>
+                      <StyledTableCell align="left">Fecha Crea</StyledTableCell>
 
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                     {dataLog.map((row,index) => (
-                                                <StyledTableRow key={index} >                                      
-                                                <StyledTableCell align="left">{row.Pdm_cNummov}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.Pdm_nItem}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.Pdm_cEstado}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.Pdm_cComentarioUser}</StyledTableCell>
-                                            </StyledTableRow>
-                     ))} 
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dataLog.map((row, index) => (
+                      <StyledTableRow key={index} >
+                        <StyledTableCell align="left">{row.Pdm_cNummov}</StyledTableCell>
+                        <StyledTableCell align="left">{row.Pdm_nItem}</StyledTableCell>
+                        <StyledTableCell align="left">{row.Pdm_cEstado}</StyledTableCell>
+                        <StyledTableCell align="left">{row.Pdm_cComentarioUser}</StyledTableCell>
+                        <StyledTableCell align="left">{row.Pdm_dFechaCrea}</StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+
               </Paper>
 
 
