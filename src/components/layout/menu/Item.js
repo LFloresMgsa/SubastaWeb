@@ -114,6 +114,9 @@ const Item = React.forwardRef((props, ref) => {
       case 'Ganadores':
         return <CrisisAlertIcon />;
 
+      case 'Topes':
+        return <CrisisAlertIcon />;
+
       case 'MantCatalogo':
         return <LibraryAddCheckOutlinedIcon />;
 
