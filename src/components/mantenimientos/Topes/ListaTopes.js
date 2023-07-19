@@ -113,8 +113,9 @@ const ListaTopes = (props) => {
           FECHAFINBASE: new Date(item.Dvd_dFin),
           FECHAFIN: new Date(item.Dvd_dFin),
           FECHACAB: new Date(item.Dvm_dFin),
-          IMPORTEFIN: item.Dvd_nImporte,
-          IMPORTEBASE: item.Dvd_nImporte
+          IMPORTEBASE: item.Dvd_nImporte,
+          IMPORTEFIN: item.Dvd_nTopeImporte,
+          IMPORTEINI: item.Dvd_nTopeImporte
         }));
 
         setFilteredData(formattedData);
@@ -123,6 +124,7 @@ const ListaTopes = (props) => {
         setLoading(false);
 
         //  console.log(formattedData);
+        //handleRefreshSliders();
 
       },
       (error) => {
@@ -208,7 +210,7 @@ const ListaTopes = (props) => {
         Accion: "EDITAR_TOPE", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"),
         Per_cPeriodo: null, Dvm_cNummov: pNummov,
         Cab_cCatalogo: pCatalogo, Dvd_nOrden: pOrden,
-        Dvd_nImporte: pImporte, Dvd_cEstado: null,
+        Dvd_nTopeImporte: pImporte, Dvd_cEstado: null,
         Dvd_dInicio: null, Dvd_dFin: _fechaFin, Dvd_cComentario: null
       }
 
@@ -318,7 +320,8 @@ const ListaTopes = (props) => {
                       <StyledTableCell align="left">Imagen</StyledTableCell>
                       <StyledTableCell align="left">Placa</StyledTableCell>
                       <StyledTableCell align="left">Código</StyledTableCell>
-                      <StyledTableCell align="center">Tope Puja</StyledTableCell>
+                      <StyledTableCell align="left">Base</StyledTableCell>
+                      <StyledTableCell align="center">Tope de Puja</StyledTableCell>
                       <StyledTableCell align="center">Fecha Final</StyledTableCell>
 
                       <StyledTableCell align="center">Accion</StyledTableCell>
@@ -339,11 +342,14 @@ const ListaTopes = (props) => {
                         <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                         <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
 
+                        <StyledTableCell align="left">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
+
                         <StyledTableCell align="center">
                           <Box sx={{ width: 350 }}>
                             <Slider
+                              key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
                               aria-label="Importe"
-                              defaultValue={0}
+                              defaultValue={item.IMPORTEFIN || 0}
                               step={100}
                               min={0}
                               max={10000}
