@@ -1,4 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
+
+import { MenuItem, CircularProgress } from '@mui/material';
+
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
@@ -33,12 +40,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 
-// const StyledTableCell_Red = withStyles((theme) => ({
-//   root: {
-//     color: 'red', // Aquí puedes cambiar el color del texto (por ejemplo, 'red', 'blue', '#FFA500', etc.)
-//   },
-// }))(TableCell);
-
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
@@ -52,47 +53,59 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const ListaTopes = (props) => {
 
-
-
   const [refreshKey, setRefreshKey] = useState(0); // Estado para forzar el renderizado de los sliders
-
-
-
   const history = useHistory();
+  const [dataCab, setDataCab] = useState([]);
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
   const [loading, setLoading] = useState([]);
-  //const [dataDelete, setDataDelete] = useState([]);
-
-  //const [filterPlaca, setFilterPlaca] = useState('');
-  //const [filterCodigo, setFilterCodigo] = useState('');
-  //const [filterMovimiento, setFilterMovimiento] = useState('');
-
   const [filteredData, setFilteredData] = useState(data);
+  const [selectedValue, setSelectedValue] = useState(''); // Estado para rastrear el valor seleccionado en el Select
 
-  //const [sliderImporte, setSliderImporte] = useState(0);
-  //const [sliderFin, setSliderFin] = useState([]);
+  const [keyListaEventoCab, setNummov] = React.useState('');
 
-  //const [Dvd_cEstado, setEstado] = useState('')
-
-  //const [Dvd_dInicio, setInicio] = useState('')
-  //const [Dvd_cComentario, setComentario] = useState('')
-
-  //const [Per_cPeriodo, setPeriodo] = useState('')
-
-
-//  const [sliderValue, setSliderValue] = useState(50); // Valor inicial del slider
-
+  const handleChangeSelectNummov = (event) => {
+    setNummov(event.target.value);
+  };
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
-  const listar = async () => {
-    let _body = { Accion: "BUSCARTODOS_PLACA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+  const listarCabeceraEventos = async () => {
+    let _body = { Accion: "BUSCARTODOS", Emp_cCodigo: storage.GetStorage("Emp_cCodigo") }
+    setLoading(true);
+    return await eventoService.obtenerEventosCabAuth(_body).then(
+      (res) => {
+        setLoading(false);
+        setDataCab(res[0]);
+
+      },
+      (error) => {
+        setLoading(false);
+        console.log(error);
+
+      }
+    );
+  };
+
+  // procedimiento para CONSULTA un catalogo con SP MySQL
+  const listarDetalleEventoTopes = async () => {
+
+    let Dvm_cNummov = keyListaEventoCab.substring(keyListaEventoCab.length - 10);
+
+    let _body = {
+      Accion: "BUSCARTODOS_PLACA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"),
+      Pan_cAnio: storage.GetStorage("Pan_cAnio"),
+      Dvm_cNummov: Dvm_cNummov
+    }
+
+    console.log(_body);
+
+    setLoading(true);
 
     return await eventoService.obtenerEventosDetAuth(_body).then(
       (res) => {
         setData(res[0]);
-        //setFilteredData(res[0]);
 
+        console.log(res[0]);
 
         // Convertimos las fechas de texto a objetos Date
         const formattedData = res[0].map((item) => ({
@@ -106,14 +119,15 @@ const ListaTopes = (props) => {
 
         setFilteredData(formattedData);
 
-        
-        
-        
+
+        setLoading(false);
+
         //  console.log(formattedData);
 
       },
       (error) => {
         console.log(error);
+        setLoading(false);
       }
     );
   };
@@ -138,8 +152,8 @@ const ListaTopes = (props) => {
   };
 
   const handleSliderChangeFin = (index, newValue) => {
-    
-    
+
+
 
     setFilteredData((prevData) => {
       if (newValue >= 0) {
@@ -223,21 +237,29 @@ const ListaTopes = (props) => {
     }
   }
 
-    // Restaurar los valores originales de los Sliders
-    const handleRestoreValues = async () => {
-      await listar();
-      handleRefreshSliders();
-    };
+  // Restaurar los valores originales de los Sliders
+  const handleRestoreValues = async () => {
+    await listarDetalleEventoTopes();
+    handleRefreshSliders();
+  };
 
   // Función para forzar el renderizado de los sliders nuevamente
   const handleRefreshSliders = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
 
+
+
+
+  // if (loading) {
+  //   // Muestra un indicador de carga mientras se obtienen los datos del API
+  //   return <CircularProgress />;
+  // }
+
   // Load de pagina
   useEffect(() => {
-    listar();
-
+    listarCabeceraEventos();
+    listarDetalleEventoTopes();
   }, []);
 
 
@@ -255,13 +277,34 @@ const ListaTopes = (props) => {
           }}
         >
           <Grid container spacing={1}>
+
+
             <Grid item xs={12} >
 
               <div>
                 <Grid container spacing={1}>
-                  <Grid item xs={12} lg={12}>
+                  <Grid item xs={12} lg={6}>
+
+                    <FormControl fullWidth>
+                      <Select labelId="select-label"
+                        value={keyListaEventoCab}
+                        onChange={handleChangeSelectNummov}
+                      >
+                        {dataCab.map(item => (
+                          <MenuItem key={`${item.Emp_cCodigo}-${item.Pan_cAnio}-${item.Dvm_cNummov}`}
+                            value={`${item.Emp_cCodigo}-${item.Pan_cAnio}-${item.Dvm_cNummov}`} >
+                            {item.Dvm_cDescripcion}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                  </Grid>
+
+                  <Grid item xs={12} lg={6}>
                     <Button variant="contained" color="primary" onClick={handleRestoreValues}> Actualizar Lista </Button>
                   </Grid>
+
                 </Grid>
               </div>
 
@@ -277,7 +320,7 @@ const ListaTopes = (props) => {
                       <StyledTableCell align="left">Código</StyledTableCell>
                       <StyledTableCell align="center">Tope Puja</StyledTableCell>
                       <StyledTableCell align="center">Fecha Final</StyledTableCell>
-                      <StyledTableCell align="left">Movimiento</StyledTableCell>
+
                       <StyledTableCell align="center">Accion</StyledTableCell>
                     </TableRow>
                   </TableHead>
@@ -314,9 +357,9 @@ const ListaTopes = (props) => {
                         <StyledTableCell align="center">
                           <Box sx={{ width: 350 }}>
                             <Slider
-                               key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
+                              key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
                               aria-label="Final"
-                              defaultValue={ item.Diferencia || 0}
+                              defaultValue={item.Diferencia || 0}
                               step={10}
                               min={0}
                               max={1440}
@@ -328,8 +371,6 @@ const ListaTopes = (props) => {
 
                           </Box>
                         </StyledTableCell>
-
-                        <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
 
                         <StyledTableCell align="left">
                           <Button variant="outlined" size="small" color="primary" onClick={(event) => actualizarTopes(item.Dvm_cNummov, item.Dvd_nOrden, item.Cab_cCatalogo, item.IMPORTEFIN, item.FECHAFIN)}>Actualizar</Button>
