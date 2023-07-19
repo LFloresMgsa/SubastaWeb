@@ -33,11 +33,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 
-const StyledTableCell_Red = withStyles((theme) => ({
-  root: {
-    color: 'red', // Aquí puedes cambiar el color del texto (por ejemplo, 'red', 'blue', '#FFA500', etc.)
-  },
-}))(TableCell);
+// const StyledTableCell_Red = withStyles((theme) => ({
+//   root: {
+//     color: 'red', // Aquí puedes cambiar el color del texto (por ejemplo, 'red', 'blue', '#FFA500', etc.)
+//   },
+// }))(TableCell);
 
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -52,28 +52,32 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const ListaTopes = (props) => {
 
+
+
   const history = useHistory();
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
   const [loading, setLoading] = useState([]);
-  const [dataDelete, setDataDelete] = useState([]);
+  //const [dataDelete, setDataDelete] = useState([]);
 
-  const [filterPlaca, setFilterPlaca] = useState('');
-  const [filterCodigo, setFilterCodigo] = useState('');
-  const [filterMovimiento, setFilterMovimiento] = useState('');
+  //const [filterPlaca, setFilterPlaca] = useState('');
+  //const [filterCodigo, setFilterCodigo] = useState('');
+  //const [filterMovimiento, setFilterMovimiento] = useState('');
 
   const [filteredData, setFilteredData] = useState(data);
 
-  const [sliderImporte, setSliderImporte] = useState(0);
-  const [sliderFin, setSliderFin] = useState([]);
+  //const [sliderImporte, setSliderImporte] = useState(0);
+  //const [sliderFin, setSliderFin] = useState([]);
 
-  const [Dvd_cEstado, setEstado] = useState('')
+  //const [Dvd_cEstado, setEstado] = useState('')
 
-  const [Dvd_dInicio, setInicio] = useState('')
-  const [Dvd_cComentario, setComentario] = useState('')
+  //const [Dvd_dInicio, setInicio] = useState('')
+  //const [Dvd_cComentario, setComentario] = useState('')
 
-  const [Per_cPeriodo, setPeriodo] = useState('')
-  
+  //const [Per_cPeriodo, setPeriodo] = useState('')
+
+
+//  const [sliderValue, setSliderValue] = useState(50); // Valor inicial del slider
 
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
@@ -98,7 +102,7 @@ const ListaTopes = (props) => {
 
         setFilteredData(formattedData);
 
-      //  console.log(formattedData);
+        //  console.log(formattedData);
 
       },
       (error) => {
@@ -108,34 +112,14 @@ const ListaTopes = (props) => {
   };
 
 
-  const handleFilterChangePlaca = (event) => {
-    setFilterPlaca(event.target.value);
-  };
-  const handleFilterChangeCodigo = (event) => {
-    setFilterDocID(event.target.value);
-  };
-  const handleFilterChangeMovimiento = (event) => {
-    setFilterNombres(event.target.value);
-  };
-
-  const handleFilterSubmit = () => {
-    let filtered;
-    filtered = data.filter(item => item.Placa.toLowerCase().includes(filterPlaca.toLowerCase()));
-    filtered = filtered.filter(item => item.Cab_cCatalogo.toLowerCase().includes(filterCodigo.toLowerCase()));
-    filtered = filtered.filter(item => item.Dvm_cNummov.toLowerCase().includes(filterMovimiento.toLowerCase()));
-
-    setFilteredData(filtered);
-  };
-
-
   const handleSliderChangeImporte = (index, newValue) => {
 
     setFilteredData((prevData) => {
       if (newValue >= 0) {
         const updatedData = [...prevData];
-        const updatedImporte = 
-          updatedData[index].IMPORTEBASE + newValue 
-        ;
+        const updatedImporte =
+          updatedData[index].IMPORTEBASE + newValue
+          ;
         updatedData[index] = {
           ...updatedData[index],
           IMPORTEFIN: updatedImporte
@@ -143,15 +127,16 @@ const ListaTopes = (props) => {
         return updatedData;
       }
       return prevData;
-    });    
+    });
   };
 
   const handleSliderChangeFin = (index, newValue) => {
+    //setSliderValue(newValue);
     setFilteredData((prevData) => {
       if (newValue >= 0) {
         const updatedData = [...prevData];
         const updatedDate = new Date(
-          updatedData[index].FECHAFINBASE.getTime() + newValue * 60000
+          updatedData[index].FECHACAB.getTime() + newValue * 60000
         );
         updatedData[index] = {
           ...updatedData[index],
@@ -166,8 +151,6 @@ const ListaTopes = (props) => {
 
   function calcularDiferenciaEnMinutos(datetime1, datetime2) {
 
-  // console.log(datetime1);
-//    console.log(datetime2);
 
     // Convertimos los parámetros a objetos Date
     const date1 = new Date(datetime1);
@@ -197,14 +180,13 @@ const ListaTopes = (props) => {
   const actualizarTopes = async (pNummov, pOrden, pCatalogo, pImporte, pFecha) => {
     try {
       let _fechaFin = formatDateTime(pFecha);
-      let _fechaFin2 = new Date (pFecha);
 
       let _body = {
-        Accion: "EDITAR_TOPE", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio") ,
-        Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: pNummov,
+        Accion: "EDITAR_TOPE", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"),
+        Per_cPeriodo: null, Dvm_cNummov: pNummov,
         Cab_cCatalogo: pCatalogo, Dvd_nOrden: pOrden,
-        Dvd_nImporte: pImporte, Dvd_cEstado: Dvd_cEstado,
-        Dvd_dInicio: null, Dvd_dFin: _fechaFin, Dvd_cComentario: Dvd_cComentario
+        Dvd_nImporte: pImporte, Dvd_cEstado: null,
+        Dvd_dInicio: null, Dvd_dFin: _fechaFin, Dvd_cComentario: null
       }
 
       console.log(_body);
@@ -257,24 +239,8 @@ const ListaTopes = (props) => {
 
               <div>
                 <Grid container spacing={1}>
-                  <Grid item xs={5} lg={4}>
-                    <TextField label="Filtrar por Placa" value={filterPlaca} onChange={handleFilterChangePlaca} />
-                  </Grid>
-                  <Grid item xs={7} lg={4}>
-                    <TextField label="Filtrar por Código" value={filterCodigo} onChange={handleFilterChangeCodigo} />
-                  </Grid>
-                  <Grid item xs={6} lg={4}>
-                    <TextField label="Filtrar por Movimiento" value={filterMovimiento} onChange={handleFilterChangeMovimiento} />
-                  </Grid>
-                  <Grid item xs={3} lg={4}>
-                    <Button variant="contained" color="primary" onClick={handleFilterSubmit}>
-                      Filtrar
-                    </Button>
-                  </Grid>
-                  <Grid item xs={3} lg={4}>
-                    <Button variant="outlined" color="primary" onClick={listar}>
-                      Actualizar
-                    </Button>
+                  <Grid item xs={12} lg={12}>
+                    <Button variant="contained" color="primary" onClick={listar}> Actualizar Lista </Button>
                   </Grid>
                 </Grid>
               </div>
@@ -289,22 +255,10 @@ const ListaTopes = (props) => {
                       <StyledTableCell align="left">Imagen</StyledTableCell>
                       <StyledTableCell align="left">Placa</StyledTableCell>
                       <StyledTableCell align="left">Código</StyledTableCell>
-
-                      <StyledTableCell align="left">Importe</StyledTableCell>
                       <StyledTableCell align="center">Tope Puja</StyledTableCell>
-                      <StyledTableCell align="center">Nuevo Importe</StyledTableCell>
-                      
-
-                      <StyledTableCell align="left">Finaliza</StyledTableCell>
-                      <StyledTableCell align="center">Tiempo Adicional</StyledTableCell>
-                      <StyledTableCell align="left">Nuevo Fin</StyledTableCell>
-
-
-
+                      <StyledTableCell align="center">Fecha Final</StyledTableCell>
                       <StyledTableCell align="left">Movimiento</StyledTableCell>
-
                       <StyledTableCell align="center">Accion</StyledTableCell>
-
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -322,10 +276,8 @@ const ListaTopes = (props) => {
                         <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                         <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
 
-                        <StyledTableCell align="left">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
-
-                        <StyledTableCell align="left">
-                          <Box sx={{ width: 200 }}>
+                        <StyledTableCell align="center">
+                          <Box sx={{ width: 350 }}>
                             <Slider
                               aria-label="Importe"
                               defaultValue={0}
@@ -334,58 +286,44 @@ const ListaTopes = (props) => {
                               max={10000}
                               onChange={(event, newValue) => handleSliderChangeImporte(idx, newValue)}
                             />
+
+                            S/. {ccyFormat(item.IMPORTEFIN)}
                           </Box>
                         </StyledTableCell>
-                        <StyledTableCell align="left">{item.IMPORTEFIN}</StyledTableCell>
-                        
 
-                        <StyledTableCell align="left">{`${item.FECHACAB.toLocaleDateString()} ${item.FECHACAB.toLocaleTimeString()}`}</StyledTableCell>
-
-
-                        <StyledTableCell align="left">
-                          <Box sx={{ width: 200 }}>
+                        <StyledTableCell align="center">
+                          <Box sx={{ width: 350 }}>
                             <Slider
                               aria-label="Final"
-                              //defaultValue={calcularDiferenciaEnMinutos(item.FECHACAB, item.FECHAFIN)}
-                              defaultValue={0}
+                              defaultValue={calcularDiferenciaEnMinutos(item.FECHACAB, item.FECHAFIN)}
                               step={10}
                               min={0}
                               max={1440}
                               onChange={(event, newValue) => handleSliderChangeFin(idx, newValue)}
-
                             />
+
+                            {`${item.FECHAFIN.toLocaleDateString()} ${item.FECHAFIN.toLocaleTimeString()}`}
+
                           </Box>
                         </StyledTableCell>
 
-                        <StyledTableCell_Red align="left">{`${item.FECHAFIN.toLocaleDateString()} ${item.FECHAFIN.toLocaleTimeString()}`}</StyledTableCell_Red>
-
-
-
                         <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
-                        
 
                         <StyledTableCell align="left">
-                          <Button variant="contained" size="small" color="primary" onClick={(event) => actualizarTopes(item.Dvm_cNummov,item.Dvd_nOrden, item.Cab_cCatalogo, item.IMPORTEFIN, item.FECHAFIN )}>Actualizar</Button>
+                          <Button variant="outlined" size="small" color="primary" onClick={(event) => actualizarTopes(item.Dvm_cNummov, item.Dvd_nOrden, item.Cab_cCatalogo, item.IMPORTEFIN, item.FECHAFIN)}>Actualizar</Button>
                         </StyledTableCell>
-
-
 
                       </StyledTableRow>
                     ))}
                   </TableBody>
                 </Table>
 
-
               </TableContainer>
             </Grid>
 
           </Grid>
         </Paper>
-
-
       </Box >
-
-
     </div >
   )
 }
