@@ -54,6 +54,10 @@ const ListaTopes = (props) => {
 
 
 
+  const [refreshKey, setRefreshKey] = useState(0); // Estado para forzar el renderizado de los sliders
+
+
+
   const history = useHistory();
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
@@ -102,6 +106,9 @@ const ListaTopes = (props) => {
 
         setFilteredData(formattedData);
 
+        
+        
+        
         //  console.log(formattedData);
 
       },
@@ -131,7 +138,9 @@ const ListaTopes = (props) => {
   };
 
   const handleSliderChangeFin = (index, newValue) => {
-    //setSliderValue(newValue);
+    
+    
+
     setFilteredData((prevData) => {
       if (newValue >= 0) {
         const updatedData = [...prevData];
@@ -214,6 +223,17 @@ const ListaTopes = (props) => {
     }
   }
 
+    // Restaurar los valores originales de los Sliders
+    const handleRestoreValues = async () => {
+      await listar();
+      handleRefreshSliders();
+    };
+
+  // Función para forzar el renderizado de los sliders nuevamente
+  const handleRefreshSliders = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
+
   // Load de pagina
   useEffect(() => {
     listar();
@@ -240,7 +260,7 @@ const ListaTopes = (props) => {
               <div>
                 <Grid container spacing={1}>
                   <Grid item xs={12} lg={12}>
-                    <Button variant="contained" color="primary" onClick={listar}> Actualizar Lista </Button>
+                    <Button variant="contained" color="primary" onClick={handleRestoreValues}> Actualizar Lista </Button>
                   </Grid>
                 </Grid>
               </div>
@@ -294,12 +314,14 @@ const ListaTopes = (props) => {
                         <StyledTableCell align="center">
                           <Box sx={{ width: 350 }}>
                             <Slider
+                               key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
                               aria-label="Final"
-                              defaultValue={calcularDiferenciaEnMinutos(item.FECHACAB, item.FECHAFIN)}
+                              defaultValue={ item.Diferencia || 0}
                               step={10}
                               min={0}
                               max={1440}
                               onChange={(event, newValue) => handleSliderChangeFin(idx, newValue)}
+                              on
                             />
 
                             {`${item.FECHAFIN.toLocaleDateString()} ${item.FECHAFIN.toLocaleTimeString()}`}
