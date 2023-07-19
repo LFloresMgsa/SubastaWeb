@@ -370,7 +370,7 @@ const ListaTopes = (props) => {
                               min={0}
                               max={1440}
                               onChange={(event, newValue) => handleSliderChangeFin(idx, newValue)}
-                              on
+                              
                             />
 
                             {`${item.FECHAFIN.toLocaleDateString()} ${item.FECHAFIN.toLocaleTimeString()}`}
