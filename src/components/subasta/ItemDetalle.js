@@ -172,6 +172,9 @@ const ItemDetalle = (props) => {
                                     <b>DETALLE:</b> {detalle.Cab_cDescripcion}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" align="left">
+                                    <b>CODIGO:</b> {detalle.Cab_cCatalogo}
+                                </Typography>                                
+                                <Typography variant="body2" color="text.secondary" align="left">
                                     <b>OBSERVACIONES:</b> {detalle.Cab_cObservaciones}
                                 </Typography>
 

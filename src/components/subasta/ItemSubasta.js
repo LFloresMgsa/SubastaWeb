@@ -291,6 +291,7 @@ const Item = (props) => {
                                             <p><b>Madre:</b> {props.Madre}</p>
                                             <p><b>Edad:</b> {props.Info}</p>
                                             <p><b>Detalles:</b> {props.Cab_cDescripcion}</p>
+                                            <p><b>Codigo:</b> {props.Cab_cCatalogo}</p>
                                             <p><b>Observaciones:</b> {props.Cab_cObservaciones}</p>
 
 

@@ -60,12 +60,20 @@ const ListaTopes = (props) => {
   const [error, setError] = useState([]);
   const [loading, setLoading] = useState([]);
   const [filteredData, setFilteredData] = useState(data);
-  const [selectedValue, setSelectedValue] = useState(''); // Estado para rastrear el valor seleccionado en el Select
+
 
   const [keyListaEventoCab, setNummov] = React.useState('');
 
-  const handleChangeSelectNummov = (event) => {
+  const handleChangeSelectEventoCab = async (event) => {
     setNummov(event.target.value);
+
+    let Dvm_cNummov = event.target.value.substring(event.target.value.length - 10);
+
+    //console.log(Dvm_cNummov);
+
+    if (Dvm_cNummov) {
+      await listarDetalleEventoTopes(Dvm_cNummov);
+    }
   };
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
@@ -87,9 +95,14 @@ const ListaTopes = (props) => {
   };
 
   // procedimiento para CONSULTA un catalogo con SP MySQL
-  const listarDetalleEventoTopes = async () => {
+  const listarDetalleEventoTopes = async (pDvm_cNummov) => {
 
     let Dvm_cNummov = keyListaEventoCab.substring(keyListaEventoCab.length - 10);
+
+    if (pDvm_cNummov != "") {
+      Dvm_cNummov = pDvm_cNummov;
+    }
+
 
     let _body = {
       Accion: "BUSCARTODOS_PLACA", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"),
@@ -97,7 +110,7 @@ const ListaTopes = (props) => {
       Dvm_cNummov: Dvm_cNummov
     }
 
-    console.log(_body);
+  //  console.log(_body);
 
     setLoading(true);
 
@@ -105,7 +118,7 @@ const ListaTopes = (props) => {
       (res) => {
         setData(res[0]);
 
-        console.log(res[0]);
+        //console.log(res[0]);
 
         // Convertimos las fechas de texto a objetos Date
         const formattedData = res[0].map((item) => ({
@@ -153,7 +166,7 @@ const ListaTopes = (props) => {
     });
   };
 
-  const handleSliderChangeFin = (index, newValue) => {
+  const handleSliderChangeFechaFinTope = (index, newValue) => {
 
 
 
@@ -174,21 +187,6 @@ const ListaTopes = (props) => {
   };
 
 
-  function calcularDiferenciaEnMinutos(datetime1, datetime2) {
-
-
-    // Convertimos los parámetros a objetos Date
-    const date1 = new Date(datetime1);
-    const date2 = new Date(datetime2);
-
-    // Obtenemos la diferencia en milisegundos entre ambas fechas
-    const diffInMilliseconds = Math.abs(date2 - date1);
-
-    // Calculamos la cantidad de minutos de diferencia
-    const minutesDifference = Math.floor(diffInMilliseconds / (1000 * 60));
-
-    return minutesDifference;
-  }
 
   const formatDateTime = (datetime) => {
     const dateObject = new Date(datetime);
@@ -214,7 +212,7 @@ const ListaTopes = (props) => {
         Dvd_dInicio: null, Dvd_dFin: _fechaFin, Dvd_cComentario: null
       }
 
-      console.log(_body);
+      //console.log(_body);
 
 
       await eventoService.obtenerEventosDetAuth(_body).then(
@@ -290,7 +288,7 @@ const ListaTopes = (props) => {
                     <FormControl fullWidth>
                       <Select labelId="select-label"
                         value={keyListaEventoCab}
-                        onChange={handleChangeSelectNummov}
+                        onChange={handleChangeSelectEventoCab}
                       >
                         {dataCab.map(item => (
                           <MenuItem key={`${item.Emp_cCodigo}-${item.Pan_cAnio}-${item.Dvm_cNummov}`}
@@ -321,6 +319,7 @@ const ListaTopes = (props) => {
                       <StyledTableCell align="left">Placa</StyledTableCell>
                       <StyledTableCell align="left">Código</StyledTableCell>
                       <StyledTableCell align="left">Base</StyledTableCell>
+                      <StyledTableCell align="left">Fin</StyledTableCell>
                       <StyledTableCell align="center">Tope de Puja</StyledTableCell>
                       <StyledTableCell align="center">Fecha Final</StyledTableCell>
 
@@ -342,18 +341,23 @@ const ListaTopes = (props) => {
                         <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                         <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
 
-                        <StyledTableCell align="left">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
+
+                        <StyledTableCell align="left">{item.IMPORTEBASE}</StyledTableCell>
+                        <StyledTableCell align="left">{item.IMPORTEFIN}</StyledTableCell>
+
+
 
                         <StyledTableCell align="center">
                           <Box sx={{ width: 350 }}>
                             <Slider
                               key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
                               aria-label="Importe"
-                              defaultValue={item.IMPORTEFIN || 0}
+                              defaultValue={item.ValorActualTope || 0}
                               step={100}
                               min={0}
                               max={10000}
                               onChange={(event, newValue) => handleSliderChangeImporte(idx, newValue)}
+                            //valueLabelDisplay="on"
                             />
 
                             S/. {ccyFormat(item.IMPORTEFIN)}
@@ -368,9 +372,8 @@ const ListaTopes = (props) => {
                               defaultValue={item.Diferencia || 0}
                               step={10}
                               min={0}
-                              max={1440}
-                              onChange={(event, newValue) => handleSliderChangeFin(idx, newValue)}
-                              
+                              max={4320}
+                              onChange={(event, newValue) => handleSliderChangeFechaFinTope(idx, newValue)}
                             />
 
                             {`${item.FECHAFIN.toLocaleDateString()} ${item.FECHAFIN.toLocaleTimeString()}`}
