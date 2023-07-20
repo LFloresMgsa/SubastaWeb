@@ -13,6 +13,9 @@ import Box from '@mui/material/Box';
 import { eventoService } from '../../../services/evento.service';
 import { storage } from "../../../storage.js";
 
+function ccyFormat(num) {
+  return `${num.toFixed(2)}`;
+}
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -141,36 +144,38 @@ const ListaEvento = (props) => {
                       <TableHead>
                         <TableRow>
 
-                          <StyledTableCell align="right">Empresa</StyledTableCell>
-                          <StyledTableCell align="right">Año</StyledTableCell>
-                          <StyledTableCell align="center">Periodo</StyledTableCell>
-                          <StyledTableCell align="left">Movimiento</StyledTableCell>
+                          <StyledTableCell align="right">Llave</StyledTableCell>
                           <StyledTableCell align="left">Tipo</StyledTableCell>
                           <StyledTableCell align="left">Descripción</StyledTableCell>
                           <StyledTableCell align="left">Inicio</StyledTableCell>
                           <StyledTableCell align="left">Fin</StyledTableCell>
                           <StyledTableCell align="left">Estado</StyledTableCell>
 
+                          <StyledTableCell align="left">Desc. Adicional</StyledTableCell>
+                          <StyledTableCell align="left">Tope Importe</StyledTableCell>
+                          <StyledTableCell align="left">Tope Dias</StyledTableCell>
+
                           <StyledTableCell align="left"></StyledTableCell>
-                          <StyledTableCell align="left"></StyledTableCell>
+                          
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {data.map((item, idx) => (
-                          <StyledTableRow item={item} key={idx}>
+                          <StyledTableRow item={item} key={`${item.Emp_cCodigo}-${item.Llave}`}>
 
-                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                            <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Llave}</StyledTableCell>
                             <StyledTableCell align="left">{item.Vtt_cTipoEvento}</StyledTableCell>
                             <StyledTableCell align="center">{item.Dvm_cDescripcion}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvm_dInicio}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvm_dFin}</StyledTableCell>
                             <StyledTableCell align="left">{item.Dvm_cEstado}</StyledTableCell>
 
+                            <StyledTableCell align="left">{item.Dvm_cDescripcionSec}</StyledTableCell>
+                            <StyledTableCell align="left">{ccyFormat(item.Dvm_nTopeImporte)}</StyledTableCell>
+                            <StyledTableCell align="left">{ccyFormat(item.Dvm_nTopeDias)}</StyledTableCell>
+
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Eliminar</Button></StyledTableCell>
+                            {/* <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov)} >Eliminar</Button></StyledTableCell> */}
                           </StyledTableRow>
                         ))}
                       </TableBody>

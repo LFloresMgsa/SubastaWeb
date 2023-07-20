@@ -20,6 +20,9 @@ const EditaEventoDet = (props) => {
 
     const [Dvd_nOrden, setOrden] = useState('')
     const [Dvd_nImporte, setImporte] = useState('')
+    const [Dvd_nTopeImporte, setImporteTope] = useState('')
+
+
     const [Dvd_cEstado, setEstado] = useState('')
 
     const [Dvd_dInicio, setInicio] = useState('')
@@ -60,11 +63,12 @@ const EditaEventoDet = (props) => {
             _result.map((item) => (
                 setOrden(item.Dvd_nOrden),
                 setImporte(item.Dvd_nImporte),
+                setImporteTope(item.Dvd_nTopeImporte),
                 setEstado(item.Dvd_cEstado),
 
                 setInicio(item.Dvd_dInicio),
                 setFin(item.Dvd_dFin),
-                
+
                 setComentario(item.Dvd_cComentario)
 
             ))
@@ -80,10 +84,10 @@ const EditaEventoDet = (props) => {
         try {
             let _body = {
                 Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio,
-                Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, 
-                Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden, 
+                Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov,
+                Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden,
                 Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado,
-                Dvd_dInicio:Dvd_dInicio,Dvd_dFin:Dvd_dFin,Dvd_cComentario:Dvd_cComentario
+                Dvd_dInicio: Dvd_dInicio, Dvd_dFin: Dvd_dFin, Dvd_cComentario: Dvd_cComentario, Dvd_nTopeImporte: Dvd_nTopeImporte
             }
             await eventoService.obtenerEventosDetAuth(_body).then(
                 (res) => {
@@ -203,6 +207,16 @@ const EditaEventoDet = (props) => {
                                 id="Importe"
                                 variant="standard"
                             />
+
+                            <TextField
+                                label="Importe Tope"
+                                value={Dvd_nTopeImporte}
+                                onChange={(e) => setImporteTope(e.target.value)}
+                                name="textformat"
+                                id="ImporteTope"
+                                variant="standard"
+                            />
+
                             <TextField
                                 label="Estado"
                                 value={Dvd_cEstado}

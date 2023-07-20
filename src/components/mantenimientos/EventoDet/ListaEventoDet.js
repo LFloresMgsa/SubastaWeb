@@ -14,6 +14,10 @@ import { eventoService } from '../../../services/evento.service';
 
 import { storage } from "../../../storage.js";
 
+function ccyFormat(num) {
+  return `${num.toFixed(2)}`;
+}
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -139,13 +143,12 @@ const ListaEventoDet = (props) => {
                       <TableHead>
                         <TableRow>
 
-                          <StyledTableCell align="right">Empresa</StyledTableCell>
-                          <StyledTableCell align="right">Año</StyledTableCell>
-                          <StyledTableCell align="center">Periodo</StyledTableCell>
-                          <StyledTableCell align="left">Movimiento</StyledTableCell>
+                          <StyledTableCell align="left">Llave</StyledTableCell>
+                          <StyledTableCell align="left">Placa</StyledTableCell>
                           <StyledTableCell align="left">Catalogo</StyledTableCell>
                           <StyledTableCell align="left">Orden</StyledTableCell>
                           <StyledTableCell align="left">Importe</StyledTableCell>
+                          <StyledTableCell align="left">Tope</StyledTableCell>
                           <StyledTableCell align="left">Estado</StyledTableCell>
 
                           <StyledTableCell align="left">Inicio</StyledTableCell>
@@ -161,13 +164,13 @@ const ListaEventoDet = (props) => {
                         {data.map((item, idx) => (
                           <StyledTableRow item={item} key={idx}>
 
-                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                            <StyledTableCell align="right">{item.Pan_cAnio}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Per_cPeriodo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvm_cNummov}</StyledTableCell>
+                            <StyledTableCell align="right">{item.LlaveDet}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                             <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
                             <StyledTableCell align="center">{item.Dvd_nOrden}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Dvd_nImporte}</StyledTableCell>
+                            <StyledTableCell align="left">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
+                            <StyledTableCell align="left">{ccyFormat(item.Dvd_nTopeImporte)}</StyledTableCell>
+                            
                             <StyledTableCell align="left">{item.Dvd_cEstado}</StyledTableCell>
 
                             <StyledTableCell align="center">{item.Dvd_dInicio}</StyledTableCell>
@@ -176,7 +179,7 @@ const ListaEventoDet = (props) => {
 
 
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
+                            {/* <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Pan_cAnio, item.Per_cPeriodo, item.Dvm_cNummov, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell> */}
                           </StyledTableRow>
                         ))}
                       </TableBody>

@@ -138,7 +138,7 @@ const CreaVideoteca = (props) => {
                                 defaultValue="09/05/2023"
                                 variant="standard"
                             />  */}
-                            <TextField
+                            {/* <TextField
                                 value={Lgt_dFechaCrea}
                                 id="date"
                                 onChange={(e) => setFecha(e.target.value)}
@@ -146,7 +146,7 @@ const CreaVideoteca = (props) => {
                                 defaultValue="2023-05-09"
                                 variant="standard"
                                                                
-                             />  
+                             />   */}
                                                    
                                                 
 

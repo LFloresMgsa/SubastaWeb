@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import { eventoService } from '../../../services/evento.service';
 import { general } from '../../../components/general/general'
 
+import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+
 const EditaEvento = (props) => {
     const history = useHistory()
     const [data, setData] = useState([])
@@ -20,6 +22,10 @@ const EditaEvento = (props) => {
     const [Dvm_dInicio, setFinicio] = useState(new Date());
     const [Dvm_dFin, setFfin] = useState(new Date());
     const [Dvm_cEstado, setEstado] = useState('')
+
+    const [Dvm_cDescripcionSec, setDescripcionSec] = useState('');
+    const [Dvm_nTopeImporte, setTopeImporte] = useState(0);
+    const [Dvm_nTopeDias, setTopeDias] = useState(0);
 
 
     const { Emp_cCodigo } = useParams()
@@ -37,6 +43,9 @@ const EditaEvento = (props) => {
     const obtenerEventos = async () => {
         try {
             let _result;
+
+            console.log(Dvm_cNummov);
+
             let _body = { Accion: "BUSCARREGISTRO", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov }
 
             await eventoService.obtenerEventosCabAuth(_body).then(
@@ -50,13 +59,17 @@ const EditaEvento = (props) => {
                 }
             )
 
+            console.log(_result);
+
             _result.map((item) => (
                 setTipoEvento(item.Vtt_cTipoEvento),
                 setDescripcion(item.Dvm_cDescripcion),
                 setFinicio(item.Dvm_dInicio),
                 setFfin(item.Dvm_dFin),
-                setEstado(item.Dvm_cEstado)
-
+                setEstado(item.Dvm_cEstado),
+                setDescripcionSec(item.Dvm_cDescripcionSec),
+                setTopeImporte(item.Dvm_nTopeImporte),
+                setTopeDias(item.Dvm_nTopeDias)
             ))
 
         } finally {
@@ -72,7 +85,11 @@ const EditaEvento = (props) => {
             let pDvm_dInicio = general.convertirFechaTextToIsoText(Dvm_dInicio);
             let pDvm_dFin = general.convertirFechaTextToIsoText(Dvm_dFin);
 
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov, Vtt_cTipoEvento: Vtt_cTipoEvento, Dvm_cDescripcion: Dvm_cDescripcion, Dvm_dInicio: pDvm_dInicio, Dvm_dFin: pDvm_dFin, Dvm_cEstado: Dvm_cEstado }
+            let _body = {
+                Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo, Dvm_cNummov: Dvm_cNummov,
+                Vtt_cTipoEvento: Vtt_cTipoEvento, Dvm_cDescripcion: Dvm_cDescripcion, Dvm_dInicio: pDvm_dInicio, Dvm_dFin: pDvm_dFin,
+                Dvm_cEstado: Dvm_cEstado, Dvm_cDescripcionSec: Dvm_cDescripcionSec, Dvm_nTopeImporte: Dvm_nTopeImporte, Dvm_nTopeDias: Dvm_nTopeDias
+            }
 
             console.log(_body);
 
@@ -107,6 +124,15 @@ const EditaEvento = (props) => {
         });
         setLoading(false);
     }
+
+    const handleChangeEstado = (event) => {
+        setEstado(event.target.value);
+    };
+
+    const handleChangeTipoEvento = (event) => {
+        setTipoEvento(event.target.value);
+    };
+    
 
     return (
 
@@ -177,6 +203,20 @@ const EditaEvento = (props) => {
                                 variant="standard"
                             />
 
+                            <FormControl>
+                                <InputLabel id="tipo-label">Tipo </InputLabel>
+                                <Select
+                                    labelId="tipo-label"
+                                    id="tipo-select"
+                                    value={Vtt_cTipoEvento}
+                                    onChange={handleChangeTipoEvento}
+                                >
+                                    <MenuItem value="S">Subasta</MenuItem>
+                                    <MenuItem value="T">Tienda</MenuItem>
+                                    
+                                </Select>
+                            </FormControl>
+
 
                             <TextField
                                 label="Descripción"
@@ -203,15 +243,48 @@ const EditaEvento = (props) => {
                                 id="Fecha Fin"
                                 variant="standard"
                             />
+
+
+                            <FormControl>
+                                <InputLabel id="estado-label">Estado</InputLabel>
+                                <Select
+                                    labelId="estado-label"
+                                    id="estado-select"
+                                    value={Dvm_cEstado}
+                                    onChange={handleChangeEstado}
+                                >
+                                    <MenuItem value="A">Activo</MenuItem>
+                                    <MenuItem value="C">Cerrado</MenuItem>
+                                    <MenuItem value="X">Anulado</MenuItem>
+                                </Select>
+                            </FormControl>
+
                             <TextField
-                                label="Estado"
-                                value={Dvm_cEstado}
-                                onChange={(e) => setEstado(e.target.value)}
+                                label="Descripción Adicional"
+                                value={Dvm_cDescripcionSec}
+                                onChange={(e) => setDescripcionSec(e.target.value)}
                                 name="textformat"
-                                id="Estado"
+                                id="DescripciónSec"
                                 variant="standard"
                             />
 
+                            <TextField
+                                label="Importe Tope"
+                                value={Dvm_nTopeImporte}
+                                onChange={(e) => setTopeImporte(e.target.value)}
+                                name="textformat"
+                                id="ImporteTope"
+                                variant="standard"
+                            />
+
+                            <TextField
+                                label="Importe Dias"
+                                value={Dvm_nTopeDias}
+                                onChange={(e) => setTopeDias(e.target.value)}
+                                name="textformat"
+                                id="DiasTope"
+                                variant="standard"
+                            />
 
                         </Grid>
 

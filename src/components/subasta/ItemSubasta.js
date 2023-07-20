@@ -300,7 +300,9 @@ const Item = (props) => {
 
                                 </Grid>
                                 <Grid item xs={6} lg={6}>
-                                    <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Pujar</Button>
+                                    { props.Estado!='CERRADO' &&
+                                        <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Pujar</Button>
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -141,7 +141,7 @@ const ListaVideoteca = (props) => {
                       <TableHead>
                         <TableRow>
 
-                          <StyledTableCell align="right">Empresa</StyledTableCell>
+
                           <StyledTableCell align="right">Indice</StyledTableCell>
                           <StyledTableCell align="center">Enlace</StyledTableCell>
                           <StyledTableCell align="left">Titulo</StyledTableCell>
@@ -157,7 +157,6 @@ const ListaVideoteca = (props) => {
                         {data.map((item, idx) => (
                           <StyledTableRow item={item} key={idx}>
 
-                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
                             <StyledTableCell align="right">{item.Lgt_nIndice}</StyledTableCell>
                             <StyledTableCell align="left">{item.Lgt_cURL}</StyledTableCell>
                             <StyledTableCell align="left">{item.Lgt_cTitulo}</StyledTableCell>

@@ -140,14 +140,14 @@ const ListaCatalogoImagenes = (props) => {
                     <Table aria-label="customized table">
                       <TableHead>
                         <TableRow>
+                          <StyledTableCell align="left">Catalogo</StyledTableCell>
 
-                          <StyledTableCell align="right">Empresa</StyledTableCell>
                           <StyledTableCell align="right">Categoria</StyledTableCell>
                           <StyledTableCell align="center">Grupo</StyledTableCell>
                           <StyledTableCell align="left">Clase</StyledTableCell>
 
                           <StyledTableCell align="left">Familia</StyledTableCell>
-                          <StyledTableCell align="left">Catalogo</StyledTableCell>
+
 
                           <StyledTableCell align="left">Item</StyledTableCell>
                           <StyledTableCell align="left">Enlace</StyledTableCell>
@@ -159,13 +159,14 @@ const ListaCatalogoImagenes = (props) => {
                         {data.map((item, idx) => (
                           <StyledTableRow item={item} key={idx}>
 
-                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
+                            <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
+
                             <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
                             <StyledTableCell align="center">{item.Lgt_cGrupo}</StyledTableCell>
                             <StyledTableCell align="left">{item.Lgt_cClase}</StyledTableCell>
 
                             <StyledTableCell align="right">{item.Lgt_cFamilia}</StyledTableCell>
-                            <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
+
                             <StyledTableCell align="center">{item.Cab_nItem}</StyledTableCell>
                             <StyledTableCell align="left">{item.Cab_cEnlace}</StyledTableCell>
 

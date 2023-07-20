@@ -177,7 +177,7 @@ const ListaCatalogo = (props) => {
                             <StyledTableCell align="center">{item.Info}</StyledTableCell>
                             <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
-                            <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell>
+                            {/* <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell> */}
                           </StyledTableRow>
                         ))}
                       </TableBody>

@@ -239,7 +239,7 @@ const ListaTopes = (props) => {
 
   // Restaurar los valores originales de los Sliders
   const handleRestoreValues = async () => {
-    await listarDetalleEventoTopes();
+    await listarDetalleEventoTopes('');
     handleRefreshSliders();
   };
 
@@ -319,11 +319,12 @@ const ListaTopes = (props) => {
                       <StyledTableCell align="left">Placa</StyledTableCell>
                       <StyledTableCell align="left">Código</StyledTableCell>
                       <StyledTableCell align="left">Base</StyledTableCell>
-                      <StyledTableCell align="left">Fin</StyledTableCell>
-                      <StyledTableCell align="center">Tope de Puja</StyledTableCell>
+                      
+                      <StyledTableCell align="center">Puja Máxima</StyledTableCell>
+                      <StyledTableCell align="center">Fecha Inicial</StyledTableCell>
                       <StyledTableCell align="center">Fecha Final</StyledTableCell>
 
-                      <StyledTableCell align="center">Accion</StyledTableCell>
+                      <StyledTableCell align="center">Acción</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -342,8 +343,8 @@ const ListaTopes = (props) => {
                         <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
 
 
-                        <StyledTableCell align="left">{item.IMPORTEBASE}</StyledTableCell>
-                        <StyledTableCell align="left">{item.IMPORTEFIN}</StyledTableCell>
+                        <StyledTableCell align="left">{ccyFormat(item.IMPORTEBASE)}</StyledTableCell>
+                        
 
 
 
@@ -353,9 +354,10 @@ const ListaTopes = (props) => {
                               key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
                               aria-label="Importe"
                               defaultValue={item.ValorActualTope || 0}
+                              //defaultValue={0}
                               step={100}
                               min={0}
-                              max={10000}
+                              max={item.Dvm_nTopeImporte - item.IMPORTEBASE}
                               onChange={(event, newValue) => handleSliderChangeImporte(idx, newValue)}
                             //valueLabelDisplay="on"
                             />
@@ -363,6 +365,8 @@ const ListaTopes = (props) => {
                             S/. {ccyFormat(item.IMPORTEFIN)}
                           </Box>
                         </StyledTableCell>
+
+                        <StyledTableCell align="left">{item.Dvd_dInicio}</StyledTableCell>
 
                         <StyledTableCell align="center">
                           <Box sx={{ width: 350 }}>
@@ -372,7 +376,7 @@ const ListaTopes = (props) => {
                               defaultValue={item.Diferencia || 0}
                               step={10}
                               min={0}
-                              max={4320}
+                              max={item.Dvm_nTopeDias * 1440}
                               onChange={(event, newValue) => handleSliderChangeFechaFinTope(idx, newValue)}
                             />
 

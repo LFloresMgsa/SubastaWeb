@@ -24,6 +24,8 @@ const CreaEventoDet = (props) => {
     const [Dvd_nImporte, setImporte] = useState('')
     const [Dvd_cEstado, setEstado] = useState('')
 
+    const [Dvd_nTopeImporte, setTopeImporte] = useState('')
+
 
     const [Dvd_dInicio, setInicio] = useState('')
     const [Dvd_dFin, setFin] = useState('')
@@ -35,9 +37,10 @@ const CreaEventoDet = (props) => {
         try {
             let _body = {
                 Accion: "INSERTAR", Emp_cCodigo: Emp_cCodigo, Pan_cAnio: Pan_cAnio, Per_cPeriodo: Per_cPeriodo,
-                Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden, 
+                Dvm_cNummov: Dvm_cNummov, Cab_cCatalogo: Cab_cCatalogo, Dvd_nOrden: Dvd_nOrden,
                 Dvd_nImporte: Dvd_nImporte, Dvd_cEstado: Dvd_cEstado,
-                Dvd_dInicio:Dvd_dInicio,Dvd_dFin:Dvd_dFin,Dvd_cComentario:Dvd_cComentario
+                Dvd_dInicio: Dvd_dInicio, Dvd_dFin: Dvd_dFin, Dvd_cComentario: Dvd_cComentario, Dvd_nTopeImporte: Dvd_nTopeImporte
+
             }
             await eventoService.obtenerEventosDetAuth(_body).then(
                 (res) => {
@@ -176,6 +179,17 @@ const CreaEventoDet = (props) => {
                                 id="Comentario"
                                 variant="standard"
                             />
+
+                            <TextField
+                                label="Importe Tope"
+                                value={Dvd_nTopeImporte}
+                                onChange={(e) => setTopeImporte(e.target.value)}
+                                name="textformat"
+                                id="ImporteTope"
+                                variant="standard"
+                            />
+
+
                         </Grid>
 
                     </Grid>

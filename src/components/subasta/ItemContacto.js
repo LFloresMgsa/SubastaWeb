@@ -456,12 +456,12 @@ const ItemContacto = (props) => {
                                         disabled={disabledPujar} />
 
                                 </Grid>
-                                <Grid item xs={12}>
+                                {/* <Grid item xs={12}>
                                     <TextField id="outlined-correo" label="Correo" variant="standard"
                                         value={pcorreo}
                                         onChange={(e) => setCorreo(e.target.value)}
                                         disabled={disabledPujar} />
-                                </Grid>
+                                </Grid> */}
                                 <Grid item xs={12}>
                                     <TextField
                                         label="Valor de Puja"
