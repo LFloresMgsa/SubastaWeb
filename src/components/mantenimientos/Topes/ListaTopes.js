@@ -147,7 +147,7 @@ const ListaTopes = (props) => {
     );
   };
 
-
+// Cambio de estado del Slide de Importe de Tope
   const handleSliderChangeImporte = (index, newValue) => {
 
     setFilteredData((prevData) => {
@@ -166,6 +166,7 @@ const ListaTopes = (props) => {
     });
   };
 
+  // Cambio de estado del Slide de Fecha de Tope
   const handleSliderChangeFechaFinTope = (index, newValue) => {
 
 
@@ -187,7 +188,7 @@ const ListaTopes = (props) => {
   };
 
 
-
+// Convierte un Datetime a Formato Peru UTC-05.00
   const formatDateTime = (datetime) => {
     const dateObject = new Date(datetime);
     const year = dateObject.getFullYear();
@@ -199,7 +200,7 @@ const ListaTopes = (props) => {
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
   };
 
-  // procedimiento para EDITAR un catalogo con SP MySQL
+  // procedimiento para actualizar los topes
   const actualizarTopes = async (pNummov, pOrden, pCatalogo, pImporte, pFecha) => {
     try {
       let _fechaFin = formatDateTime(pFecha);
@@ -237,7 +238,7 @@ const ListaTopes = (props) => {
     }
   }
 
-  // Restaurar los valores originales de los Sliders
+  // Restaurar los valores originales de la grilla y de los Sliders cuando se hace un clic en el boton ACTUALIZAR TODOS
   const handleRestoreValues = async () => {
     await listarDetalleEventoTopes('');
     handleRefreshSliders();
