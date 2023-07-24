@@ -32,6 +32,8 @@ import imagenes from '../../components/subasta/imagenes.js'
 
 import barra from '../../assets/images/barra.jpg'
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const style = {
     position: 'absolute',
@@ -90,6 +92,9 @@ const Item = (props) => {
     };
 
     const handleVerDetalle = async () => {
+
+        cookies.set('PosImagen', props.keyImagen, { path: "/" });
+        
 
         await fetchServerTime();
 
@@ -200,6 +205,8 @@ const Item = (props) => {
 
                     <img src={barra} srcSet={barra} />
 
+                    { props.Estado!='CERRADO' &&
+
                     <ImageListItemBar
 
                         sx={{
@@ -227,7 +234,11 @@ const Item = (props) => {
                         actionPosition="left"
 
                     />
+
+}
                 </ImageListItem>
+
+                    
 
 
                 <ImageListItem >

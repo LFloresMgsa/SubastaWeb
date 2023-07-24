@@ -8,6 +8,9 @@ import { eventoService } from '../services/evento.service';
 import { storage } from "../storage.js";
 import Typography from '@material-ui/core/Typography';
 
+
+
+
 const SubastaStyled = styled('div')(
   ({ theme }) => css`
     width:100%;
@@ -98,6 +101,7 @@ const Subasta = (props) => {
     obtenerSubastaactual();
 
   }, []);
+
 
   return (
 

@@ -16,6 +16,8 @@ function IniciaVariablesGlobales() {
   SetStorage('Pan_cAnio', '2023');
   SetStorage('Carrito', []);
   
+  
+  
 
   return true;
 }
