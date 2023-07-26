@@ -26,6 +26,9 @@ const StyledMenu = styled(Drawer)(
       width: ${state.width};
       margin-top: ${['xs', 'sm'].includes(viewport) ? '0px' : '50px'};
       justify-content: space-between;
+      background-color: black;
+      //background-color: ${theme.palette.sbAppBarYMenuBG?.main};
+      
       
 
     }

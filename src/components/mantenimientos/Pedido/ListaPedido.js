@@ -79,7 +79,6 @@ const columns = [
 ];
 
 
-
 function Derecha(cadena, cantidad) {
   if (cantidad >= 0 && cantidad <= cadena.length) {
     return cadena.slice(-cantidad);
@@ -88,31 +87,20 @@ function Derecha(cadena, cantidad) {
   }
 }
 
-
 const CabeceraDetalle = (props) => {
 
 
-
   const [invoiceTotal, setInvoiceTotal] = useState(0);
-
   const nsubtotal = invoiceTotal / (TAX_RATE + 1);
   const nimpuestos = invoiceTotal - nsubtotal;
-
   const [data, setData] = useState([]);
-
   const [dataLog, setDataLog] = useState([0]);
-
-
   const [dataRowSelCab, setDataRowSelCab] = useState([]);
-
   const [error, setError] = useState([]);
   const [loading, setLoading] = useState([]);
   const [dataDelete, setDataDelete] = useState([]);
-
   const [selectedRow, setSelectedRow] = useState(null);
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
-
-
 
   const [Emp_cCodigo, setEmpresa] = useState('')
   const [Pan_cAnio, setAnio] = useState('')
@@ -135,7 +123,6 @@ const CabeceraDetalle = (props) => {
   const [Pdm_cComentarioUser, setComentarioUser] = useState('')
 
 
-
   const handleChange = (event) => {
     _RowSelCab(event.target.value);
   };
@@ -153,18 +140,11 @@ const CabeceraDetalle = (props) => {
 
     let pPdm_cNummov = "";
 
-
-
-
     if (selectedRow) {
       pPdm_cNummov = selectedRow[0].Pdm_cNummov;
 
     }
-
     let rowCabSel = data.filter(_temps => _temps.Pdm_cNummov == pPdm_cNummov);
-
-
-
 
     return rowCabSel[0];
   }
@@ -172,16 +152,12 @@ const CabeceraDetalle = (props) => {
   const actualizar = async () => {
 
     await actualizaEstado();
-
     let nunmmov = "";
 
     if (_RowSelCab) {
       nunmmov = _RowSelCab.Pdm_cNummov;
     }
-
-
     await obtenerEstadoLog(nunmmov);
-
     setComentarioUser('');
 
   }
@@ -194,8 +170,6 @@ const CabeceraDetalle = (props) => {
       nunmmov = _RowSelCab.Pdm_cNummov;
     }
 
-
-
     let _body = {
       Accion: "ACTUALIZA_ESTADOPED", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"),
       Pdm_cNummov: nunmmov, Per_cPeriodo: Per_cPeriodo, Cli_cNombre: Cli_cNombre, Cli_cApellido: Cli_cApellido, Cli_cDocID: Cli_cDocID,
@@ -204,7 +178,6 @@ const CabeceraDetalle = (props) => {
       Pdm_cEstado: Pdm_cEstado, Pdm_cComentarioUser: Pdm_cComentarioUser, Pdm_dFechaCrea: null,
       Pdm_dFechaModifica: null, Pdm_cUserModifica: Pdm_cUserModifica, Pdm_nItem: 0
     }
-
 
     return await eventoService.actualizaPedidoAuth(_body).then(
       (res) => {
@@ -230,28 +203,17 @@ const CabeceraDetalle = (props) => {
     );
   };
 
-
-
-
   const handleRowClickCab = async (param) => {
     let pPdm_cNummov = Derecha(param[0], 10);
 
-
-
-
     await listarDetalle(pPdm_cNummov);
-
 
     if (_RowSelCab) {
       setEstado(_RowSelCab.Pdm_cEstado);
     }
 
-
     await obtenerEstadoLog(pPdm_cNummov);
-
-    //setEstado(Pdm_cEstado[0].Pdm_cEstado);  
-
-
+    //setEstado(Pdm_cEstado[0].Pdm_cEstado); 
 
   };
 
@@ -281,8 +243,6 @@ const CabeceraDetalle = (props) => {
         setSelectedRow(res[0]);
         setInvoiceTotal(totalPedido(res[0]));
 
-
-
       },
       (error) => {
         console.log(error);
@@ -291,20 +251,8 @@ const CabeceraDetalle = (props) => {
     );
   };
 
-
-
-
   useEffect(() => {
-
-
     listarCabecera();
-
-
-
-
-
-
-
   }, []);
 
   const getRowId = (row) => {
@@ -373,7 +321,6 @@ const CabeceraDetalle = (props) => {
                 <div>
                   <h6>Detalle del Pedido :</h6>
 
-
                   <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                       <TableHead>
@@ -418,17 +365,10 @@ const CabeceraDetalle = (props) => {
                           <TableCell align="right">S/. {ccyFormat(invoiceTotal)}</TableCell>
                         </TableRow>
 
-
-
-
                       </TableBody>
                     </Table>
                   </TableContainer>
-
-
                 </div>
-
-
 
               </Paper>
             </Grid>
@@ -449,7 +389,6 @@ const CabeceraDetalle = (props) => {
 
                   <form onSubmit={actualizar}>
                     <h6>Cambio de Estado de Pedido :</h6>
-
 
                     <Grid container spacing={1}>
 
@@ -540,15 +479,10 @@ const CabeceraDetalle = (props) => {
                     ))}
                   </TableBody>
                 </Table>
-
               </Paper>
-
-
             </Grid>
           </Grid>
-
         </Paper>
-
       </Box>
     </div>
   );

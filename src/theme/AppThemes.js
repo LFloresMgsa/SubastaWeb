@@ -499,6 +499,10 @@ const appThemes = {
       nsPanelInfoBG: {
         main: 'beige',
       },
+      sbAppBarYMenuBG: {
+        main: 'black',
+      },
+
       contrastThreshold: 3,
       tonalOffset: 0.2, // changes can be viewed when hover over a button
     },
