@@ -27,7 +27,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { format } from 'date-fns';
 
 import { storage } from "../../storage.js";
-
+ 
 import imagenes from '../../components/subasta/imagenes.js'
 
 import barra from '../../assets/images/barra.jpg'
