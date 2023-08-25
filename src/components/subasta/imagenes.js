@@ -61,7 +61,8 @@ import img000057 from '../../assets/ejemplares/741.jpg'
 import img000058 from '../../assets/ejemplares/773.jpg'
 import img000059 from '../../assets/ejemplares/778.jpg'
 import img000060 from '../../assets/ejemplares/1028.jpg'
-// 3er evento 14/07/2023
+
+// 3er evento 26/08/2023
 import img000061 from '../../assets/ejemplares/5611.jpg'
 import img000062 from '../../assets/ejemplares/5717.jpg'
 import img000063 from '../../assets/ejemplares/6805.jpg'

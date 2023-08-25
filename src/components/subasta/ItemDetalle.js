@@ -11,6 +11,7 @@ import { storage } from "../../storage.js";
 
 
 
+//import imagenes from '../../components/subasta/imagenes.js'
 
 // Función para hacer la solicitud a la API
 const obtenerDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
@@ -60,6 +61,7 @@ const ItemDetalle = (props) => {
     useEffect(() => {
         const fetchDetalleEvento = async (pCab_cCatalogo, pDvm_cNummov) => {
             const detalleEvento = await obtenerDetalleEvento(pCab_cCatalogo, pDvm_cNummov);
+
 
 
             setDetalleEvento(detalleEvento[0]);

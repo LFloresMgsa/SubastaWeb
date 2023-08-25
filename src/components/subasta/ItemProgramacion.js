@@ -38,11 +38,12 @@ const Itemprogramacion = (props) => {
     const obtenerEventoDetalle = async (pDvm_cNummov) => {
         let _body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
 
+        
 
         return await eventoService.obtenerEventosDet(_body).then(
 
             (res) => {
-
+                
                 setSubastas(res[0])
 
             },
@@ -120,7 +121,7 @@ const Itemprogramacion = (props) => {
 
                         {/* <div ref={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`} > */}
 
-                            <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo} keyImagen={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`} />
+                        <ItemSubasta key={subasta.Cab_cCatalogo} {...subasta} IndicePanel={props.IndicePanel} Per_cPeriodo={props.Per_cPeriodo} keyImagen={`${subasta.Dvm_cNummov}-${subasta.Cab_cCatalogo}`} />
                             
                         {/* </div> */}
                     </Grid>
