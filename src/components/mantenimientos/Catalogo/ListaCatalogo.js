@@ -142,19 +142,16 @@ const ListaCatalogo = (props) => {
                       <TableHead>
                         <TableRow>
 
-                          <StyledTableCell align="right">Empresa</StyledTableCell>
-                          <StyledTableCell align="right">Categoria</StyledTableCell>
-                          <StyledTableCell align="center">Grupo</StyledTableCell>
-                          <StyledTableCell align="left">Clase</StyledTableCell>
-
-                          <StyledTableCell align="left">Familia</StyledTableCell>
+                          
                           <StyledTableCell align="left">Catalogo</StyledTableCell>
+                          <StyledTableCell align="left">Placa</StyledTableCell>
                           <StyledTableCell align="left">Descripcion</StyledTableCell>
                           <StyledTableCell align="left">Propietario</StyledTableCell>
                           <StyledTableCell align="left">Padre</StyledTableCell>
                           <StyledTableCell align="left">Madre</StyledTableCell>
                           <StyledTableCell align="left">Info</StyledTableCell>
-                          <StyledTableCell align="left">Placa</StyledTableCell>
+
+                          <StyledTableCell align="left">Estado</StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                         </TableRow>
@@ -163,19 +160,16 @@ const ListaCatalogo = (props) => {
                         {data.map((item) => (
                           <StyledTableRow key={item.Cab_cCatalogo}>
 
-                            <StyledTableCell align="right">{item.Emp_cCodigo}</StyledTableCell>
-                            <StyledTableCell align="right">{item.Lgt_cCategoria}</StyledTableCell>
-                            <StyledTableCell align="center">{item.Lgt_cGrupo}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Lgt_cClase}</StyledTableCell>
-
-                            <StyledTableCell align="right">{item.Lgt_cFamilia}</StyledTableCell>
+                            
                             <StyledTableCell align="right">{item.Cab_cCatalogo}</StyledTableCell>
+                            <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                             <StyledTableCell align="center">{item.Cab_cDescripcion}</StyledTableCell>
                             <StyledTableCell align="left">{item.Propietario}</StyledTableCell>
                             <StyledTableCell align="right">{item.Padre}</StyledTableCell>
                             <StyledTableCell align="right">{item.Madre}</StyledTableCell>
                             <StyledTableCell align="center">{item.Info}</StyledTableCell>
-                            <StyledTableCell align="left">{item.Placa}</StyledTableCell>
+                            
+                            <StyledTableCell align="center">{item.Cab_cEstado}</StyledTableCell>
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
                             {/* <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell> */}
                           </StyledTableRow>

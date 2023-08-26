@@ -136,7 +136,7 @@ const ListaTopes = (props) => {
 
         setLoading(false);
 
-        //  console.log(formattedData);
+         // console.log(formattedData);
         //handleRefreshSliders();
 
       },
@@ -252,10 +252,7 @@ const ListaTopes = (props) => {
 
 
 
-  // if (loading) {
-  //   // Muestra un indicador de carga mientras se obtienen los datos del API
-  //   return <CircularProgress />;
-  // }
+ 
 
   // Load de pagina
   useEffect(() => {
