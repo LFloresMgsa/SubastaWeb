@@ -152,6 +152,7 @@ const ListaCatalogo = (props) => {
                           <StyledTableCell align="left">Info</StyledTableCell>
 
                           <StyledTableCell align="left">Estado</StyledTableCell>
+                          <StyledTableCell align="left">Observaciones</StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                           <StyledTableCell align="left"></StyledTableCell>
                         </TableRow>
@@ -170,6 +171,7 @@ const ListaCatalogo = (props) => {
                             <StyledTableCell align="center">{item.Info}</StyledTableCell>
                             
                             <StyledTableCell align="center">{item.Cab_cEstado}</StyledTableCell>
+                            <StyledTableCell align="center">{item.Cab_cObservaciones}</StyledTableCell>
                             <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => editar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Editar</Button></StyledTableCell>
                             {/* <StyledTableCell align="left"><Button variant="contained" size="small" color="primary" onClick={() => eliminar(item.Emp_cCodigo, item.Cab_cCatalogo)} >Eliminar</Button></StyledTableCell> */}
                           </StyledTableRow>

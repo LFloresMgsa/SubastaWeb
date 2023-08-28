@@ -26,6 +26,9 @@ const EditaCatalogo = (props) => {
     const [Info, setInfo] = useState('')
     const [Placa, setPlaca] = useState('')
 
+    const [Cab_cObservaciones,setObservaciones] = useState('')
+    const [Cab_cEstado,  setEstado] = useState('')
+
 
     const { Emp_cCodigo } = useParams()
     const { Cab_cCatalogo } = useParams()
@@ -63,7 +66,11 @@ const EditaCatalogo = (props) => {
                 setPadre(item.Padre),
                 setMadre(item.Madre),
                 setInfo(item.Info),
-                setPlaca(item.Placa)
+                setPlaca(item.Placa),
+
+                setEstado(item.Cab_cEstado),
+                setObservaciones(item.Cab_cObservaciones)
+
             ))
 
         } finally {
@@ -75,7 +82,7 @@ const EditaCatalogo = (props) => {
     // procedimiento para EDITAR un catalogo con SP MySQL
     const editarCatalogo = async (e) => {
         try {
-            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa }
+            let _body = { Accion: "EDITAR", Emp_cCodigo: Emp_cCodigo, Lgt_cCategoria: Lgt_cCategoria, Lgt_cGrupo: Lgt_cGrupo, Lgt_cClase: Lgt_cClase, Lgt_cFamilia: Lgt_cFamilia, Cab_cCatalogo: Cab_cCatalogo, Cab_cDescripcion: Cab_cDescripcion, Propietario: Propietario, Padre: Padre, Madre: Madre, Info: Info, Placa: Placa, Cab_cEstado:Cab_cEstado, Cab_cObservaciones:Cab_cObservaciones}
             await eventoService.obtenerCatalogoAuth(_body).then(
                 (res) => {
                     setData(res[0]);
@@ -223,6 +230,25 @@ const EditaCatalogo = (props) => {
                                 id="placa"
                                 variant="standard"
                             />
+
+
+                            <TextField
+                                label="Estado"
+                                value={Cab_cEstado}
+                                onChange={(e) => setEstado(e.target.value)}
+                                name="textformat"
+                                id="Estado"
+                                variant="standard"
+                            />
+                            <TextField
+                                label="Oservaciones"
+                                value={Cab_cObservaciones}
+                                onChange={(e) => setObservaciones(e.target.value)}
+                                name="textformat"
+                                id="Oservaciones"
+                                variant="standard"
+                            />
+
 
                         </Grid>
 
