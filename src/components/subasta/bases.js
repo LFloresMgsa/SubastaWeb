@@ -60,7 +60,7 @@ const Bases = () => {
 
 
                 <div>
-                    <ListItem>La subasta culminará el día miercoles 30 a las 9:00 pm, momento en el que se determinarán a los ganadores de los ejemplares subastados.</ListItem>
+                    <ListItem>La subasta culminará el día miercoles 30 de agosto a las 9:00 pm, momento en el que se determinarán a los ganadores de los ejemplares subastados.</ListItem>
                     <ListItem>Cada puja se realizará por múltiplos de S/50.00 (cincuenta soles) sobre el precio base de cada ejemplar.</ListItem>
                     <ListItem>De existir 2 (dos) o más pujas por algún ejemplar a falta de 10 (diez) minutos para el cierre de la subasta, se aumentarán 10 (diez) minutos adicionales, generando una nueva hora de cierre, y así sucesivamente, hasta definir a un ganador. La hora límite para el cierre será indefectiblemente a las 00:00 horas de jueves 31 de agosto.</ListItem>
                     <ListItem>Se eliminarán las pujas de quienes coloquen DNI y/o celular falsos o de otra persona. Toda puja se verificará por vía telefónica, por transparencia.</ListItem>
