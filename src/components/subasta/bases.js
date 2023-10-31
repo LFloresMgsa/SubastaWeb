@@ -77,7 +77,7 @@ const Bases = () => {
 
                     <ListItem>La subasta iniciará el día lunes 30 de octubre al mediodía y culminará el día miércoles 1 de noviembre a las 9:00 pm, momento en el que se determinarán a los ganadores de los ejemplares subastados.</ListItem>
                     <ListItem>Cada puja se realizará por múltiplos de S/50.00 (cincuenta soles) sobre el precio base de cada ejemplar.</ListItem>
-                    <ListItem>De existir 2 (dos) o más pujas por algún ejemplar a falta de 10 (diez) minutos para el cierre de la subasta, se aumentarán 10 (diez) minutos adicionales, generando una nueva hora de cierre, y así sucesivamente, hasta definir a un ganador. La hora límite para el cierre será indefectiblemente a las 00:00 horas del jueves 2 de noviembre.</ListItem>
+                    <ListItem>De existir 2 (dos) o más pujas por algún ejemplar a falta de 10 (diez) minutos para el cierre de la subasta, se aumentarán 10 (diez) minutos adicionales, generando una nueva hora de cierre, y así sucesivamente, hasta definir a un ganador. La hora límite para el cierre será indefectiblemente a las 00:00 horas del viernes 3 de noviembre.</ListItem>
                     <ListItem>Se eliminarán las pujas de quienes coloquen DNI y/o celular falsos o de otra persona. Toda puja se verificará por vía telefónica, por transparencia.</ListItem>
                     <ListItem>Nos comunicaremos, previo abono, con los ganadores para coordinar la recepción o envío de los ejemplares. El pago deberá realizarse dentro de las 24 (veinticuatro) horas posteriores a la finalización de la subasta.</ListItem>
                     <ListItem>Si el ganador de algún ejemplar no respondiera o no realizara el pago en el plazo indicado, se dará por nuevo ganador a quien realizó la siguiente puja más alta y así sucesivamente.</ListItem>
@@ -101,5 +101,5 @@ const Bases = () => {
 export default Bases; 1
 
 //----------------- comando para compilar proyecto react -----------------
-// npm run guild
+// npm run build
 //------------------------------------------------------------------------
