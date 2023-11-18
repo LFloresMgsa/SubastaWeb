@@ -353,7 +353,7 @@ const ListaTopes = (props) => {
                               aria-label="Importe"
                               defaultValue={item.ValorActualTope || 0}
                               //defaultValue={0}
-                              step={100}
+                              step={50}
                               min={0}
                               max={item.Dvm_nTopeImporte - item.IMPORTEBASE}
                               onChange={(event, newValue) => handleSliderChangeImporte(idx, newValue)}
@@ -372,7 +372,7 @@ const ListaTopes = (props) => {
                               key={`${item.idx}-${refreshKey}`} // Agregar un key único para forzar el renderizado
                               aria-label="Final"
                               defaultValue={item.Diferencia || 0}
-                              step={10}
+                              step={1}
                               min={0}
                               max={item.Dvm_nTopeDias * 1440}
                               onChange={(event, newValue) => handleSliderChangeFechaFinTope(idx, newValue)}

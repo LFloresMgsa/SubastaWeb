@@ -147,11 +147,11 @@ const ListaGanadores = (props) => {
                     <Button variant="contained" color="primary" onClick={handleFilterSubmit}>
                       Filtrar
                     </Button>
-                    </Grid>
-                  <Grid item xs={3} lg={4}>                    
+                  </Grid>
+                  <Grid item xs={3} lg={4}>
                     <Button variant="outlined" color="primary" onClick={listar}>
                       Actualizar
-                    </Button>                    
+                    </Button>
                   </Grid>
                 </Grid>
               </div>
@@ -174,14 +174,17 @@ const ListaGanadores = (props) => {
                       <StyledTableCell align="left">Telefono</StyledTableCell>
                       <StyledTableCell align="left">Correo</StyledTableCell>
                       <StyledTableCell align="right">N° Pujas</StyledTableCell>
-                      <StyledTableCell align="left">Importe</StyledTableCell>
-                      <StyledTableCell align="left">Fecha</StyledTableCell>
-                      <StyledTableCell align="left">Evento</StyledTableCell>
+                      <StyledTableCell align="left">Importe Ganador</StyledTableCell>
+                      <StyledTableCell align="left">Puja</StyledTableCell>
+                      <StyledTableCell align="left">Inicio</StyledTableCell>
+                      <StyledTableCell align="left">Fin</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {filteredData.map((item, idx) => (
                       <StyledTableRow item={item} key={idx}>
+
+  
                         <StyledTableCell align="left">{item.Placa}</StyledTableCell>
                         <StyledTableCell align="left">{item.Cab_cCatalogo}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_cDocID}</StyledTableCell>
@@ -194,7 +197,8 @@ const ListaGanadores = (props) => {
 
                         <StyledTableCell align="right">{ccyFormat(item.Dvd_nImporte)}</StyledTableCell>
                         <StyledTableCell align="left">{item.Dvd_dFechaPuja}</StyledTableCell>
-                        <StyledTableCell align="left">{item.Dvm_cDescripcion}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_dInicio}</StyledTableCell>
+                        <StyledTableCell align="left">{item.Dvd_dFin}</StyledTableCell>
 
                       </StyledTableRow>
                     ))}
@@ -209,7 +213,7 @@ const ListaGanadores = (props) => {
                 <h4>Cantidad de Items:</h4>
                 <span className='total-pagar-sm'>{cantidadItems}</span>
               </div>
-            </Grid>            
+            </Grid>
             <Grid item xs={12} >
               <div className='cart-total'>
                 <h4>Items Pujados:</h4>
