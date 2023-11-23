@@ -36,9 +36,15 @@ const Itemprogramacion = (props) => {
     const [subastas, setSubastas] = React.useState([]);
 
     const obtenerEventoDetalle = async (pDvm_cNummov) => {
+
         let _body = { Accion: "EVENTO_DET", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
 
-        
+        if (cookies.get('Sgm_cUsuario') != "" && cookies.get('Sgm_cUsuario') != null) {
+
+            _body = { Accion: "EVENTO_DET_ADMIN", Emp_cCodigo: storage.GetStorage("Emp_cCodigo"), Pan_cAnio: storage.GetStorage("Pan_cAnio"), Dvm_cNummov: pDvm_cNummov }
+        }
+
+
 
         return await eventoService.obtenerEventosDet(_body).then(
 

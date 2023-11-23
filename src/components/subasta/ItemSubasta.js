@@ -27,7 +27,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { format } from 'date-fns';
 
 import { storage } from "../../storage.js";
- 
+
 import imagenes from '../../components/subasta/imagenes.js'
 
 import barra from '../../assets/images/barra.jpg'
@@ -94,7 +94,7 @@ const Item = (props) => {
     const handleVerDetalle = async () => {
 
         cookies.set('PosImagen', props.keyImagen, { path: "/" });
-        
+
 
         await fetchServerTime();
 
@@ -198,47 +198,49 @@ const Item = (props) => {
                     maxWidth: 'auto',
                     flexGrow: 1,
                     backgroundColor: (theme) =>
-                        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                        props.Estado === 'CERRADO' ? '#EAEDED' : '#fff',
                 }}
+
+
             >
                 <ImageListItem >
 
                     <img src={barra} srcSet={barra} />
 
-                    { props.Estado!='CERRADO' &&
+                    {props.Estado != 'CERRADO' &&
 
-                    <ImageListItemBar
+                        <ImageListItemBar
 
-                        sx={{
-                            background:
-                                'white',
-                            "& .MuiImageListItemBar-title": { color: isPressed ? 'red' : 'black' }, //styles for title                                
-                        }}
+                            sx={{
+                                background:
+                                    'white',
+                                "& .MuiImageListItemBar-title": { color: isPressed ? 'red' : 'black' }, //styles for title                                
+                            }}
 
 
-                        title={`. Pujas : ${nPujas}`}
+                            title={`. Pujas : ${nPujas}`}
 
-                        actionIcon={
-                            <IconButton
-                                sx={{ color: 'black' }}
-                                aria-label={`star ${props.pujas}`}
-                                onClick={handleClick}
-                                onMouseLeave={handleRelease}
+                            actionIcon={
+                                <IconButton
+                                    sx={{ color: 'black' }}
+                                    aria-label={`star ${props.pujas}`}
+                                    onClick={handleClick}
+                                    onMouseLeave={handleRelease}
 
-                                style={{ color: isPressed ? 'red' : 'black' }}
-                            >
-                                <Medalla />
-                            </IconButton>
-                        }
-                        position="top"
-                        actionPosition="left"
+                                    style={{ color: isPressed ? 'red' : 'black' }}
+                                >
+                                    <Medalla />
+                                </IconButton>
+                            }
+                            position="top"
+                            actionPosition="left"
 
-                    />
+                        />
 
-}
+                    }
                 </ImageListItem>
 
-                    
+
 
 
                 <ImageListItem >
@@ -286,7 +288,10 @@ const Item = (props) => {
                                 <Grid item xs={6} lg={6}>
 
 
-                                    <Button variant="outlined" size="small" color="primary" onClick={handleOpen}>Detalles</Button>
+                                    <Button variant="outlined" size="small" color="primary" onClick={handleOpen} style={{
+                                        backgroundColor: props.Estado != 'CERRADO' ? 'white' : 'red',
+                                        color: props.Estado != 'CERRADO' ? 'darkblue' : 'white',
+                                    }}>Detalles</Button>
                                     <Modal
                                         open={open}
                                         onClose={handleClose}
@@ -311,7 +316,10 @@ const Item = (props) => {
 
                                 </Grid>
                                 <Grid item xs={6} lg={6}>
-                                    { props.Estado!='CERRADO' &&
+
+
+
+                                    {props.Estado != 'CERRADO' &&
                                         <Button variant="contained" size="small" color="primary" onClick={handleVerDetalle}  >Pujar</Button>
                                     }
                                 </Grid>
