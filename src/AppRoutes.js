@@ -7,6 +7,7 @@ import Videoteca from './views/Videoteca';
 import Subasta from './views/Subasta';
 import Ganadores from './views/Ganadores';
 import Topes from './views/Topes';
+import Informes from './components/informes/Informes';
 
 import Bases from './views/Bases';
 import SubastaDetalle from './views/SubastaDetalle';
@@ -93,6 +94,11 @@ const AppRoutes = (props) => {
         render={(route) => <Topes {...props} {...route} />}
       />
 
+      <Route
+        exact
+        path="/informes"
+        render={(route) => <Informes {...props} {...route} />}
+      />
 
       <Route
         exact

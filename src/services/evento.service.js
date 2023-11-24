@@ -27,7 +27,8 @@ export const eventoService = {
   obtenerPedidoCabAuth,
   obtenerPedidoDetAuth,
   obtenerAccesosAuth,
-  actualizaPedidoAuth
+  actualizaPedidoAuth,
+
 
 };
 
@@ -266,9 +267,10 @@ function actualizaPedidoAuth(dataJson) {
   const options = { headers: authHeader(), body: JSON.stringify(dataJson) };
   const params = {};
 
-  const url = `/api/evento/vtm_pedido_estados/auth`; 
+  const url = `/api/evento/vtm_pedido_estados/auth`;
   return Fetch.post(url, params, options).then((res) =>
     handleResponse(res, false)
   );
 }
+
 
