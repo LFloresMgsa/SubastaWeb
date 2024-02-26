@@ -6,7 +6,7 @@ import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons'
 import { eventoService } from '../services/evento.service';
 import md5 from 'md5';
 import Cookies from 'universal-cookie';
-
+import Swal from 'sweetalert2';
 const cookies = new Cookies();
 
 const useStyles = makeStyles(theme => ({
@@ -68,31 +68,21 @@ const Login = () => {
 		try {
 			let _body = { Accion: "BUSCARREGISTRO", Sgm_cUsuario: username, Sgm_cContrasena: md5(password) }
 
+			//console.log(_body);
 			// obtenemos el token
-			await eventoService.obtenerToken(_body).then(
-				(res) => {
-					setToken(res)
-				},
-				(error) => {
-					console.log(error);
-				}
-			);
-			/*
-				  console.log('------------**********');
-				  console.log(username);
-				  console.log(password);
-				  console.log(Token.token);
-				  console.log('------------**********');
-			*/
-
-			if (Token) {
-				cookies.set('token', Token.token, { path: "/" });
+			const tokenResponse = await eventoService.obtenerToken(_body);
+			//console.log(tokenResponse);
+			// Utiliza la variable local en lugar del estado Token
+			if (tokenResponse) {
+				// cookies.set("token", tokenResponse.token);
+				cookies.set('token', tokenResponse.token, { path: "/" });
 				setError('');
 			}
 		} catch (error) {
 			setError('An error occurred while trying to login - token');
 		}
 	};
+
 
 
 	const handleLogin = async () => {
@@ -127,11 +117,11 @@ const Login = () => {
 
 				cookies.set('Sgm_cUsuario', _result[0].Sgm_cUsuario, { path: "/" });
 				cookies.set('Sgm_cNombre', _result[0].Sgm_cNombre, { path: "/" });
-				cookies.set('Sgm_cContrasena', _result[0].Sgm_cContrasena, { path: "/" });
+				//cookies.set('Sgm_cContrasena', _result[0].Sgm_cContrasena, { path: "/" });
 				cookies.set('Sgm_cObservaciones', _result[0].Sgm_cObservaciones, { path: "/" });
 				cookies.set('Sgm_cPerfil', _result[0].Sgm_cPerfil, { path: "/" });
 
-				cookies.set('IsLoged', true , { path: "/" });
+				cookies.set('IsLoged', true, { path: "/" });
 
 				setError('');
 
@@ -143,7 +133,15 @@ const Login = () => {
 			}
 		} catch (error) {
 			setError('');
+			//console.error('Error durante el inicio de sesión:', error);
 
+			Swal.fire({
+				icon: 'error',
+				title: 'Usuario o contraseña incorrectos',
+				position: 'top-center', // Puedes ajustar la posición si es necesario
+				showConfirmButton: false,
+				timer: 1000 // La alerta desaparecerá después de 2 segundos
+			});
 		}
 	};
 
@@ -186,7 +184,7 @@ const Login = () => {
 											label='Usuario'
 											name='nickname'
 											value={username}
-											onChange={(e) => setUsername(e.target.value)}
+											onChange={(e) => setUsername(e.target.value.toUpperCase())} // Convertir a mayúsculas
 										/>
 									</Grid>
 									<Grid item xs={12} lg={12}>
@@ -212,6 +210,7 @@ const Login = () => {
 										>
 											Ingresar
 										</Button>
+
 									</Grid>
 								</Grid>
 							</form>

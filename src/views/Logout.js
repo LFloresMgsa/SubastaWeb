@@ -10,7 +10,7 @@ const Logout = () => {
         cookies.remove('Sgm_cUsuario', { path: "/" });
         cookies.remove('Sgm_cPerfil', { path: "/" });
         cookies.remove('Sgm_cNombre', { path: "/" });
-        cookies.remove('Sgm_cContrasena', { path: "/" });
+        //cookies.remove('Sgm_cContrasena', { path: "/" });
         cookies.remove('Sgm_cObservaciones', { path: "/" });
         cookies.remove('token', { path: "/" });
         cookies.remove('IsLoged', { path: "/" });
