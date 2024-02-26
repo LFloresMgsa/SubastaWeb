@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './views/Dashboard';
@@ -35,14 +35,18 @@ import EditaEventoDet from './components/mantenimientos/EventoDet/EditaEventoDet
 import CreaEventoDetPuja from './components/mantenimientos/EventoPuja/CreaEventoPuja';
 import EditaEventoDetPuja from './components/mantenimientos/EventoPuja/EditaEventoPuja';
 import MantPedido from './views/MantPedido';
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 import FinalizarCompra from './components/tienda/FinalizarCompra';
 
 
 const AppRoutes = (props) => {
   const { accessToken, currentUser } = props;
+  const _Usuario = cookies.get('Sgm_cUsuario');
+  const [validaLogeo, setValidaLogeo] = useState(_Usuario || '')
 
+  //console.log(_Usuario);
   return (
     <Switch>
 
@@ -62,10 +66,7 @@ const AppRoutes = (props) => {
         path="/inicio"
         render={(route) => <Dashboard {...props} {...route} />}
       />
-      <Route
-        path="/tienda"
-        render={(route) => <Tienda {...props} {...route} />}
-      />
+
       <Route
         path="/videoteca"
         render={(route) => <Videoteca {...props} {...route} />}
@@ -94,11 +95,10 @@ const AppRoutes = (props) => {
         render={(route) => <Topes {...props} {...route} />}
       />
 
-      <Route
-        exact
-        path="/informes"
-        render={(route) => <Informes {...props} {...route} />}
-      />
+
+
+
+
 
       <Route
         exact
@@ -169,66 +169,91 @@ const AppRoutes = (props) => {
         render={(route) => <SubastaDetalle {...props} {...route} />}
       />
 
-      <Route
-        path="/crear"
-        render={(route) => <CreaCatalogo {...props} {...route} />}
-      />
 
-      <Route
-        path="/editar/:Emp_cCodigo/:Cab_cCatalogo"
-        render={(route) => <EditaCatalogo {...props} {...route} />}
-      />
+      {/* VALIDACION CON LOGE */}
 
-      <Route
-        path="/crearcatalogoimagenes"
-        render={(route) => <CreaCatalogoImagenes {...props} {...route} />}
-      />
+      {validaLogeo !== null && validaLogeo.trim() !== '' ? (
+        <>
+          <Route
+            exact
+            path="/informes"
+            render={(route) => <Informes {...props} {...route} />}
+          />
 
-      <Route
-        path="/editarcatalogoimagenes/:Emp_cCodigo/:Cab_cCatalogo/:Cab_nItem"
-        render={(route) => <EditaCatalogoImagenes {...props} {...route} />}
-      />
+          <Route
+            path="/tienda"
+            render={(route) => <Tienda {...props} {...route} />}
+          />
 
-      <Route
-        path="/crearvideoteca"
-        render={(route) => <CreaVideoteca {...props} {...route} />}
-      />
 
-      <Route
-        path="/editarvideoteca/:Emp_cCodigo/:Lgt_nIndice"
-        render={(route) => <EditaVideoteca {...props} {...route} />}
-      />
+          <Route
+            path="/crear"
+            render={(route) => <CreaCatalogo {...props} {...route} />}
+          />
 
-      <Route
-        path="/crearevento"
-        render={(route) => <CreaEvento {...props} {...route} />}
-      />
+          <Route
+            path="/editar/:Emp_cCodigo/:Cab_cCatalogo"
+            render={(route) => <EditaCatalogo {...props} {...route} />}
+          />
 
-      <Route
-        path="/editarevento/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov"
-        render={(route) => <EditaEvento {...props} {...route} />}
-      />
+          <Route
+            path="/crearcatalogoimagenes"
+            render={(route) => <CreaCatalogoImagenes {...props} {...route} />}
+          />
 
-      <Route
-        path="/creareventodet"
-        render={(route) => <CreaEventoDet {...props} {...route} />}
-      />
+          <Route
+            path="/editarcatalogoimagenes/:Emp_cCodigo/:Cab_cCatalogo/:Cab_nItem"
+            render={(route) => <EditaCatalogoImagenes {...props} {...route} />}
+          />
 
-      <Route
-        path="/editareventodet/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov/:Cab_cCatalogo"
-        render={(route) => <EditaEventoDet {...props} {...route} />}
-      />
+          <Route
+            path="/crearvideoteca"
+            render={(route) => <CreaVideoteca {...props} {...route} />}
+          />
 
-      <Route
-        path="/creareventodetpuja"
-        render={(route) => <CreaEventoDetPuja {...props} {...route} />}
-      />
+          <Route
+            path="/editarvideoteca/:Emp_cCodigo/:Lgt_nIndice"
+            render={(route) => <EditaVideoteca {...props} {...route} />}
+          />
 
-      <Route
-        path="/editareventodetpuja/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov/:Cab_cCatalogo/:Dvd_nCorrel"
-        render={(route) => <EditaEventoDetPuja {...props} {...route} />}
-      />
+          <Route
+            path="/crearevento"
+            render={(route) => <CreaEvento {...props} {...route} />}
+          />
 
+          <Route
+            path="/editarevento/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov"
+            render={(route) => <EditaEvento {...props} {...route} />}
+          />
+
+          <Route
+            path="/creareventodet"
+            render={(route) => <CreaEventoDet {...props} {...route} />}
+          />
+
+          <Route
+            path="/editareventodet/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov/:Cab_cCatalogo"
+            render={(route) => <EditaEventoDet {...props} {...route} />}
+          />
+
+          <Route
+            path="/creareventodetpuja"
+            render={(route) => <CreaEventoDetPuja {...props} {...route} />}
+          />
+
+          <Route
+            path="/editareventodetpuja/:Emp_cCodigo/:Pan_cAnio/:Per_cPeriodo/:Dvm_cNummov/:Cab_cCatalogo/:Dvd_nCorrel"
+            render={(route) => <EditaEventoDetPuja {...props} {...route} />}
+          />
+        </>
+      ) : (
+        <Route
+          exact
+          path="/subasta"
+          render={(route) => <Bases {...props} {...route} />}
+        />
+      )}
+      <Route render={() => <Redirect to="/subasta" />} />
     </Switch>
   );
 

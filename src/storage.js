@@ -13,7 +13,7 @@ export const storage = {
 function IniciaVariablesGlobales() {
 
   SetStorage('Emp_cCodigo', '015');
-  SetStorage('Pan_cAnio', '2023');
+  SetStorage('Pan_cAnio', '2024');
   SetStorage('Carrito', []);
   
   
